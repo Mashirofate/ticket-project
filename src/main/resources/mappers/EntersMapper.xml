@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.EntersMapper">
+    <resultMap id="BaseResultMap" type="com.tickets.dto.EntersAddDto">
+        <id column="eId" jdbcType="VARCHAR" property="eId" />
+        <result column="aId" jdbcType="VARCHAR" property="aId" />
+        <result column="aName" jdbcType="VARCHAR" property="aName" />
+        <result column="vName" jdbcType="VARCHAR" property="vName" />
+        <result column="eName" jdbcType="VARCHAR" property="eName" />
+        <result column="tQrcard" jdbcType="VARCHAR" property="tQrcard" />
+        <result column="tIdentitycard" jdbcType="VARCHAR" property="tIdentitycard" />
+        <result column="eDate" jdbcType="TIMESTAMP" property="eDate" />
+        <result column="tId" jdbcType="VARCHAR" property="tId" />
+        <result column="dWorker" jdbcType="VARCHAR" property="dWorker" />
+        <result column="temp" jdbcType="VARCHAR" property="temp" />
+        <result column="fImage" jdbcType="VARCHAR" property="fImage" />
+        <result column="fFeature" jdbcType="VARCHAR" property="fFeature" />
+        <result column="autonym" jdbcType="VARCHAR" property="autonym" />
+        <result column="clientId" jdbcType="VARCHAR" property="clientId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        eId, aId, aName, vName, eName, tIdentitycard, tQrcard, eDate, tId, dWorker, temp, fImage, fFeature, autonym, clientId
+    </sql>
+    <!--parameterType 传入参数的类型，resultType返回参数的类型-->
+    <select id="selectByKeys" resultType="java.util.Map">
+        <!--date_format(ed.eDate,'%Y-%m-%d %H:%i:%s') 用于固定显示时间格式 -->
+        SELECT e.eId,e.fImage, e.aName,e.vName,e.autonym,e.eName,e.temp,e.tIdentitycard,
+        e.tQrcard,date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as eDate,
+        t.tSeatingarea,t.tRownumber,t.tSeat,t.tGrandstand
+        /*--引用其他sql片段*/
+        <include refid="searchSQL"/>
+        order by eDate desc
+        LIMIT ${(current-1)*size},${size}
+    </select>
+
+    <select id="selectCountByKeys" resultType="java.lang.Integer">
+        SELECT COUNT(e.eId)
+        <include refid="searchSQL"></include>
+    </select>
+
+    <!--<select id="selectById" resultType="java.util.Map">
+        SELECT t.tId, t.tIdentitycard, t.tRealname, t.phone, t.tQrcard, a.aName, a.aNote
+        FROM ticketing t
+            LEFT JOIN activity a On a.aId = t.taId
+        WHERE tWId= #{id}
+    </select>-->
+
+
+    <delete id="deleteEs">
+        delete from enter where eid=#{eid}
+    </delete>
+
+    <sql id="searchSQL">
+        FROM enter as e
+        LEFT JOIN ticketing AS t ON e.tId = t.tId
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="aName != null and aName.length != 0">
+                AND e.aName LIKE "%"#{aName}"%"
+            </if>
+            <if test="vName != null and vName.length != 0">
+                AND e.vName LIKE "%"#{vName}"%"
+            </if>
+            <if test="eName != null and eName.length != 0">
+                AND e.eName LIKE "%"#{eName}"%"
+            </if>
+            <if test="tIdentitycard != null and tIdentitycard.length != 0">
+                AND e.tIdentitycard LIKE "%"#{tIdentitycard}"%"
+            </if>
+            <if test="autonym != null and autonym.length != 0">
+                AND e.autonym LIKE "%"#{autonym}"%"
+            </if>
+            <if test="tQrcard != null and tQrcard.length != 0">
+                AND e.tQrcard LIKE "%"#{tQrcard}"%"
+            </if>
+            <if test="temp.equals('true') and temp != null and temp.length != 0">
+            AND e.temp >37.5
+            </if>
+
+            <if test="eDate1 != null and eDate2.length != 0">
+                AND e.eDate BETWEEN #{eDate1} and DATE_ADD(#{eDate2},INTERVAL 1 DAY)
+            </if>
+        </trim>
+    </sql>
+
+    <select id="selectNewDataCount" resultType="int">
+        select count(eId) from enter where edate between date_sub(#{date},interval 60 SECOND) and #{date}
+        <if test="clientId != null and clientId != ''">
+            and clientId &lt;&gt; #{clientId}
+        </if>
+    </select>
+    <select id="selectNewData" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from enter where edate between date_sub(#{date},interval 60 SECOND) and #{date}
+        <if test="clientId != null and clientId != ''">
+            and clientId &lt;&gt; #{clientId}
+        </if>
+        order by edate desc
+    </select>
+    <delete id="deleteTemp">
+        delete FROM sync_enter where  clientId=#{clientId}
+    </delete>
+
+    <insert id="insertTempBatch" parameterType="java.util.List">
+        INSERT INTO sync_enter (<include refid="Base_Column_List" />) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.eId},
+            #{item.aId},
+            #{item.aName},
+            #{item.vName},
+            #{item.eName},
+            #{item.tIdentitycard},
+            #{item.tQrcard},
+            #{item.eDate},
+            #{item.tId},
+            #{item.dWorker},
+            #{item.temp},
+            #{item.fImage},
+            #{item.fFeature},
+            #{item.autonym},
+            #{item.clientId}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertSync" parameterType="java.util.List">
+        INSERT INTO enter (<include refid="Base_Column_List" />)
+        select a.eId, a.aId, a.aName, a.vName, a.eName, a.tIdentitycard,a.tQrcard, a.eDate,
+            a.tId,a.dWorker,a.temp,a.fImage,a.fFeature, a.autonym, a.clientId
+        from sync_enter a where not exists
+            (select b.eId from enter b where b.eId = a.eId)
+    </insert>
+</mapper>

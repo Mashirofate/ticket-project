@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.AisleMapper">
+  <resultMap id="BaseResultMap" type="com.tickets.entity.Aisle">
+    <id column="aId" jdbcType="VARCHAR" property="aid" />
+    <result column="aName" jdbcType="VARCHAR" property="aname" />
+  </resultMap>
+  <resultMap id="BaseDtoResultMap" type="com.tickets.dto.AisleAddDto">
+    <id column="aId" jdbcType="VARCHAR" property="aId" />
+    <result column="aName" jdbcType="VARCHAR" property="aName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aId, aName
+  </sql>
+  <select id="selectCountByKeys" resultType="java.lang.Integer">
+    SELECT COUNT(a.aId)
+    FROM aisle as a
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+      <if test="aId != null and aId.length != 0">
+        AND d.aId LIKE "%"#{aId}"%"
+      </if>
+      <if test="aName != null and aName.length != 0">
+        AND d.aName LIKE "%"#{aName}"%"
+      </if>
+    </trim>
+  </select>
+
+  <select id="selectByKeys" resultType="java.util.Map">
+    SELECT a.aId ,a.aName
+    FROM aisle as a
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+      <if test="aId != null and aId.length != 0">
+        AND d.aId LIKE "%"#{aId}"%"
+      </if>
+      <if test="aName != null and aName.length != 0">
+        AND d.aName LIKE "%"#{aName}"%"
+      </if>
+    </trim>
+    LIMIT ${(current-1)*size},${size}
+  </select>
+
+  <delete id="deleteDes">
+    delete from aisle where aid=#{aid}
+  </delete>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aisle
+    where aId = #{aid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from aisle
+    where aId = #{aid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert">
+    <selectKey keyProperty="aId" resultType="string" order="BEFORE">
+      SELECT uuId()
+    </selectKey>
+    INSERT INTO aisle (aId,aName)
+    values (#{aId},#{aName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="aId" keyProperty="aid" parameterType="com.tickets.entity.Aisle" useGeneratedKeys="true">
+    insert into aisle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aname != null">
+        aName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aname != null">
+        #{aname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tickets.entity.Aisle">
+    update aisle
+    <set>
+      <if test="aname != null">
+        aName = #{aname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aId = #{aid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tickets.entity.Aisle">
+    update aisle
+    set aName = #{aName,jdbcType=VARCHAR}
+    where aId = #{aId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAll"  resultMap="BaseDtoResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from aisle
+  </select>
+</mapper>

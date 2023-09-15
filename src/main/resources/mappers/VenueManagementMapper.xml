@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.VenueManagementMapper">
+    <resultMap id="BaseResultMap" type="com.tickets.dto.VenueManagementAddDto">
+        <id column="vId" jdbcType="VARCHAR" property="vmId" />
+        <result column="vName" jdbcType="VARCHAR" property="vmName" />
+        <result column="vEnable" jdbcType="INTEGER" property="vmEnable" />
+        <result column="vNote" jdbcType="VARCHAR" property="vmNote" />
+        <result column="vCreationtime" jdbcType="TIMESTAMP" property="vmCreationtime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        vId, vName, vEnable, vNote, vCreationtime
+    </sql>
+    <insert id="insert">
+        <selectKey keyProperty="vmId" resultType="string" order="BEFORE">
+            SELECT uuId()
+        </selectKey>
+        INSERT INTO
+        venues ( vId, vName, vEnable, vNote, vCreationtime )
+        VALUES
+        (#{vmId}, #{vmName}, #{vmEnable}, #{vmNote}, now())
+    </insert>
+
+    <update id="updates">
+        UPDATE
+            venues
+        SET
+            vEnable = #{vmEnable} , vName=#{vmName}, vNote=#{vmNote}, vCreationtime=now()
+        WHERE
+            vId = #{vmId}
+    </update>
+
+
+    <update id="updateEnable">
+        UPDATE
+            venues
+        SET
+            vEnable = #{enable}
+        WHERE
+            vId = #{vmId} LIMIT 1
+    </update>
+
+    <select id="selectByKeys" resultType="java.util.Map">
+        SELECT
+        v.vId, v.vName, IF(v.vEnable = 0, '删除',IF(v.vEnable = 1, '启用','不启用')) vEnable, v.vNote, v.vCreationtime,
+        (
+        SELECT
+        COUNT(e.eId)
+        FROM
+        entrance AS e
+        WHERE
+        e.evId = v.vId AND e.eEnable = 1
+        ) AS openEntranceCount,
+        (
+        SELECT
+        COUNT(e.eId)
+        FROM
+        entrance AS e
+        WHERE
+        e.evId = v.vId AND e.eEnable != 0
+        ) AS openEntranceCountTotal
+        FROM
+        venues AS v
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="vmName != null and vmName.length != 0">
+                v.vName LIKE "%"#{vmName}"%"
+            </if>
+            <if test="vmEnable != null">
+                AND v.vEnable = #{vmEnable}
+            </if>
+            <if test="vmEnable == null">
+                AND v.vEnable !=0
+            </if>
+        </trim>
+        LIMIT ${(current-1)*size},${size}
+    </select>
+
+    <select id="selectCountByKeys" resultType="java.lang.Integer">
+        SELECT
+        COUNT(v.vId)
+        FROM
+        venues AS v
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="vmName != null and vmName.length != 0">
+                v.vName LIKE "%"#{vmName}"%"
+            </if>
+            <if test="vmEnable != null">
+                AND v.vEnable = #{vmEnable}
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="selectSimple" resultType="java.util.Map">
+        SELECT
+            vId, vName
+        FROM
+            venues
+        WHERE
+            vEnable = 1
+    </select>
+
+    <select id="selectVenuesByEnable" resultMap="BaseResultMap">
+        SELECT
+           <include refid="Base_Column_List"/>
+        FROM
+            venues
+        WHERE
+            vEnable = 1
+    </select>
+
+</mapper>

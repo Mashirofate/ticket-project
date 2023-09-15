@@ -1,0 +1,1322 @@
+2023-09-12 10:22:10.507 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 10:22:10.530 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 10:55:36.243 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 34888 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 10:55:36.245 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 10:55:37.012 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 10:55:37.013 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 10:55:37.072 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 10:55:37.570 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 10:55:37.727 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 10:55:37.734 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 10:55:37.752 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 10:55:37.839 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 10:55:37.840 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 10:55:37.850 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 10:55:37.851 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 10:55:37.852 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 10:55:37.853 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 10:55:37.856 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 10:55:37.857 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 10:55:37.860 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 10:55:37.863 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 10:55:37.864 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 10:55:37.867 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 10:55:37.871 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 10:55:37.873 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 10:55:37.874 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 10:55:37.876 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 10:55:37.879 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 10:55:37.880 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 10:55:37.881 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 10:55:37.895 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 10:55:37.897 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 10:55:37.901 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 10:55:37.902 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 10:55:37.904 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 10:55:37.905 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 10:55:37.905 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 10:55:37.906 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 10:55:37.908 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 10:55:37.910 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 10:55:37.911 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 10:55:37.913 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 10:55:37.913 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 10:55:37.914 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 10:55:37.914 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 10:55:37.916 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 10:55:37.917 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 10:55:37.917 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 10:55:37.918 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 10:55:37.920 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 10:55:37.921 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 10:55:37.922 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 10:55:37.924 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 10:55:37.925 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 10:55:37.925 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 10:55:37.926 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 10:55:37.927 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 10:55:37.965 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.053 seconds (JVM running for 2.479)
+2023-09-12 10:56:12.697 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 10:56:14.034 [http-nio-8080-exec-4] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 10:59:58.592 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 10:59:58.595 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:00:01.416 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 11208 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:00:01.417 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:00:02.172 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:00:02.173 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:00:02.230 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:00:02.715 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:00:02.866 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:00:02.873 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:00:02.890 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:00:02.969 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:00:02.971 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:00:02.979 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:00:02.980 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:00:02.981 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:00:02.982 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:00:02.985 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:00:02.986 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:00:02.989 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:00:02.992 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:00:02.993 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:00:02.997 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:00:03.001 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:00:03.003 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:00:03.004 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:00:03.007 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:00:03.009 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:00:03.010 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:00:03.012 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:00:03.027 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:00:03.030 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:00:03.034 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:00:03.035 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:00:03.037 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:00:03.038 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:00:03.039 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:00:03.039 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:00:03.042 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:00:03.043 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:00:03.044 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:00:03.046 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:00:03.047 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:00:03.048 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:00:03.048 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:00:03.050 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:00:03.051 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:00:03.051 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:00:03.052 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:00:03.054 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:00:03.055 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:00:03.055 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:00:03.058 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:00:03.058 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:00:03.059 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:00:03.060 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:00:03.061 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:00:03.096 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.965 seconds (JVM running for 2.341)
+2023-09-12 11:00:06.132 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:00:08.758 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:05:33.911 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:05:33.916 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:05:42.580 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 63772 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:05:42.582 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:05:43.319 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:05:43.320 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:05:43.376 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:05:43.856 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:05:44.005 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:05:44.012 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:05:44.028 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:05:44.107 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:05:44.108 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:05:44.115 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:05:44.116 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:05:44.117 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:05:44.118 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:05:44.120 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:05:44.121 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:05:44.123 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:05:44.126 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:05:44.127 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:05:44.130 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:05:44.134 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:05:44.136 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:05:44.137 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:05:44.139 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:05:44.143 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:05:44.144 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:05:44.145 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:05:44.160 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:05:44.163 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:05:44.167 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:05:44.168 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:05:44.171 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:05:44.171 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:05:44.172 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:05:44.173 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:05:44.176 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:05:44.177 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:05:44.178 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:05:44.180 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:05:44.181 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:05:44.182 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:05:44.182 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:05:44.185 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:05:44.185 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:05:44.185 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:05:44.186 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:05:44.188 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:05:44.189 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:05:44.190 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:05:44.191 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:05:44.192 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:05:44.193 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:05:44.194 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:05:44.195 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:05:44.229 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.929 seconds (JVM running for 2.297)
+2023-09-12 11:05:52.934 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:05:53.061 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:07:59.091 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:07:59.094 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:08:01.845 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 25324 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:08:01.847 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:08:02.597 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:08:02.597 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:08:02.654 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:08:03.153 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:08:03.308 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:08:03.315 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:08:03.331 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:08:03.409 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:08:03.410 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:08:03.417 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:08:03.419 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:08:03.420 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:08:03.421 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:08:03.423 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:08:03.425 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:08:03.427 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:08:03.430 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:08:03.431 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:08:03.434 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:08:03.438 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:08:03.440 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:08:03.441 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:08:03.443 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:08:03.446 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:08:03.447 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:08:03.448 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:08:03.462 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:08:03.464 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:08:03.468 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:08:03.469 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:08:03.471 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:08:03.472 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:08:03.472 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:08:03.473 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:08:03.476 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:08:03.477 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:08:03.478 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:08:03.481 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:08:03.481 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:08:03.482 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:08:03.483 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:08:03.485 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:08:03.486 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:08:03.487 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:08:03.487 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:08:03.490 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:08:03.490 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:08:03.491 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:08:03.493 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:08:03.494 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:08:03.495 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:08:03.495 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:08:03.497 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:08:03.534 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.98 seconds (JVM running for 2.357)
+2023-09-12 11:08:14.600 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:08:14.688 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:12:14.283 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:12:14.287 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:12:15.838 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 12896 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:12:15.839 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:12:16.607 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:12:16.607 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:12:16.667 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:12:17.180 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:12:17.355 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:12:17.363 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:12:17.380 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:12:17.475 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:12:17.476 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:12:17.483 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:12:17.485 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:12:17.486 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:12:17.487 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:12:17.489 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:12:17.489 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:12:17.492 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:12:17.495 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:12:17.496 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:12:17.499 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:12:17.504 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:12:17.507 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:12:17.508 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:12:17.510 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:12:17.513 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:12:17.514 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:12:17.515 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:12:17.528 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:12:17.531 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:12:17.534 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:12:17.536 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:12:17.538 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:12:17.539 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:12:17.540 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:12:17.540 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:12:17.543 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:12:17.544 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:12:17.545 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:12:17.548 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:12:17.548 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:12:17.549 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:12:17.550 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:12:17.552 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:12:17.552 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:12:17.553 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:12:17.555 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:12:17.557 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:12:17.558 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:12:17.559 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:12:17.561 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:12:17.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:12:17.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:12:17.563 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:12:17.564 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:12:17.601 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.123 seconds (JVM running for 2.499)
+2023-09-12 11:12:20.900 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:12:20.985 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:14:16.210 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:14:16.214 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:14:17.714 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 29860 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:14:17.716 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:14:18.482 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:14:18.482 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:14:18.541 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:14:19.038 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:14:19.200 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:14:19.208 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:14:19.227 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:14:19.314 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:14:19.315 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:14:19.322 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:14:19.324 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:14:19.324 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:14:19.325 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:14:19.327 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:14:19.328 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:14:19.331 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:14:19.334 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:14:19.335 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:14:19.338 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:14:19.342 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:14:19.344 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:14:19.345 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:14:19.347 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:14:19.351 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:14:19.351 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:14:19.353 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:14:19.367 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:14:19.370 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:14:19.374 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:14:19.375 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:14:19.378 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:14:19.379 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:14:19.379 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:14:19.380 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:14:19.383 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:14:19.384 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:14:19.385 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:14:19.388 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:14:19.388 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:14:19.389 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:14:19.390 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:14:19.393 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:14:19.394 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:14:19.394 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:14:19.395 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:14:19.398 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:14:19.398 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:14:19.399 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:14:19.401 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:14:19.401 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:14:19.402 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:14:19.403 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:14:19.404 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:14:19.441 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.027 seconds (JVM running for 2.397)
+2023-09-12 11:14:23.434 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:19:49.455 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:20:01.021 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 48840 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:20:01.023 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:20:01.723 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:20:01.723 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:20:01.780 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:20:02.240 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:20:02.393 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:20:02.401 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:20:02.417 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:20:02.502 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:20:02.503 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:20:02.510 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:20:02.512 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:20:02.513 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:20:02.513 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:20:02.515 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:20:02.516 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:20:02.518 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:20:02.521 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:20:02.522 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:20:02.525 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:20:02.530 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:20:02.532 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:20:02.533 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:20:02.535 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:20:02.539 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:20:02.539 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:20:02.541 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:20:02.552 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:20:02.554 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:20:02.558 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:20:02.559 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:20:02.561 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:20:02.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:20:02.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:20:02.563 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:20:02.565 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:20:02.567 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:20:02.568 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:20:02.570 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:20:02.571 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:20:02.572 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:20:02.572 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:20:02.575 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:20:02.575 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:20:02.576 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:20:02.577 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:20:02.579 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:20:02.579 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:20:02.580 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:20:02.582 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:20:02.582 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:20:02.583 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:20:02.584 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:20:02.585 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:20:02.622 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.896 seconds (JVM running for 2.319)
+2023-09-12 11:20:07.005 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:20:07.093 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:20:26.565 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:20:26.568 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:20:27.990 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 42864 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:20:27.992 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:20:28.746 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:20:28.746 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:20:28.804 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:20:29.289 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:20:29.443 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:20:29.450 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:20:29.468 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:20:29.553 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:20:29.554 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:20:29.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:20:29.563 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:20:29.564 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:20:29.565 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:20:29.566 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:20:29.567 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:20:29.569 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:20:29.573 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:20:29.573 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:20:29.576 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:20:29.579 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:20:29.581 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:20:29.581 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:20:29.583 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:20:29.586 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:20:29.587 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:20:29.588 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:20:29.600 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:20:29.602 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:20:29.606 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:20:29.607 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:20:29.609 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:20:29.610 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:20:29.610 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:20:29.611 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:20:29.614 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:20:29.616 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:20:29.617 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:20:29.619 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:20:29.620 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:20:29.620 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:20:29.621 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:20:29.624 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:20:29.624 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:20:29.625 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:20:29.626 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:20:29.628 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:20:29.629 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:20:29.629 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:20:29.631 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:20:29.632 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:20:29.632 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:20:29.633 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:20:29.634 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:20:29.671 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.983 seconds (JVM running for 2.337)
+2023-09-12 11:20:31.453 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:26:31.493 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 45696 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:26:31.495 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:26:32.259 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:26:32.260 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:26:32.320 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:26:32.828 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:26:32.988 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:26:32.995 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:26:33.012 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:26:33.093 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:26:33.094 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:26:33.101 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:26:33.103 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:26:33.104 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:26:33.105 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:26:33.107 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:26:33.109 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:26:33.112 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:26:33.116 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:26:33.117 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:26:33.121 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:26:33.128 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:26:33.130 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:26:33.131 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:26:33.134 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:26:33.138 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:26:33.139 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:26:33.141 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:26:33.156 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:26:33.160 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:26:33.167 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:26:33.168 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:26:33.171 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:26:33.172 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:26:33.173 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:26:33.173 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:26:33.177 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:26:33.179 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:26:33.180 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:26:33.182 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:26:33.183 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:26:33.184 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:26:33.184 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:26:33.187 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:26:33.187 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:26:33.188 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:26:33.188 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:26:33.190 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:26:33.191 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:26:33.192 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:26:33.193 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:26:33.194 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:26:33.194 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:26:33.195 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:26:33.196 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:26:33.232 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.03 seconds (JVM running for 2.399)
+2023-09-12 11:27:27.156 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:27:29.448 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 56828 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:27:29.449 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:27:30.085 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:27:30.085 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:27:30.443 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:27:30.837 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:27:30.964 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:27:30.971 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:27:30.988 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:27:31.062 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:27:31.063 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:27:31.070 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:27:31.072 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:27:31.073 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:27:31.075 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:27:31.076 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:27:31.078 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:27:31.080 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:27:31.083 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:27:31.084 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:27:31.086 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:27:31.090 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:27:31.092 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:27:31.092 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:27:31.094 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:27:31.097 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:27:31.098 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:27:31.099 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:27:31.110 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:27:31.113 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:27:31.116 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:27:31.118 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:27:31.120 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:27:31.120 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:27:31.121 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:27:31.121 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:27:31.124 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:27:31.125 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:27:31.126 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:27:31.128 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:27:31.129 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:27:31.129 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:27:31.130 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:27:31.132 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:27:31.132 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:27:31.133 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:27:31.133 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:27:31.135 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:27:31.136 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:27:31.136 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:27:31.137 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:27:31.138 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:27:31.139 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:27:31.139 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:27:31.141 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:27:31.162 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.925 seconds (JVM running for 2.506)
+2023-09-12 11:27:47.328 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 11:27:47.633 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:28:07.768 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:28:07.770 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 11:28:09.686 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 56312 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:28:09.687 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:28:10.347 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:28:10.348 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:28:10.399 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:28:10.841 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:28:10.987 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:28:10.995 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:28:11.015 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:28:11.101 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:28:11.102 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:28:11.111 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:28:11.112 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:28:11.113 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:28:11.115 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:28:11.116 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:28:11.118 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:28:11.120 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:28:11.123 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:28:11.124 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:28:11.126 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:28:11.132 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:28:11.133 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:28:11.134 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:28:11.136 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:28:11.139 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:28:11.140 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:28:11.141 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:28:11.152 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:28:11.155 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:28:11.158 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:28:11.159 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:28:11.161 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:28:11.162 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:28:11.162 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:28:11.163 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:28:11.165 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:28:11.166 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:28:11.167 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:28:11.170 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:28:11.176 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:28:11.177 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:28:11.177 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:28:11.181 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:28:11.182 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:28:11.182 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:28:11.183 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:28:11.184 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:28:11.185 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:28:11.185 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:28:11.187 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:28:11.187 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:28:11.187 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:28:11.188 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:28:11.189 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:28:11.212 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.806 seconds (JVM running for 2.339)
+2023-09-12 11:28:34.275 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:28:36.020 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 61768 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:28:36.022 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:28:36.648 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:28:36.648 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:28:36.699 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:28:37.107 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:28:37.242 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:28:37.248 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:28:37.264 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:28:37.338 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:28:37.339 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:28:37.347 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:28:37.349 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:28:37.350 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:28:37.351 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:28:37.354 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:28:37.355 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:28:37.357 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:28:37.360 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:28:37.360 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:28:37.362 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:28:37.367 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:28:37.368 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:28:37.369 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:28:37.371 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:28:37.374 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:28:37.375 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:28:37.376 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:28:37.388 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:28:37.390 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:28:37.393 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:28:37.394 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:28:37.397 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:28:37.397 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:28:37.398 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:28:37.398 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:28:37.400 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:28:37.401 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:28:37.402 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:28:37.404 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:28:37.405 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:28:37.405 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:28:37.406 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:28:37.408 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:28:37.408 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:28:37.409 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:28:37.409 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:28:37.411 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:28:37.411 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:28:37.412 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:28:37.413 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:28:37.414 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:28:37.414 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:28:37.415 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:28:37.416 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:28:37.437 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.623 seconds (JVM running for 2.083)
+2023-09-12 11:29:02.458 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:35:34.311 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 62296 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:35:34.313 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 11:35:34.899 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:35:34.900 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:35:34.944 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:35:35.339 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:35:35.465 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:35:35.471 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:35:35.487 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:35:35.559 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:35:35.559 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:35:35.566 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:35:35.568 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:35:35.568 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:35:35.570 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:35:35.571 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:35:35.572 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:35:35.574 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:35:35.577 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:35:35.577 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:35:35.579 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:35:35.583 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:35:35.584 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:35:35.585 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:35:35.586 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:35:35.589 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:35:35.589 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:35:35.590 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:35:35.601 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:35:35.603 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:35:35.606 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:35:35.607 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:35:35.609 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:35:35.609 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:35:35.610 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:35:35.610 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:35:35.612 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:35:35.613 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:35:35.614 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:35:35.616 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:35:35.616 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:35:35.617 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:35:35.617 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:35:35.619 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:35:35.619 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:35:35.620 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:35:35.620 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:35:35.622 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:35:35.622 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:35:35.623 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:35:35.624 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:35:35.624 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:35:35.624 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:35:35.625 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:35:35.626 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:35:35.647 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.56 seconds (JVM running for 2.023)
+2023-09-12 11:35:42.050 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:19.226 [main] INFO  com.tickets.mapper.TicketingStaffMapperTest - Starting TicketingStaffMapperTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:19.227 [main] INFO  com.tickets.mapper.TicketingStaffMapperTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:20.327 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 11:37:20.328 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 11:37:20.396 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 11:37:21.327 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:21.944 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 11:37:21.955 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 11:37:21.977 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 11:37:22.080 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 11:37:22.082 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 11:37:22.091 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 11:37:22.092 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 11:37:22.093 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 11:37:22.096 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 11:37:22.099 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 11:37:22.100 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 11:37:22.103 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 11:37:22.106 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 11:37:22.107 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 11:37:22.110 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 11:37:22.116 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 11:37:22.119 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 11:37:22.120 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 11:37:22.122 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 11:37:22.125 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 11:37:22.126 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 11:37:22.127 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 11:37:22.140 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 11:37:22.143 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 11:37:22.147 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 11:37:22.149 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 11:37:22.151 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 11:37:22.153 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 11:37:22.154 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 11:37:22.154 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 11:37:22.157 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 11:37:22.158 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 11:37:22.159 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 11:37:22.161 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 11:37:22.162 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 11:37:22.162 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 11:37:22.163 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 11:37:22.166 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 11:37:22.166 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 11:37:22.167 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 11:37:22.167 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 11:37:22.170 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 11:37:22.170 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 11:37:22.171 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 11:37:22.172 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 11:37:22.173 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 11:37:22.173 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 11:37:22.174 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 11:37:22.175 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 11:37:22.204 [main] INFO  com.tickets.mapper.TicketingStaffMapperTest - Started TicketingStaffMapperTest in 3.267 seconds (JVM running for 4.092)
+2023-09-12 11:37:22.343 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 11:37:22.590 [main] INFO  com.tickets.service.impl.UserServiceImplTest - Starting UserServiceImplTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:22.591 [main] INFO  com.tickets.service.impl.UserServiceImplTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:23.224 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:23.233 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:23.292 [main] INFO  com.tickets.service.impl.UserServiceImplTest - Starting UserServiceImplTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:23.293 [main] INFO  com.tickets.service.impl.UserServiceImplTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:23.794 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:23.802 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:23.840 [main] INFO  com.tickets.mapper.UserMapperTest - Starting UserMapperTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:23.841 [main] INFO  com.tickets.mapper.UserMapperTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:24.301 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:24.305 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:24.333 [main] INFO  com.tickets.mapper.UserMapperTest - Starting UserMapperTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:24.333 [main] INFO  com.tickets.mapper.UserMapperTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:24.762 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:24.767 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:24.795 [main] INFO  com.tickets.mapper.UserMapperTest - Starting UserMapperTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:24.795 [main] INFO  com.tickets.mapper.UserMapperTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:25.236 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:25.241 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:25.274 [main] INFO  com.tickets.mapper.UserMapperTest - Starting UserMapperTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:25.274 [main] INFO  com.tickets.mapper.UserMapperTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:25.682 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:25.686 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:25.733 [main] INFO  com.tickets.mapper.AuthorityMapperTest - Starting AuthorityMapperTest on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:25.733 [main] INFO  com.tickets.mapper.AuthorityMapperTest - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:26.126 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:26.131 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:26.156 [main] INFO  com.tickets.TicketsApplicationTests - Starting TicketsApplicationTests on 文文 with PID 22548 (started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 11:37:26.156 [main] INFO  com.tickets.TicketsApplicationTests - No active profile set, falling back to default profiles: default
+2023-09-12 11:37:26.553 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 11:37:26.558 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 11:37:26.572 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 11:37:26.578 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 12:11:23.996 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 44972 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 12:11:23.997 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 12:11:24.711 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 12:11:24.711 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 12:11:24.760 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 12:11:25.219 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 12:11:25.369 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 12:11:25.376 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 12:11:25.396 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 12:11:25.482 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 12:11:25.483 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 12:11:25.491 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 12:11:25.493 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 12:11:25.494 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 12:11:25.496 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 12:11:25.499 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 12:11:25.500 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 12:11:25.502 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 12:11:25.505 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 12:11:25.506 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 12:11:25.509 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 12:11:25.513 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 12:11:25.515 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 12:11:25.516 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 12:11:25.518 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 12:11:25.522 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 12:11:25.522 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 12:11:25.524 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 12:11:25.535 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 12:11:25.537 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 12:11:25.541 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 12:11:25.542 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 12:11:25.544 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 12:11:25.545 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 12:11:25.545 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 12:11:25.546 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 12:11:25.548 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 12:11:25.549 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 12:11:25.550 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 12:11:25.552 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 12:11:25.553 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 12:11:25.554 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 12:11:25.555 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 12:11:25.557 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 12:11:25.558 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 12:11:25.558 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 12:11:25.559 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 12:11:25.561 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 12:11:25.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 12:11:25.563 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 12:11:25.564 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 12:11:25.565 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 12:11:25.565 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 12:11:25.566 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 12:11:25.567 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 12:11:25.592 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.884 seconds (JVM running for 2.386)
+2023-09-12 12:11:34.651 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 12:11:34.803 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 13:26:42.360 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 13:26:42.366 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 13:26:50.251 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 31608 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 13:26:50.253 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 13:26:50.935 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 13:26:50.935 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 13:26:50.983 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 13:26:51.444 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 13:26:51.600 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 13:26:51.608 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 13:26:51.628 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 13:26:51.717 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 13:26:51.718 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 13:26:51.727 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 13:26:51.728 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 13:26:51.729 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 13:26:51.731 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 13:26:51.733 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 13:26:51.735 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 13:26:51.737 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 13:26:51.740 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 13:26:51.741 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 13:26:51.744 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 13:26:51.749 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 13:26:51.750 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 13:26:51.751 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 13:26:51.753 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 13:26:51.757 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 13:26:51.757 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 13:26:51.759 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 13:26:51.771 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 13:26:51.774 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 13:26:51.778 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 13:26:51.779 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 13:26:51.781 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 13:26:51.782 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 13:26:51.782 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 13:26:51.783 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 13:26:51.785 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 13:26:51.786 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 13:26:51.787 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 13:26:51.790 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 13:26:51.791 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 13:26:51.791 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 13:26:51.792 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 13:26:51.794 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 13:26:51.794 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 13:26:51.795 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 13:26:51.795 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 13:26:51.798 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 13:26:51.798 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 13:26:51.799 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 13:26:51.800 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 13:26:51.800 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 13:26:51.801 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 13:26:51.802 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 13:26:51.803 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 13:26:51.828 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.845 seconds (JVM running for 2.417)
+2023-09-12 13:27:04.028 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 13:27:04.224 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 13:38:08.452 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 13:38:08.455 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 13:38:10.354 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 34624 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 13:38:10.356 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 13:38:11.083 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 13:38:11.083 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 13:38:11.138 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 13:38:11.615 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 13:38:11.761 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 13:38:11.770 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 13:38:11.786 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 13:38:11.862 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 13:38:11.863 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 13:38:11.870 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 13:38:11.871 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 13:38:11.872 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 13:38:11.873 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 13:38:11.875 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 13:38:11.876 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 13:38:11.878 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 13:38:11.880 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 13:38:11.881 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 13:38:11.883 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 13:38:11.887 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 13:38:11.889 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 13:38:11.889 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 13:38:11.891 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 13:38:11.894 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 13:38:11.895 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 13:38:11.896 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 13:38:11.909 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 13:38:11.912 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 13:38:11.915 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 13:38:11.916 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 13:38:11.918 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 13:38:11.919 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 13:38:11.920 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 13:38:11.920 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 13:38:11.923 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 13:38:11.925 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 13:38:11.926 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 13:38:11.928 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 13:38:11.928 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 13:38:11.929 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 13:38:11.929 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 13:38:11.931 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 13:38:11.932 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 13:38:11.932 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 13:38:11.933 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 13:38:11.935 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 13:38:11.936 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 13:38:11.936 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 13:38:11.938 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 13:38:11.938 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 13:38:11.939 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 13:38:11.939 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 13:38:11.940 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 13:38:11.975 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.901 seconds (JVM running for 2.286)
+2023-09-12 16:56:22.991 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 16:56:31.090 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 37880 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 16:56:31.092 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 16:56:31.933 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 16:56:31.934 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 16:56:31.998 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 16:56:32.503 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 16:56:32.655 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 16:56:32.663 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 16:56:32.683 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 16:56:32.769 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 16:56:32.770 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 16:56:32.777 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 16:56:32.778 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 16:56:32.779 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 16:56:32.780 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 16:56:32.782 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 16:56:32.784 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 16:56:32.787 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 16:56:32.790 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 16:56:32.791 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 16:56:32.794 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 16:56:32.799 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 16:56:32.800 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 16:56:32.801 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 16:56:32.803 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 16:56:32.806 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 16:56:32.807 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 16:56:32.808 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 16:56:32.822 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 16:56:32.824 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 16:56:32.829 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 16:56:32.830 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 16:56:32.832 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 16:56:32.833 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 16:56:32.834 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 16:56:32.834 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 16:56:32.836 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 16:56:32.838 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 16:56:32.839 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 16:56:32.841 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 16:56:32.841 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 16:56:32.842 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 16:56:32.843 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 16:56:32.845 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 16:56:32.846 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 16:56:32.846 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 16:56:32.847 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 16:56:32.848 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 16:56:32.849 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 16:56:32.849 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 16:56:32.851 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 16:56:32.852 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 16:56:32.852 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 16:56:32.853 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 16:56:32.854 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 16:56:33.004 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.213 seconds (JVM running for 2.659)
+2023-09-12 16:57:13.897 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 16:57:16.180 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 44608 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 16:57:16.182 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 16:57:16.957 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 16:57:16.958 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 16:57:17.020 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 16:57:17.512 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 16:57:17.667 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 16:57:17.674 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 16:57:17.691 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 16:57:17.769 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 16:57:17.770 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 16:57:17.778 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 16:57:17.779 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 16:57:17.780 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 16:57:17.781 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 16:57:17.784 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 16:57:17.786 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 16:57:17.788 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 16:57:17.792 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 16:57:17.792 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 16:57:17.795 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 16:57:17.800 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 16:57:17.802 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 16:57:17.803 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 16:57:17.805 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 16:57:17.808 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 16:57:17.808 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 16:57:17.810 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 16:57:17.824 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 16:57:17.826 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 16:57:17.830 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 16:57:17.832 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 16:57:17.834 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 16:57:17.835 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 16:57:17.835 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 16:57:17.836 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 16:57:17.839 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 16:57:17.841 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 16:57:17.841 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 16:57:17.844 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 16:57:17.844 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 16:57:17.845 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 16:57:17.845 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 16:57:17.848 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 16:57:17.849 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 16:57:17.849 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 16:57:17.850 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 16:57:17.852 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 16:57:17.853 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 16:57:17.853 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 16:57:17.855 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 16:57:17.856 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 16:57:17.857 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 16:57:17.857 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 16:57:17.858 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 16:57:17.962 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.061 seconds (JVM running for 2.425)
+2023-09-12 17:00:38.310 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 17:18:39.022 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 48812 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 17:18:39.023 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 17:18:39.787 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 17:18:39.788 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 17:18:39.851 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 17:18:40.378 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 17:18:40.536 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 17:18:40.543 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 17:18:40.558 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 17:18:40.639 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 17:18:40.641 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 17:18:40.648 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 17:18:40.650 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 17:18:40.651 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 17:18:40.651 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 17:18:40.654 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 17:18:40.655 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 17:18:40.657 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 17:18:40.662 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 17:18:40.663 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 17:18:40.665 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 17:18:40.671 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 17:18:40.673 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 17:18:40.674 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 17:18:40.677 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 17:18:40.680 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 17:18:40.681 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 17:18:40.683 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 17:18:40.698 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 17:18:40.700 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 17:18:40.704 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 17:18:40.706 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 17:18:40.708 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 17:18:40.709 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 17:18:40.709 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 17:18:40.710 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 17:18:40.713 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 17:18:40.715 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 17:18:40.716 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 17:18:40.719 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 17:18:40.720 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 17:18:40.721 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 17:18:40.721 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 17:18:40.724 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 17:18:40.725 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 17:18:40.725 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 17:18:40.726 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 17:18:40.728 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 17:18:40.729 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 17:18:40.730 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 17:18:40.732 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 17:18:40.732 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 17:18:40.733 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 17:18:40.733 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 17:18:40.735 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 17:18:40.773 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.104 seconds (JVM running for 2.485)
+2023-09-12 17:21:17.685 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+2023-09-12 17:21:21.852 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 30460 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 17:21:21.854 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 17:21:22.607 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 17:21:22.607 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 17:21:22.662 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 17:21:23.100 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 17:21:23.243 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 17:21:23.250 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 17:21:23.264 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 17:21:23.340 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 17:21:23.341 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 17:21:23.348 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 17:21:23.350 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 17:21:23.351 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 17:21:23.352 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 17:21:23.354 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 17:21:23.355 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 17:21:23.358 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 17:21:23.362 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 17:21:23.362 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 17:21:23.365 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 17:21:23.369 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 17:21:23.371 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 17:21:23.372 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 17:21:23.374 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 17:21:23.377 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 17:21:23.377 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 17:21:23.379 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 17:21:23.392 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 17:21:23.394 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 17:21:23.398 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 17:21:23.399 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 17:21:23.402 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 17:21:23.402 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 17:21:23.403 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 17:21:23.404 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 17:21:23.406 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 17:21:23.408 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 17:21:23.408 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 17:21:23.411 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 17:21:23.411 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 17:21:23.412 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 17:21:23.412 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 17:21:23.414 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 17:21:23.415 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 17:21:23.416 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 17:21:23.416 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 17:21:23.419 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 17:21:23.420 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 17:21:23.420 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 17:21:23.422 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 17:21:23.423 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 17:21:23.423 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 17:21:23.424 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 17:21:23.425 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 17:21:23.460 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.866 seconds (JVM running for 2.23)
+2023-09-12 17:22:15.096 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 17:22:15.162 [http-nio-8080-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-12 17:33:28.654 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-12 17:33:28.659 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2023-09-12 17:35:22.419 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 53736 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-12 17:35:22.420 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-12 17:35:23.166 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-12 17:35:23.167 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-12 17:35:23.226 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-12 17:35:23.727 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-12 17:35:23.882 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-12 17:35:23.890 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-12 17:35:23.907 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-12 17:35:23.990 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-12 17:35:23.992 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-12 17:35:24.000 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-12 17:35:24.001 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-12 17:35:24.002 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-12 17:35:24.003 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-12 17:35:24.006 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-12 17:35:24.008 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-12 17:35:24.010 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-12 17:35:24.014 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-12 17:35:24.015 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-12 17:35:24.018 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-12 17:35:24.024 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-12 17:35:24.027 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-12 17:35:24.027 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-12 17:35:24.030 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-12 17:35:24.033 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-12 17:35:24.033 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-12 17:35:24.035 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-12 17:35:24.048 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-12 17:35:24.050 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-12 17:35:24.054 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-12 17:35:24.055 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-12 17:35:24.058 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-12 17:35:24.058 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-12 17:35:24.059 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-12 17:35:24.059 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-12 17:35:24.062 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-12 17:35:24.064 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-12 17:35:24.065 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-12 17:35:24.067 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-12 17:35:24.068 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-12 17:35:24.069 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-12 17:35:24.069 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-12 17:35:24.072 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-12 17:35:24.073 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-12 17:35:24.073 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-12 17:35:24.074 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-12 17:35:24.076 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-12 17:35:24.077 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-12 17:35:24.078 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-12 17:35:24.079 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-12 17:35:24.080 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-12 17:35:24.081 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-12 17:35:24.081 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-12 17:35:24.083 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-12 17:35:24.119 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.988 seconds (JVM running for 2.367)
+2023-09-12 17:35:31.322 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-12 17:35:31.438 [http-nio-8080-exec-3] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited

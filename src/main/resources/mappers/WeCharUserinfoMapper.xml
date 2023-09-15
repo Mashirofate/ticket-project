@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.WeCharUserinfoMapper">
+
+
+    <insert id="insert">
+        <selectKey keyProperty="wcId" resultType="string" order="BEFORE">
+            SELECT uuId()
+        </selectKey>
+        INSERT INTO
+            wechatuser (wId, wOpenid, wSessionkey, wNick, wPhone, wAvatarUrl)
+        VALUES
+            (#{wcId}, #{wcOpenid}, #{wcSessionKey}, #{wcNick}, #{wcPhone}, #{wAvatarUrl})
+    </insert>
+    <select id="selectIsExist" resultType="java.lang.String">
+        SELECT
+            wId
+        FROM
+            wechatuser
+        WHERE
+            wOpenid = #{wOpenid} LIMIT 1
+    </select>
+    <select id="selectById" resultType="java.util.Map">
+        SELECT
+            wId, wNick, wAvatarUrl
+        FROM
+            wechatuser
+        WHERE wId = #{id}
+    </select>
+</mapper>

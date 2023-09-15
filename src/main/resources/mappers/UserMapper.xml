@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.UserMapper">
+    <insert id="insert">
+        <selectKey keyProperty="uId" resultType="string" order="BEFORE">
+            SELECT uuId()
+        </selectKey>
+        INSERT INTO `user` (uId, uUser, uPassword, uStartusing,uAuthority)
+        VALUES (#{uId},#{uUser},#{uPassword},#{uStartusing}, #{uAuthority})
+    </insert>
+
+    <delete id="deleteReal">
+        DELETE FROM `user` WHERE uId = #{uId} LIMIT 1
+    </delete>
+
+    <select id="selectCout" resultType="java.lang.Integer">
+        SELECT COUNT(uId) FROM `user` WHERE uUser = #{uUser}
+    </select>
+
+    <select id="selectByKeys" resultType="java.util.Map">
+        SELECT u.uId, u.uUser, IF(u.uStartusing=0,'删除', IF(u.uStartusing=1,'启用','不启用')) uStartusing, u.uAuthority
+        FROM `user` AS u
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="uUser != null and uUser.length != 0">
+                uUser LIKE "%"#{uUser}"%"
+            </if>
+            <if test="uStartusing != null">
+                AND uStartusing = #{uStartusing}
+            </if>
+            <if test="uStartusing == null">
+                AND uStartusing != 0
+            </if>
+        </trim>
+        LIMIT ${(current-1)*size},${size}
+    </select>
+
+    <select id="selectCountByKeys" resultType="java.lang.Integer">
+        SELECT COUNT(u.uId)
+        FROM `user` AS u
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="uUser != null and uUser.length != 0">
+                uUser LIKE "%"#{uUser}"%"
+            </if>
+            <if test="uStartusing != null">
+                AND uStartusing = #{uStartusing}
+            </if>
+        </trim>
+    </select>
+    <select id="selectCountByuUser" resultType="java.lang.Integer">
+        SELECT COUNT(uUser) FROM user WHERE uUser = #{uUser}
+    </select>
+
+    <select id="selectIsExist" resultType="java.lang.String">
+        SELECT uId FROM user WHERE uUser = #{uUser} AND uPassword = #{uPassword} LIMIT 1
+    </select>
+
+    <select id="selectById" resultType="java.util.Map">
+         SELECT uId, uUser, uAuthority, uStartusing FROM user WHERE uId = #{uId}
+    </select>
+
+<update id="update">
+    UPDATE user SET uUser = #{uUser}, uPassword=#{ uPassword},uAuthority = #{uAuthority},uStartusing=#{uStartusing}  WHERE uId=#{uId} LIMIT 1
+</update>
+    <update id="delete">
+        UPDATE `user` SET uStartusing = 0 WHERE uId = #{uId} LIMIT 1
+    </update>
+    <update id="updateStartusing">
+        UPDATE `user` SET uStartusing = #{startusing} WHERE uId = #{uId} LIMIT 1
+    </update>
+</mapper>

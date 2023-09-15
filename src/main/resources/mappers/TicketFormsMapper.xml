@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.TicketFormsMapper">
+    <select id="getNumber" resultType="java.util.HashMap">
+        SELECT (
+                   # 票务总数
+                   SELECT aTicketnumber
+                   FROM activity
+                   WHERE aId = #{aId}
+               ) AS aTicketnumber,
+
+               (
+                   #工作证总数
+                   SELECT aEmployeenumber
+                   FROM activity
+                   WHERE aId = #{aId}
+               ) AS aEmployeenumber,
+               (
+                   #票务入场
+                   SELECT COUNT(DISTINCT e.tId)
+                   FROM enter AS e
+                   WHERE e.aId = #{aId}
+                     AND e.dWorker = 0
+               ) AS ticket,
+               (
+                   #工作人员入场
+                   SELECT COUNT(DISTINCT e.tId)
+                   FROM  enter AS e
+                   WHERE e.aId = #{aId}
+                     AND e.dWorker = 1
+               ) AS work,
+
+               (
+                   # 未实名入场
+                   SELECT COUNT(DISTINCT e.tId)
+                   FROM enter AS e
+                   WHERE e.aId =#{aId}
+                     AND (ISNULL(e.tIdentitycard) > 0 or LENGTH(e.tIdentitycard) &lt; 1)
+               ) AS noautonym,
+
+               (
+                   # 实名入场
+                   SELECT COUNT(DISTINCT e.tId)
+                   FROM enter AS e
+                   WHERE e.aId =#{aId}
+                     AND (ISNULL(e.tIdentitycard) &lt; 1 or LENGTH(e.tIdentitycard) > 0)
+               ) AS autonym
+    </select>
+    <select id="getNumbers" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT( e.eDate, "%Y-%m-%d" ) AS name,
+            COUNT(e.eId) AS value
+        FROM enter  AS e
+        WHERE e.aId=#{aId}
+        GROUP BY DATE_FORMAT( e.eDate, "%Y-%m-%d" )
+    </select>
+    <select id="getSum" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(
+                       concat(date(c.Dates), ' ', HOUR(c.Dates), ':', floor(MINUTE(c.Dates) / 10) * 10),
+                       '%Y-%m-%d %H:%i:%s'
+                   )        AS time,
+               Names,
+               count(Names) as amount
+        FROM (
+                 SELECT date_format(e.eDate, '%Y-%m-%d %H:%i:%s') as Dates,
+                        e.eName                                   as Names,
+                        e.tId                                    as ids
+                 FROM  enter as e
+                 WHERE e.aId =#{aId}
+                   and e.dWorker = 0
+             ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s'),Names
+        ORDER BY time;
+
+    </select>
+    <select id="getcolumns" resultType="java.util.HashMap">
+        SELECT DATE_FORMAT(
+                       concat(date(c.Dates), ' ', HOUR(c.Dates), ':', floor(MINUTE(c.Dates) / 10) * 10),
+                       '%Y-%m-%d %H:%i:%s'
+                   )        AS time,
+               count(Names) as amount
+        FROM (
+                 SELECT date_format(e.eDate, '%Y-%m-%d %H:%i:%s') as Dates,
+                        e.eName                                   as Names,
+                        e.tId                                    as ids
+                 FROM  enter as e
+                 WHERE e.aId =#{aId}
+                   and e.dWorker = 1
+             ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s')
+        ORDER BY time;
+    </select>
+    <select id="getTotality" resultType="java.util.HashMap">
+        SELECT count(ids) as value,
+               DATE_FORMAT(
+                       concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
+                       '%Y-%m-%d %H:%i:%s'
+                   ) AS time
+        FROM
+            (
+                SELECT
+                    date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.tId as ids
+                FROM enter as e
+                WHERE e.aId =#{aId}
+            ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' )
+        ORDER BY time;
+    </select>
+
+    <select id="getheadcount" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT( t.teDate, "%Y-%m-%d" ) AS name,
+            COUNT(t.teId) AS value
+        FROM tloe  AS t
+        WHERE t.teaId=#{aId}
+        GROUP BY DATE_FORMAT( t.teDate, "%Y-%m-%d" )
+    </select>
+
+    <select id="getExportTotality" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT(  t.teDate, "%Y-%m-%d" ) AS time,
+            COUNT(t.teId) AS value,
+            t.teAisle as Names
+        FROM tloe  AS t
+        WHERE t.teaId=#{aId}
+        GROUP BY DATE_FORMAT( t.teDate, "%Y-%m-%d" ),Names
+        ORDER BY time ASC
+    </select>
+
+    <select id="getEnTotalitys" resultType="java.util.HashMap">
+        SELECT count(ids) as value,
+               DATE_FORMAT(
+                       concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
+                       '%Y-%m-%d %H:%i:%s'
+                   ) AS time
+        FROM
+            (
+                SELECT
+                    date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates,e.eId as ids
+                FROM enter  AS e
+                WHERE e.aId=#{aId}
+
+            ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' )
+        ORDER BY time;
+
+    </select>
+
+    <select id="getEnTotality" resultType="java.util.HashMap">
+        SELECT count(ids) as value,
+               DATE_FORMAT(
+                       concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
+                       '%Y-%m-%d '
+                   ) AS time,
+               Names
+        FROM
+            (
+
+                SELECT date_format( e.eDate, '%Y-%m-%d') as Dates,
+                       e.eName                              as Names,
+                       e.eId                                  as ids
+                FROM enter  AS e
+                WHERE e.aId=#{aId}
+
+            ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d'),Names
+        ORDER BY time;
+
+    </select>
+
+
+    <select id="getExportSum" resultType="java.util.HashMap">
+        SELECT count(ids) as value,
+               DATE_FORMAT(
+                       concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
+                       '%Y-%m-%d %H:%i:%s'
+                   ) AS time,
+               Names
+        FROM
+            (
+
+                SELECT date_format(t.teDate, '%Y-%m-%d %H:%i:%s') as Dates,
+                       date_format(t.teDate, '%Y-%m-%d')                             as Names,
+                       t.teId                                  as ids
+                FROM tloe  AS t
+                WHERE t.teaId=#{aId}
+
+            ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),Names
+        ORDER BY time;
+    </select>
+
+    <select id="getEnSum" resultType="java.util.HashMap">
+        SELECT count(ids) as value,
+               DATE_FORMAT(
+                       concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
+                       '%Y-%m-%d %H:%i:%s'
+                   ) AS time,
+               Names
+        FROM
+            (
+
+                SELECT date_format( e.eDate, '%Y-%m-%d %H:%i:%s') as Dates,
+                       date_format( e.eDate, '%Y-%m-%d')                             as Names,
+                       e.eId                                  as ids
+                FROM enter  AS e
+                WHERE e.aId=#{aId}
+
+            ) as c
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),Names
+        ORDER BY time;
+    </select>
+
+
+
+
+    <select id="getExitcount" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT( t.teDate, "%Y-%m-%d" ) AS time,
+            COUNT(t.teId) AS total
+        FROM tloe  AS t
+        WHERE t.teaId=#{aId}
+        GROUP BY DATE_FORMAT( t.teDate, "%Y-%m-%d" )
+        ORDER BY time ASC
+
+    </select>
+
+    <select id="getEncountsingle" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT(  e.eDate, "%Y-%m-%d" ) AS time,
+            COUNT(e.eId) AS total,
+            e.eName as Names
+        FROM enter  AS e
+        WHERE e.aId=#{aId}
+        GROUP BY DATE_FORMAT(  e.eDate, "%Y-%m-%d" ),Names
+        ORDER BY time ASC
+    </select>
+
+    <select id="getEncount" resultType="java.util.HashMap">
+        SELECT
+            DATE_FORMAT(  e.eDate, "%Y-%m-%d" ) AS time,
+            COUNT(e.eId) AS total
+        FROM enter  AS e
+        WHERE e.aId=#{aId}
+        GROUP BY DATE_FORMAT(  e.eDate, "%Y-%m-%d" )
+        ORDER BY time ASC
+    </select>
+</mapper>

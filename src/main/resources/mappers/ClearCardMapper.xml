@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.ClearCardMapper">
+
+
+    <!--parameterType 传入参数的类型，resultType返回参数的类型-->
+    <select id="selectByKeys" resultType="java.util.Map">
+        SELECT fId,fCertificate,fComment
+        <include refid="searchSQL"/>
+        LIMIT ${(current-1)*size},${size}
+    </select>
+
+    <select id="selectCountByKeys" resultType="java.lang.Integer">
+        SELECT COUNT(fId)
+        <include refid="searchSQL"></include>
+    </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="fId" resultType="string" order="BEFORE">
+            SELECT uuId()
+        </selectKey>
+        INSERT INTO frontinfo (fId, fCertificate, fComment)
+        VALUES (#{fId}, #{fCertificate},#{fComment})
+    </insert>
+
+
+    <delete id="deleteDes">
+        delete from frontinfo where fId=#{fid}
+    </delete>
+
+    <update id="update">
+        UPDATE frontinfo SET fCertificate= #{fCertificate},fComment = #{fComment}  WHERE fId=#{fId} LIMIT 1
+    </update>
+
+    <sql id="searchSQL">
+        FROM frontinfo AS f
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="fCertificate != null and fCertificate.length != 0">
+                AND f.fCertificate LIKE "%"#{fCertificate}"%"
+            </if>
+            <if test="fComment != null and fComment.length != 0">
+                AND f.fComment LIKE "%"#{fComment}"%"
+            </if>
+        </trim>
+    </sql>
+
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.AuthorityMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="authorityId">
+        <selectKey keyProperty="authorityId" resultType="string" order="BEFORE">
+            SELECT uuId()
+        </selectKey>
+        INSERT INTO authority(authority_id, authority_name, authority_note, authority_grade)
+        VALUES (#{authorityId}, #{authorityName}, #{authorityNote}, #{authorityGrade})
+    </insert>
+</mapper>

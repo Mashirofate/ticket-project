@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.TradeshowMapper">
+    <resultMap id="BaseResultMap" type="com.tickets.entity.Tradeshow">
+        <id column="tId" jdbcType="VARCHAR" property="tid" />
+        <result column="tName" jdbcType="VARCHAR" property="tname" />
+        <result column="tQrcard" jdbcType="VARCHAR" property="tqrcard" />
+        <result column="tIdentitycard" jdbcType="VARCHAR" property="tidentitycard" />
+        <result column="tphone" jdbcType="VARCHAR" property="tphone" />
+        <result column="tCompany" jdbcType="VARCHAR" property="tcompany" />
+        <result column="tType" jdbcType="VARCHAR" property="ttype" />
+        <result column="tData" jdbcType="TIMESTAMP" property="tdata" />
+        <result column="tElse" jdbcType="VARCHAR" property="telse" />
+        <result column="aId" jdbcType="VARCHAR" property="aid" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        tId, tName, tQrcard, tIdentitycard, tphone, tCompany, tType, tData, tElse, aId
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tradeshow
+        where tId = #{tid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from tradeshow
+        where tId = #{tid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" keyColumn="tId" keyProperty="tid" parameterType="com.tickets.entity.Tradeshow" useGeneratedKeys="false">
+        insert into tradeshow (tId,tName, tQrcard, tIdentitycard,
+        tphone, tCompany, tType,
+        tData, tElse, aId
+        )
+        values (#{tid,jdbcType=VARCHAR},#{tname,jdbcType=VARCHAR}, #{tqrcard,jdbcType=VARCHAR}, #{tidentitycard,jdbcType=VARCHAR},
+        #{tphone,jdbcType=VARCHAR}, #{tcompany,jdbcType=VARCHAR}, #{ttype,jdbcType=VARCHAR},
+        #{tdata,jdbcType=TIMESTAMP}, #{telse,jdbcType=VARCHAR}, #{aid,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="tId" keyProperty="tid" parameterType="com.tickets.entity.Tradeshow" useGeneratedKeys="true">
+        insert into tradeshow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tname != null">
+                tName,
+            </if>
+            <if test="tqrcard != null">
+                tQrcard,
+            </if>
+            <if test="tidentitycard != null">
+                tIdentitycard,
+            </if>
+            <if test="tphone != null">
+                tphone,
+            </if>
+            <if test="tcompany != null">
+                tCompany,
+            </if>
+            <if test="ttype != null">
+                tType,
+            </if>
+            <if test="tdata != null">
+                tData,
+            </if>
+            <if test="telse != null">
+                tElse,
+            </if>
+            <if test="aid != null">
+                aId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tname != null">
+                #{tname,jdbcType=VARCHAR},
+            </if>
+            <if test="tqrcard != null">
+                #{tqrcard,jdbcType=VARCHAR},
+            </if>
+            <if test="tidentitycard != null">
+                #{tidentitycard,jdbcType=VARCHAR},
+            </if>
+            <if test="tphone != null">
+                #{tphone,jdbcType=VARCHAR},
+            </if>
+            <if test="tcompany != null">
+                #{tcompany,jdbcType=VARCHAR},
+            </if>
+            <if test="ttype != null">
+                #{ttype,jdbcType=VARCHAR},
+            </if>
+            <if test="tdata != null">
+                #{tdata,jdbcType=TIMESTAMP},
+            </if>
+            <if test="telse != null">
+                #{telse,jdbcType=VARCHAR},
+            </if>
+            <if test="aid != null">
+                #{aid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tickets.entity.Tradeshow">
+        update tradeshow
+        <set>
+            <if test="tname != null">
+                tName = #{tname,jdbcType=VARCHAR},
+            </if>
+            <if test="tqrcard != null">
+                tQrcard = #{tqrcard,jdbcType=VARCHAR},
+            </if>
+            <if test="tidentitycard != null">
+                tIdentitycard = #{tidentitycard,jdbcType=VARCHAR},
+            </if>
+            <if test="tphone != null">
+                tphone = #{tphone,jdbcType=VARCHAR},
+            </if>
+            <if test="tcompany != null">
+                tCompany = #{tcompany,jdbcType=VARCHAR},
+            </if>
+            <if test="ttype != null">
+                tType = #{ttype,jdbcType=VARCHAR},
+            </if>
+            <if test="tdata != null">
+                tData = #{tdata,jdbcType=TIMESTAMP},
+            </if>
+            <if test="telse != null">
+                tElse = #{telse,jdbcType=VARCHAR},
+            </if>
+            <if test="aid != null">
+                aId = #{aid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where tId = #{tid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.tickets.entity.Tradeshow">
+        update tradeshow
+        set tName = #{tname,jdbcType=VARCHAR},
+        tQrcard = #{tqrcard,jdbcType=VARCHAR},
+        tIdentitycard = #{tidentitycard,jdbcType=VARCHAR},
+        tphone = #{tphone,jdbcType=VARCHAR},
+        tCompany = #{tcompany,jdbcType=VARCHAR},
+        tType = #{ttype,jdbcType=VARCHAR},
+        tData = #{tdata,jdbcType=TIMESTAMP},
+        tElse = #{telse,jdbcType=VARCHAR},
+        aId = #{aid,jdbcType=VARCHAR}
+        where tId = #{tid,jdbcType=VARCHAR}
+    </update>
+</mapper>

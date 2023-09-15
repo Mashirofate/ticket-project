@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.VenueActiviesMapper">
+    <resultMap id="BaseResultMap" type="com.tickets.dto.VenueActivieAddDto">
+        <id column="aId" jdbcType="VARCHAR" property="aId" />
+        <result column="aName" jdbcType="VARCHAR" property="aName" />
+        <result column="aEnable" jdbcType="INTEGER" property="aEnable" />
+        <result column="aNote" jdbcType="VARCHAR" property="aNote" />
+        <result column="aCreationtime" jdbcType="TIMESTAMP" property="aCreationtime" />
+        <result column="aTicketnumber" jdbcType="INTEGER" property="aTicketnumber" />
+        <result column="aEmployeenumber" jdbcType="INTEGER" property="aEmployeenumber" />
+        <result column="aImage" jdbcType="VARCHAR" property="aImage" />
+        <result column="aType" jdbcType="VARCHAR" property="aType" />
+        <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+        <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        aId, aName, aEnable, aNote, aCreationtime, aTicketnumber, aEmployeenumber, aImage, aType,startTime,endTime,updateTime
+    </sql>
+    <insert id="insert">
+        <selectKey keyProperty="aId" resultType="string" order="BEFORE">
+            SELECT uuId()
+        </selectKey>
+        INSERT INTO activity (<include refid="Base_Column_List"/>)
+        VALUES (#{aId}, #{aName}, #{aEnable}, #{aNote}, now(), #{aTicketnumber}, #{aEmployeenumber}, #{aImage},#{aType},#{startTime}, #{endTime}, now())
+    </insert>
+
+    <update id="update">
+        UPDATE
+        activity
+        SET
+        aName= #{aName},aEnable = #{aEnable},aNote=#{aNote},aCreationtime=now(),aTicketnumber=#{aTicketnumber},
+        aEmployeenumber=#{aEmployeenumber},aImage=#{aImage},aType=#{aType}, startTime=#{startTime}, endTime=#{endTime},
+        updateTime=now()
+        WHERE
+        aId = #{aId}
+    </update>
+
+
+    <update id="updateEnable">
+        UPDATE activity SET aEnable = #{aEnable},updateTime=now() WHERE aId = #{aId}
+    </update>
+    <select id="selectByKeys" resultType="java.util.Map">
+    SELECT aId, aName, aNote, IF(aEnable = 0, '删除', IF(aEnable=1,'启用','不启用')) aEnable, aCreationtime, aTicketnumber , aEmployeenumber, aImage, aType, startTime, endTime
+    FROM activity
+    <trim prefix="WHERE" prefixOverrides="AND |OR ">
+        <if test="aName != null and aName.length != 0">
+            aName LIKE "%"#{aName}"%"
+        </if>
+        <if test="aEnable != null">
+            AND aEnable = #{aEnable}
+        </if>
+        <if test="aEnable == null">
+            AND aEnable !=0
+        </if>
+        <if test="aType != null">
+            AND aType = #{aType}
+        </if>
+    </trim>
+    LIMIT ${(current-1)*size},${size}
+</select>
+    <select id="selectByNames" resultType="java.util.Map">
+        SELECT aId, aName
+        FROM activity
+        WHERE aEnable = "1"
+    </select>
+
+
+
+    <select id="selectCountByKeys" resultType="java.lang.Integer">
+        SELECT COUNT(aId)
+        FROM activity
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="aName != null and aName.length != 0">
+                aName LIKE "%"#{aName}"%"
+            </if>
+            <if test="aEnable != null">
+                AND aEnable = #{aEnable}
+            </if>
+
+        </trim>
+    </select>
+    <select id="selectByEnable" resultType="java.util.Map">
+        SELECT <include refid="Base_Column_List"/>
+        FROM activity
+        WHERE aEnable = #{enable}
+    </select>
+    <select id="selectByVaId" resultType="java.util.Map">
+        SELECT <include refid="Base_Column_List"/>
+        FROM activity
+        WHERE aId = #{aId}
+        LIMIT 1
+    </select>
+
+    <select id="selectSimple" resultType="java.util.Map">
+        SELECT
+            aId, aName
+        FROM
+            activity
+    </select>
+    <select id="activitiyAmount" resultType="int">
+        SELECT
+            count(aId)
+        FROM
+            activity
+    </select>
+
+    <select id="venuesAmount" resultType="int">
+        SELECT
+            count(vId)
+        FROM
+            venues
+    </select>
+    <select id="deviceAmount" resultType="int">
+        SELECT
+            count(dId)
+        FROM
+            devices
+    </select>
+    <select id="ticketingAmount" resultType="int">
+        SELECT
+            count(tId)
+        FROM
+            ticketing
+    </select>
+    <select id="queryVenuesForOpenActivity" resultType="int">
+        SELECT
+            count(tId)
+        FROM
+            ticketing
+    </select>
+
+</mapper>

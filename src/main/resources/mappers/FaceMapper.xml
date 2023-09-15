@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.FaceMapper">
+
+
+    <select id="queryFace" resultType="java.util.Map">
+        SELECT fImage,fFeature,eId FROM enter as e WHERE fImage  is not null  and fFeature is not null
+    </select>
+
+
+    <select id="queryTicketing" resultType="java.util.Map">
+        SELECT
+            e.fImage,
+            t.tSeatingarea,
+            t.tRownumber,
+            t.tSeat,
+            t.tGrandstand,
+            e.eDate,
+            e.aName,
+            e.vName,
+            e.temp,
+            e.tQrcard,
+            e.tIdentitycard
+        FROM enter AS e
+        left join ticketing AS t
+        ON e.tId =t.tId
+        WHERE
+            e.eId = #{eId}
+
+    </select>
+    <select id="selectImageByActivityId" resultType="java.lang.String">
+        SELECT
+            CONCAT('data:image/jpg;base64,', e.fImage)  AS image
+        FROM enter AS e
+        WHERE
+            e.aId=#{aId}
+          AND
+            TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        ORDER BY
+            e.eDate DESC
+        LIMIT 5
+    </select>
+
+    <select id="selectImageByActivityIds" resultType="java.util.Map">
+        SELECT
+            e.tIdentitycard,e.autonym,
+            CONVERT( e.fImage USING utf8 )  AS image
+
+        FROM enter AS e
+        WHERE
+            e.aId=#{aId}
+#           AND
+#             TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        ORDER BY
+            e.eDate DESC
+        LIMIT 5
+    </select>
+
+    <select id="getImageByActivityId" resultType="java.util.Map">
+        SELECT aName,eName,tIdentitycard,eDate,fImage from enter
+        WHERE eDate between #{sqlDateformerly} and #{sqlDate}
+          AND aId=#{aId}
+    </select>
+    <select id="getImageByActivityIdcount" resultType="java.util.Map">
+        SELECT COUNT(eId) from enter
+        WHERE eDate between #{sqlDateformerly} and #{sqlDate}
+          AND aId=#{aId}
+    </select>
+
+    <select id="selectImageByActivityIdsAbnormal" resultType="java.util.Map">
+        SELECT
+            e.tIdentitycard,e.autonym,
+            CONVERT( e.fImage USING utf8 )  AS image
+
+        FROM enter AS e
+        WHERE
+            e.aId=#{aId}
+          AND
+            TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        ORDER BY
+            e.eDate DESC
+
+    </select>
+
+    <select id="selectKeyByActivityId" resultType="java.lang.String">
+        SELECT
+            e.eId
+        FROM enter AS e
+        WHERE
+            e.aId=#{aId}
+            <if test="date != null and date != ''">
+                AND DATE(e.eDate)=#{date}
+            </if>
+
+        ORDER BY
+            e.eDate DESC
+            LIMIT 5
+    </select>
+
+    <select id="selectImageByKeys" resultType="java.util.Map">
+        SELECT
+            e.tIdentitycard,e.autonym,
+            CONVERT( e.fImage USING utf8 )  AS image
+        FROM enter AS e
+        WHERE
+            e.eId in
+        <foreach item="item" collection="ids" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </select>
+</mapper>
+
+
