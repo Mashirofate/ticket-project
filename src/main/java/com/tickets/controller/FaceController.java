@@ -227,7 +227,7 @@ public class FaceController {
                         postdate( time2,  time1);
                     }*/
                     String  sqlDate = format.format(getTime1());;
-                    System.out.println("format : " +sqlDate+"-------任务执行开始时间--------");
+                    System.out.println("format : " +sqlDate+"-------任务执行开始时间-------");
                     String  sqlDateformerly = format.format(getTime2());
                     System.out.println("format : " +sqlDateformerly+"-------任务执行以前时间--------");
                     postdate( sqlDate, sqlDateformerly );
