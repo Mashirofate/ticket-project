@@ -53,7 +53,7 @@
         UPDATE devices SET eName = #{eName},dIp = #{dIp},dCreationtime=now()  WHERE dId=#{dId} LIMIT 1
     </update>
 
-    <select id="getSingle" resultType="java.util.Map">
+    <select id="getSingle" resultType="String">
         SELECT tIdentitycard
         FROM enter
         WHERE aId=#{aId}

@@ -102,106 +102,86 @@
     </select>
 
     <select id="getoutlist" resultType="java.lang.String">
-
-        SELECT COALESCE(o.value,0) FROM ( SELECT count(ids) as value,
-                               DATE_FORMAT(
-                                       concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-                                       '%Y-%m-%d %H:%i:%s'
-                                   ) AS time
-                        FROM
-                            (
-                                SELECT
-                                    date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
-                                FROM  enter as e
-                                WHERE e.aId =#{vaId}
-                                  AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
-                            ) as c
-                        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),ids
-                        ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(DISTINCT ids) as value,
-                                                                       DATE_FORMAT(
-                                                                               concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-                                                                               '%Y-%m-%d %H:%i:%s'
-                                                                           ) AS time
-                                                                FROM
-                                                                    (
-                                                                        SELECT
-                                                                            date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
-                                                                        FROM tloe  AS t
-                                                                        WHERE t.teaId = #{vaId}
-                                                                          AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
-                                                                    ) as c
-                                                                GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),ids
-                                                                ORDER BY time) as o on e.time=o.time
+        SELECT COALESCE(o.value,0) FROM (	SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                             FROM
+                                                 (
+                                                 SELECT
+                                                 date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
+                                                 FROM  enter as e
+                                                 WHERE e.aId =#{vaId}
+                                                 AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+                                                 ) as c
+                                             GROUP BY  SUBSTR(c.Dates, 1, 15)
+                                             ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                                                                     FROM
+                                                                                         (
+                                                                                         SELECT
+                                                                                         date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                                                                         FROM tloe  AS t
+                                                                                         WHERE t.teaId =#{vaId}
+                                                                                         AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
+                                                                                         ) as c
+                                                                                     GROUP BY SUBSTR(c.Dates, 1, 15)
+                                                                                     ORDER BY time
+        ) as o on e.time=o.time
 
 
     </select>
 
     <select id="getenterlist" resultType="java.lang.String">
 
-        SELECT COALESCE(e.value,0) FROM ( SELECT count(ids) as value,
-                                                 DATE_FORMAT(
-                                                         concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-                                                         '%Y-%m-%d %H:%i:%s'
-                                                     ) AS time
-                                          FROM
-                                              (
-                                                  SELECT
-                                                      date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
-                                                  FROM  enter as e
-                                                  WHERE e.aId =#{vaId}
-                                                    AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
-                                              ) as c
-                                          GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),ids
-                                          ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(DISTINCT ids) as value,
-                                                                                         DATE_FORMAT(
-                                                                                                 concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-                                                                                                 '%Y-%m-%d %H:%i:%s'
-                                                                                             ) AS time
-                                                                                  FROM
-                                                                                      (
-                                                                                          SELECT
-                                                                                              date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
-                                                                                          FROM tloe  AS t
-                                                                                          WHERE t.teaId = #{vaId}
-                                                                                            AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
-                                                                                      ) as c
-                                                                                  GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),ids
-                                                                                  ORDER BY time) as o on e.time=o.time
+        SELECT COALESCE(e.value,0) FROM (SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                         FROM
+                                             (
+                                             SELECT
+                                             date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
+                                             FROM  enter as e
+                                             WHERE e.aId =#{vaId}
+                                             AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+                                             ) as c
+                                         GROUP BY  SUBSTR(c.Dates, 1, 15)
+                                         ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                                                                 FROM
+                                                                                     (
+                                                                                     SELECT
+                                                                                     date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                                                                     FROM tloe  AS t
+                                                                                     WHERE t.teaId =#{vaId}
+                                                                                     AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
+                                                                                     ) as c
+                                                                                 GROUP BY SUBSTR(c.Dates, 1, 15)
+                                                                                 ORDER BY time) as o on e.time=o.time
+
 
 
     </select>
 
     <select id="getTIMElist" resultType="java.lang.String">
 
-        SELECT e.time  FROM ( SELECT count(ids) as value,
-                                                 DATE_FORMAT(
-                                                         concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-                                                         '%Y-%m-%d %H:%i:%s'
-                                                     ) AS time
-                                          FROM
-                                              (
-                                                  SELECT
-                                                      date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
-                                                  FROM  enter as e
-                                                  WHERE e.aId =#{vaId}
-                                                    AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
-                                              ) as c
-                                          GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),ids
-                                          ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(DISTINCT ids) as value,
-                                                                                         DATE_FORMAT(
-                                                                                                 concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-                                                                                                 '%Y-%m-%d %H:%i:%s'
-                                                                                             ) AS time
-                                                                                  FROM
-                                                                                      (
-                                                                                          SELECT
-                                                                                              date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
-                                                                                          FROM tloe  AS t
-                                                                                          WHERE t.teaId = #{vaId}
-                                                                                            AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
-                                                                                      ) as c
-                                                                                  GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),ids
-                                                                                  ORDER BY time) as o on e.time=o.time
+        SELECT e.time  FROM (	SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                 FROM
+                                     (
+                                     SELECT
+                                     date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
+                                     FROM  enter as e
+                                     WHERE e.aId =#{vaId}
+                                     AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+                                     ) as c
+                                 GROUP BY  SUBSTR(c.Dates, 1, 15)
+                                 ORDER BY time	) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                                                             FROM
+                                                                                 (
+                                                                                 SELECT
+                                                                                 date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                                                                 FROM tloe  AS t
+                                                                                 WHERE t.teaId =#{vaId}
+                                                                                 AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
+                                                                                 ) as c
+                                                                             GROUP BY SUBSTR(c.Dates, 1, 15)
+                                                                             ORDER BY time
+
+        ) as o on e.time=o.time
+
 
 
     </select>

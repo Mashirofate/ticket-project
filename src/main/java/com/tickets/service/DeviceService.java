@@ -19,7 +19,7 @@ public interface DeviceService {
 
 
 
-    List<Map<String, Object>>  getSingle(String aId);
+    List<String>   getSingle(String aId);
 
     Page getaiKeys(AisleSearchDto aisleSearchDto);
     boolean deaiById(String aid);

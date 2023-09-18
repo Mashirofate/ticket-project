@@ -57,10 +57,11 @@
             e.eDate DESC
         LIMIT 5
     </select>
-
+   <!-- TO_DAYS(eDate)=TO_DAYS(NOW())-->
+<!--    eDate between #{sqlDateformerly} and #{sqlDate}-->
     <select id="getImageByActivityId" resultType="java.util.Map">
-        SELECT aName,eName,tIdentitycard,eDate,fImage from enter
-        WHERE eDate between #{sqlDateformerly} and #{sqlDate}
+        SELECT eId,aName,eName,tIdentitycard,tQrcard,eDate,CONVERT( fImage USING utf8 )  fImage from enter
+        WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
           AND aId=#{aId}
     </select>
     <select id="getImageByActivityIdcount" resultType="java.util.Map">

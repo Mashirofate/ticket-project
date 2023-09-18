@@ -80,7 +80,7 @@ public class DeviceServiceImpl implements DeviceService {
         return aisleMapper.updateByPrimaryKey(aisle) == 1;
     }
     @Override
-    public List<Map<String, Object>> getSingle(String aId) {
+    public List<String>  getSingle(String aId) {
         return deviceMapper.getSingle(aId);
     }
 }

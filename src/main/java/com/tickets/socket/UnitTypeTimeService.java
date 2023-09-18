@@ -69,7 +69,7 @@ public class UnitTypeTimeService {
      */
     @OnError
     public void onError(Session session, Throwable error) {
-        System.out.println("用户错误:" + this.vaId + ",原因:" + error.getMessage());
+        //.out.println("用户错误:" + this.vaId + ",原因:" + error.getMessage());
         error.printStackTrace();
     }
 
@@ -80,7 +80,7 @@ public class UnitTypeTimeService {
         if (!StringUtils.isEmpty(vaId) && webSocketMap.containsKey(vaId)) {
             webSocketMap.get(vaId).sendMessage(message);
         } else {
-            System.out.println("设备情况开始推送 客户端" + vaId + ",不在线！");
+           // System.out.println("设备情况开始推送 客户端" + vaId + ",不在线！");
         }
     }
 
