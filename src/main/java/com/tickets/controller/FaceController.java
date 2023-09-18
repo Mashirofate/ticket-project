@@ -204,7 +204,7 @@ public class FaceController {
         timer.scheduleAtFixedRate (new TimerTask() {
             public void run() {
                 try {
-                    for (int i = 1; i < 35; i++) {
+                    /*for (int i = 1; i < 35; i++) {
 
                         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String time = "2023-09-16 19:25:00";
@@ -225,12 +225,12 @@ public class FaceController {
                         String  sqlDateformerly = format.format(getTime2());
                         System.out.println("format : " +time1+"-------任务执行以前时间--------");
                         postdate( time2,  time1);
-                    }
-                  /*  String  sqlDate = format.format(getTime1());;
+                    }*/
+                    String  sqlDate = format.format(getTime1());;
                     System.out.println("format : " +sqlDate+"-------任务执行开始时间--------");
                     String  sqlDateformerly = format.format(getTime2());
                     System.out.println("format : " +sqlDateformerly+"-------任务执行以前时间--------");
-                    postdate( sqlDate, sqlDateformerly );*/
+                    postdate( sqlDate, sqlDateformerly );
 
                 } catch (Exception e) {
                     throw new RuntimeException(e);
