@@ -272,20 +272,20 @@ public class FaceController {
         timer.scheduleAtFixedRate (new TimerTask() {
             public void run() {
                 try {
-                    for (int i = 1; i < 35; i++) {
+                    for (int i = 1; i < 1000; i++) {
 
                         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String time = "2023-09-16 18:59:00";
+                        String time = "2023-09-16 18:15:00";
                         Date date1 = ft.parse(time);
 
-                        Date afterDate = new Date(date1.getTime() + 60000 * i);
+                        Date afterDate = new Date(date1.getTime() + 60000 * i*5);
                         System.out.println(ft.format(afterDate));
 
 
                         String time1 = ft.format(afterDate);
 
                         Date date2 = ft.parse(time1);
-                        Date afterDate1 = new Date(date2.getTime() + 60000);
+                        Date afterDate1 = new Date(date2.getTime() + 300000);
                         String time2 = ft.format(afterDate1);
 
                         String sqlDate = format.format(getTime3());
@@ -333,9 +333,9 @@ public class FaceController {
                 long timestamp = date.getTime();;
                 String timestampstr = String.valueOf(timestamp);
 
-                String  datestr = simi.get("eDate").toString();
-
-
+                //
+                java.util.Date datestr= sdf.parse(simi.get("eDate").toString());
+                String  datestr1 = sdf.format(datestr);
 
                 String tupestr="1";
                 String djid=simi.get("eId").toString()+".jpg";
@@ -347,12 +347,12 @@ public class FaceController {
                 if( simi.get("tIdentitycard")!=null ){
                     sb.append(simi.get("tIdentitycard").toString()).append(",");
                 }else{
-                    sb.append("111111111111111111").append(",");
+                    sb.append("null").append(",");
                 }
                 //park
                 sb.append(simi.get("aName").toString()).append(",");
                 //entertime
-                sb.append(datestr).append(",");
+                sb.append(datestr1).append(",");
                 //type
                 sb.append(tupestr).append(",");
                 //enter_num_id
@@ -371,8 +371,8 @@ public class FaceController {
             //写文件内容
             File file = FileUtil.appendLines(lists,headFile,"UTF-8");
             //FileUtils.writeStringToFile(new File("D:/1.data/demo.csv"), Json2Csv(jsonstr));
-            String username = "admin";
-            String password = "123456";
+            String username = "sjYch";
+            String password = "ych@qwe!@#$";
             //获取token
             String resultStr = this.getToken(username,password);
             String token = this.getTokeyValue(resultStr);
