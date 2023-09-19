@@ -1,10 +1,5 @@
 package com.tickets.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.RowBounds;
@@ -16,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository("BaseDao")
@@ -84,7 +82,6 @@ public class BaseDaoImpl extends SqlSessionDaoSupport implements BaseDao {
     /**
      * 功能：删除数据库中某些记录
      * @param statementId	sql语句的定义名称
-     * @param param	sql语句所要用到的参数
      * @return		删除记录个数
      */
     @Override

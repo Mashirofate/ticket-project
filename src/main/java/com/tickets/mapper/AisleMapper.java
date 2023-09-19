@@ -2,9 +2,8 @@ package com.tickets.mapper;
 
 import com.tickets.dto.AisleAddDto;
 import com.tickets.dto.AisleSearchDto;
-import com.tickets.dto.DeviceSearchDto;
-import com.tickets.dto.Page;
 import com.tickets.entity.Aisle;
+import org.apache.ibatis.annotations.MapKey;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ public interface AisleMapper {
     int updateByPrimaryKeySelective(Aisle record);
 
     int updateByPrimaryKey(Aisle record);
-
+    @MapKey("")
     List<Map<String, Object>> selectByKeys(AisleSearchDto aisleSearchDto);
     int selectCountByKeys(AisleSearchDto aisleSearchDto);
 

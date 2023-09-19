@@ -86,8 +86,7 @@ public class Page<T> {
     /**
      * 设置当前页的页码, 序号从1开始,低于1时自动调整为1.
      *
-     * @param pageNo
-     *            页码
+     * @param
      * @return this
      */
     public Page<T> pageNo(final int thePageNo) {
@@ -115,8 +114,7 @@ public class Page<T> {
     /**
      * 设置每页的记录数量, 为0表示不分页
      *
-     * @param pageSize
-     *            每页的记录数量
+     * @param
      * @return this
      */
     public Page<T> pageSize(final int thePageSize) {
@@ -148,8 +146,6 @@ public class Page<T> {
     /**
      * 设置排序字段.
      *
-     * @param orderBy
-     *            排序字段. 多个字段用","分隔
      * @return this
      */
     public Page<T> orderBy(final String theOrderBy) {
@@ -184,8 +180,8 @@ public class Page<T> {
     /**
      * 设置排序方向
      *
-     * @param orderType
-     *            排序方向。可选值{@link #ASC}、{@link #DESC}。多个属性用","分隔
+     * @param
+     *         //   排序方向。可选值{@link #ASC}、{@link #DESC}。多个属性用","分隔
      */
     public Page<T> order(final String theOrder) {
         setOrder(theOrder);

@@ -4,22 +4,14 @@ import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.arcsoft.face.FaceInfo;
-import com.arcsoft.face.toolkit.ImageFactory;
-import com.arcsoft.face.toolkit.ImageInfo;
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.FaceSaveDto;
-import com.tickets.dto.Page;
 import com.tickets.dto.ResponseResult;
 import com.tickets.service.FaceService;
-import com.tickets.utils.Base64Util;
 import com.tickets.utils.JsonUtil;
 import com.tickets.utils.SHACoder;
-import com.tickets.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
 import org.json.CDL;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +22,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import sun.net.www.protocol.http.HttpURLConnection;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -55,122 +46,6 @@ public class FaceController {
     private RestTemplate restTemplate;
 
     private String baseUrl = "https://gaxcx.huizhou.gov.cn/sjcs";
-
-    @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "人脸对比条件搜索", notes = "")
-    @PostMapping("/search")
-    public ResponseResult search(@RequestBody FaceSaveDto faceSaveDto) throws ParseException {
-        Page<Map<String, Object>> page = new Page<>();
-
-        if(faceSaveDto.getImage()!=null &  !"".equals(faceSaveDto.getImage())){
-            // 将base64的图片数据传化为byte[] 数组
-            byte[] bytes = Base64Util.base64ToBytes(faceSaveDto.getImage());
-
-            // 将byte[] 数组传化为imageinfo 用于提取特征数据
-            ImageInfo rgbData = ImageFactory.getRGBData(bytes);
-
-            // 获取传入照片的人脸数据
-            List<FaceInfo> faceInfoList = faceService.detectFaces(rgbData);
-
-            if(faceInfoList.size()>0){
-                // 获取传入照片的人脸特征数据
-                byte[] feature = faceService.extractFaceFeaqture(rgbData, faceInfoList.get(0));
-
-                // 返回给前端的数据
-                List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
-
-                //相似度
-                float passRate =  Float.parseFloat(faceSaveDto.getSimilar());
-
-                // 查询到数据库中所有的人脸数据
-                List<Map<String,Object>> arr=faceService.queryFace();
-
-                //遍历所有人脸数据
-                for (Map<String, Object> stringObjectMap : arr) {
-
-                    // 提取人脸特征
-                    byte[] farr = (byte[]) stringObjectMap.get("fFeature");
-
-                    String str1= new String((byte[]) stringObjectMap.get("fImage"));
-                    byte[] bytes2= Base64Util.base64ToBytes(str1);
-                    ImageInfo rgbData2 = ImageFactory.getRGBData(bytes2);
-
-                    // 获取传入照片的人脸数据
-                    List<FaceInfo> faceInfoListf = faceService.detectFaces(rgbData2);
-                    if(faceInfoListf.size()>0){
-                        // 提取人脸照片
-                        String str = new String((byte[]) stringObjectMap.get("fImage"));
-
-                        // 将人脸照片（beca64）转化为 byte[]
-                        byte[] bytes1 = Base64Util.base64ToBytes(str);
-
-                        // 在将照片 （byte[]）转化为 Image数据
-                        ImageInfo rgbData1 = ImageFactory.getRGBData(bytes1);
-
-                        //根据两个人脸照片的 ImageInfo数据对比，得出相似度
-                        Float similar = faceService.compareFace(rgbData1, rgbData);
-                        if(similar!=null){
-                            // 根据相似的的设定显示有关信息
-                            if (similar > passRate) {
-                                // 形似度大于设定的形似的，根据人脸数据中的票务id 去查询出活动名，入场时间和显示人脸数据
-                                String eId = stringObjectMap.get("eId").toString();
-                                List<Map<String, Object>> list1 = faceService.queryTicketing(eId);
-                                for (Map<String, Object> simi : list1) {
-
-                                    String a = new String((byte[]) simi.get("fImage"));
-
-
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    java.util.Date date= sdf.parse(simi.get("eDate").toString());
-                                    SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    String time = format0.format(date.getTime());
-
-                                    String a1 = "data:image/png;base64," + a;
-                                    simi.put("fImage", a1);
-                                    simi.put("eDate", time);
-                                    simi.put("similar", similar);
-
-                                    list.add(simi);
-                                }
-
-                       /* Map<String, Object> arr1 = faceService.queryTicketing(ftId);
-                        String a = new String((byte[]) arr1.get("fImage"));
-
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        java.util.Date date= sdf.parse(arr1.get("eDate").toString());
-                        SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String time = format0.format(date.getTime());
-
-                        String a1 = "data:image/png;base64," + a;
-                        arr1.put("fImage", a1);
-                        arr1.put("eDate", time);
-                        arr1.put("similar", similar);
-
-                        list.add(arr1);*/
-                            }
-                        }
-                    }
-
-
-                }
-                int i=  list.size();
-                if (i != 0) {
-                    page.setRecords(list);
-                }
-//            double j=10;
-//            double de= i/j;
-//            page.setTotal((int) Math.ceil(de));
-                page.setTotal(i);
-                page.setCurrent((long) 0);
-                page.setSize((long) 10);
-            }
-
-
-        }
-
-        return ResponseResult.SUCCESS(page);
-    }
 
 
 
@@ -289,7 +164,7 @@ public class FaceController {
                         String time2 = ft.format(afterDate1);
 
                         String sqlDate = format.format(getTime3());
-                        ;
+
                         System.out.println("format : " + time2 + "-------任务执行开始时间--------");
                         String sqlDateformerly = format.format(getTime4());
                         postHuiZhouDate(time2, time1);

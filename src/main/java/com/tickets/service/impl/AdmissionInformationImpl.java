@@ -1,6 +1,6 @@
 package com.tickets.service.impl;
 
-import com.tickets.mapper.AdminssionInfomationMapper;
+import com.tickets.mapper.AdmissionInformatization;
 import com.tickets.service.AdmissionInformationService;
 import org.springframework.stereotype.Service;
 
@@ -13,47 +13,47 @@ import java.util.Map;
 public class AdmissionInformationImpl implements AdmissionInformationService {
 
     @Resource
-    private AdminssionInfomationMapper adminssionInfomationMapper;
+    private AdmissionInformatization admissionInformatization;
 
     @Override
     public Map<String,Object> getCountLimitTime(Date date, String vaId) {
-        return adminssionInfomationMapper.selectCountLimitTime(date,vaId);
+        return admissionInformatization.selectCountLimitTime(date,vaId);
     }
 
     @Override
     public Map<String, Object> getTypeCount(String vaId) {
-        return adminssionInfomationMapper.selectTypeCount(vaId);
+        return admissionInformatization.selectTypeCount(vaId);
     }
 
     @Override
     public List<Map<String, Object>> getCountLimitTimeenter(String vaId) {
-        return adminssionInfomationMapper.getCountLimitTimeenter(vaId);
+        return admissionInformatization.getCountLimitTimeenter(vaId);
     }
 
     @Override
     public List<Map<String, Object>> getCountLimitTimeout(String vaId) {
-        return adminssionInfomationMapper.getCountLimitTimeout(vaId) ;
+        return admissionInformatization.getCountLimitTimeout(vaId) ;
     }
 
     @Override
     public List getoutlist(String vaId) {
-        return adminssionInfomationMapper.getoutlist(vaId) ;
+        return admissionInformatization.getoutlist(vaId) ;
     }
 
     public List<Map<String, Object>> getSeatList(String vaId) {
-        return adminssionInfomationMapper.getSeatList(vaId) ;
+        return admissionInformatization.getSeatList(vaId) ;
     }
     public List<Map<String, Object>> getGrandList(String vaId) {
-        return adminssionInfomationMapper.getGrandList(vaId) ;
+        return admissionInformatization.getGrandList(vaId) ;
     }
     public List<Map<String, Object>> getGrandsList(String vaId) {
-        return adminssionInfomationMapper.getGrandsList(vaId) ;
+        return admissionInformatization.getGrandsList(vaId) ;
     }
     public List getenterlist(String vaId) {
-        return adminssionInfomationMapper.getenterlist(vaId) ;
+        return admissionInformatization.getenterlist(vaId) ;
     }
 
     public List getTIMElist(String vaId) {
-        return adminssionInfomationMapper.getTIMElist(vaId) ;
+        return admissionInformatization.getTIMElist(vaId) ;
     }
 }

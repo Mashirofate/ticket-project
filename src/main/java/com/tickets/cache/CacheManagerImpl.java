@@ -21,8 +21,8 @@ public class CacheManagerImpl implements ICacheManager {
 
     /**
      * 存入缓存
-     * @param key
-     * @param cache
+     * @param
+     * @param
      */
     public void putCache(String key, Object datas, long timeOut) {
         timeOut = timeOut > 0 ? timeOut : 0L;
@@ -55,7 +55,7 @@ public class CacheManagerImpl implements ICacheManager {
 
     /**
      * 获取所有缓存
-     * @param key
+     * @param
      * @return
      */
     public Map<String, EntityCache> getCacheAll() {

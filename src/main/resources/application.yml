@@ -40,11 +40,5 @@ logging:
     com.tickets: info
     org.springframework: warn
 
-config:
-  arcface-sdk:
-    sdk-lib-path: C:\Users\11583\Desktop\ticket-project\lib\WIN64
-    app-id: 6GkHezpaFzQb6niUHYo9ZoR4XZEUqd7h5TnUfp77iRx4
-    sdk-key: 4J7oBSN3frcLvoAv3CvXnz4LqafKrModsVg77s4HVRrG
-    detect-pool-size: 5
-    compare-pool-size: 5
+
 

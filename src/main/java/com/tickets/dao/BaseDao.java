@@ -28,8 +28,7 @@ public interface BaseDao {
      *
      * @param statementId
      *            sql语句的定义名称
-     * @param vo
-     *            VO对象
+     * @param
      * @return VO对象
      */
     public Object insert(String statementId, Object parameter) ;
@@ -49,8 +48,6 @@ public interface BaseDao {
      *
      * @param statementId
      *            sql语句的定义名称
-     * @param vo
-     *            VO对象
      * @return VO对象
      */
     public Object update(String statementId, Object parameter) ;
@@ -60,8 +57,7 @@ public interface BaseDao {
      *
      * @param statementId
      *            sql语句的定义名称
-     * @param param
-     *            sql语句所要用到的参数
+     * @param
      * @return 删除记录个数
      */
     public int delete(String statementId, Object parameter) ;
@@ -112,8 +108,6 @@ public interface BaseDao {
      *
      * @param statementId
      *            sql语句的定义名称
-     * @param param
-     *            查询所要用到的参数
      * @param starNum
      *            开始记录的位置
      * @param num
@@ -127,8 +121,6 @@ public interface BaseDao {
      *
      * @param statementId
      *            获取查询结果sql语句的定义名称
-     * @param param
-     *            查询所要用到的参数
      * @param currPage
      *            当前页码
      * @param pageSize
@@ -170,8 +162,6 @@ public interface BaseDao {
      *
      * @param statementId
      *            sql语句的定义名称
-     * @param vo
-     *            VO对象
      * @return int对象
      * 			  更新条数
      */

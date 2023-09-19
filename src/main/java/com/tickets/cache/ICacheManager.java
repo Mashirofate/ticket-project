@@ -14,7 +14,7 @@ public interface ICacheManager {
     /**
      * 存入缓存
      * @param key
-     * @param cache
+     * @param
      */
     void putCache(String key, Object datas, long timeOut);
 
@@ -34,7 +34,7 @@ public interface ICacheManager {
 
     /**
      * 获取所有缓存
-     * @param key
+     * @param
      * @return
      */
     Map<String, EntityCache> getCacheAll();
