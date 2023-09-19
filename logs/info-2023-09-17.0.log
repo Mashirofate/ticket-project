@@ -1,0 +1,80 @@
+2023-09-17 20:49:08.301 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication on 文文 with PID 23440 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2023-09-17 20:49:08.304 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to default profiles: default
+2023-09-17 20:49:09.061 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-09-17 20:49:09.062 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2023-09-17 20:49:09.128 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-09-17 20:49:09.625 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-09-17 20:49:09.765 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+2023-09-17 20:49:09.771 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2023-09-17 20:49:09.771 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+2023-09-17 20:49:09.772 [main] INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+2023-09-17 20:49:09.772 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2023-09-17 20:49:09.772 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2023-09-17 20:49:09.772 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+2023-09-17 20:49:09.772 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@27a0e6ce
+2023-09-17 20:49:09.803 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-09-17 20:49:09.809 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-09-17 20:49:09.824 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-09-17 20:49:09.906 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_1
+2023-09-17 20:49:09.907 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_1
+2023-09-17 20:49:09.915 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_1
+2023-09-17 20:49:09.916 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_1
+2023-09-17 20:49:09.917 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_2
+2023-09-17 20:49:09.918 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_2
+2023-09-17 20:49:09.920 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_2
+2023-09-17 20:49:09.922 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_1
+2023-09-17 20:49:09.925 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addDeviceUsingPOST_2
+2023-09-17 20:49:09.928 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_3
+2023-09-17 20:49:09.929 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_3
+2023-09-17 20:49:09.932 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_3
+2023-09-17 20:49:09.936 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updatDeviceUsingPOST_2
+2023-09-17 20:49:09.939 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_4
+2023-09-17 20:49:09.939 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_4
+2023-09-17 20:49:09.941 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_4
+2023-09-17 20:49:09.945 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_5
+2023-09-17 20:49:09.945 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_5
+2023-09-17 20:49:09.946 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_5
+2023-09-17 20:49:09.960 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_1
+2023-09-17 20:49:09.962 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_2
+2023-09-17 20:49:09.965 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_6
+2023-09-17 20:49:09.966 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_1
+2023-09-17 20:49:09.968 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_3
+2023-09-17 20:49:09.969 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addBatchUsingPOST_1
+2023-09-17 20:49:09.970 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_6
+2023-09-17 20:49:09.970 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_6
+2023-09-17 20:49:09.972 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: modelDownloadUsingGET_1
+2023-09-17 20:49:09.974 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_7
+2023-09-17 20:49:09.975 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_1
+2023-09-17 20:49:09.977 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addUsingPOST_4
+2023-09-17 20:49:09.977 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_7
+2023-09-17 20:49:09.978 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_7
+2023-09-17 20:49:09.979 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getByVaIdUsingGET_1
+2023-09-17 20:49:09.982 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_8
+2023-09-17 20:49:09.982 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_9
+2023-09-17 20:49:09.983 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateUsingPOST_1
+2023-09-17 20:49:09.984 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_1
+2023-09-17 20:49:09.987 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addVenueUsingPOST_2
+2023-09-17 20:49:09.987 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdUsingDELETE_8
+2023-09-17 20:49:09.987 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: delByIdsUsingDELETE_8
+2023-09-17 20:49:09.989 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_10
+2023-09-17 20:49:09.989 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: searchUsingGET_11
+2023-09-17 20:49:09.990 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateEnableUsingPUT_2
+2023-09-17 20:49:09.990 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: updateVenueUsingPOST_2
+2023-09-17 20:49:09.992 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: loginUsingPOST_1
+2023-09-17 20:49:09.997 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2023-09-17 20:49:10.028 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.176 seconds (JVM running for 2.708)
+2023-09-17 20:49:59.931 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-09-17 20:50:00.009 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-09-17 20:51:16.911 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-09-17 20:51:16.911 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-09-17 20:51:16.911 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-09-17 20:51:16.911 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-09-17 20:51:16.913 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-09-17 20:51:16.913 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
