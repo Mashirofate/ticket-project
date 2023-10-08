@@ -1,7 +1,8 @@
 package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.*;
+import com.tickets.dto.BuyticketDto;
+import com.tickets.dto.ResponseResult;
 import com.tickets.service.EntersService;
 import com.tickets.service.TicketingStaffService;
 import com.tickets.service.VenueActiviesService;
@@ -11,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
 @Api(tags = "打印票务")
 @RestController
@@ -54,8 +53,8 @@ public class BuyticketController {
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids){
         String[] activies =ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            entersService.delById( activies[i]);
+        for (String activy : activies) {
+            entersService.delById(activy);
         }
         return ResponseResult.SUCCESS();
     }

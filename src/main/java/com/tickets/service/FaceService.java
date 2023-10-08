@@ -13,5 +13,7 @@ public interface FaceService {
     List<Map<String, Object>> getImageByActivityIdsAbnormal(String aId);
 
 
+    int Queryquantity(String aid);
 
+    int upquantity(String tId, String tIdentitycard);
 }

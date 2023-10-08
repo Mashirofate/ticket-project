@@ -4,9 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tickets.mapper.FaceMapper">
 
+    <update id="upquantity" >
+        UPDATE  ticketing SET tIdentitycard=#{tIdentitycard}
+        WHERE tid=#{tId}
+
+    </update>
+
 
     <select id="queryFace" resultType="java.util.Map">
         SELECT fImage,fFeature,eId FROM enter as e WHERE fImage  is not null  and fFeature is not null
+    </select>
+
+    <select id="Queryquantity" resultType="java.lang.Integer">
+        SELECT COUNT(tIdentitycard) from ticketing
+        WHERE taId = #{aId}
     </select>
 
 

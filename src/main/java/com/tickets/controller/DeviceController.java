@@ -9,12 +9,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -107,14 +109,14 @@ public class DeviceController {
     @PostMapping("/synchrodata")
     public ResponseResult synchrodata(@RequestBody  List <Map<String, Object>> list ) {
         int j=0;
-        for (int i = 0; i < list.size(); i++) {
-            Map map = (Map) list.get(i);
-            String dEnable= (String) map.get("dEnable");
-            if(dEnable.equals("在线")){
-              String dip= (String) map.get("dIp");
-              // 同步数据再线设备的数据
-              transmitData(dip);
-          }
+        for (Map<String, Object> stringObjectMap : list) {
+            Map map = (Map) stringObjectMap;
+            String dEnable = (String) map.get("dEnable");
+            if (dEnable.equals("在线")) {
+                String dip = (String) map.get("dIp");
+                // 同步数据再线设备的数据
+                transmitData(dip);
+            }
 
         }
         return ResponseResult.SUCCESS();
@@ -243,8 +245,8 @@ public class DeviceController {
     @DeleteMapping("/sai/{ids}")
     public ResponseResult delaiByIds(@PathVariable String ids) {
         String[] activies = ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            deviceService.deaiById(activies[i]);
+        for (String activy : activies) {
+            deviceService.deaiById(activy);
         }
         return ResponseResult.SUCCESS();
     }

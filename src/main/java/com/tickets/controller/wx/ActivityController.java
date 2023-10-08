@@ -1,8 +1,9 @@
 package com.tickets.controller.wx;
 
+import com.alibaba.fastjson.JSONObject;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.ResponseResult;
-import com.tickets.dto.TicketingSaveDto;
+import com.tickets.service.FaceService;
 import com.tickets.service.TicketingStaffService;
 import com.tickets.service.VenueActiviesService;
 import io.swagger.annotations.Api;
@@ -20,6 +21,10 @@ import java.util.Map;
 @RequestMapping("/wechat/activity")
 public class ActivityController {
 
+
+
+    @Autowired
+    private FaceService faceService;
     @Autowired
     private VenueActiviesService venueActiviesService;
     @Autowired
@@ -74,12 +79,14 @@ public class ActivityController {
     @Authentication(required = true)
     @ApiOperation(value = "根据id获取活动信息")
     @PostMapping("/binding")
-    public ResponseResult getbindingaId(String aId,String cardId,String Rname,String scanCode,String datei) {
-
+    public ResponseResult getbindingaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String datei) {
+        // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
         int i=0;
         String tid=null;
         // 查询是否是有效票务
         List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
+
+
         for (Map<String, Object> map : codelist) {
             for (String s : map.keySet()) {
                  tid = map.get(s).toString();
@@ -102,6 +109,35 @@ public class ActivityController {
         myMap.put("codes",i);
         list.add(myMap);
        return ResponseResult.SUCCESS(list);
+
+
+    }
+
+
+    @Authentication(required = true)
+    @ApiOperation(value = "根据id获取活动票务标准中的身份证信息，并返回身份证信息    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
+    @PostMapping("/applet")
+    public ResponseResult getbindingapplet(@RequestBody String jsonstr) {
+        // json传输过来的活动id和已有身份证信息的条数
+        JSONObject jsobject =  JSONObject.parseObject(jsonstr);
+
+
+        String aId= jsobject.getString("aid");
+        String QueryInt= jsobject.getString("QueryInt");
+        // 根据活动id返有身份证的票务数量
+        int ints = faceService.Queryquantity(aId);
+
+        List<Map<String,Object>> codelist;
+        int yInt = Integer.valueOf(QueryInt);
+        int valid =ints;
+        if(yInt <= ints){
+            valid=ints-yInt;
+            codelist=  ticketingStaffService.getByapplet(valid,aId);
+        } else {
+            codelist=null;
+        }
+        System.out.println("成功+++++++++"+ codelist+"++++++++valid:"+valid);
+        return ResponseResult.SUCCESS(codelist);
 
 
     }

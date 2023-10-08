@@ -30,4 +30,9 @@ public interface AdmissionInformationService {
     List<Map<String, Object>> getGrandsList(String vaId);
     List getenterlist(String vaId);
     List getTIMElist(String vaId);
+
+
+    Map<String, Object> getrealnameCount(String vaId);
+
+    Map<String, Object> getNorealnameCount(String vaId);
 }

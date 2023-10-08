@@ -87,7 +87,7 @@ public class DataHandler {
                         logger.error("=====异常======", e.getMessage());
                         e.printStackTrace();
                     } finally {
-
+                        logger.error("=====finally======");
                     }
                 }
             };

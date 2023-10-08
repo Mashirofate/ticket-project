@@ -1,7 +1,9 @@
 package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.*;
+import com.tickets.dto.ResponseResult;
+import com.tickets.dto.VenueActivieAddDto;
+import com.tickets.dto.VenueActivieSearchDto;
 import com.tickets.service.VenueActiviesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -88,8 +90,8 @@ public class VenueActiviesController { //活动管理
        /* 1、如果用“.”作为分隔的话,必须是如下写法,String.split("\\."),这样才能正确的分隔开,不能用String.split(".");
         2、如果用“|”作为分隔的话,必须是如下写法,String.split("\\|"),这样才能正确的分隔开,不能用String.split("|");*/
         String[] activies =ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            venueActiviesService.remove( activies[i]);
+        for (String activy : activies) {
+            venueActiviesService.remove(activy);
         }
         return ResponseResult.SUCCESS();
     }

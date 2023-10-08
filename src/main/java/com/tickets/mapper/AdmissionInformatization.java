@@ -28,5 +28,9 @@ public interface AdmissionInformatization {
     List<Map<String, Object>> getGrandsList(String vaId);
     List<String> getenterlist(String vaId);
     List<String> getTIMElist(String vaId);
+
+    Map<String, Object> selectrealnameCount(String vaId);
+
+    Map<String, Object> selectNorealnameCount(String vaId);
 }
 

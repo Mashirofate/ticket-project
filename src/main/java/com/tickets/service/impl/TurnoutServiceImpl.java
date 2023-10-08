@@ -51,4 +51,10 @@ public class TurnoutServiceImpl implements TurnoutService {
     public Map<String, Object> getintworkCount(String vaId) {
         return turnoutMapper.getintworkCount(vaId);
     }
+
+    /**
+     * @param vaId
+     * @return
+     */
+
 }

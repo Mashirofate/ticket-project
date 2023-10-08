@@ -1,7 +1,10 @@
 package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.*;
+import com.tickets.dto.ClearCardAddDto;
+import com.tickets.dto.ClearCardSearchDto;
+import com.tickets.dto.Page;
+import com.tickets.dto.ResponseResult;
 import com.tickets.service.ClearCardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -73,8 +76,8 @@ public class ClearCardController {
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids) {
         String[] activies = ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            clearCardService.delById(activies[i]);
+        for (String activy : activies) {
+            clearCardService.delById(activy);
         }
         return ResponseResult.SUCCESS();
     }

@@ -46,6 +46,26 @@
 
     </select>
 
+    <select id="selectNorealnameCount" resultType="java.util.Map">
+                SELECT COUNT(e.eId) Norealname from
+                    (SELECT  eid,tIdentitycard FROM enter AS e
+                     WHERE e.aId =#{vaId}
+                       AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+                     group by e.eId) as e
+                WHERE (ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
+    </select>
+    <select id="selectrealnameCount" resultType="java.util.Map">
+
+                SELECT COUNT(e.eId) realname from
+                    (SELECT  eid,tIdentitycard FROM enter AS e
+                     WHERE e.aId =#{vaId}
+                       AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+                     group by e.eId) as e
+                WHERE NOT(ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
+
+    </select>
+
+
     <select id="getCountLimitTimeenter" resultType="java.util.Map">
 
         SELECT count(ids) as value,

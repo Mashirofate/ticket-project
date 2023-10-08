@@ -2,7 +2,6 @@ package com.tickets.mapper;
 
 import com.tickets.dto.BuyticketDto;
 import com.tickets.dto.TicketingStaffSearchDto;
-import com.tickets.dto.VenueMgDto;
 import com.tickets.entity.TicketingStaff;
 
 import java.util.List;
@@ -34,4 +33,6 @@ public interface TicketingStaffMapper {
 
     int update(TicketingStaff ticketingStaff);
     int updates(String cardId, String Rname, String tid,String datei);
+
+    List<Map<String, Object>> getByapplet( int valid, String aId);
 }

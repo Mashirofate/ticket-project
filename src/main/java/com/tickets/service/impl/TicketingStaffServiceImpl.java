@@ -1,9 +1,7 @@
 package com.tickets.service.impl;
 
 import com.tickets.dto.*;
-import com.tickets.entity.EntranceManagement;
 import com.tickets.entity.TicketingStaff;
-import com.tickets.entity.VenueManagement;
 import com.tickets.mapper.TicketingStaffMapper;
 import com.tickets.service.TicketingStaffService;
 import com.tickets.utils.JwtUtil;
@@ -11,13 +9,15 @@ import io.jsonwebtoken.Claims;
 import lombok.SneakyThrows;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class TicketingStaffServiceImpl implements TicketingStaffService {
@@ -177,5 +177,15 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
     @Override
     public boolean update(String cardId, String Rname, String tid,String datei) {
         return ticketingStaffMapper.updates(cardId, Rname,tid ,datei) == 1;
+    }
+
+    /**
+     * @param valid
+     * @param aId
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getByapplet(int valid, String aId) {
+        return ticketingStaffMapper.getByapplet(valid, aId) ;
     }
 }

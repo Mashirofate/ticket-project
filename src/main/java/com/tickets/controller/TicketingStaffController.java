@@ -1,19 +1,19 @@
 package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.*;
+import com.tickets.dto.ResponseResult;
+import com.tickets.dto.TicketingAddDto;
+import com.tickets.dto.TicketingStaffSearchDto;
 import com.tickets.service.TicketingStaffService;
 import com.tickets.utils.ExcelUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -77,8 +77,8 @@ public class TicketingStaffController {
     @DeleteMapping("/s/{ids}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult delTs(@PathVariable String ids) {
         String[] activies =ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            ticketingStaffService.remove( activies[i]);
+        for (String activy : activies) {
+            ticketingStaffService.remove(activy);
         }
         return ResponseResult.SUCCESS();
     }

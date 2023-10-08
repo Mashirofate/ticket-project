@@ -55,17 +55,7 @@ public class ExcelUtils {
                 sheetRow1 = sheet.getRow(i);
                 Map<String, Object> cel = new HashMap<>();
                 for (int j = 0; j < sheetRow1.getPhysicalNumberOfCells(); j++) {
-//                    Cell c = sheetRow1.getCell(j,Row.CREATE_NULL_AS_BLANK);
-////                    if (c != null) {
-////                        sheet.getRow(i).getCell(j,Row.CREATE_NULL_AS_BLANK).setCellType(Cell.CELL_TYPE_STRING);
-////                        cel.put(header.get(j), sheetRow1.getCell(j,Row.CREATE_NULL_AS_BLANK).getStringCellValue());
-////                    }
-////                    else
-////                    {
-////                        cel.put(header.get(j), "1");
-////                    }
-//                    sheet.getRow(i).getCell(j).setCellType(Cell.CELL_TYPE_STRING);
-//                    cel.put(header.get(j), sheetRow1.getCell(j).getStringCellValue());
+
 //
                     if(sheet.getRow(i).getCell(j) == null){
                         sheet.getRow(i).createCell(j).setCellType(Cell.CELL_TYPE_STRING);

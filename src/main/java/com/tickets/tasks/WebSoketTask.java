@@ -4,11 +4,7 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.tickets.service.*;
-import com.tickets.socket.RealTimeEnterServer;
-import com.tickets.socket.RealTimeEntranceServer;
-import com.tickets.socket.RealTimeOtherServer;
-import com.tickets.socket.RealTimePeopleServer;
-import com.tickets.socket.UnitTypeTimeService;
+import com.tickets.socket.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.var;
@@ -118,16 +114,7 @@ public class WebSoketTask {
 
 
 
-           /* // 获取场内人数
-            Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
 
-            Map<String, Object> intraFieldCount = turnoutService.getintraFieldCount(vaId);
-            int intraField =0;
-            if(intraFieldCount==null){
-                intraField = -Integer.parseInt(typeOutCount.get("counts").toString());
-            }else{
-                intraField=Integer.parseInt(intraFieldCount.get("counts").toString()) - Integer.parseInt(typeOutCount.get("counts").toString());
-            }*/
 
                     int intraFields = intraFieldINFO;
                     Map<String, Object> intraFieldmap = new HashMap<>();
@@ -238,20 +225,31 @@ public class WebSoketTask {
     @Scheduled(fixedRate = 2 * 1000)
     public void RealTimeOtherData() throws IOException {
         List<String> vaIds = RealTimeOtherServer.vaIds;
+        Map<String, List<Map<String, Object>>> maps=new HashMap<>();
+        Map<String, Object> rest = new HashMap<>();
         if(vaIds!=null & vaIds.size()>0){
             for (int u=0;u<vaIds.size();u++){
                 String vaId=vaIds.get(u);
                 if(vaId!=null){
-                    Map<String, Object> rest = new HashMap<>();
+
 
                     // 入场人数 ：  票务入场 ticketing+工作人员入场 staff+未实名入场 Norealname+实名入场 realname
-                    Map<String, Object> typeCount = admissionInformationService.getTypeCount(vaId);
-                    if(typeCount==null){
-                        typeCount.put("Norealname", 0);
-                        typeCount.put("ticketing", 0);
-                        typeCount.put("staff", 0);
-                        typeCount.put("realname", 0);
-                    }
+                   // Map<String, Object> typeCount = admissionInformationService.getTypeCount(vaId);
+//                    Map<String, Object> typeCounts = new HashMap<>();
+//                    if (typeCount == null) {
+//                        typeCounts.put("Norealname", 0);
+//                        typeCounts.put("ticketing", 0);
+//                        typeCounts.put("staff", 0);
+//                        typeCounts.put("realname", 0);
+//                        rest.put("typeenterCount", typeCounts);
+//                    }
+
+                    // 未实名人数
+                    Map<String, Object> Norealname = admissionInformationService.getNorealnameCount(vaId);
+                    // 实名人数
+                    Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
+                    rest.put("Norealname",Norealname.get("Norealname"));
+                    rest.put("realname",realname.get("realname"));
 
                     // 获取出场人数
                     Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
@@ -267,51 +265,54 @@ public class WebSoketTask {
                     }else{
                         intraField=Integer.parseInt(intraFieldCount.get("counts").toString()) - Integer.parseInt(typeOutCount.get("counts").toString())+ work ;
                     }
-                    // 工作证总数
+
+
 
 
                     rest.put("typeOutCount",typeOutCount.get("counts"));
-                    rest.put("typeenterCount",typeCount);
+
+
+
                     rest.put("intraField",intraField);
                     rest.put("work",work);
                     intraFieldINFO =intraField;
 
-                    List<Map<String, Object>> rows=new ArrayList<>();
-                    List<Map<String, Object>> enterM =faceService.getImageByActivityIdsAbnormal(vaId);
-
-
-                    for (int i = 0; i <enterM.size() ; i++) {
-                        Map<String, Object> b=new HashMap<>();
-                        Map<String, Object> a= enterM.get(i);
-
-                        String images = "data:image/jpg;base64," +a.get("image").toString();
-
-                        String tIdentitycard =null;
-                        if( a.containsKey("tIdentitycard")){
-                            tIdentitycard =a.get("tIdentitycard").toString();
-                            if(tIdentitycard.length() ==18){
-                                tIdentitycard=tIdentitycard.substring(0,6)+"************";
-                            }
-                        }
-
-                        b.put("autonym",a.get("autonym"));
-
-
-                        b.put("tIdentitycard",tIdentitycard);
-                        // 显示健康码
-                        b.put("healthCode",a.get("healthCode"));
-               /* if(tIdentitycard ==null || tIdentitycard.length() !=18){
-                    b.put("healthCode",null);
-                }else {
-                    b.put("healthCode","绿码");
-                }*/
-                        b.put("image",images);
-                        rows.add(b);
-                    }
-
-
-
-                    rest.put("enterImgAbnormal",rows);
+//                    List<Map<String, Object>> rows=new ArrayList<>();
+//                    List<Map<String, Object>> enterM =faceService.getImageByActivityIdsAbnormal(vaId);
+//
+//
+//                    for (int i = 0; i <enterM.size() ; i++) {
+//                        Map<String, Object> b=new HashMap<>();
+//                        Map<String, Object> a= enterM.get(i);
+//
+//                        String images = "data:image/jpg;base64," +a.get("image").toString();
+//
+//                        String tIdentitycard =null;
+//                        if( a.containsKey("tIdentitycard")){
+//                            tIdentitycard =a.get("tIdentitycard").toString();
+//                            if(tIdentitycard.length() ==18){
+//                                tIdentitycard=tIdentitycard.substring(0,6)+"************";
+//                            }
+//                        }
+//
+//                        b.put("autonym",a.get("autonym"));
+//
+//
+//                        b.put("tIdentitycard",tIdentitycard);
+//                        // 显示健康码
+//                        b.put("healthCode",a.get("healthCode"));
+//               /* if(tIdentitycard ==null || tIdentitycard.length() !=18){
+//                    b.put("healthCode",null);
+//                }else {
+//                    b.put("healthCode","绿码");
+//                }*/
+//                        b.put("image",images);
+//                        rows.add(b);
+//                    }
+//
+//
+//
+//                    rest.put("enterImgAbnormal",rows);
                     String jsonStr = JSON.toJSONString(rest);
                     //logger.info(" &&&&&&& send RealTimeOtherData : " + jsonStr);
                     RealTimeOtherServer.sendMessage(vaId, jsonStr);
@@ -356,15 +357,18 @@ public class WebSoketTask {
                         String images = "data:image/jpg;base64," + a.get("image").toString();
                         String tIdentitycard = null;
                         if (a.containsKey("tIdentitycard")) {
-                            tIdentitycard = a.get("tIdentitycard").toString();
-                            if (tIdentitycard.length() == 18) {
-                                tIdentitycard = tIdentitycard.substring(0, 6) + "************";
+                            if(null !=a.get("tIdentitycard")){
+                                tIdentitycard = a.get("tIdentitycard").toString();
+                                if (tIdentitycard.length() == 18) {
+                                    tIdentitycard = tIdentitycard.substring(0, 6) + "************";
+                                }
                             }
+
                         }
 
                         b.put("autonym", a.get("autonym"));
                         b.put("tIdentitycard", tIdentitycard);
-                        // 显示健康码  b.put("healthCode",a.get("healthCode"));
+
 
                         if (tIdentitycard == null || tIdentitycard.length() != 18) {
                             b.put("healthCode", null);
@@ -378,14 +382,12 @@ public class WebSoketTask {
 
 
                     // 入场人数 ：  票务入场 ticketing+工作人员入场 staff+未实名入场 Norealname+实名入场 realname
-                    Map<String, Object> typeCount = admissionInformationService.getTypeCount(vaId);
-                    if (typeCount == null) {
-                        typeCount.put("Norealname", 0);
-                        typeCount.put("ticketing", 0);
-                        typeCount.put("staff", 0);
-                        typeCount.put("realname", 0);
-                    }
-
+                    // 未实名人数
+                    Map<String, Object> Norealname = admissionInformationService.getNorealnameCount(vaId);
+                    // 实名人数
+                    Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
+                    rest.put("Norealname",Norealname.get("Norealname"));
+                    rest.put("realname",realname.get("realname"));
                     // 获取出场人数
                     Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
                     // 获取当天入场记录中的所有人数去重
@@ -399,7 +401,7 @@ public class WebSoketTask {
 
 
                     rest.put("typeOutCount", typeOutCount.get("counts"));
-                    rest.put("typeenterCount", typeCount);
+                    // rest.put("typeenterCount", typeCount);
                     rest.put("intraField", intraField);
 
                     rest.put("enterImg", rows);

@@ -27,4 +27,8 @@ public interface FaceMapper {
     List<Map<String, Object>> selectImageByKeys(@Param("ids")List<String> ids);
 
     List<String> selectKeyByActivityId(String aId, String date, String healthCode);
+
+    int Queryquantity(String aid);
+
+    int upquantity(String tId, String tIdentitycard);
 }

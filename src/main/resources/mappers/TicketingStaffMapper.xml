@@ -34,6 +34,14 @@
         LIMIT ${(current-1)*size},${size}
     </select>
 
+
+    <select id="getByapplet" resultType="java.util.Map">
+        select tId,tIdentitycard from ticketing
+        WHERE taId = #{aId,jdbcType=VARCHAR}
+        order by tData
+        desc limit  #{valid,jdbcType=BIGINT}
+    </select>
+
     <select id="getByBuys" resultType="java.util.Map">
         SELECT t.tId, a.aId,a.aName, t.tIdentitycard, t.tIccard, t.tQrcard, t.tSeatingarea,t.tRownumber, t.tSeat,
         t.tGrandstand, t.tRealname, t.tNote,t.phone

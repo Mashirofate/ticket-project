@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.ResponseResult;
 import com.tickets.service.FaceService;
+import com.tickets.service.TicketingStaffService;
 import com.tickets.utils.JsonUtil;
 import com.tickets.utils.SHACoder;
 import io.swagger.annotations.Api;
@@ -44,8 +45,117 @@ public class FaceController {
 
     @Autowired
     private RestTemplate restTemplate;
-
+    private TicketingStaffService ticketingStaffServi;
     private String baseUrl = "https://gaxcx.huizhou.gov.cn/sjcs";
+
+    public FaceController(TicketingStaffService ticketingStaffServi) {
+        this.ticketingStaffServi = ticketingStaffServi;
+    }
+
+
+    @Authentication(isLogin = true,isRequiredUserInfo = true)
+    @ApiOperation(value = "小程序数据同步", notes = "")
+    @PostMapping("/applet")
+    public ResponseResult getpostapplet(@RequestBody String params) throws Exception {
+
+
+//
+//         方法四：安排指定的任务task在指定的时间firstTime开始进行重复的固定速率period执行．
+//         Timer.scheduleAtFixedRate(TimerTask task,Date firstTime,long period)
+
+
+
+        Calendar calendar = Calendar.getInstance();
+//            calendar.set(Calendar.HOUR_OF_DAY, 12); // 控制小时
+//            calendar.set(Calendar.MINUTE, 0);    // 控制分钟
+//            calendar.set(Calendar.SECOND, 0);    // 控制秒
+
+
+        // Date time = calendar.getTime();//获取当前系统时间
+        Date time= new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // System.out.println(time+"-------开始时间--------");
+        String aid="2ea38fda-4fa2-11ee-affe-c81f66ed2833";
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate (new TimerTask() {
+            public void run() {
+                try {
+                   int QueryInt = faceService.Queryquantity(aid);
+                    postapplet( aid, QueryInt);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, time, 1000*10);// 这里设定将延时每天固定执行
+
+
+        return ResponseResult.SUCCESS(1);
+    }
+
+
+
+    public int postapplet(String  aid,  int QueryInt ) throws Exception {
+
+
+            String url = "https://zeantong.com:8080/wechat/activity/applet";
+
+            //LinkedMultiValueMap一个键对应多个值，对应format-data的传入类型
+            LinkedMultiValueMap<String,Object> request = new LinkedMultiValueMap<>();
+
+
+            request.put("aid", Collections.singletonList(aid));
+            request.put("QueryInt", Collections.singletonList(String.valueOf(QueryInt)));
+
+
+            // json数据的方式请求
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("aid",aid);
+            jsonObject.put("QueryInt",String.valueOf(QueryInt));
+
+//            System.out.println("String.valueOf(jsonObject)"+String.valueOf(jsonObject));
+
+
+            //请求
+            String result = restTemplate.postForObject(url,jsonObject,String.class);
+            //获取返回的身份证信息
+            JSONObject jsobject =  JSONObject.parseObject(result);
+
+            int  interesting = 0;
+             JSONArray listiden=  jsobject.getJSONArray("data");
+            for(int i=0;i<listiden.size();i++) {
+              String tId= listiden.getJSONObject(i).get("tId").toString();
+              String tIdentitycard=listiden.getJSONObject(i).get("tIdentitycard").toString();
+               interesting = faceService.upquantity(tId,tIdentitycard);
+            }
+
+
+            System.out.println("成功"+new Date() +"+++++++++"+ result);
+
+
+
+       /* ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, request, String.class);
+        System.out.println("responseEntity.getBody() = " + responseEntity.getBody());*/
+
+        return interesting;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,14 +185,14 @@ public class FaceController {
         // System.out.println(time+"-------开始时间--------");
 
         Timer timer = new Timer();
-        String  sqlDate1 = "2023-09-16 18:42:00";
+        String  sqlDate1 = "2023-09-23 18:00:00";
         timer.scheduleAtFixedRate (new TimerTask() {
             public void run() {
                 try {
-                    /*for (int i = 1; i < 35; i++) {
+                    for (int i = 1; i < 135; i++) {
 
                         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String time = "2023-09-16 19:25:00";
+                        String time = "2023-09-23 18:00:00";
                         Date date1 = ft.parse(time);
 
                         Date afterDate = new Date(date1 .getTime() + 60000*i);
@@ -100,12 +210,13 @@ public class FaceController {
                         String  sqlDateformerly = format.format(getTime2());
                         System.out.println("format : " +time1+"-------任务执行以前时间--------");
                         postdate( time2,  time1);
-                    }*/
-                    String  sqlDate = format.format(getTime1());;
-                    System.out.println("format : " +sqlDate+"-------任务执行开始时间-------");
-                    String  sqlDateformerly = format.format(getTime2());
-                    System.out.println("format : " +sqlDateformerly+"-------任务执行以前时间--------");
-                    postdate( sqlDate, sqlDateformerly );
+                    }
+//                    String  sqlDate = format.format(getTime1());;
+//                    System.out.println("format : " +sqlDate+"-------任务执行开始时间-------");
+//                    String  sqlDateformerly = format.format(getTime2());
+//                    System.out.println("format : " +sqlDateformerly+"-------任务执行以前时间--------");
+//                    postdate( sqlDate, sqlDateformerly );
+//                    Thread.sleep(500);
 
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -281,7 +392,7 @@ public class FaceController {
     public int postdate( String  sqlDate,String  sqlDateformerly) throws Exception {
 
         List<Map<String,Object>> lists =new ArrayList<Map<String,Object>>();
-        String aid="2ea38fda-4fa2-11ee-affe-c81f66ed2833";
+        String aid="2ea38fda-4fa2-11ee-affe-c81f66ed283312";
         List<Map<String, Object>> listconet = faceService.getImageByActivityId(aid,sqlDate,sqlDateformerly);
 
         if(listconet.size()>0){
@@ -302,7 +413,7 @@ public class FaceController {
                 //身份证
                 String flagstr="0";
                 String tupestr="1";
-                String djid="ych20230916001";
+                String djid="ych20230923001";
                 simis.put("park_id", "Black-045011c63f6f432b969004b259163478");
                 if( simi.get("tIdentitycard")!=null ){
                     simis.put("license", simi.get("tIdentitycard").toString());
@@ -323,9 +434,9 @@ public class FaceController {
                 lists.add(simis);
             }
 
-            String appid= "zbhbfxhych440703";
+            String appid= "djyyh440703";
             String times= Timestamp();
-            String secretKey= "pakho123";
+            String secretKey= "dearjane123";
 
             JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
 

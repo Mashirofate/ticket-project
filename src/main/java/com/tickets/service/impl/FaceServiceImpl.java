@@ -47,5 +47,23 @@ public class FaceServiceImpl implements FaceService {
         return Collections.emptyList();
     }
 
+    /**
+     * @param aid 活动名称
+     * @return 返回数据中有身份证信息的数量
+     */
+    @Override
+    public int Queryquantity(String aid) {
+        return faceMapper.Queryquantity(aid);
+    }
+
+    /**
+     * @param tId
+     * @param tIdentitycard 更新 身份证信息
+     */
+    @Override
+    public int upquantity(String tId, String tIdentitycard) {
+        return faceMapper.upquantity(tId,tIdentitycard);
+    }
+
 
 }

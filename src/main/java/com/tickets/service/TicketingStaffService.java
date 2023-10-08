@@ -31,4 +31,6 @@ public interface TicketingStaffService {
 
     boolean update(TicketingAddDto ticketingAddDto);
     boolean update(String cardId,String Rname,String tid,String datei);
+
+    List<Map<String, Object>> getByapplet(int valid, String aId);
 }

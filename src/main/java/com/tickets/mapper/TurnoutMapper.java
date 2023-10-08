@@ -19,4 +19,6 @@ public interface TurnoutMapper {
     List<String> selectImageByKeys(@Param("ids") List<String> ids);
 
     List<String> selectKeyByActivityId(String vaId, String date);
+
+
 }
