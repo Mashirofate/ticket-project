@@ -158,3 +158,9 @@
 2023-10-12 22:37:57.182 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 1.957 seconds (JVM running for 2.352)
 2023-10-12 22:38:34.616 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-10-12 22:38:34.809 [Timer-0] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2023-10-12 22:57:48.267 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-10-12 22:57:48.268 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2023-10-12 22:57:48.268 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2023-10-12 22:57:48.268 [SpringContextShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2023-10-12 22:57:48.271 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2023-10-12 22:57:48.275 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
