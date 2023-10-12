@@ -1,5 +1,6 @@
 package com.tickets.controller.wx;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.ResponseResult;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -142,5 +144,75 @@ public class ActivityController {
 
     }
 
+    @Authentication(required = true)
+    @ApiOperation(value = "接受上传的入场记录    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
+    @PostMapping("/Entryrecord")
+    public ResponseResult getbindEntryrecord(@RequestBody String jsonstr) {
+        // json传输过来的活动id和已有身份证信息的条数
+        System.out.print("jsonstr:"+jsonstr);
+
+        JSONObject jsobject =  JSONObject.parseObject(jsonstr);
+        JSONArray listiden=  jsobject.getJSONArray("Entryrecord");
+        if(listiden!=null){
+            for(int i=0;i<listiden.size();i++) {
+                if( listiden.getJSONObject(i).get("eId")!=null){
+                    String eId= listiden.getJSONObject(i).get("eId").toString();
+                    String aId= listiden.getJSONObject(i).get("aId").toString();
+                    String vName=listiden.getJSONObject(i).get("vName").toString();
+                    String eName=listiden.getJSONObject(i).get("eName").toString();
+                    String tId= listiden.getJSONObject(i).get("tId").toString();
+                    String aName= listiden.getJSONObject(i).get("aName").toString();
+                    System.out.print("Date:"+listiden.getJSONObject(i).get("eDate").toString());
+
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    // 获取当前系统时间戳
+                    //long l = System.currentTimeMillis();
+                    //如果你数据库存储的时间戳类型为string，就需要将string字符串转为long类型
+                    long l = Long.parseLong(listiden.getJSONObject(i).get("eDate").toString());
+                    String eDate = sdf.format(l);
+
+
+                    String temp=null;
+                    if(listiden.getJSONObject(i).get("temp")!=null){
+                        temp=  listiden.getJSONObject(i).get("temp").toString();
+                    }
+                    String dWorker=null;
+                    if(listiden.getJSONObject(i).get("dWorker")!=null){
+                        dWorker=  listiden.getJSONObject(i).get("dWorker").toString();
+                    }
+                    String tQrcard=null;
+                    if(listiden.getJSONObject(i).get("tQrcard")!=null){
+                        tQrcard= listiden.getJSONObject(i).get("tQrcard").toString();
+                    }
+                    String tIdentitycard=null;
+                    if(listiden.getJSONObject(i).get("tIdentitycard")!=null){
+                        tIdentitycard=  listiden.getJSONObject(i).get("tIdentitycard").toString();
+                    }
+
+
+
+                    String autonym=null;
+                    if(listiden.getJSONObject(i).get("autonym")!=null){
+                        autonym=  listiden.getJSONObject(i).get("autonym").toString();
+                    }
+
+//                    byte[] fImage=null;
+//                    if(listiden.getJSONObject(i).get("fImage")!=null){
+//                        fImage = listiden.getJSONObject(i).get("fImage").toString().getBytes();
+//                    }
+
+                    ticketingStaffService.installEntryrecord(eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym);
+                }
+            }
+        }
+
+
+
+
+        return ResponseResult.SUCCESS("1");
+
+
+    }
 
 }

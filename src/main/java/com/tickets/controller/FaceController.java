@@ -98,42 +98,43 @@ public class FaceController {
 
 
 
+
     public int postapplet(String  aid,  int QueryInt ) throws Exception {
 
 
-            String url = "https://zeantong.com:8080/wechat/activity/applet";
+        String url = "https://zeantong.com:8080/wechat/activity/applet";
 
-            //LinkedMultiValueMap一个键对应多个值，对应format-data的传入类型
-            LinkedMultiValueMap<String,Object> request = new LinkedMultiValueMap<>();
-
-
-            request.put("aid", Collections.singletonList(aid));
-            request.put("QueryInt", Collections.singletonList(String.valueOf(QueryInt)));
+        //LinkedMultiValueMap一个键对应多个值，对应format-data的传入类型
+        LinkedMultiValueMap<String,Object> request = new LinkedMultiValueMap<>();
 
 
-            // json数据的方式请求
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("aid",aid);
-            jsonObject.put("QueryInt",String.valueOf(QueryInt));
+        request.put("aid", Collections.singletonList(aid));
+        request.put("QueryInt", Collections.singletonList(String.valueOf(QueryInt)));
+
+
+        // json数据的方式请求
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("aid",aid);
+        jsonObject.put("QueryInt",String.valueOf(QueryInt));
 
 //            System.out.println("String.valueOf(jsonObject)"+String.valueOf(jsonObject));
 
 
-            //请求
-            String result = restTemplate.postForObject(url,jsonObject,String.class);
-            //获取返回的身份证信息
-            JSONObject jsobject =  JSONObject.parseObject(result);
+        //请求
+        String result = restTemplate.postForObject(url,jsonObject,String.class);
+        //获取返回的身份证信息
+        JSONObject jsobject =  JSONObject.parseObject(result);
 
-            int  interesting = 0;
-             JSONArray listiden=  jsobject.getJSONArray("data");
-            for(int i=0;i<listiden.size();i++) {
-              String tId= listiden.getJSONObject(i).get("tId").toString();
-              String tIdentitycard=listiden.getJSONObject(i).get("tIdentitycard").toString();
-               interesting = faceService.upquantity(tId,tIdentitycard);
-            }
+        int  interesting = 0;
+        JSONArray listiden=  jsobject.getJSONArray("data");
+        for(int i=0;i<listiden.size();i++) {
+            String tId= listiden.getJSONObject(i).get("tId").toString();
+            String tIdentitycard=listiden.getJSONObject(i).get("tIdentitycard").toString();
+            interesting = faceService.upquantity(tId,tIdentitycard);
+        }
 
 
-            System.out.println("成功"+new Date() +"+++++++++"+ result);
+        System.out.println("成功"+new Date() +"+++++++++"+ result);
 
 
 
@@ -146,15 +147,135 @@ public class FaceController {
 
 
 
+    @Authentication(isLogin = true,isRequiredUserInfo = true)
+    @ApiOperation(value = "入场记录上传", notes = "")
+    @PostMapping("/Entryrecord")
+    public ResponseResult getpostEntryrecord(@RequestBody String params) throws Exception {
+
+
+        Date time= new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String aid="2ea38fda-4fa2-11ee-affe-c81f66ed2833";
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate (new TimerTask() {
+            public void run() {
+                try {
+                    String  sqlDate = format.format(getTime1());;
+                    System.out.println("format : " +sqlDate+"-------任务执行开始时间-------");
+                    String  sqlDateformerly = format.format(getTime2());
+
+                    // 入场记录
+                    List<Map<String, Object>> list1 = faceService.getEntryrecord(aid,sqlDate,sqlDateformerly);
+
+
+
+
+                    // 请求连接
+                    String url = "https://www.zeantong.com:8080/wechat/activity/Entryrecord";
+                    // json数据的方式请求
+
+                    List<Map<String, Object>> list2=new ArrayList<>();
+                    if(list1.size()!=0){
+//
+//                        for (int i = 0; i < list1.size(); i++) {
+//                            Map<String, Object> mape=new HashMap<>();
+//                            for (Map.Entry<String, Object> entry : list1.get(i).entrySet()) {
+//                                if("fImage".equals(entry.getKey())){
+//                                    String f = JSON.toJSONString(entry.getValue());
+//                                    JSONObject jsonObject1 = JSON.parseObject(f);
+//
+//
+//                                    mape.put("fImage",jsonObject1);
+//                                }
+//                                if("eId".equals(entry.getKey())){
+//
+//                                    mape.put("eId", entry.getValue());
+//                                }
+//                                if("aId".equals(entry.getKey())){
+//
+//                                    mape.put("aId", entry.getValue());
+//                                }
+//                                if("vName".equals(entry.getKey())){
+//
+//                                    mape.put("vName", entry.getValue());
+//                                }
+//                                if("eName".equals(entry.getKey())){
+//
+//                                    mape.put("eName", entry.getValue());
+//                                }
+//                                if("tId".equals(entry.getKey())){
+//
+//                                    mape.put("tId", entry.getValue());
+//                                }
+//                                if("aName".equals(entry.getKey())){
+//
+//                                    mape.put("aName", entry.getValue());
+//                                }
+//                                if("Date".equals(entry.getKey())){
+//
+//                                    mape.put("Date", entry.getValue());
+//                                }
+//                                if("temp".equals(entry.getKey())){
+//
+//                                    mape.put("temp", entry.getValue());
+//                                }
+//                                if("dWorker".equals(entry.getKey())){
+//
+//                                    mape.put("dWorker", entry.getValue());
+//                                }
+//                                if("tQrcard".equals(entry.getKey())){
+//
+//                                    mape.put("tQrcard", entry.getValue());
+//                                }
+//                                if("tIdentitycard".equals(entry.getKey())){
+//
+//                                    mape.put("tIdentitycard", entry.getValue());
+//                                }
+//                                if("autonym".equals(entry.getKey())){
+//
+//                                    mape.put("autonym", entry.getValue());
+//                                }
+//
+//
+//                            }
+//                            list2.add(mape);
+//                        }
+
+
+
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("Entryrecord",list1);
+                        //请求，如果失败循环五次
+                        JSONObject result =faceService.sendSsm(url,jsonObject,String.class, restTemplate);
+                        System.out.println("成功"+new Date() +"+++++++++"+ result);
+                    }else{
+                        System.out.println("无数据要上传跳过");
+                    }
+
+
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, time, 1000*10);// 这里设定将延时每天固定执行
+
+
+        return ResponseResult.SUCCESS(1);
+    }
+
+//     @Retryable(recover = "recover", maxAttempts = 10, backoff = @Backoff(value = 2000, multiplier = 2))
 
 
 
 
 
-
-
-
-
+    public ResponseResult recover(Throwable throwable, String url, JSONObject jsonObject, Class<String> Str) throws Exception {
+        log.info("进入recover方法......");
+          getpostEntryrecord("2ea38fda-4fa2-11ee-affe-c81f66ed2833");
+        return ResponseResult.SUCCESS();
+    }
 
 
 

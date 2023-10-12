@@ -1,10 +1,12 @@
 package com.tickets.service.impl;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.tickets.mapper.FaceMapper;
 import com.tickets.service.FaceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -21,8 +23,18 @@ public class FaceServiceImpl implements FaceService {
     public List<Map<String, Object>> getImageByActivityId(String aId,String  sqlDate,String  sqlDateformerly) {
         return faceMapper.getImageByActivityId(aId,sqlDate,sqlDateformerly);
     }
+    public List<Map<String, Object>> getEntryrecord(String aId,String  sqlDate,String  sqlDateformerly) {
 
+        return faceMapper.getEntryrecord(aId,sqlDate,sqlDateformerly);
+    }
 
+    public JSONObject sendSsm(String url, JSONObject jsonObject, Class<String> Str,RestTemplate restTemplate) {
+
+        System.out.print("2");
+        String result = restTemplate.postForObject(url,jsonObject,Str);
+        JSONObject JSONArray=  JSONObject.parseObject(result);
+        return JSONArray;
+    }
 
     @Override
     public List<Map<String, Object>> getImageByActivityIds(String aId) {

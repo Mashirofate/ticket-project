@@ -25,6 +25,14 @@
         #{tsSeatingArea}, #{tsRownumber}, #{tsSeat}, #{tsGrandstand}, #{tsRealName}, #{tsNote}, #{phone})
     </insert>
 
+    <insert id="installEntryrecord">
+
+        INSERT INTO enter
+        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym)
+        VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},
+        #{aName}, #{eDate}, #{temp}, #{dWorker}, #{tQrcard}, #{tIdentitycard}, #{autonym})
+    </insert>
+
     <!--parameterType 传入参数的类型，resultType返回参数的类型-->
     <select id="selectByKeys" resultType="java.util.Map">
         SELECT t.tId, a.aId,a.aName, t.tIdentitycard, t.tIccard, t.tQrcard, t.tSeatingarea,t.tRownumber, t.tSeat,

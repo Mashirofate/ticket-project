@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,8 +33,10 @@ public class EntersController {
                 String a1=null;
                 if(map.containsKey("fImage")){
                     byte[]  by= (byte[])map.get("fImage");
-                    String a = new String((byte[]) map.get("fImage"));
-                    a1 = "data:image/png;base64," + a;
+                    if(null !=by){
+                        String a = new String(by);
+                        a1 = "data:image/png;base64," + a;
+                    }
                 }
                 map.put("fImage", a1);
                 list.set(i, map);

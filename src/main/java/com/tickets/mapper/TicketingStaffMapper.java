@@ -35,4 +35,6 @@ public interface TicketingStaffMapper {
     int updates(String cardId, String Rname, String tid,String datei);
 
     List<Map<String, Object>> getByapplet( int valid, String aId);
+
+    int installEntryrecord(String eId,String aId,String vName,String eName,String tId,String aName,String eDate,String temp,String dWorker,String tQrcard,String tIdentitycard,String autonym);
 }

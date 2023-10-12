@@ -16,6 +16,8 @@ public interface FaceMapper {
     @MapKey("")
     List<Map<String, Object>> getImageByActivityId(String aId,String  sqlDate,String  sqlDateformerly);
     @MapKey("")
+    List<Map<String, Object>> getEntryrecord(String aId,String  sqlDate,String  sqlDateformerly);
+    @MapKey("")
     List<Map<String, Object>> getImageByActivityIdcount(String aId,String  sqlDate,String  sqlDateformerly);
     @MapKey("")
     List<Map<String, Object>> selectImageByActivityIds(String aId);

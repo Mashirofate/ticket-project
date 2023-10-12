@@ -153,14 +153,7 @@ public class WebSoketTask {
                 String vaId = vaIds.get(u);
                 if (vaId != null) {
 
-                    List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
 
-                    // 获取各个出口的人数
-                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
-
-
-                    maps.put("EachexoutList", EachexoutList);
-                    maps.put("EachexenterList", EachexenterList);
 
                     List rows = new ArrayList<>();
 
@@ -171,6 +164,11 @@ public class WebSoketTask {
                     // 票务当天入口统计人数
                     List ExportenterList = admissionInformationService.getenterlist(vaId);
 
+                    List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
+                    // 获取各个出口的人数
+                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
+                    maps.put("EachexenterList", EachexenterList);
+                    maps.put("EachexoutList", EachexoutList);
 
                     List TIMElList = admissionInformationService.getTIMElist(vaId);
 
@@ -208,6 +206,54 @@ public class WebSoketTask {
                     maps.put("GrandList", GrandList);
                     maps.put("GrandsList", GrandsList);
 
+
+
+                        Map<String, Object> rest = new HashMap<>();
+                        List<String>  list = deviceService.getSingle(vaId);
+                        List<String> listshen = new ArrayList<>();
+                        for (int i = 0; i < list.size(); i++) {
+                            // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
+                            var obj= list.get(i);
+                            if(obj != null && !obj.trim().equals("")){
+                                int val = Integer.parseInt(obj.substring(0, 6));
+                                String Iden = getNativePlace(val);
+                                listshen.add(Iden);
+                            }
+                        }
+                        Map<String, Integer> nameMap = Maps.newHashMap();
+
+                        listshen.forEach(name -> {
+                            Integer counts = nameMap.get(name);
+                            nameMap.put(name, counts == null ? 1 : ++counts);
+                        });
+                        // System.out.println(nameMap);
+                        List<Map<String, Object>> listmap = new ArrayList<>();
+
+                        for (Map.Entry<String, Integer> entry : nameMap.entrySet()) {
+                            Map<String, Object> nameMap1 = Maps.newHashMap();
+                            String str=entry.getKey();
+                            str = str.substring(0,str.length()-1);
+                            nameMap1.put("name",str );
+                            nameMap1.put("value", entry.getValue());
+                            listmap.add(nameMap1);
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    maps.put("listmap",listmap);
+
+
+
                     String jsonStr = JSON.toJSONString(maps);
                     //logger.info(" ******* send realTimeEntrancePeopleData : " + jsonStr);
                     RealTimeEntranceServer.sendMessage(vaId, jsonStr);
@@ -219,7 +265,7 @@ public class WebSoketTask {
 
     /**
      * 其它信息推送
-     *
+     * lift
      * @throws IOException
      */
     @Scheduled(fixedRate = 2 * 1000)
@@ -231,8 +277,6 @@ public class WebSoketTask {
             for (int u=0;u<vaIds.size();u++){
                 String vaId=vaIds.get(u);
                 if(vaId!=null){
-
-
                     // 入场人数 ：  票务入场 ticketing+工作人员入场 staff+未实名入场 Norealname+实名入场 realname
                    // Map<String, Object> typeCount = admissionInformationService.getTypeCount(vaId);
 //                    Map<String, Object> typeCounts = new HashMap<>();
@@ -277,42 +321,42 @@ public class WebSoketTask {
                     rest.put("work",work);
                     intraFieldINFO =intraField;
 
-//                    List<Map<String, Object>> rows=new ArrayList<>();
-//                    List<Map<String, Object>> enterM =faceService.getImageByActivityIdsAbnormal(vaId);
-//
-//
-//                    for (int i = 0; i <enterM.size() ; i++) {
-//                        Map<String, Object> b=new HashMap<>();
-//                        Map<String, Object> a= enterM.get(i);
-//
-//                        String images = "data:image/jpg;base64," +a.get("image").toString();
-//
-//                        String tIdentitycard =null;
-//                        if( a.containsKey("tIdentitycard")){
-//                            tIdentitycard =a.get("tIdentitycard").toString();
-//                            if(tIdentitycard.length() ==18){
-//                                tIdentitycard=tIdentitycard.substring(0,6)+"************";
-//                            }
-//                        }
-//
-//                        b.put("autonym",a.get("autonym"));
-//
-//
-//                        b.put("tIdentitycard",tIdentitycard);
-//                        // 显示健康码
-//                        b.put("healthCode",a.get("healthCode"));
-//               /* if(tIdentitycard ==null || tIdentitycard.length() !=18){
-//                    b.put("healthCode",null);
-//                }else {
-//                    b.put("healthCode","绿码");
-//                }*/
-//                        b.put("image",images);
-//                        rows.add(b);
-//                    }
-//
-//
-//
-//                    rest.put("enterImgAbnormal",rows);
+                    // 根据身份证判断性别
+                    List<String>  list = deviceService.getSingle(vaId);
+                    List<String> listshen = new ArrayList<>();
+                    int man=0;
+                    int girl=0;
+
+                    for (int i = 0; i < list.size(); i++) {
+                        // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
+                        var obj= list.get(i);
+                        if(obj != null && !obj.trim().equals("")){
+                            char genderCode = obj.charAt(obj.length() - 2);
+                            int genderDigit = Integer.parseInt(String.valueOf(genderCode));
+                            if (genderDigit % 2 == 0) {
+                                girl+=1;
+                            } else {
+                                 man +=1;
+                            }
+
+                        }
+                    }
+
+                    List<Map<String, String>> listmap = new ArrayList<>();
+                    Map<String, String> nameMap1 = Maps.newHashMap();
+                    Map<String, String> nameMap2 = Maps.newHashMap();
+
+                    nameMap1.put("name","男");
+                    nameMap1.put("value", String.valueOf(man));
+                    nameMap2.put("name","女");
+                    nameMap2.put("value", String.valueOf(girl));
+
+                    listmap.add(nameMap1);
+                    listmap.add(nameMap2);
+
+                    rest.put("gender",listmap);
+
+
                     String jsonStr = JSON.toJSONString(rest);
                     //logger.info(" &&&&&&& send RealTimeOtherData : " + jsonStr);
                     RealTimeOtherServer.sendMessage(vaId, jsonStr);
@@ -325,7 +369,7 @@ public class WebSoketTask {
 
     /**
      * 出场人数推送
-     *
+     * right
      * @throws IOException
      */
     @Scheduled(fixedRate = 2 * 1000)
@@ -352,32 +396,43 @@ public class WebSoketTask {
 
                     for (int i = 0; i < enterM.size(); i++) {
                         Map<String, Object> b = new HashMap<>();
-                        Map<String, Object> a = enterM.get(i);
-
-                        String images = "data:image/jpg;base64," + a.get("image").toString();
-                        String tIdentitycard = null;
-                        if (a.containsKey("tIdentitycard")) {
-                            if(null !=a.get("tIdentitycard")){
-                                tIdentitycard = a.get("tIdentitycard").toString();
-                                if (tIdentitycard.length() == 18) {
-                                    tIdentitycard = tIdentitycard.substring(0, 6) + "************";
+                        if(enterM.get(i)!=null){
+                            Map<String, Object> a = enterM.get(i);
+                            String images =null;
+                            if (a.containsKey("image")) {
+                                if(null !=a.get("image")){
+                                    images = "data:image/jpg;base64," + a.get("image").toString();
                                 }
+
+                            }
+                            String tIdentitycard = null;
+                            if (a.containsKey("tIdentitycard")) {
+                                if(null !=a.get("tIdentitycard")){
+                                    tIdentitycard = a.get("tIdentitycard").toString();
+                                    if (tIdentitycard.length() == 18) {
+                                        tIdentitycard = tIdentitycard.substring(0, 6) + "************";
+                                    }
+                                }
+
                             }
 
+                            b.put("autonym", a.get("autonym"));
+                            b.put("tIdentitycard", tIdentitycard);
+
+
+                            if (tIdentitycard == null || tIdentitycard.length() != 18) {
+                                b.put("healthCode", null);
+                            } else {
+                                b.put("healthCode", "绿码");
+                            }
+
+                            b.put("image", images);
+                            rows.add(b);
                         }
 
-                        b.put("autonym", a.get("autonym"));
-                        b.put("tIdentitycard", tIdentitycard);
 
 
-                        if (tIdentitycard == null || tIdentitycard.length() != 18) {
-                            b.put("healthCode", null);
-                        } else {
-                            b.put("healthCode", "绿码");
-                        }
 
-                        b.put("image", images);
-                        rows.add(b);
                     }
 
 
@@ -406,6 +461,63 @@ public class WebSoketTask {
 
                     rest.put("enterImg", rows);
                     rest.put("OutImg", listimg);
+
+
+
+                    List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
+                    // 获取各个出口的人数
+                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
+
+                    List enterListname = new ArrayList<>();
+                    List enterListvalue = new ArrayList<>();
+                    List outList = new ArrayList<>();
+                    if (EachexenterList!=null & EachexenterList.size()>0)
+                    {
+                        for (int i = 0; i < EachexenterList.size(); i++) {
+                            for (Map.Entry<String, Object> entry : EachexenterList.get(i).entrySet()) {
+                                if("name".equals(entry.getKey())){
+                                    enterListname.add(entry.getValue());
+                                }else{
+                                    enterListvalue.add(entry.getValue());
+                                }
+                            }
+                        }
+
+                    }
+                    List outListname = new ArrayList<>();
+                    List outListvalue = new ArrayList<>();
+                    if (EachexoutList!=null & EachexoutList.size()>0)
+                    {
+                        for (int i = 0; i < EachexoutList.size(); i++) {
+                            for (Map.Entry<String, Object> entry : EachexoutList.get(i).entrySet()) {
+                                if("name".equals(entry.getKey())){
+                                    outListname.add(entry.getValue());
+                                }else{
+                                    outListvalue.add(entry.getValue());
+                                }
+                            }
+                        }
+
+                    }
+
+
+
+
+                    rest.put("enterListname", enterListname);
+                    rest.put("enterListvalue", enterListvalue);
+                    rest.put("outListname", outListname);
+                    rest.put("outListvalue", outListvalue);
+
+
+
+
+
+
+
+
+
+
+
                     String jsonStr = JSON.toJSONString(rest);
                     //logger.info(" $$$$$$$ send RealTimeEnterData : " + jsonStr);
                     RealTimeEnterServer.sendMessage(vaId, jsonStr);

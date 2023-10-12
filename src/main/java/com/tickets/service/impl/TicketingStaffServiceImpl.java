@@ -188,4 +188,25 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
     public List<Map<String, Object>> getByapplet(int valid, String aId) {
         return ticketingStaffMapper.getByapplet(valid, aId) ;
     }
+
+    /**
+     * @param eId
+     * @param aId
+     * @param vName
+     * @param eName
+     * @param tId
+     * @param aName
+     * @param eDate
+     * @param temp
+     * @param dWorker
+     * @param tQrcard
+     * @param tIdentitycard
+     * @param autonym
+     * @param fImage
+     * @return
+     */
+    @Override
+    public int installEntryrecord(String eId, String aId, String vName, String eName, String tId, String aName, String eDate, String temp, String dWorker, String tQrcard, String tIdentitycard, String autonym) {
+        return ticketingStaffMapper.installEntryrecord(eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym) ;
+    }
 }

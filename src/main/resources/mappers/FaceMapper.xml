@@ -75,6 +75,14 @@
         WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
           AND aId=#{aId}
     </select>
+    <select id="getEntryrecord" resultType="java.util.Map">
+        SELECT eId,aId,aName,vName,eName,tQrcard,tIdentitycard,tQrcard,eDate,tId ,dWorker,temp,autonym  from enter
+        WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
+          AND aId=#{aId}
+
+    </select>
+
+
     <select id="getImageByActivityIdcount" resultType="java.util.Map">
         SELECT COUNT(eId) from enter
         WHERE eDate between #{sqlDateformerly} and #{sqlDate}
