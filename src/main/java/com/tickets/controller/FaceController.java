@@ -78,6 +78,7 @@ public class FaceController {
 
         // System.out.println(time+"-------开始时间--------");
         String aid="2ea38fda-4fa2-11ee-affe-c81f66ed2833";
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate (new TimerTask() {
             public void run() {

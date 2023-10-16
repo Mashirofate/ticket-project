@@ -1,6 +1,6 @@
 package com.tickets.utils;
 
-public class NativePlace {
+public class NativePlace_beif {
     public static String getNativePlace(int nativePlaceCode) {
         int shengCode = nativePlaceCode / 10000;
         int shiCode = nativePlaceCode / 100;
@@ -25,7 +25,7 @@ public class NativePlace {
     private static String getNameString(int code) {
         switch (code) {
             case 11:
-                return "北京";
+                return "北京市";
             case 1101:
                 return "市辖区";
             case 110101:
@@ -63,7 +63,7 @@ public class NativePlace {
             case 110229:
                 return "延庆县";
             case 12:
-                return "天津";
+                return "天津市";
             case 1201:
                 return "市辖区";
             case 120101:
@@ -101,7 +101,7 @@ public class NativePlace {
             case 120225:
                 return "蓟县";
             case 13:
-                return "河北";
+                return "河北省";
             case 1301:
                 return "石家庄市";
             case 130101:
@@ -483,7 +483,7 @@ public class NativePlace {
             case 131181:
                 return "冀州市";
             case 131182:
-                return "深州";
+                return "深州市";
             case 1390:
                 return "省直辖县级行政区划";
             case 139001:
@@ -491,7 +491,7 @@ public class NativePlace {
             case 139002:
                 return "辛集市";
             case 14:
-                return "山西";
+                return "山西省";
             case 1401:
                 return "太原市";
             case 140101:
@@ -775,7 +775,7 @@ public class NativePlace {
             case 141182:
                 return "汾阳市";
             case 15:
-                return "内蒙古";
+                return "内蒙古自治区";
             case 1501:
                 return "呼和浩特市";
             case 150101:
@@ -1023,7 +1023,7 @@ public class NativePlace {
             case 152923:
                 return "额济纳旗";
             case 21:
-                return "辽宁";
+                return "辽宁省";
             case 2101:
                 return "沈阳市";
             case 210101:
@@ -1281,7 +1281,7 @@ public class NativePlace {
             case 211481:
                 return "兴城市";
             case 22:
-                return "吉林";
+                return "吉林省";
             case 2201:
                 return "长春市";
             case 220101:
@@ -1437,7 +1437,7 @@ public class NativePlace {
             case 222426:
                 return "安图县";
             case 23:
-                return "黑龙江";
+                return "黑龙江省";
             case 2301:
                 return "哈尔滨市";
             case 230101:
@@ -1745,7 +1745,7 @@ public class NativePlace {
             case 232723:
                 return "漠河县";
             case 31:
-                return "上海";
+                return "上海市";
             case 3101:
                 return "市辖区";
             case 310101:
@@ -1785,7 +1785,7 @@ public class NativePlace {
             case 310230:
                 return "崇明县";
             case 32:
-                return "江苏";
+                return "江苏省";
             case 3201:
                 return "南京市";
             case 320101:
@@ -2037,7 +2037,7 @@ public class NativePlace {
             case 321324:
                 return "泗洪县";
             case 33:
-                return "浙江";
+                return "浙江省";
             case 3301:
                 return "杭州市";
             case 330101:
@@ -2263,7 +2263,7 @@ public class NativePlace {
             case 331181:
                 return "龙泉市";
             case 34:
-                return "安徽";
+                return "安徽省";
             case 3401:
                 return "合肥市";
             case 340101:
@@ -2539,7 +2539,7 @@ public class NativePlace {
             case 341881:
                 return "宁国市";
             case 35:
-                return "福建";
+                return "福建省";
             case 3501:
                 return "福州市";
             case 350101:
@@ -2747,7 +2747,7 @@ public class NativePlace {
             case 350982:
                 return "福鼎市";
             case 36:
-                return "江西";
+                return "江西省";
             case 3601:
                 return "南昌市";
             case 360101:
@@ -2993,7 +2993,7 @@ public class NativePlace {
             case 361181:
                 return "德兴市";
             case 37:
-                return "山东";
+                return "山东省";
             case 3701:
                 return "济南市";
             case 370101:
@@ -3337,7 +3337,7 @@ public class NativePlace {
             case 371728:
                 return "东明县";
             case 41:
-                return "河南";
+                return "河南省";
             case 4101:
                 return "郑州市";
             case 410101:
@@ -3727,7 +3727,7 @@ public class NativePlace {
             case 419001:
                 return "济源市";
             case 42:
-                return "湖北";
+                return "湖北省";
             case 4201:
                 return "武汉市";
             case 420101:
@@ -3987,7 +3987,7 @@ public class NativePlace {
             case 429021:
                 return "神农架林区";
             case 43:
-                return "湖南";
+                return "湖南省";
             case 4301:
                 return "长沙市";
             case 430101:
@@ -4287,7 +4287,7 @@ public class NativePlace {
             case 433130:
                 return "龙山县";
             case 44:
-                return "广东";
+                return "广东省";
             case 4401:
                 return "广州市";
             case 440101:
@@ -4609,7 +4609,7 @@ public class NativePlace {
             case 445381:
                 return "罗定市";
             case 45:
-                return "广西";
+                return "广西壮族自治区";
             case 4501:
                 return "南宁市";
             case 450101:
@@ -4887,7 +4887,7 @@ public class NativePlace {
             case 451481:
                 return "凭祥市";
             case 46:
-                return "海南";
+                return "海南省";
             case 4601:
                 return "海口市";
             case 460101:
@@ -4949,7 +4949,7 @@ public class NativePlace {
             case 469030:
                 return "琼中黎族苗族自治县";
             case 50:
-                return "重庆";
+                return "重庆市";
             case 5001:
                 return "市辖区";
             case 500101:
@@ -5031,7 +5031,7 @@ public class NativePlace {
             case 500243:
                 return "彭水苗族土家族自治县";
             case 51:
-                return "四川";
+                return "四川省";
             case 5101:
                 return "成都市";
             case 510101:
@@ -5477,7 +5477,7 @@ public class NativePlace {
             case 513437:
                 return "雷波县";
             case 52:
-                return "贵州";
+                return "贵州省";
             case 5201:
                 return "贵阳市";
             case 520101:
@@ -5683,7 +5683,7 @@ public class NativePlace {
             case 522732:
                 return "三都水族自治县";
             case 53:
-                return "云南";
+                return "云南省";
             case 5301:
                 return "昆明市";
             case 530101:
@@ -5991,7 +5991,7 @@ public class NativePlace {
             case 533423:
                 return "维西傈僳族自治县";
             case 54:
-                return "西藏";
+                return "西藏自治区";
             case 5401:
                 return "拉萨市";
             case 540101:
@@ -6157,7 +6157,7 @@ public class NativePlace {
             case 542627:
                 return "朗县";
             case 61:
-                return "陕西";
+                return "陕西省";
             case 6101:
                 return "西安市";
             case 610101:
@@ -6413,7 +6413,7 @@ public class NativePlace {
             case 611026:
                 return "柞水县";
             case 62:
-                return "甘肃";
+                return "甘肃省";
             case 6201:
                 return "兰州市";
             case 620101:
@@ -6639,7 +6639,7 @@ public class NativePlace {
             case 623027:
                 return "夏河县";
             case 63:
-                return "青海";
+                return "青海省";
             case 6301:
                 return "西宁市";
             case 630101:
@@ -6745,7 +6745,7 @@ public class NativePlace {
             case 632823:
                 return "天峻县";
             case 64:
-                return "宁夏";
+                return "宁夏回族自治区";
             case 6401:
                 return "银川市";
             case 640101:
@@ -6811,7 +6811,7 @@ public class NativePlace {
             case 640522:
                 return "海原县";
             case 65:
-                return "新疆";
+                return "新疆维吾尔自治区";
             case 6501:
                 return "乌鲁木齐市";
             case 650101:
@@ -7045,11 +7045,11 @@ public class NativePlace {
             case 659004:
                 return "五家渠市";
             case 71:
-                return "台湾";
+                return "台湾省";
             case 81:
-                return "香港";
+                return "香港特别行政区";
             case 82:
-                return "澳门";
+                return "澳门特别行政区";
             default:
                 return null;
         }
