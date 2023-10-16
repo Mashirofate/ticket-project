@@ -2,13 +2,13 @@ server:
   port: 8080
   tomcat:
     max-swallow-size: 100MB
-  ssl: #ssl配置
-    enabled: true  # 默认为true
-    #key-alias: alias-key # 别名(可以不进行配置)
-    # 保存SSL证书的秘钥库的路径
-    key-store: C:\Users\Administrator\Desktop\target\ssl\zeantong.com.jks
-    key-store-password: zeantong.com09b6a2d8 #证书密码
-    key-store-type: JKS    #证书类型
+#  ssl: #ssl配置
+#    enabled: true  # 默认为true
+#    #key-alias: alias-key # 别名(可以不进行配置)
+#    # 保存SSL证书的秘钥库的路径
+#    key-store: C:\Users\Administrator\Desktop\target\ssl\zeantong.com.jks
+#    key-store-password: zeantong.com09b6a2d8 #证书密码
+#    key-store-type: JKS    #证书类型
 
 
 
