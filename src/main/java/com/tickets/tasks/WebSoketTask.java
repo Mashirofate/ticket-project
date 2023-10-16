@@ -215,9 +215,11 @@ public class WebSoketTask {
                             // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
                             var obj= list.get(i);
                             if(obj != null && !obj.trim().equals("")){
-                                int val = Integer.parseInt(obj.substring(0, 6));
-                                String Iden = getNativePlace(val);
-                                listshen.add(Iden);
+                                if(obj.length()==18){
+                                    int val = Integer.parseInt(obj.substring(0, 6));
+                                    String Iden = getNativePlace(val);
+                                    listshen.add(Iden);
+                                }
                             }
                         }
                         Map<String, Integer> nameMap = Maps.newHashMap();
@@ -232,7 +234,6 @@ public class WebSoketTask {
                         for (Map.Entry<String, Integer> entry : nameMap.entrySet()) {
                             Map<String, Object> nameMap1 = Maps.newHashMap();
                             String str=entry.getKey();
-                            str = str.substring(0,str.length()-1);
                             nameMap1.put("name",str );
                             nameMap1.put("value", entry.getValue());
                             listmap.add(nameMap1);
