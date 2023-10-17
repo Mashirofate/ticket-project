@@ -704,7 +704,7 @@ public class FaceController {
             MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
             CommonInputStreamResource commonInputStreamResource = null;
             try {
-                commonInputStreamResource = new CommonInputStreamResource(fileInputStream,img.length(),img.getName());
+                commonInputStreamResource = new CommonInputStreamResource(fileInputStream, img.length(), img.getName());
             } catch (Exception e) {
                 log.error("文件输入流转换错误",e);
             }
@@ -722,7 +722,7 @@ public class FaceController {
         return "";
     }
 
-    class CommonInputStreamResource extends InputStreamResource {
+    static class CommonInputStreamResource extends InputStreamResource {
         private long length;
         private String fileName;
         public CommonInputStreamResource(InputStream inputStream, long length, String fileName) {

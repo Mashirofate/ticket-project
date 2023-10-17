@@ -7,7 +7,6 @@ import com.tickets.service.UserService;
 import com.tickets.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -27,7 +26,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 
-    @Override
+
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         // 预请求直接放行（解决 token拦截错误）
@@ -71,12 +70,12 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    @Override
+
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
     }
 
-    @Override
+
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
     }

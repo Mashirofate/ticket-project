@@ -2,15 +2,16 @@ package com.tickets.controller;
 
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.Page;
 import com.tickets.dto.ResponseResult;
 import com.tickets.service.TicketFormsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -147,23 +148,23 @@ public class TicketFormsController {
             // 票务入口统计人数
             List<Map<String, Object>> ExportList= ticketFormsService.getEnSum(aId);
 
-            for (int i = 0; i <ExportList.size() ; i++) {
-                Map<String, Object> b=new HashMap<>();
-                Map<String, Object> a= ExportList.get(i);
-                // "yyyy-MM-dd HH:mm:ss"
-                // 使用这个方法转化 Date和string
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                // string ---》Date
-                Date date= sdf.parse( a.get("time").toString());
+        for (Map<String, Object> stringObjectMap : ExportList) {
+            Map<String, Object> b = new HashMap<>();
+            Map<String, Object> a = stringObjectMap;
+            // "yyyy-MM-dd HH:mm:ss"
+            // 使用这个方法转化 Date和string
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            // string ---》Date
+            Date date = sdf.parse(a.get("time").toString());
 
-                //按固定的格式显示时间
-                SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
-                String time = format0.format(  date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
-                b.put("type",a.get("Names")+"号");
-                b.put("date",time);
-                b.put("value",a.get("value"));
-                rows.add(b);
-            }
+            //按固定的格式显示时间
+            SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
+            String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
+            b.put("type", a.get("Names") + "号");
+            b.put("date", time);
+            b.put("value", a.get("value"));
+            rows.add(b);
+        }
 
 
 
@@ -185,21 +186,21 @@ public class TicketFormsController {
         // 统计总人数
         List<Map<String, Object>> list= ticketFormsService.getTotality(aId);
         List<Map<String, Object>> rows=new ArrayList<>();
-        for (int i = 0; i <list.size() ; i++) {
-            Map<String, Object> b=new HashMap<>();
-            Map<String, Object> a= list.get(i);
+        for (Map<String, Object> stringObjectMap : list) {
+            Map<String, Object> b = new HashMap<>();
+            Map<String, Object> a = stringObjectMap;
             // "yyyy-MM-dd HH:mm:ss"
             // 使用这个方法转化 Date和string
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             // string ---》Date
-            Date date= sdf.parse(a.get("time").toString());
+            Date date = sdf.parse(a.get("time").toString());
 
             //按固定的格式显示时间
             SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
-            String time = format0.format(  date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
-            b.put("时间",time);
-            b.put("人数",a.get("value"));
+            String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
+            b.put("时间", time);
+            b.put("人数", a.get("value"));
             rows.add(b);
         }
 
@@ -266,21 +267,21 @@ public class TicketFormsController {
         // 票务入口统计人数
         List<Map<String, Object>> ExportList= ticketFormsService.getExportSum(aId);
 
-        for (int i = 0; i <ExportList.size() ; i++) {
-            Map<String, Object> b=new HashMap<>();
-            Map<String, Object> a= ExportList.get(i);
+        for (Map<String, Object> stringObjectMap : ExportList) {
+            Map<String, Object> b = new HashMap<>();
+            Map<String, Object> a = stringObjectMap;
             // "yyyy-MM-dd HH:mm:ss"
             // 使用这个方法转化 Date和string
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             // string ---》Date
-            Date date= sdf.parse( a.get("time").toString());
+            Date date = sdf.parse(a.get("time").toString());
 
             //按固定的格式显示时间
             SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
-            String time = format0.format(  date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
-            b.put("date",time);
-            b.put("type",a.get("Names")+"号");
-            b.put("value",a.get("value"));
+            String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
+            b.put("date", time);
+            b.put("type", a.get("Names") + "号");
+            b.put("value", a.get("value"));
             rows.add(b);
         }
         return ResponseResult.SUCCESS(rows);

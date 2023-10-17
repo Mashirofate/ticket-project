@@ -53,8 +53,7 @@ public class WebSoketTask {
         Map<String, List<Map<String, Object>>> maps=new HashMap<>();
         List<String> vaIds = RealTimePeopleServer.vaIds;
         if(vaIds!=null & vaIds.size()>0) {
-            for (int u = 0; u < vaIds.size(); u++) {
-                String vaId = vaIds.get(u);
+            for (String vaId : vaIds) {
                 if (vaId != null) {
                     //  Map<String, Object> countLimitTime = admissionInformationService.getCountLimitTime(new Date(),vaId);
                     List<Map<String, Object>> rows = new ArrayList<>();
@@ -113,9 +112,6 @@ public class WebSoketTask {
                     maps.put("tempchartList", tempchartList);
 
 
-
-
-
                     int intraFields = intraFieldINFO;
                     Map<String, Object> intraFieldmap = new HashMap<>();
                     intraFieldmap.put("intraField", intraFields);
@@ -143,7 +139,7 @@ public class WebSoketTask {
     /**
      * 推送实时入口人数信息  新的中间数据
      */
-    @Scheduled(fixedRate = 2 * 1000)
+    @Scheduled(fixedRate = 10 * 1000)
     public void realTimeEntrancePeopleData() throws IOException, ParseException {
         List<String> vaIds = RealTimeEntranceServer.vaIds;
         Map<String, List<Map<String, Object>>> maps=new HashMap<>();

@@ -1,0 +1,125 @@
+2023-10-17 10:18:54.105 [scheduling-1] ERROR o.s.s.support.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.io.IOException: The transformer has been closed and may no longer be used
+	at org.apache.tomcat.websocket.PerMessageDeflate.sendMessagePart(PerMessageDeflate.java:360)
+	at org.apache.tomcat.websocket.WsRemoteEndpointImplBase.sendMessageBlock(WsRemoteEndpointImplBase.java:284)
+	at org.apache.tomcat.websocket.WsRemoteEndpointImplBase.sendMessageBlock(WsRemoteEndpointImplBase.java:250)
+	at org.apache.tomcat.websocket.WsRemoteEndpointImplBase.sendString(WsRemoteEndpointImplBase.java:191)
+	at org.apache.tomcat.websocket.WsRemoteEndpointBasic.sendText(WsRemoteEndpointBasic.java:37)
+	at com.tickets.socket.RealTimeEnterServer.sendMessage(RealTimeEnterServer.java:91)
+	at com.tickets.socket.RealTimeEnterServer.sendMessage(RealTimeEnterServer.java:81)
+	at com.tickets.tasks.WebSoketTask.RealTimeEnterData(WebSoketTask.java:524)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.runAndReset$$$capture(FutureTask.java:358)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: java.lang.NullPointerException: Deflater has been closed
+	at java.base/java.util.zip.Deflater.ensureOpen(Deflater.java:902)
+	at java.base/java.util.zip.Deflater.deflate(Deflater.java:564)
+	at org.apache.tomcat.websocket.PerMessageDeflate.sendMessagePart(PerMessageDeflate.java:355)
+	... 18 common frames omitted
+2023-10-17 17:14:31.417 [main] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement.<init>(CommonAnnotationBeanPostProcessor.java:698)
+
+The following method did not exist:
+
+    'java.lang.String javax.annotation.Resource.lookup()'
+
+The calling method's class, org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement, was loaded from the following location:
+
+    jar:file:/C:/Users/11583/.m2/repository/org/springframework/spring-context/6.0.12/spring-context-6.0.12.jar!/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor$LegacyResourceElement.class
+
+The called method's class, javax.annotation.Resource, is available from the following locations:
+
+    jar:file:/C:/Users/11583/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar!/javax/annotation/Resource.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    javax.annotation.Resource: file:/C:/Users/11583/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement and javax.annotation.Resource
+
+2023-10-17 17:28:16.769 [main] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement.<init>(CommonAnnotationBeanPostProcessor.java:698)
+
+The following method did not exist:
+
+    'java.lang.String javax.annotation.Resource.lookup()'
+
+The calling method's class, org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement, was loaded from the following location:
+
+    jar:file:/C:/Users/11583/.m2/repository/org/springframework/spring-context/6.0.12/spring-context-6.0.12.jar!/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor$LegacyResourceElement.class
+
+The called method's class, javax.annotation.Resource, is available from the following locations:
+
+    jar:file:/C:/Users/11583/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar!/javax/annotation/Resource.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    javax.annotation.Resource: file:/C:/Users/11583/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement and javax.annotation.Resource
+
+2023-10-17 17:29:22.701 [main] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement.<init>(CommonAnnotationBeanPostProcessor.java:698)
+
+The following method did not exist:
+
+    'java.lang.String javax.annotation.Resource.lookup()'
+
+The calling method's class, org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement, was loaded from the following location:
+
+    jar:file:/C:/Users/11583/.m2/repository/org/springframework/spring-context/6.0.12/spring-context-6.0.12.jar!/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor$LegacyResourceElement.class
+
+The called method's class, javax.annotation.Resource, is available from the following locations:
+
+    jar:file:/C:/Users/11583/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar!/javax/annotation/Resource.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    javax.annotation.Resource: file:/C:/Users/11583/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$LegacyResourceElement and javax.annotation.Resource
+

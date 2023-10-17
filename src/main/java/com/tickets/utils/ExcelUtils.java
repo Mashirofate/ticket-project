@@ -2,7 +2,7 @@ package com.tickets.utils;
 
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ExcelUtils {
-    private static Object CellType;
+
 
     /**
      * 获取并解析excel文件，返回一个二维集合
@@ -58,11 +58,11 @@ public class ExcelUtils {
 
 //
                     if(sheet.getRow(i).getCell(j) == null){
-                        sheet.getRow(i).createCell(j).setCellType(Cell.CELL_TYPE_STRING);
+                        sheet.getRow(i).createCell(j).setCellType(CellType.STRING);
                         sheet.getRow(i).createCell(j).setCellValue(new  HSSFRichTextString(String.valueOf(sheet.getRow(i).getCell(j).getStringCellValue())));
                         cel.put(header.get(j),null);
                     }else {//单元格有值时，getCell方法获获取到单元格。
-                        sheet.getRow(i).getCell(j).setCellType(Cell.CELL_TYPE_STRING);
+                        sheet.getRow(i).getCell(j).setCellType(CellType.STRING);
                         cel.put(header.get(j), sheetRow1.getCell(j).getStringCellValue());
                     }
 

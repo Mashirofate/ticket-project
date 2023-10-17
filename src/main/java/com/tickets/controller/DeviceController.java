@@ -93,15 +93,46 @@ public class DeviceController {
         return ResponseResult.SUCCESS();
     }
 
-    @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除设备ip")
-    @DeleteMapping("/s/{ids}")
-    public ResponseResult delByIds(@PathVariable String ids) {
-        String[] activies = ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            deviceService.delById(activies[i]);
+    /**
+     * 根据ip判断当前ip是否能够ping通
+     *  
+     *
+     * @param ip
+     * @return
+     */
+    public static boolean isConnect(String ip) {
+        boolean bool = false;
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process process = runtime.exec("ping " + ip);
+            InputStream is = process.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line = null;
+            StringBuffer sb = new StringBuffer();
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                // 优化速度
+                if (line.contains("请求超时")) {
+                    // System.out.println(ip + "网络断开，时间 " + new Date());
+                    return false;
+                }
+            }
+            is.close();
+            isr.close();
+            br.close();
+
+            if (null != sb && !sb.toString().equals("")) {
+                // 网络畅通
+                //System.out.println(ip + "网络正常 ，时间" + new Date());
+                // 网络不畅通
+                //System.out.println(ip + "网络断开，时间 " + new Date());
+                bool = sb.toString().indexOf("TTL") > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return ResponseResult.SUCCESS();
+        return bool;
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
@@ -162,46 +193,15 @@ public class DeviceController {
         return InetAddress.getByName(ip).isReachable(3000);
     }
 
-    /**
-     * 根据ip判断当前ip是否能够ping通
-     *  
-     *
-     * @param ip
-     * @return
-     */
-    public static boolean isConnect(String ip) {
-        boolean bool = false;
-        Runtime runtime = Runtime.getRuntime();
-        try {
-            Process process = runtime.exec("ping " + ip);
-            InputStream is = process.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String line = null;
-            StringBuffer sb = new StringBuffer();
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-                // 优化速度
-                if (line.indexOf("请求超时") >= 0) {
-                    // System.out.println(ip + "网络断开，时间 " + new Date());
-                    return false;
-                }
-            }
-            is.close();
-            isr.close();
-            br.close();
-
-            if (null != sb && !sb.toString().equals("")) {
-                // 网络畅通
-                //System.out.println(ip + "网络正常 ，时间" + new Date());
-                // 网络不畅通
-                //System.out.println(ip + "网络断开，时间 " + new Date());
-                bool = sb.toString().indexOf("TTL") > 0;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Authentication(isLogin = true, isRequiredUserInfo = true)
+    @ApiOperation(value = "批量删除设备ip")
+    @DeleteMapping("/s/{ids}")
+    public ResponseResult delByIds(@PathVariable String ids) {
+        String[] activies = ids.split(",");
+        for (String activy : activies) {
+            deviceService.delById(activy);
         }
-        return bool;
+        return ResponseResult.SUCCESS();
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)

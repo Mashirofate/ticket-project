@@ -1,14 +1,14 @@
 package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.*;
+import com.tickets.dto.EntranceManagementAddDto;
+import com.tickets.dto.EntranceManagementSearchDto;
+import com.tickets.dto.ResponseResult;
 import com.tickets.service.EntranceManagementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @Api(tags = "入口接口")
 @RestController
@@ -75,8 +75,8 @@ public class EntranceManagementController { // 入口管理
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids){
         String[] activies =ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            entranceManagementService.delById( activies[i]);
+        for (String activy : activies) {
+            entranceManagementService.delById(activy);
         }
         return ResponseResult.SUCCESS();
     }

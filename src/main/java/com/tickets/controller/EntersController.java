@@ -61,8 +61,8 @@ public class EntersController {
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids){
         String[] activies =ids.split(",");
-        for (int i = 0; i < activies.length; i++) {
-            entersService.delById( activies[i]);
+        for (String activy : activies) {
+            entersService.delById(activy);
         }
         return ResponseResult.SUCCESS();
     }
