@@ -5,8 +5,8 @@ import com.tickets.dto.EntersSearchDto;
 import com.tickets.dto.Page;
 import com.tickets.dto.ResponseResult;
 import com.tickets.service.EntersService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "入场记录接口")
+@Tag(name  = "入场记录接口")
 @RestController
 @RequestMapping("/es")
 public class EntersController {
@@ -22,7 +22,7 @@ public class EntersController {
     private EntersService entersService;
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "入场记录条件搜索", notes = "")
+    @Operation(summary = "入场记录条件搜索", description  = "")
     @GetMapping("/search")
     public ResponseResult search(EntersSearchDto entersSearchDto) throws ParseException {
         Page page= entersService.getByKeys(entersSearchDto);
@@ -49,7 +49,7 @@ public class EntersController {
 
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "删除入场记录")
+    @Operation(summary = "删除入场记录")
     @DeleteMapping("/{eid}")
     public ResponseResult delById(@PathVariable String eid){
         entersService.delById(eid);
@@ -57,7 +57,7 @@ public class EntersController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除入场记录")
+    @Operation(summary = "批量删除入场记录")
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids){
         String[] activies =ids.split(",");

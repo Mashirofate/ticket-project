@@ -5,8 +5,8 @@ import com.tickets.dto.ResponseResult;
 import com.tickets.dto.VenueActivieAddDto;
 import com.tickets.dto.VenueActivieSearchDto;
 import com.tickets.service.VenueActiviesService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "场馆活动接口")
+@Tag(name = "场馆活动接口")
 @RestController
 @RequestMapping("/va")
 public class VenueActiviesController { //活动管理
@@ -23,7 +23,7 @@ public class VenueActiviesController { //活动管理
     private VenueActiviesService venueActiviesService;
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "创建一个活动")
+    @Operation(summary  = "创建一个活动")
     @PostMapping("/add")
     public ResponseResult add(@RequestBody VenueActivieAddDto venueActivieAddDto) {
         venueActiviesService.save(venueActivieAddDto);
@@ -31,7 +31,7 @@ public class VenueActiviesController { //活动管理
     }
 
     /*@Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "更新一个用户")
+    @Operation(value = "更新一个用户")
     @PostMapping("/update")
     public ResponseResult update(@RequestBody Map map) {
         VenueActivieAddDto venueActivieAddDto =new VenueActivieAddDto();
@@ -46,7 +46,7 @@ public class VenueActiviesController { //活动管理
         return ResponseResult.SUCCESS();
     }*/
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "更新一个活动")
+    @Operation(summary  = "更新一个活动")
     @PostMapping("/update")
     public ResponseResult update(@RequestBody VenueActivieAddDto venueActivieAddDto) {
         venueActiviesService.update(venueActivieAddDto);
@@ -54,14 +54,14 @@ public class VenueActiviesController { //活动管理
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "场馆活动条件搜索")
+    @Operation(summary  = "场馆活动条件搜索")
     @GetMapping("/search")
     public ResponseResult search(VenueActivieSearchDto venueActivieSearchDto) {
         return ResponseResult.SUCCESS(venueActiviesService.getByKeys(venueActivieSearchDto));
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "启用的活动")
+    @Operation(summary  = "启用的活动")
     @GetMapping("/open")
     public ResponseResult openActivies() {
         List<Map<String, Object>> list= venueActiviesService.getOpenActivies();
@@ -76,7 +76,7 @@ public class VenueActiviesController { //活动管理
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "删除活动", notes = "根据vaId删除")
+    @Operation(summary  = "删除活动", description  = "根据vaId删除")
     @DeleteMapping("/{aId}")
     public ResponseResult delById(@PathVariable String aId) {
         venueActiviesService.remove(aId);
@@ -84,7 +84,7 @@ public class VenueActiviesController { //活动管理
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除活动", notes = "根据vaId删除")
+    @Operation(summary  = "批量删除活动", description  = "根据vaId删除")
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids) {
        /* 1、如果用“.”作为分隔的话,必须是如下写法,String.split("\\."),这样才能正确的分隔开,不能用String.split(".");
@@ -99,7 +99,7 @@ public class VenueActiviesController { //活动管理
 
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "更新活动的状态", notes = "")
+    @Operation(summary  = "更新活动的状态", description  = "")
     @PutMapping("/{vaId}/{vaEnable}")
     public ResponseResult updateEnable(@PathVariable String vaId, @PathVariable Character vaEnable) {
         venueActiviesService.updateEnable(vaId, vaEnable);
@@ -107,14 +107,14 @@ public class VenueActiviesController { //活动管理
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "根据id获取活动信息")
+    @Operation(summary  = "根据id获取活动信息")
     @GetMapping("/{id}")
     public ResponseResult getByVaId(@PathVariable String id) {
         return ResponseResult.SUCCESS(venueActiviesService.getByVaId(id));
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "获取简单的数据列表", notes = "vmId, vmName")
+    @Operation(summary  = "获取简单的数据列表", description  = "vmId, vmName")
     @GetMapping("/simple")
     public ResponseResult search() {
         return ResponseResult.SUCCESS(venueActiviesService.getSimpleList());

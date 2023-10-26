@@ -1,6 +1,6 @@
 package com.tickets.dto;
 
-import io.swagger.models.auth.In;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 

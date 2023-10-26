@@ -6,12 +6,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.ResponseResult;
+import com.tickets.dto.VenueActivieSearchDto;
 import com.tickets.service.FaceService;
-import com.tickets.service.TicketingStaffService;
+import com.tickets.service.VenueActiviesService;
 import com.tickets.utils.JsonUtil;
 import com.tickets.utils.SHACoder;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.json.CDL;
 import org.json.JSONException;
@@ -21,20 +23,22 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Api(tags = "人脸接口")
+@Tag(name  = "人脸接口")
 @RestController
 @RequestMapping("/fr")
 @Slf4j
@@ -45,16 +49,25 @@ public class FaceController {
 
     @Autowired
     private RestTemplate restTemplate;
-    private TicketingStaffService ticketingStaffServi;
+    @Autowired
+    private VenueActiviesService venueActiviesService;
     private String baseUrl = "https://gaxcx.huizhou.gov.cn/sjcs";
 
-    public FaceController(TicketingStaffService ticketingStaffServi) {
-        this.ticketingStaffServi = ticketingStaffServi;
+
+
+    @Authentication(isLogin = true, isRequiredUserInfo = true)
+    @Operation(summary  = "查询活动进行数据传输")
+    @PostMapping ("/search")
+    public ResponseResult search(@RequestBody String params) {
+        VenueActivieSearchDto   venueActivieSearchDto =new VenueActivieSearchDto();
+        return ResponseResult.SUCCESS(venueActiviesService.getByKeys(venueActivieSearchDto));
     }
 
 
+
+
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "小程序数据同步", notes = "")
+    @Operation(summary = "小程序数据同步", description  = "")
     @PostMapping("/applet")
     public ResponseResult getpostapplet(@RequestBody String params) throws Exception {
 
@@ -149,7 +162,7 @@ public class FaceController {
 
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "入场记录上传", notes = "")
+    @Operation(summary = "入场记录上传", description  = "")
     @PostMapping("/Entryrecord")
     public ResponseResult getpostEntryrecord(@RequestBody String params) throws Exception {
 
@@ -177,71 +190,6 @@ public class FaceController {
 
                     List<Map<String, Object>> list2=new ArrayList<>();
                     if(list1.size()!=0){
-//
-//                        for (int i = 0; i < list1.size(); i++) {
-//                            Map<String, Object> mape=new HashMap<>();
-//                            for (Map.Entry<String, Object> entry : list1.get(i).entrySet()) {
-//                                if("fImage".equals(entry.getKey())){
-//                                    String f = JSON.toJSONString(entry.getValue());
-//                                    JSONObject jsonObject1 = JSON.parseObject(f);
-//
-//
-//                                    mape.put("fImage",jsonObject1);
-//                                }
-//                                if("eId".equals(entry.getKey())){
-//
-//                                    mape.put("eId", entry.getValue());
-//                                }
-//                                if("aId".equals(entry.getKey())){
-//
-//                                    mape.put("aId", entry.getValue());
-//                                }
-//                                if("vName".equals(entry.getKey())){
-//
-//                                    mape.put("vName", entry.getValue());
-//                                }
-//                                if("eName".equals(entry.getKey())){
-//
-//                                    mape.put("eName", entry.getValue());
-//                                }
-//                                if("tId".equals(entry.getKey())){
-//
-//                                    mape.put("tId", entry.getValue());
-//                                }
-//                                if("aName".equals(entry.getKey())){
-//
-//                                    mape.put("aName", entry.getValue());
-//                                }
-//                                if("Date".equals(entry.getKey())){
-//
-//                                    mape.put("Date", entry.getValue());
-//                                }
-//                                if("temp".equals(entry.getKey())){
-//
-//                                    mape.put("temp", entry.getValue());
-//                                }
-//                                if("dWorker".equals(entry.getKey())){
-//
-//                                    mape.put("dWorker", entry.getValue());
-//                                }
-//                                if("tQrcard".equals(entry.getKey())){
-//
-//                                    mape.put("tQrcard", entry.getValue());
-//                                }
-//                                if("tIdentitycard".equals(entry.getKey())){
-//
-//                                    mape.put("tIdentitycard", entry.getValue());
-//                                }
-//                                if("autonym".equals(entry.getKey())){
-//
-//                                    mape.put("autonym", entry.getValue());
-//                                }
-//
-//
-//                            }
-//                            list2.add(mape);
-//                        }
-
 
 
                         JSONObject jsonObject = new JSONObject();
@@ -272,24 +220,14 @@ public class FaceController {
 
 
 
-    public ResponseResult recover(Throwable throwable, String url, JSONObject jsonObject, Class<String> Str) throws Exception {
-        log.info("进入recover方法......");
-          getpostEntryrecord("2ea38fda-4fa2-11ee-affe-c81f66ed2833");
-        return ResponseResult.SUCCESS();
-    }
 
 
 
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "江门数据上传", notes = "")
+    @Operation(summary = "江门数据上传", description  = "")
     @PostMapping("/posts")
     public ResponseResult getposts(@RequestBody String params) throws Exception {
-
-
-//
-//         方法四：安排指定的任务task在指定的时间firstTime开始进行重复的固定速率period执行．
-//         Timer.scheduleAtFixedRate(TimerTask task,Date firstTime,long period)
 
 
 
@@ -300,46 +238,103 @@ public class FaceController {
 
 
         // Date time = calendar.getTime();//获取当前系统时间
+
         Date time= new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         // System.out.println(time+"-------开始时间--------");
-
+        String aid="2ea38fda-4fa2-11ee-affe-c81f66ed2833";
         Timer timer = new Timer();
-        String  sqlDate1 = "2023-09-23 18:00:00";
         timer.scheduleAtFixedRate (new TimerTask() {
             public void run() {
                 try {
-                    for (int i = 1; i < 135; i++) {
+                    Date time= new Date();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String dateUp = format.format(time);
+                    // 数据库有的的数据量
+                    //int UploadQTIEM=faceService.getUploadQTIAE(aid,dateUp);
 
-                        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String time = "2023-09-23 18:00:00";
-                        Date date1 = ft.parse(time);
+                    List<Map<String,Object>> lists =new ArrayList<Map<String,Object>>();
+                    List<Map<String, Object>> listconet = faceService.getImageByActivityIdUP(aid,dateUp);
+                    List<String> listeid=new ArrayList<>();
+                    if(listconet.size()>0){
+                                for (Map<String, Object> simi : listconet) {
+                                    Map<String, Object> simis=new HashMap<>();
+                                    String a=null;
+                                    if( simi.get("fImage")!=null ){
+                                        a =  simi.get("fImage").toString();
+                                    }
 
-                        Date afterDate = new Date(date1 .getTime() + 60000*i);
-                        System.out.println(ft.format(afterDate ));
+                                    //String a1 = "data:image/png;base64," + a;
+                                    //时间
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    java.util.Date date= sdf.parse(simi.get("eDate").toString());
+
+                                    SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    long timestamp = date.getTime();;
+                                    String timestampstr = String.valueOf(timestamp);
+                                    //身份证
+                                    String flagstr="0";
+                                    String tupestr="1";
+                                    String djid="ych20231028001";
+                                    simis.put("park_id", "2ea38fda-4fa2-11ee-affe-c81f66ed2833");
+                                    if( simi.get("tIdentitycard")!=null ){
+                                        simis.put("license", simi.get("tIdentitycard").toString());
+                                    }else{
+                                        simis.put("license","111111111111111111");
+                                    }
+
+                                    simis.put("park", simi.get("aName").toString());
+                                    simis.put("type", tupestr);
+                                    simis.put("entertime", timestampstr);
+                                    simis.put("enter_position",simi.get("eName").toString());
+                                    simis.put("parktime",timestampstr);
+                                    simis.put("enter_full_img", a);
+                                    simis.put("flag", flagstr);
+                                    simis.put("djid", djid);
+                                    simis.put("leave_position", simi.get("tQrcard").toString());
+
+                                    listeid.add( simi.get("eId").toString());
+                                    lists.add(simis);
+                                }
+
+                                String appid= "lykgyadxhych440703";
+                                String times= Timestamp();
+                                String secretKey= "phillam123";
+
+                                JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
 
 
-                        String time1 = ft.format(afterDate);
+                                String signature= times  +"&"+ appid   +"&"+ secretKey;
+                                //String url = "http://127.0.0.1:5000/register";
+                                String url = "http://202.104.200.83:8314/api/tccxx/b_pj_tccxxs/addTccxx";
 
-                        Date date2 = ft.parse(time1);
-                        Date afterDate1 = new Date(date2 .getTime() + 60000);
-                        String time2 = ft.format(afterDate1);
+                                //LinkedMultiValueMap一个键对应多个值，对应format-data的传入类型
+                               // LinkedMultiValueMap<String,Object> request = new LinkedMultiValueMap<>();
 
-                        String  sqlDate = format.format(getTime1());;
-                        System.out.println("format : " +time2+"-------任务执行开始时间--------");
-                        String  sqlDateformerly = format.format(getTime2());
-                        System.out.println("format : " +time1+"-------任务执行以前时间--------");
-                        postdate( time2,  time1);
-                    }
-//                    String  sqlDate = format.format(getTime1());;
-//                    System.out.println("format : " +sqlDate+"-------任务执行开始时间-------");
-//                    String  sqlDateformerly = format.format(getTime2());
-//                    System.out.println("format : " +sqlDateformerly+"-------任务执行以前时间--------");
-//                    postdate( sqlDate, sqlDateformerly );
-//                    Thread.sleep(500);
 
+                                // 加密
+                                String  hex256= SHACoder.encodeSHA256Hex(signature);
+
+                                //  System.out.println(request);
+                                // json数据
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("appid",appid);
+                                jsonObject.put("timestamp",times);
+                                jsonObject.put("signature", hex256);
+                                jsonObject.put("data",array);
+
+                                faceService.sendSsmUP(restTemplate,url,jsonObject,String.class,listeid,aid);
+                        //   sendSsmUP(restTemplate,url,jsonObject,String.class,listeid,aid);
+                                //String result = restTemplate.postForObject(url,jsonObject,String.class);
+                                // JSONObject JSONArray=  JSONObject.parseObject(result);
+                                // faceService.getUploadQTIAEW(aid,listeid);
+
+                                // 重试数据上传
+                               //
+//                                //请求
+//                                String result = restTemplate.postForObject(url,jsonObject,String.class);
+                            }
+                    System.out.println("成功"+new Date()+"+++++++++++++++上传数据:"+listeid.size());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -351,9 +346,26 @@ public class FaceController {
         return ResponseResult.SUCCESS(1);
     }
 
+    @Retryable(value = ResourceAccessException.class, maxAttempts = 4,backoff = @Backoff(delay = 1000L, multiplier = 2))
+    public JSONObject sendSsmUP(RestTemplate restTemplate12, String url, JSONObject jsonObject, Class<String> Str,List<String> listeid ,String aid) {
+
+        String result="1";
+        System.out.print(result);
+
+        try {
+            result = restTemplate.postForObject(url, jsonObject, String.class);
+        }catch (Exception e){
+            System.out.println("异常："+e);
+        }
+
+        JSONObject JSONArray = JSONObject.parseObject(result);
+        faceService.getUploadQTIAEW(aid, listeid);
+        return JSONArray;
+    }
+
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "惠州人脸数据上传", notes = "")
+    @Operation(summary = "惠州人脸数据上传", description  = "")
     @PostMapping("/huiZhouPosts")
     public ResponseResult getPostsForHuizhou(@RequestBody String params) throws Exception {
 
@@ -511,97 +523,7 @@ public class FaceController {
         return 0;
     }
 
-    public int postdate( String  sqlDate,String  sqlDateformerly) throws Exception {
 
-        List<Map<String,Object>> lists =new ArrayList<Map<String,Object>>();
-        String aid="2ea38fda-4fa2-11ee-affe-c81f66ed283312";
-        List<Map<String, Object>> listconet = faceService.getImageByActivityId(aid,sqlDate,sqlDateformerly);
-
-        if(listconet.size()>0){
-            List<Map<String, Object>> list1 = faceService.getImageByActivityId(aid,sqlDate,sqlDateformerly);
-            for (Map<String, Object> simi : list1) {
-                Map<String, Object> simis=new HashMap<>();
-                //图片
-                //String a = new String((byte[]) simi.get("fImage"));
-
-                String a =  simi.get("fImage").toString();
-                //String a1 = "data:image/png;base64," + a;
-                //时间
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                java.util.Date date= sdf.parse(simi.get("eDate").toString());
-                SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                long timestamp = date.getTime();;
-                String timestampstr = String.valueOf(timestamp);
-                //身份证
-                String flagstr="0";
-                String tupestr="1";
-                String djid="ych20230923001";
-                simis.put("park_id", "Black-045011c63f6f432b969004b259163478");
-                if( simi.get("tIdentitycard")!=null ){
-                    simis.put("license", simi.get("tIdentitycard").toString());
-                }else{
-                    simis.put("license","111111111111111111");
-                }
-
-                simis.put("park", simi.get("aName").toString());
-                simis.put("type", tupestr);
-                simis.put("entertime", timestampstr);
-                simis.put("enter_position",simi.get("eName").toString());
-                simis.put("parktime",timestampstr);
-                simis.put("enter_full_img", a);
-                simis.put("flag", flagstr);
-                simis.put("djid", djid);
-                simis.put("leave_position", simi.get("tQrcard").toString());
-
-                lists.add(simis);
-            }
-
-            String appid= "djyyh440703";
-            String times= Timestamp();
-            String secretKey= "dearjane123";
-
-            JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
-
-
-            String signature= times  +"&"+ appid   +"&"+ secretKey;
-            //String url = "http://127.0.0.1:5000/register";
-            String url = "http://202.104.200.83:8314/api/tccxx/b_pj_tccxxs/addTccxx";
-
-            //LinkedMultiValueMap一个键对应多个值，对应format-data的传入类型
-            LinkedMultiValueMap<String,Object> request = new LinkedMultiValueMap<>();
-
-
-            // 加密
-            String  hex256= SHACoder.encodeSHA256Hex(signature);
-            //入参
-//        request.set("appid",appid);
-//        request.set("timestamp",times);
-//        request.set("signature", hex256);
-//        request.set("data",array);
-
-
-            //  System.out.println(request);
-            // json数据
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("appid",appid);
-            jsonObject.put("timestamp",times);
-            jsonObject.put("signature", hex256);
-            jsonObject.put("data",array);
-
-//            System.out.println("String.valueOf(jsonObject)"+String.valueOf(jsonObject));
-
-
-            //请求
-            String result = restTemplate.postForObject(url,jsonObject,String.class);
-            System.out.println("成功"+new Date());
-        }
-
-
-       /* ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, request, String.class);
-        System.out.println("responseEntity.getBody() = " + responseEntity.getBody());*/
-
-        return 0;
-    }
 
 
 
@@ -622,7 +544,7 @@ public class FaceController {
 //        System.out.println("当前时间戳（h秒）：" + timestampSeconds);
 
         //输出时间戳（毫秒）
-        System.out.println("当前时间戳（h秒）：" + timestamp);
+       // System.out.println("当前时间戳（h秒）：" + timestamp);
 
         return String.valueOf(timestamp);
     }

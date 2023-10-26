@@ -48,6 +48,40 @@
                 GROUP BY e.Activityname-->
     </select>
 
+    <select id="getEachexageCount" resultType="java.util.Map">
+        SELECT
+        (
+        CASE
+        WHEN age &lt; 18 THEN
+        '18岁以下'
+        WHEN age &lt; 30 THEN
+        '18-29岁'
+        WHEN age &lt; 40 THEN
+        '30-39岁'
+        WHEN age &lt; 50 THEN
+        '40-49岁'
+        WHEN age &lt; 60 THEN
+        '50-59岁'
+        WHEN age &lt; 70 THEN
+        '60-69岁'
+        ELSE
+        '70岁以上'
+        END
+        ) AS age_range,
+        COUNT(age) AS count
+        FROM
+        (
+        SELECT
+        (
+        DATE_FORMAT(NOW(), '%Y') - SUBSTRING(tIdentitycard, 7, 4)
+        ) AS age
+        FROM
+        enter   WHERE aId=#{vaId} and TO_DAYS(eDate)=TO_DAYS(NOW())
+        ) AS a
+        GROUP BY age_range
+        order by  age_range  asc
+    </select>
+
     <select id="getTempCount" resultType="java.util.Map">
         SELECT
             (

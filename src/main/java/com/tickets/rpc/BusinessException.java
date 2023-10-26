@@ -1,7 +1,9 @@
 package com.tickets.rpc;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper=false)
 @Data
 public class BusinessException extends RuntimeException {
     private ErrorCode errorCode;

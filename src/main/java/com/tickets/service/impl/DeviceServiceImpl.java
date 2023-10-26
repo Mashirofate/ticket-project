@@ -6,10 +6,10 @@ import com.tickets.entity.Devices;
 import com.tickets.mapper.AisleMapper;
 import com.tickets.mapper.DeviceMapper;
 import com.tickets.service.DeviceService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 

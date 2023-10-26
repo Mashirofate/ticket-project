@@ -6,18 +6,18 @@ import com.tickets.dto.TicketingAddDto;
 import com.tickets.dto.TicketingStaffSearchDto;
 import com.tickets.service.TicketingStaffService;
 import com.tickets.utils.ExcelUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "活动接口")
+@Tag(name= "活动接口")
 @RestController
 @RequestMapping("/ts")
 public class TicketingStaffController {
@@ -26,19 +26,20 @@ public class TicketingStaffController {
     private TicketingStaffService ticketingStaffService;
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "场馆条件搜索", notes = "")
+    @Operation(summary = "场馆条件搜索", description  = "")
     @GetMapping("/search")
     public ResponseResult search(TicketingStaffSearchDto ticketingStaffSearchDto) {
         return ResponseResult.SUCCESS(ticketingStaffService.getByKeys(ticketingStaffSearchDto));
     }
     @Authentication(required = false)
-    @ApiOperation(value = "下载批量导入票务信息模板", notes = "")
+    @Operation(summary = "下载批量导入票务信息模板", description  = "")
     @GetMapping("/model/download")
     public void modelDownload(HttpServletResponse response) throws IOException {
+
         ticketingStaffService.exportExcel(response);
     }
     @Authentication(required = false)
-    @ApiOperation(value = "批量添加用户", notes = "需要下载固定的模板")
+    @Operation(summary = "批量添加用户", description  = "需要下载固定的模板")
     @PostMapping("/addBatch")
     public ResponseResult addBatch(@RequestParam("file") MultipartFile file, @RequestParam String aId) {
 
@@ -51,7 +52,7 @@ public class TicketingStaffController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "添加一个用户")
+    @Operation(summary = "添加一个用户")
     @PostMapping("/add")
     public ResponseResult add(@RequestBody TicketingAddDto ticketingAddDto) {
         ticketingStaffService.install(ticketingAddDto);
@@ -59,7 +60,7 @@ public class TicketingStaffController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "更新入口", notes = "")
+    @Operation(summary = "更新入口", description  = "")
     @PostMapping("/update")
     public ResponseResult update(@RequestBody TicketingAddDto ticketingAddDto) {
         ticketingStaffService.update(ticketingAddDto);
@@ -69,7 +70,7 @@ public class TicketingStaffController {
 
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "删除票务人员", notes = "根据tid删除")
+    @Operation(summary = "删除票务人员", description  = "根据tid删除")
     @DeleteMapping("/{tid}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult delT(@PathVariable String tid) {
         ticketingStaffService.remove(tid);
@@ -77,7 +78,7 @@ public class TicketingStaffController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除票务人员", notes = "根据tid删除")
+    @Operation(summary = "批量删除票务人员", description  = "根据tid删除")
     @DeleteMapping("/s/{ids}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult delTs(@PathVariable String ids) {
         String[] activies =ids.split(",");

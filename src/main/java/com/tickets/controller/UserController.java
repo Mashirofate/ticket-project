@@ -2,30 +2,24 @@ package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.*;
-import com.tickets.entity.User;
 import com.tickets.exception.BizException;
 import com.tickets.service.UserService;
-import com.tickets.utils.ExcelUtils;
 import com.tickets.utils.JwtUtil;
-import io.jsonwebtoken.Jwt;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Result;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = "用户接口")
+@Tag(name= "用户接口")
 @RestController
 @RequestMapping("/u")
 public class UserController {
@@ -36,7 +30,7 @@ public class UserController {
     private HttpServletRequest httpServletRequest;
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "创建一个用户")
+    @Operation(summary = "创建一个用户")
     @PostMapping("/add")
     public ResponseResult add(@RequestBody UserSinInDto userSinInDto) {
         userService.save(userSinInDto);
@@ -44,7 +38,7 @@ public class UserController {
     }
 
     @Authentication(required = true)
-    @ApiOperation(value = "用户登录")
+    @Operation(summary = "用户登录")
     @PostMapping("/login")
     public ResponseResult login(@RequestBody LoginDto loginDto) {
         String uId = userService.isLogin(loginDto.getUsername(), loginDto.getPassword());
@@ -58,7 +52,7 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "用户推出登录")
+    @Operation(summary = "用户推出登录")
     @PostMapping("/logout")
     public ResponseResult logout() {
 
@@ -66,7 +60,7 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "获取用户信息", notes = "前提是以通过 /login接口获得了token信息，且请求头携带了token信息。")
+    @Operation(summary = "获取用户信息", description  = "前提是以通过 /login接口获得了token信息，且请求头携带了token信息。")
     @GetMapping("/info")
     public ResponseResult info() {
         String id = (String) httpServletRequest.getAttribute("id");
@@ -87,14 +81,14 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "用户条件搜索")
+    @Operation(summary = "用户条件搜索")
     @GetMapping("/search")
     public ResponseResult search(UserSeachDto seachDto) {
         return ResponseResult.SUCCESS(userService.getByKeys(seachDto));
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "删除用户", notes = "根据uId删除")
+    @Operation(summary = "删除用户", description  = "根据uId删除")
     @DeleteMapping("/{uId}")
     public ResponseResult delById(@PathVariable String uId) {
         userService.remove(uId);
@@ -102,7 +96,7 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "更新用户", notes = "")
+    @Operation(summary = "更新用户", description  = "")
     @PostMapping("/update")
     public ResponseResult updateVenue(@RequestBody UserSinInDto userSinInDto) {
         userService.update(userSinInDto);
@@ -111,7 +105,7 @@ public class UserController {
 
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "下载批量导入用户模板", notes = "")
+    @Operation(summary = "下载批量导入用户模板", description  = "")
     @GetMapping("/model/download")
     public void modelDownload(HttpServletResponse response) throws IOException {
         //表头数据
@@ -157,7 +151,7 @@ public class UserController {
 
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "批量添加用户", notes = "需要下载固定的模板")
+    @Operation(summary = "批量添加用户", description  = "需要下载固定的模板")
     @PostMapping("/addBatch")
     public ResponseResult addBatch(@RequestParam("file") MultipartFile file) {
 //        ArrayList<ArrayList<String>> analysis = ExcelUtils.analysis(file);
@@ -166,7 +160,7 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除用户", notes = "根据uId删除")
+    @Operation(summary = "批量删除用户", description  = "根据uId删除")
     @DeleteMapping("/batch")
     public ResponseResult delByIds(@RequestParam String ids) {
         String[] uIds = ids.split(",");
@@ -175,7 +169,7 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "更新用户的状态", notes = "")
+    @Operation(summary = "更新用户的状态", description  = "")
     @PutMapping("/{uId}/{uStartusing}")
     public ResponseResult updateStartusing(@PathVariable String uId, @PathVariable String uStartusing) {
         userService.updateStartusing(uId, uStartusing);
@@ -183,7 +177,7 @@ public class UserController {
     }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @ApiOperation(value = "判断用户名是否存在")
+    @Operation(summary  = "判断用户名是否存在")
     @GetMapping("/is/{uUser}")
     public ResponseResult isUUserExist(@PathVariable String uUser) {
         return ResponseResult.SUCCESS(userService.isUUserExist(uUser));

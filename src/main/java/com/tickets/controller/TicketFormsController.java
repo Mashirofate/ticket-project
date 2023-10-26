@@ -4,8 +4,8 @@ package com.tickets.controller;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.ResponseResult;
 import com.tickets.service.TicketFormsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Api(tags = "报表接口")
+@Tag(name = "报表接口")
 @RestController
 @RequestMapping("/tf")
 public class TicketFormsController {
@@ -26,7 +26,7 @@ public class TicketFormsController {
 
 
     @Authentication(required = false)
-    @ApiOperation(value = "查询人数情况", notes = "根据aId活动ID查询")
+    @Operation(summary = "查询人数情况", description  = "根据aId活动ID查询")
     @GetMapping("/{aId}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult getNumber(@PathVariable String aId) {
 
@@ -86,7 +86,7 @@ public class TicketFormsController {
     }
 
     @Authentication(required = false)
-    @ApiOperation(value = "查询人数入场人流数情况", notes = "根据aId查询")
+    @Operation(summary = "查询人数入场人流数情况", description  = "根据aId查询")
     @GetMapping("/s/{aId}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult getSum(@PathVariable String aId) throws ParseException {
 
@@ -178,7 +178,7 @@ public class TicketFormsController {
 
 
     @Authentication(required = false)
-    @ApiOperation(value = "查询人数入场人流数情况", notes = "根据aId查询")
+    @Operation(summary = "查询人数入场人流数情况", description  = "根据aId查询")
     @GetMapping("/Totality/{aId}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult getTotality(@PathVariable String aId) throws ParseException {
 
@@ -217,7 +217,7 @@ public class TicketFormsController {
 
 
     @Authentication(required = false)
-    @ApiOperation(value = "查询出场人员总数", notes = "根据aId查询")
+    @Operation(summary = "查询出场人员总数", description  = "根据aId查询")
     @GetMapping("/getHeadcount/{aId}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult getHeadcount (@PathVariable String aId) throws ParseException {
 
@@ -260,7 +260,7 @@ public class TicketFormsController {
     }
 
     @Authentication(required = false)
-    @ApiOperation(value = "查询人数出场人流数情况", notes = "根据aId查询")
+    @Operation(summary = "查询人数出场人流数情况", description  = "根据aId查询")
     @GetMapping("/HeadExport/{aId}")  // 不同的情求  DeleteMapping 需要更改要不会产生跨域问题
     public ResponseResult getExportSum(@PathVariable String aId) throws ParseException {
         List<Map<String, Object>> rows=new ArrayList<>();

@@ -2,9 +2,9 @@ package com.tickets.service.impl;
 
 import com.tickets.mapper.TurnoutMapper;
 import com.tickets.service.TurnoutService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;

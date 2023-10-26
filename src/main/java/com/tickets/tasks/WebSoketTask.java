@@ -7,7 +7,6 @@ import com.tickets.service.*;
 import com.tickets.socket.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -465,6 +464,9 @@ public class WebSoketTask {
                     // 获取各个出口的人数
                     List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
 
+                    // 各个年龄段的人数
+                    List<Map<String, Object>> EachexageList = entranceManagementService.getEachexageCount(vaId);
+
                     List enterListname = new ArrayList<>();
                     List enterListvalue = new ArrayList<>();
                     List outList = new ArrayList<>();
@@ -497,7 +499,21 @@ public class WebSoketTask {
 
                     }
 
+                    List ageListname = new ArrayList<>();
+                    List ageListvalue = new ArrayList<>();
+                    if (EachexageList!=null & EachexageList.size()>0)
+                    {
+                        for (int i = 0; i < EachexageList.size(); i++) {
+                            for (Map.Entry<String, Object> entry : EachexageList.get(i).entrySet()) {
+                                if("age_range".equals(entry.getKey())){
+                                    ageListname.add(entry.getValue());
+                                }else{
+                                    ageListvalue.add(entry.getValue());
+                                }
+                            }
+                        }
 
+                    }
 
 
                     rest.put("enterListname", enterListname);
@@ -505,7 +521,8 @@ public class WebSoketTask {
                     rest.put("outListname", outListname);
                     rest.put("outListvalue", outListvalue);
 
-
+                    rest.put("ageListname", ageListname);
+                    rest.put("ageListvalue", ageListvalue);
 
 
 
@@ -529,7 +546,7 @@ public class WebSoketTask {
    *设备情况表
    *
    */
-   @Scheduled(fixedRate = 2 * 1000)
+
     public void UnitTypeTimeEnterData() throws IOException {
         List<String> vaIds = UnitTypeTimeService.vaIds;
        if(vaIds!=null & vaIds.size()>0) {

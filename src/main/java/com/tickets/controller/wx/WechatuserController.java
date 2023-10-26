@@ -5,16 +5,15 @@ import com.tickets.dto.ResponseResult;
 import com.tickets.dto.WeCharUserinfoAddDto;
 import com.tickets.service.WeCharUserinfoService;
 import com.tickets.utils.JwtUtil;
-import io.jsonwebtoken.Claims;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = "微信用户权限接口")
+@Tag(name = "微信用户权限接口")
 @RestController
 @RequestMapping("/wechat/user")
 public class WechatuserController {

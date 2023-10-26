@@ -1,6 +1,7 @@
 package com.tickets.exception;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -8,6 +9,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper=true)
 public class BizException extends RuntimeException {
 
     /**

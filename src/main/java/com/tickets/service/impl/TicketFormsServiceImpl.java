@@ -2,10 +2,9 @@ package com.tickets.service.impl;
 
 import com.tickets.mapper.TicketFormsMapper;
 import com.tickets.service.TicketFormsService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

@@ -6,10 +6,10 @@ import com.tickets.dto.VenueMgDto;
 import com.tickets.entity.VenueManagement;
 import com.tickets.mapper.VenueManagementMapper;
 import com.tickets.service.VenueManagementService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 

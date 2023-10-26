@@ -7,8 +7,8 @@ import com.tickets.dto.ResponseResult;
 import com.tickets.service.FaceService;
 import com.tickets.service.TicketingStaffService;
 import com.tickets.service.VenueActiviesService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "微信用户权限接口")
+@Tag(name = "微信用户权限接口")
 @RestController
 @RequestMapping("/wechat/activity")
 public class ActivityController {
@@ -34,7 +34,7 @@ public class ActivityController {
 
     // required =  false  @GetMapping("/open")
     @Authentication(required = true)
-    @ApiOperation(value = "启用的活动")
+    @Operation(summary = "启用的活动")
     @PostMapping("/open")
     public ResponseResult openActivies(@RequestBody String x) {
         String s =x;
@@ -72,14 +72,14 @@ public class ActivityController {
     }
 
     @Authentication(required = false)
-    @ApiOperation(value = "根据id获取活动信息")
+    @Operation(summary = "根据id获取活动信息")
     @GetMapping("/")
     public ResponseResult getByVaId(@RequestParam String aId) {
         return ResponseResult.SUCCESS(venueActiviesService.getByVaId(aId));
     }
 
     @Authentication(required = true)
-    @ApiOperation(value = "根据id获取活动信息")
+    @Operation(summary = "根据id获取活动信息")
     @PostMapping("/binding")
     public ResponseResult getbindingaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String datei) {
         // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
@@ -117,7 +117,7 @@ public class ActivityController {
 
 
     @Authentication(required = true)
-    @ApiOperation(value = "根据id获取活动票务标准中的身份证信息，并返回身份证信息    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
+    @Operation(summary = "根据id获取活动票务标准中的身份证信息，并返回身份证信息    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
     @PostMapping("/applet")
     public ResponseResult getbindingapplet(@RequestBody String jsonstr) {
         // json传输过来的活动id和已有身份证信息的条数
@@ -145,7 +145,7 @@ public class ActivityController {
     }
 
     @Authentication(required = true)
-    @ApiOperation(value = "接受上传的入场记录    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
+    @Operation(summary = "接受上传的入场记录    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
     @PostMapping("/Entryrecord")
     public ResponseResult getbindEntryrecord(@RequestBody String jsonstr) {
         // json传输过来的活动id和已有身份证信息的条数

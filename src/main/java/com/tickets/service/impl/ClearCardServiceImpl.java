@@ -1,15 +1,15 @@
 package com.tickets.service.impl;
 
-import com.tickets.dto.*;
-import com.tickets.entity.Devices;
+import com.tickets.dto.ClearCardAddDto;
+import com.tickets.dto.ClearCardSearchDto;
+import com.tickets.dto.Page;
 import com.tickets.entity.Frontinfo;
 import com.tickets.mapper.ClearCardMapper;
-import com.tickets.mapper.DeviceMapper;
 import com.tickets.service.ClearCardService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Service

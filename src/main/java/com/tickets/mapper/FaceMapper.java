@@ -16,6 +16,8 @@ public interface FaceMapper {
     @MapKey("")
     List<Map<String, Object>> getImageByActivityId(String aId,String  sqlDate,String  sqlDateformerly);
     @MapKey("")
+    List<Map<String, Object>> getImageByActivityIdUP(String aid, String dateUp);
+    @MapKey("")
     List<Map<String, Object>> getEntryrecord(String aId,String  sqlDate,String  sqlDateformerly);
     @MapKey("")
     List<Map<String, Object>> getImageByActivityIdcount(String aId,String  sqlDate,String  sqlDateformerly);
@@ -31,6 +33,9 @@ public interface FaceMapper {
     List<String> selectKeyByActivityId(String aId, String date, String healthCode);
 
     int Queryquantity(String aid);
-
+    int getUploadQTIAE(String aid,String dateUp);
+    List<String> getUploadQuantity(String aid);
     int upquantity(String tId, String tIdentitycard);
+
+    int getUploadQTIAEW(String aid, List<String>  UploadQuantity);
 }

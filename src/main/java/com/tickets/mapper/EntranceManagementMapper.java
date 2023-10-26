@@ -13,6 +13,9 @@ public interface EntranceManagementMapper {
     int insert(EntranceManagement entranceManagement);
     @MapKey("")
     List<Map<String,Object>> selectEntrancePeopleCount(String vaId);
+
+    @MapKey("")
+    List<Map<String,Object>> getEachexageCount(String vaId);
     @MapKey("")
     List<Map<String, Object>> selectByKeys(EntranceManagementSearchDto entranceManagementSearchDto);
 

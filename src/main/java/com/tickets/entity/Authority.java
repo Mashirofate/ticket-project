@@ -1,14 +1,12 @@
 package com.tickets.entity;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
-import java.util.UUID;
-@ApiModel
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+@Schema
 @Data
 public class Authority {
-    @ApiModelProperty(hidden = true)
+    @Schema(hidden = true)
     private String aId;
     private String aName;
     private String aNote;

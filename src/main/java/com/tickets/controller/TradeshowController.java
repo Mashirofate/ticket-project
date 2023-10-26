@@ -1,20 +1,17 @@
 package com.tickets.controller;
 
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.*;
-import com.tickets.service.EntersService;
-import com.tickets.service.EntranceManagementService;
+import com.tickets.dto.ResponseResult;
+import com.tickets.dto.TradeshowPartDto;
 import com.tickets.service.TradeshowService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
-
-@Api(tags = "入场记录接口")
+@Tag(name= "入场记录接口")
 @RestController
 @RequestMapping("/tc")
 public class TradeshowController {
@@ -23,7 +20,7 @@ public class TradeshowController {
     private TradeshowService tradeshowService;
 
     @Authentication(required = true)
-    @ApiOperation(value = "传入数据接口", notes = "")
+    @Operation(summary = "传入数据接口", description  = "")
     @PostMapping("/add")
     public ResponseResult addVenue( String tQrcard,String tType,String aId  ) {
         TradeshowPartDto tradeshowPartDto =new TradeshowPartDto();

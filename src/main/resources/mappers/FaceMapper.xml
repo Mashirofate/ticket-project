@@ -9,6 +9,14 @@
         WHERE tid=#{tId}
 
     </update>
+    <update id="getUploadQTIAEW" >
+        UPDATE enter  SET dWorker = 1
+        WHERE aid=#{aidset}
+        AND eId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
 
 
     <select id="queryFace" resultType="java.util.Map">
@@ -20,6 +28,16 @@
         WHERE taId = #{aId}
     </select>
 
+    <select id="getUploadQTIAE" resultType="java.lang.Integer">
+        SELECT COUNT(eId)  from enter
+        WHERE  eDate between   DATE_FORMAT(NOW(),'%Y-%m-%d 00:00:00')  and #{dateUp}
+        AND aId=#{aid}
+    </select>
+
+    <select id="getUploadQuantity" resultType="java.lang.String">
+        SELECT tr.UploadQuantity FROM tradeshow AS tr WHERE tr.taid=#{aId}
+
+    </select>
 
     <select id="queryTicketing" resultType="java.util.Map">
         SELECT
@@ -73,12 +91,20 @@
     <select id="getImageByActivityId" resultType="java.util.Map">
         SELECT eId,aName,eName,tIdentitycard,tQrcard,eDate,CONVERT( fImage USING utf8 )  fImage from enter
         WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
-          AND aId=#{aId}
+        AND aId=#{aId}
+    </select>
+
+
+    <select id="getImageByActivityIdUP" resultType="java.util.Map">
+        SELECT eId,aName,eName,tIdentitycard,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,CONVERT( fImage USING utf8 )  fImage from enter
+        WHERE  eDate between  DATE_FORMAT(NOW(),'%Y-%m-%d 00:00:00') and #{dateUp}
+        AND aId=#{aid}
+        AND dWorker = 0
     </select>
     <select id="getEntryrecord" resultType="java.util.Map">
         SELECT eId,aId,aName,vName,eName,tQrcard,tIdentitycard,tQrcard,eDate,tId ,dWorker,temp,autonym  from enter
         WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
-          AND aId=#{aId}
+        AND aId=#{aId}
 
     </select>
 
@@ -86,7 +112,7 @@
     <select id="getImageByActivityIdcount" resultType="java.util.Map">
         SELECT COUNT(eId) from enter
         WHERE eDate between #{sqlDateformerly} and #{sqlDate}
-          AND aId=#{aId}
+        AND aId=#{aId}
     </select>
 
     <select id="selectImageByActivityIdsAbnormal" resultType="java.util.Map">

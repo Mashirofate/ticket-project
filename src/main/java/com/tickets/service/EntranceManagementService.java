@@ -3,7 +3,6 @@ package com.tickets.service;
 import com.tickets.dto.EntranceManagementAddDto;
 import com.tickets.dto.EntranceManagementSearchDto;
 import com.tickets.dto.Page;
-import com.tickets.entity.EntranceManagement;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ public interface EntranceManagementService {
      * @return
      */
     List<Map<String,Object>> getEntrancePeopleCount(String vaId);
-
+    List<Map<String,Object>> getEachexageCount(String vaId);
 
     Page getByKeys(EntranceManagementSearchDto entranceManagementSearchDto);
 

@@ -4,8 +4,8 @@ import com.tickets.annotations.Authentication;
 import com.tickets.dto.*;
 import com.tickets.entity.Aisle;
 import com.tickets.service.DeviceService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "设备ip接口")
+@Tag(name = "设备ip接口")
 @RestController
 @RequestMapping("/de")
 public class DeviceController {
@@ -29,7 +29,7 @@ public class DeviceController {
     private DeviceService deviceService;
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "设备ip条件搜索", notes = "")
+    @Operation(summary = "设备ip条件搜索", description  = "")
     @GetMapping("/search")
     public ResponseResult search(DeviceSearchDto deviceSearchDto) throws IOException {
 
@@ -57,7 +57,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "创建设备ip", notes = "")
+    @Operation(summary = "创建设备ip", description  = "")
     @PostMapping("/add")
     public ResponseResult addDevice(@RequestBody DeviceAddDto deviceAddDto) {
         deviceService.save(deviceAddDto);
@@ -66,7 +66,7 @@ public class DeviceController {
 
 //    手动装配
 //    @Authentication(isLogin = true, isRequiredUserInfo = true)
-//    @ApiOperation(value = "更新设备ip")
+//    @Operation(summary = "更新设备ip")
 //    @PostMapping("/update")
 //    public ResponseResult updatDevice(@RequestBody Map map) {
 //        DeviceAddDto deviceAddDto = new DeviceAddDto();
@@ -78,7 +78,7 @@ public class DeviceController {
 //    }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "更新设备ip")
+    @Operation(summary = "更新设备ip")
     @PostMapping("/update")
     public ResponseResult updatDevice(@RequestBody DeviceAddDto deviceAddDto) {
         deviceService.update(deviceAddDto);
@@ -86,7 +86,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "删除设备ip")
+    @Operation(summary = "删除设备ip")
     @DeleteMapping("/{did}")
     public ResponseResult delById(@PathVariable String did) {
         deviceService.delById(did);
@@ -136,7 +136,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "同步在线设备的数据ip")
+    @Operation(summary = "同步在线设备的数据ip")
     @PostMapping("/synchrodata")
     public ResponseResult synchrodata(@RequestBody  List <Map<String, Object>> list ) {
         int j=0;
@@ -194,7 +194,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除设备ip")
+    @Operation(summary = "批量删除设备ip")
     @DeleteMapping("/s/{ids}")
     public ResponseResult delByIds(@PathVariable String ids) {
         String[] activies = ids.split(",");
@@ -205,7 +205,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "区域通道条件搜索", notes = "")
+    @Operation(summary = "区域通道条件搜索", description  = "")
     @GetMapping("/searchai")
     public ResponseResult searchai(AisleSearchDto aisleSearchDto) throws IOException {
 
@@ -233,7 +233,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "删除区域通道")
+    @Operation(summary = "删除区域通道")
     @DeleteMapping("/saii/{aid}")
     public ResponseResult deaiById(@PathVariable String aid) {
         deviceService.deaiById(aid);
@@ -241,7 +241,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "批量删除区域通道")
+    @Operation(summary = "批量删除区域通道")
     @DeleteMapping("/sai/{ids}")
     public ResponseResult delaiByIds(@PathVariable String ids) {
         String[] activies = ids.split(",");
@@ -252,7 +252,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "更新区域通道")
+    @Operation(summary = "更新区域通道")
     @PostMapping("/updateai")
     public ResponseResult updatai(@RequestBody Aisle aisle) {
         deviceService.updateai(aisle);
@@ -260,7 +260,7 @@ public class DeviceController {
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @ApiOperation(value = "创建区域通道", notes = "")
+    @Operation(summary = "创建区域通道", description  = "")
     @PostMapping("/addai")
     public ResponseResult addai(@RequestBody  Aisle aisle) {
         deviceService.saveai(aisle);

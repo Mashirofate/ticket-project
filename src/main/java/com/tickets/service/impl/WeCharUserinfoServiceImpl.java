@@ -1,20 +1,17 @@
 package com.tickets.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tickets.dto.WeCharUserinfoAddDto;
 import com.tickets.entity.WecharUser;
 import com.tickets.mapper.WeCharUserinfoMapper;
 import com.tickets.service.WeCharUserinfoService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
-import springfox.documentation.spring.web.json.Json;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Service

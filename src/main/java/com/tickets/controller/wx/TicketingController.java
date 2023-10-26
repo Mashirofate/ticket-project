@@ -4,21 +4,16 @@ import com.tickets.annotations.Authentication;
 import com.tickets.dto.ResponseResult;
 import com.tickets.dto.TicketingSaveDto;
 import com.tickets.service.TicketingStaffService;
-import com.tickets.utils.JwtUtil;
-import io.jsonwebtoken.Claims;
-import io.swagger.annotations.Api;
-import org.apache.poi.ss.formula.functions.T;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "微信票务接口")
+@Tag(name = "微信票务接口")
 @RestController
 @RequestMapping("/wechat/ts")
 public class TicketingController {

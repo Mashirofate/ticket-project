@@ -1,24 +1,33 @@
 package com.tickets.socket;
 
 
+
+
+/*
+* 因为spring3.x版本问题，websocker
+*   spring2.x import javax.websocket.*; 引入的方法
+*   spring3.x import jakarta.websocket.*; 引入的方法
+*
+ */
+
+import jakarta.websocket.OnClose;
+import jakarta.websocket.OnError;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.Session;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
-
-@ServerEndpoint("/RealTimeEnterServer/{vaId}")
+@Scope("prototype")
 @Component
+@ServerEndpoint("/websocket/RealTimeEnterServer/{vaId}")
 public class RealTimeEnterServer {
 
 
@@ -26,6 +35,7 @@ public class RealTimeEnterServer {
      * 保存活动的Id
      */
     public static List<String> vaIds = new ArrayList<>();
+    
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */
@@ -51,6 +61,7 @@ public class RealTimeEnterServer {
         vaIds.add(vaId);
         webSocketMap.remove(vaId);
         webSocketMap.put(vaId, this);
+
     }
 
 

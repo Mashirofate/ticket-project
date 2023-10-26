@@ -3,16 +3,15 @@ package com.tickets.service.impl;
 import com.tickets.dto.Page;
 import com.tickets.dto.UserSeachDto;
 import com.tickets.dto.UserSinInDto;
-import com.tickets.entity.EntranceManagement;
 import com.tickets.entity.User;
 import com.tickets.mapper.UserMapper;
 import com.tickets.service.UserService;
 import com.tickets.utils.PwdUtil;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 

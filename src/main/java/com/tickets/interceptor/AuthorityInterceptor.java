@@ -3,18 +3,16 @@ package com.tickets.interceptor;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.HttpCode;
 import com.tickets.exception.BizException;
-import com.tickets.service.UserService;
 import com.tickets.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class AuthorityInterceptor implements HandlerInterceptor {
@@ -23,8 +21,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
      */
     private static final String TOKEN_KEY = "X-Token";
 
-    @Autowired
-    private UserService userService;
+
 
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -40,6 +37,13 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         }
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
+
+        //判断如果请求的类是swagger的控制器，直接通行。
+        if(handlerMethod.getBean().getClass().getName().equals("springfox.documentation.swagger.web.ApiResourceController")){
+            return  true;
+        }
+
+
         // 获取Controller 参数上的注解
         Authentication methodAnnotation = handlerMethod.getMethodAnnotation(Authentication.class);
         // 没有参数，将会认定接口未开放
@@ -53,7 +57,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         }
         // 判断是否需要登录
         if (methodAnnotation.isLogin()) {
-            String token = request.getHeader("X-Token");
+            String token = request.getHeader(TOKEN_KEY);
            if (StringUtils.isEmpty(token)) {
                 // token不存在
                 throw new BizException().setCode(HttpCode.TOKEN_ERROR.getCode()).setMsg("需要登录");
@@ -69,8 +73,6 @@ public class AuthorityInterceptor implements HandlerInterceptor {
 
         return true;
     }
-
-
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
     }

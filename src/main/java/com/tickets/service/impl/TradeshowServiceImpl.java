@@ -4,10 +4,11 @@ import com.tickets.dto.TradeshowPartDto;
 import com.tickets.entity.Tradeshow;
 import com.tickets.mapper.TradeshowMapper;
 import com.tickets.service.TradeshowService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import javax.annotation.Resource;
+
 
 @Service
 public class TradeshowServiceImpl implements TradeshowService {

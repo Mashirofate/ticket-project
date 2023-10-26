@@ -2,9 +2,9 @@ package com.tickets.service.impl;
 
 import com.tickets.mapper.AdmissionInformatization;
 import com.tickets.service.AdmissionInformationService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;

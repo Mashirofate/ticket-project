@@ -6,10 +6,10 @@ import com.tickets.dto.Page;
 import com.tickets.entity.EntranceManagement;
 import com.tickets.mapper.EntranceManagementMapper;
 import com.tickets.service.EntranceManagementService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +24,10 @@ public class EntranceManagementServiceImpl implements EntranceManagementService 
     public List<Map<String, Object>> getEntrancePeopleCount(String vaId) {
         return entranceManagementMapper.selectEntrancePeopleCount(vaId);
     }
-
+    @Override
+    public List<Map<String, Object>> getEachexageCount(String vaId) {
+        return entranceManagementMapper.getEachexageCount(vaId);
+    }
     @Override
     public Page getByKeys(EntranceManagementSearchDto entranceManagementSearchDto) {
         Page<Map<String, Object>> page = new Page<>();

@@ -6,10 +6,10 @@ import com.tickets.dto.VenueActivieSearchDto;
 import com.tickets.entity.VenueActivies;
 import com.tickets.mapper.VenueActiviesMapper;
 import com.tickets.service.VenueActiviesService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
