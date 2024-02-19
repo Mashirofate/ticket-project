@@ -54,7 +54,7 @@ public class VenueActiviesController { //活动管理
     }
 
     @Authentication(isLogin = true, isRequiredUserInfo = true)
-    @Operation(summary  = "场馆活动条件搜索")
+    @Operation(summary  = "活动条件搜索")
     @GetMapping("/search")
     public ResponseResult search(VenueActivieSearchDto venueActivieSearchDto) {
         return ResponseResult.SUCCESS(venueActiviesService.getByKeys(venueActivieSearchDto));
@@ -64,7 +64,7 @@ public class VenueActiviesController { //活动管理
     @Operation(summary  = "启用的活动")
     @GetMapping("/open")
     public ResponseResult openActivies() {
-        List<Map<String, Object>> list= venueActiviesService.getOpenActivies();
+        List<Map<String, Object>> list= venueActiviesService.getOpenActiviess();
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("activitiyAmount",venueActiviesService.activitiyAmount());

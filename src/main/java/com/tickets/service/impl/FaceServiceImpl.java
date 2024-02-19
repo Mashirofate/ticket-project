@@ -2,6 +2,7 @@ package com.tickets.service.impl;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.tickets.mapper.EntersMapper;
 import com.tickets.mapper.FaceMapper;
 import com.tickets.service.FaceService;
 import jakarta.annotation.Resource;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class FaceServiceImpl implements FaceService {
     @Resource
     private FaceMapper faceMapper;
+    @Resource
+    private EntersMapper entersMapper;
 
     @Override
     public List<Map<String, Object>> getImageByActivityId(String aId,String  sqlDate,String  sqlDateformerly) {
@@ -28,18 +31,43 @@ public class FaceServiceImpl implements FaceService {
     public List<Map<String, Object>> getImageByActivityIdUP(String aid ,String dateUp) {
         return faceMapper.getImageByActivityIdUP(aid,dateUp);
     }
-    public List<Map<String, Object>> getEntryrecord(String aId,String  sqlDate,String  sqlDateformerly) {
-
-        return faceMapper.getEntryrecord(aId,sqlDate,sqlDateformerly);
+    @Override
+    public List<Map<String, Object>> getEntryrecord(String aid ,String dateUp) {
+        return faceMapper.getEntryrecord(aid,dateUp);
     }
 
-    public JSONObject sendSsm(String url, JSONObject jsonObject, Class<String> Str,RestTemplate restTemplate) {
 
-        System.out.print("2");
-        String result = restTemplate.postForObject(url,jsonObject,Str);
+    @Override
+    public List<Map<String, Object>> getEntryrecords(String aid ,String dateUp) {
+        return faceMapper.getEntryrecords(aid,dateUp);
+    }
+    @Override
+    public List<Map<String, Object>> getemploys(String aid ,String dateUp) {
+        List<Map<String, Object>> list =entersMapper.getempssssssssssssssssssssloys(aid,dateUp);
+        return list;
+       // return faceMapper.getemploys(aid,dateUp);
+    }
+    public JSONObject sendSsm( RestTemplate restTemplate, String url, JSONObject jsonObject, Class<String> Str, List<String> listeid , String aid) {
+        System.out.print("入场日志");
+        String result = restTemplate.postForObject(url,jsonObject,String.class);
+
         JSONObject JSONArray=  JSONObject.parseObject(result);
+        for (Map.Entry<String, Object> entry : JSONArray.entrySet()) {
+            if("data".equals(entry.getKey())){
+              int dt= (int) entry.getValue();
+                if(dt==1){
+                    faceMapper.getUploadQTIAEW(aid,listeid);
+                    System.out.println("成功"+new Date() +"+++++++++上传的数据量："+ listeid.size());
+                }else {
+                    System.out.println( "上传失败");
+                }
+              //   System.out.println(entry.getKey() + " : " + entry.getValue());
+            }
+        }
         return JSONArray;
     }
+
+
 
     /**
      * @param restTemplate
@@ -69,6 +97,15 @@ public class FaceServiceImpl implements FaceService {
         return Collections.emptyList();
     }
 
+    /**
+     * @param aId 活动名称
+     * @return 返回数据中有身份证信息的数量
+     */
+    @Override
+    public List<Map<String, Object>> getdomparison(String aId) {
+
+        return faceMapper.getdomparison(aId);
+    }
     public List<Map<String, Object>> getImageByActivityIdsAbnormal(String aId) {
 
         String date = "2023-02-16";
@@ -79,7 +116,6 @@ public class FaceServiceImpl implements FaceService {
         return Collections.emptyList();
     }
     public int getUploadQTIAEW(String aid,List<String>  UploadQuantity) {
-
 
         return faceMapper.getUploadQTIAEW(aid, UploadQuantity);
     }
@@ -98,14 +134,22 @@ public class FaceServiceImpl implements FaceService {
     public List<String> getUploadQuantity(String aid) {
         return faceMapper.getUploadQuantity(aid);
     }
+
     /**
      * @param tId
      * @param tIdentitycard 更新 身份证信息
      */
     @Override
-    public int upquantity(String tId, String tIdentitycard) {
-        return faceMapper.upquantity(tId,tIdentitycard);
+    public int upquantity(String tId, String tIdentitycard,String tRealname) {
+        return faceMapper.upquantity(tId,tIdentitycard,tRealname);
     }
-
+    @Override
+    public int upquantitys(String tId, String tIdentitycard,String tRealname) {
+        Date time= new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String datei = format.format(time);
+        return faceMapper.upquantitys(tId,tIdentitycard,tRealname,datei);
+    }
 
 }

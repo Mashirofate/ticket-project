@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tickets.mapper.EntryrecordMapper">
+
+    <select id="getByEntryrecorddownload" resultType="java.util.Map">
+        SELECT eId ,aId,aName,vName,eName,tIdentitycard,tQrcard,eDate,tId,dWorker,temp,autonym from enter
+        WHERE aId=#{aId}
+        AND not locate(#{ips},dWorker)>0
+        LIMIT 500
+    </select>
+
+    <select id="getByticketingDownloads" resultType="java.util.Map">
+        SELECT tId ,taId,tIdentitycard,tQrcard,tSeatingarea,tRownumber,tSeat,tGrandstand,tRealname,phone from ticketing
+        WHERE taId=#{aId}
+    </select>
+    <update id="getByEntryrecorddownloadlisteid" >
+        UPDATE enter  SET dWorker =  CONCAT(dWorker,#{ips})
+        WHERE aId=#{aId}
+        AND eId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <insert id="installEntryrecord">
+
+        INSERT INTO enter
+        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym)
+        VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},#{aName}, #{eDate}, #{temp}, #{dWorker}, #{tQrcard}, #{tIdentitycard}, #{autonym})
+    </insert>
+
+    <select id="getPermissions" resultType="String">
+        SELECT pPermissions FROM permissions WHERE aId= #{aId}
+    </select>
+    <!-- 插入物品信息 -->
+    <insert id="addMayo">
+        insert into ticketing
+        (
+        tId,
+        taId,
+        tQrcard,
+        tIdentitycard,
+        tData,
+        tNote
+        )
+        values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.tId},
+            #{item.aId},
+            #{item.tQrcard},
+            #{item.tIdentitycard},
+            #{item.time},
+            #{item.tNote}
+            )
+        </foreach>
+
+    </insert>
+    <insert id="installticketing" parameterType="java.util.List">
+        insert into ticketing
+        (
+        tId,
+        taId,
+        tQrcard,
+        tIdentitycard,
+        tSeatingarea,
+        tRownumber,
+        tSeat,
+        tGrandstand,
+        tRealname,
+        phone
+        )
+        values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.tId},
+            #{item.taId},
+            #{item.tQrcard},
+            #{item.tIdentitycard},
+            #{item.tSeatingarea},
+            #{item.tRownumber},
+            #{item.tSeat},
+            #{item.tGrandstand},
+            #{item.tRealname},
+            #{item.phone}
+            )
+        </foreach>
+
+    </insert>
+
+</mapper>

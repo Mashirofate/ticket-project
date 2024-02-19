@@ -50,8 +50,7 @@
                 SELECT COUNT(e.eId) Norealname from
                     (SELECT  eid,tIdentitycard FROM enter AS e
                      WHERE e.aId =#{vaId}
-                       AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
-                     group by e.eId) as e
+                     group by e.eId,e.tIdentitycard) as e
                 WHERE (ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
     </select>
     <select id="selectrealnameCount" resultType="java.util.Map">
@@ -59,8 +58,7 @@
                 SELECT COUNT(e.eId) realname from
                     (SELECT  eid,tIdentitycard FROM enter AS e
                      WHERE e.aId =#{vaId}
-                       AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
-                     group by e.eId) as e
+                     group by e.eId,e.tIdentitycard) as e
                 WHERE NOT(ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
 
     </select>
@@ -129,7 +127,6 @@
                                                  date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
                                                  FROM  enter as e
                                                  WHERE e.aId =#{vaId}
-                                                 AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
                                                  ) as c
                                              GROUP BY  SUBSTR(c.Dates, 1, 15)
                                              ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
@@ -139,7 +136,6 @@
                                                                                          date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
                                                                                          FROM tloe  AS t
                                                                                          WHERE t.teaId =#{vaId}
-                                                                                         AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
                                                                                          ) as c
                                                                                      GROUP BY SUBSTR(c.Dates, 1, 15)
                                                                                      ORDER BY time
@@ -157,7 +153,6 @@
                                              date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
                                              FROM  enter as e
                                              WHERE e.aId =#{vaId}
-                                             AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
                                              ) as c
                                          GROUP BY  SUBSTR(c.Dates, 1, 15)
                                          ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
@@ -167,7 +162,6 @@
                                                                                      date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
                                                                                      FROM tloe  AS t
                                                                                      WHERE t.teaId =#{vaId}
-                                                                                     AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
                                                                                      ) as c
                                                                                  GROUP BY SUBSTR(c.Dates, 1, 15)
                                                                                  ORDER BY time) as o on e.time=o.time
@@ -185,7 +179,7 @@
                                      date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
                                      FROM  enter as e
                                      WHERE e.aId =#{vaId}
-                                     AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+
                                      ) as c
                                  GROUP BY  SUBSTR(c.Dates, 1, 15)
                                  ORDER BY time	) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
@@ -195,7 +189,6 @@
                                                                                  date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
                                                                                  FROM tloe  AS t
                                                                                  WHERE t.teaId =#{vaId}
-                                                                                 AND TO_DAYS(t.teDate)=TO_DAYS(NOW())
                                                                                  ) as c
                                                                              GROUP BY SUBSTR(c.Dates, 1, 15)
                                                                              ORDER BY time

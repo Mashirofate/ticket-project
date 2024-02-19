@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.tickets.dto.VenueActivieAddDto">
         <id column="aId" jdbcType="VARCHAR" property="aId" />
         <result column="aName" jdbcType="VARCHAR" property="aName" />
+        <result column="vName" jdbcType="VARCHAR" property="vName" />
         <result column="aEnable" jdbcType="INTEGER" property="aEnable" />
         <result column="aNote" jdbcType="VARCHAR" property="aNote" />
         <result column="aCreationtime" jdbcType="TIMESTAMP" property="aCreationtime" />
@@ -18,33 +19,56 @@
         <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     </resultMap>
     <sql id="Base_Column_List">
-        aId, aName, aEnable, aNote, aCreationtime, aTicketnumber, aEmployeenumber, aImage, aType,startTime,endTime,updateTime
+       aaId,aId, aName,vName, aEnable, aNote, aCreationtime, aTicketnumber, aEmployeenumber, aImage, aType,startTime,endTime,updateTime
     </sql>
     <insert id="insert">
-        <selectKey keyProperty="aId" resultType="string" order="BEFORE">
-            SELECT uuId()
-        </selectKey>
-        INSERT INTO activity (<include refid="Base_Column_List"/>)
-        VALUES (#{aId}, #{aName}, #{aEnable}, #{aNote}, now(), #{aTicketnumber}, #{aEmployeenumber}, #{aImage},#{aType},#{startTime}, #{endTime}, now())
+        INSERT INTO activity (aId, aName,vName, aEnable, aNote, aCreationtime, aTicketnumber, aEmployeenumber, aImage, aType,startTime,endTime,updateTime)
+        VALUES (#{aId}, #{aName}, #{vName}, #{aEnable}, #{aNote}, now(), #{aTicketnumber}, #{aEmployeenumber}, #{aImage},#{aType},#{startTime}, #{endTime}, now())
     </insert>
+    <insert id="addAM" >
+        insert into entrance
+        (
+        eId,aId,eName,eNote,eEnable
+        )
+        values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.eId},
+            #{item.aId},
+            #{item.eName},
+            #{item.eNote},
+            #{item.eEnable}
+            )
+        </foreach>
 
+    </insert>
     <update id="update">
         UPDATE
         activity
         SET
-        aName= #{aName},aEnable = #{aEnable},aNote=#{aNote},aCreationtime=now(),aTicketnumber=#{aTicketnumber},
+        aId= #{aId},aName= #{aName},vName= #{vName},aEnable = #{aEnable},aNote=#{aNote},aCreationtime=now(),aTicketnumber=#{aTicketnumber},
         aEmployeenumber=#{aEmployeenumber},aImage=#{aImage},aType=#{aType}, startTime=#{startTime}, endTime=#{endTime},
         updateTime=now()
         WHERE
-        aId = #{aId}
+        aaId = #{aaId}
     </update>
 
+    <select id="getdomparison" resultType="java.util.Map">
+        SELECT t.tId as tid,t.tIdentitycard as tIdentitycard,
+               w.tId as wtid,w.tRealname as wtRealname,w.tIdentitycard as wtIdentitycard ,t.tQrcard
+        FROM     ticketing AS t LEFT JOIN ticketing_wechat AS w   ON t.tQrcard= w.tQrcard
+        where  t.taId=#{aId}
 
+    </select>
+    <update id="upquantitys" >
+        UPDATE  ticketing SET tIdentitycard=#{tIdentitycard}, tRealname=#{tRealname},tData=#{datei},tNote=1
+        WHERE tId=#{tId}
+    </update>
     <update id="updateEnable">
         UPDATE activity SET aEnable = #{aEnable},updateTime=now() WHERE aId = #{aId}
     </update>
     <select id="selectByKeys" resultType="java.util.Map">
-    SELECT aId, aName, aNote, IF(aEnable = 0, '删除', IF(aEnable=1,'启用','不启用')) aEnable, aCreationtime, aTicketnumber , aEmployeenumber, aImage, aType, startTime, endTime
+    SELECT aaId ,aId, aName,vName, aNote, IF(aEnable = 0, '删除', IF(aEnable=1,'启用','不启用')) aEnable, aCreationtime, aTicketnumber , aEmployeenumber, aImage, aType, startTime, endTime
     FROM activity
     <trim prefix="WHERE" prefixOverrides="AND |OR ">
         <if test="aName != null and aName.length != 0">
@@ -87,6 +111,18 @@
         SELECT <include refid="Base_Column_List"/>
         FROM activity
         WHERE aEnable = #{enable}
+        and aType="演唱会"
+    </select>
+    <select id="selectByEnables" resultType="java.util.Map">
+        SELECT <include refid="Base_Column_List"/>
+        FROM activity
+        WHERE aEnable = #{enable}
+    </select>
+    <select id="selectByEnableex" resultType="java.util.Map">
+        SELECT <include refid="Base_Column_List"/>
+        FROM activity
+        WHERE aEnable = #{enable}
+        and aType="展会"
     </select>
     <select id="selectByVaId" resultType="java.util.Map">
         SELECT <include refid="Base_Column_List"/>
@@ -94,7 +130,12 @@
         WHERE aId = #{aId}
         LIMIT 1
     </select>
-
+    <select id="selectemVaId" resultType="java.util.Map">
+        SELECT eId,aId,eName,eNote
+        FROM entrance
+        WHERE aId = #{aId}
+        and eEnable=1
+    </select>
     <select id="selectSimple" resultType="java.util.Map">
         SELECT
             aId, aName

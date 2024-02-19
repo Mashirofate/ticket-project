@@ -1,0 +1,4 @@
+2024-01-17 18:43:59.213 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-17 18:43:59.225 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-17 18:44:32.902 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 28940 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-17 18:44:32.904 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"

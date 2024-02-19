@@ -19,22 +19,26 @@ public interface FaceService {
     List<Map<String, Object>> getImageByActivityIdUP(String aid,String dateUp );
     List<String> getUploadQuantity(String aid);
 
-    List<Map<String, Object>> getEntryrecord(String aId,String  sqlDate,String  sqlDateformerly);
-
+    List<Map<String, Object>> getEntryrecord(String aid,String dateUp);
+    List<Map<String, Object>> getEntryrecords(String aid,String dateUp);
+    List<Map<String, Object>> getemploys(String aid,String dateUp);
 
     @Retryable(value = RuntimeException.class,maxAttempts = 10, backoff = @Backoff(value = 2000, multiplier = 2))
-    JSONObject sendSsm(String url, JSONObject jsonObject, Class<String> Str, RestTemplate restTemplate);
+    JSONObject sendSsm(RestTemplate restTemplate ,String url, JSONObject jsonObject, Class<String> Str,List<String> listeid,String aid);
+
+
 
     @Retryable(value = ResourceAccessException.class,maxAttempts = 10, backoff = @Backoff(value = 2000, multiplier = 2))
     JSONObject sendSsmUP(RestTemplate restTemplate ,String url, JSONObject jsonObject, Class<String> Str,List<String> listeid,String aid);
 
 
     List<Map<String, Object>> getImageByActivityIds(String aId);
-
+    List<Map<String, Object>> getdomparison(String aId);
     List<Map<String, Object>> getImageByActivityIdsAbnormal(String aId);
 
     int getUploadQTIAEW(String aid ,List<String>  UploadQuantity);
     int Queryquantity(String aid);
     int getUploadQTIAE(String aid,String dateUp);
-    int upquantity(String tId, String tIdentitycard);
+    int upquantity(String tId, String tIdentitycard,String tRealname);
+    int upquantitys(String tId, String tIdentitycard,String tRealname);
 }

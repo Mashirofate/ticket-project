@@ -1,0 +1,241 @@
+2024-01-26 16:08:21.926 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 20220 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 16:08:21.929 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 16:09:12.730 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 20400 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 16:09:12.731 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 16:09:13.721 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 16:09:13.721 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 16:09:13.784 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 16:09:14.876 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.504 seconds (process running for 3.177)
+2024-01-26 16:09:15.307 [RMI TCP Connection(2)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 16:09:15.332 [RMI TCP Connection(3)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 16:09:23.439 [Druid-ConnectionPool-Create-638743982] INFO  com.alibaba.druid.pool.DruidAbstractDataSource - {dataSource-1} failContinuous is true
+2024-01-26 16:11:39.754 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 16:11:39.754 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 16:11:41.995 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 13276 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 16:11:41.996 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 16:11:42.913 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 16:11:42.913 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 16:11:42.973 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 16:11:44.098 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.43 seconds (process running for 2.833)
+2024-01-26 16:11:44.430 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 16:11:44.455 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 16:11:52.529 [Druid-ConnectionPool-Create-2130782499] INFO  com.alibaba.druid.pool.DruidAbstractDataSource - {dataSource-1} failContinuous is true
+2024-01-26 16:12:42.607 [Druid-ConnectionPool-Create-2130782499] INFO  com.alibaba.druid.pool.DruidAbstractDataSource - {dataSource-1} failContinuous is false
+2024-01-26 16:13:19.002 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 16:13:19.004 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 16:13:20.650 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 20996 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 16:13:20.652 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 16:13:21.585 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 16:13:21.585 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 16:13:21.649 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 16:13:22.793 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.468 seconds (process running for 3.005)
+2024-01-26 16:13:22.989 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 16:13:23.015 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 16:40:00.285 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 16:40:00.288 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 16:40:04.115 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 16020 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 16:40:04.117 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 16:40:05.149 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 16:40:05.149 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 16:40:05.217 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 16:40:06.373 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.621 seconds (process running for 3.094)
+2024-01-26 16:40:06.929 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 16:40:06.953 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 17:33:09.625 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 17:33:09.629 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 17:33:14.213 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 248 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:33:14.214 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:33:15.189 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 17:33:15.189 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 17:33:15.256 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 17:33:16.327 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.483 seconds (process running for 2.899)
+2024-01-26 17:33:16.670 [RMI TCP Connection(2)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 17:33:16.695 [RMI TCP Connection(3)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 17:47:27.374 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 17:47:27.378 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 17:48:04.574 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 20816 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:48:04.575 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:49:19.280 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 15440 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:49:19.281 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:49:20.260 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 17:49:20.260 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 17:49:20.331 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 17:49:21.826 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.886 seconds (process running for 3.256)
+2024-01-26 17:49:22.239 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 17:49:22.270 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 17:51:02.012 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 17:51:02.015 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 17:51:10.978 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 1628 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:51:10.979 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:52:03.923 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 8700 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:52:03.924 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:52:04.861 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 17:52:04.862 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 17:52:04.923 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 17:52:06.062 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.461 seconds (process running for 2.866)
+2024-01-26 17:52:06.347 [RMI TCP Connection(2)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 17:52:06.372 [RMI TCP Connection(1)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 17:55:58.860 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 17:55:58.863 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 17:56:09.919 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 17260 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:56:09.921 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:56:46.731 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 2844 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:56:46.732 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:56:47.711 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 17:56:47.711 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 17:56:47.776 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 17:56:48.939 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.525 seconds (process running for 2.912)
+2024-01-26 17:56:49.172 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 17:56:49.195 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 17:58:04.520 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 17:58:04.523 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 17:58:06.179 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 19296 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 17:58:06.180 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 17:58:07.134 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 17:58:07.135 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 17:58:07.197 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 17:58:08.341 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.566 seconds (process running for 2.972)
+2024-01-26 17:58:08.529 [RMI TCP Connection(2)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 17:58:08.554 [RMI TCP Connection(3)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:01:07.831 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:01:07.835 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:01:11.803 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 21124 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:01:11.804 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:01:12.855 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:01:12.855 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:01:12.914 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:01:14.010 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.556 seconds (process running for 3.043)
+2024-01-26 18:01:14.151 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:01:14.176 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:03:10.808 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:03:10.811 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:03:14.940 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 19936 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:03:14.942 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:03:16.310 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:03:16.310 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:03:16.392 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:03:17.644 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 3.229 seconds (process running for 3.73)
+2024-01-26 18:03:18.102 [RMI TCP Connection(1)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:03:18.126 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:04:26.652 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:04:26.655 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:04:30.399 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 21036 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:04:30.400 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:04:31.429 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:04:31.429 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:04:31.498 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:04:32.709 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.674 seconds (process running for 3.15)
+2024-01-26 18:04:33.217 [RMI TCP Connection(1)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:04:33.241 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:28:06.743 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:28:06.746 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:28:11.377 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 20808 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:28:11.378 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:28:12.384 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:28:12.384 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:28:12.449 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:28:13.756 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.717 seconds (process running for 3.193)
+2024-01-26 18:28:14.298 [RMI TCP Connection(7)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:28:14.323 [RMI TCP Connection(5)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:31:31.845 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:31:31.848 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:31:35.826 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 21200 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:31:35.827 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:31:36.886 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:31:36.886 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:31:36.954 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:31:38.183 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.746 seconds (process running for 3.23)
+2024-01-26 18:31:38.625 [RMI TCP Connection(5)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:31:38.647 [RMI TCP Connection(6)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:33:13.898 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:33:13.902 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:33:17.906 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 20820 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:33:17.907 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:33:18.939 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:33:18.940 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:33:19.008 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:33:20.139 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.638 seconds (process running for 3.143)
+2024-01-26 18:33:20.666 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:33:20.689 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:35:32.710 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:35:32.713 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:35:37.631 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 19960 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:35:37.632 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:35:38.663 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:35:38.663 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:35:38.730 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:35:39.916 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.625 seconds (process running for 3.12)
+2024-01-26 18:35:40.488 [RMI TCP Connection(4)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:35:40.511 [RMI TCP Connection(5)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:36:03.733 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:36:03.737 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:36:23.497 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 7884 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:36:23.498 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:36:48.471 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 21084 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:36:48.472 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:36:49.414 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:36:49.415 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:36:49.474 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:36:50.712 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.573 seconds (process running for 2.991)
+2024-01-26 18:36:50.863 [RMI TCP Connection(5)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:36:50.887 [RMI TCP Connection(4)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:40:04.244 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:40:04.247 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:40:07.885 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 12408 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:40:07.886 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:40:08.987 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:40:08.987 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:40:09.059 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:40:10.193 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.719 seconds (process running for 3.142)
+2024-01-26 18:40:10.724 [RMI TCP Connection(8)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:40:10.748 [RMI TCP Connection(7)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:42:47.553 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:42:47.557 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:42:51.891 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 5776 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:42:51.892 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:42:52.954 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:42:52.954 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:42:53.024 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:42:54.222 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.746 seconds (process running for 3.175)
+2024-01-26 18:42:54.699 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:42:54.721 [RMI TCP Connection(4)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:46:47.864 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:46:47.867 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:46:54.354 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 7628 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:46:54.355 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:46:55.502 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:46:55.502 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:46:55.564 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:46:56.665 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.74 seconds (process running for 3.182)
+2024-01-26 18:46:57.211 [RMI TCP Connection(1)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:46:57.235 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:48:21.790 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:48:21.793 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:48:25.218 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 260 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:48:25.219 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:48:26.232 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:48:26.232 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:48:26.308 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:48:27.500 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.603 seconds (process running for 3.002)
+2024-01-26 18:48:27.667 [RMI TCP Connection(3)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:48:27.689 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:54:26.577 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:54:26.580 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:54:30.766 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 7600 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:54:30.768 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:54:32.126 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:54:32.126 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:54:32.207 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:54:33.504 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 3.139 seconds (process running for 3.557)
+2024-01-26 18:54:33.717 [RMI TCP Connection(1)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:54:33.741 [RMI TCP Connection(2)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-01-26 18:57:35.599 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-01-26 18:57:35.602 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-01-26 18:57:37.221 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 3216 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-26 18:57:37.222 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-26 18:57:38.193 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-01-26 18:57:38.193 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-01-26 18:57:38.255 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-01-26 18:57:39.348 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.455 seconds (process running for 2.947)
+2024-01-26 18:57:39.790 [RMI TCP Connection(2)-192.168.1.5] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-01-26 18:57:39.820 [RMI TCP Connection(1)-192.168.1.5] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited

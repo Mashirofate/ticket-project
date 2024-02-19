@@ -57,7 +57,6 @@
         SELECT tIdentitycard
         FROM enter
         WHERE aId=#{aId}
-        AND TO_DAYS(eDate)=TO_DAYS(NOW())
     </select>
 
     <sql id="searchSQL">

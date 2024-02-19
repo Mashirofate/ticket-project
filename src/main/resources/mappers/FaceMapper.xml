@@ -5,13 +5,17 @@
 <mapper namespace="com.tickets.mapper.FaceMapper">
 
     <update id="upquantity" >
-        UPDATE  ticketing SET tIdentitycard=#{tIdentitycard}
-        WHERE tid=#{tId}
+        UPDATE  ticketing SET tIdentitycard=#{tIdentitycard}, tRealname=#{tRealname}
+        WHERE tId=#{tId}
+    </update>
 
+    <update id="upquantitys" >
+        UPDATE  ticketing SET tIdentitycard=#{tIdentitycard}, tRealname=#{tRealname},tData=#{datei},tNote=1
+        WHERE tId=#{tId}
     </update>
     <update id="getUploadQTIAEW" >
         UPDATE enter  SET dWorker = 1
-        WHERE aid=#{aidset}
+        WHERE aId=#{aid}
         AND eId in
         <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
             #{item, jdbcType=VARCHAR}
@@ -80,8 +84,8 @@
         FROM enter AS e
         WHERE
             e.aId=#{aId}
-#           AND
-#             TO_DAYS(e.eDate)=TO_DAYS(NOW())
+          AND
+             TO_DAYS(e.eDate)=TO_DAYS(NOW())
         ORDER BY
             e.eDate DESC
         LIMIT 5
@@ -96,19 +100,39 @@
 
 
     <select id="getImageByActivityIdUP" resultType="java.util.Map">
-        SELECT eId,aName,eName,tIdentitycard,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,CONVERT( fImage USING utf8 )  fImage from enter
+        SELECT eId,aName,eName,tIdentitycard,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,CONVERT( fImage USING utf8 )  fImage  from enter
         WHERE  eDate between  DATE_FORMAT(NOW(),'%Y-%m-%d 00:00:00') and #{dateUp}
         AND aId=#{aid}
         AND dWorker = 0
     </select>
-    <select id="getEntryrecord" resultType="java.util.Map">
-        SELECT eId,aId,aName,vName,eName,tQrcard,tIdentitycard,tQrcard,eDate,tId ,dWorker,temp,autonym  from enter
-        WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
-        AND aId=#{aId}
 
+    <select id="getEntryrecord" resultType="java.util.Map">
+        SELECT eId,aId,aName,vName,eName,tQrcard,tIdentitycard,CONVERT( fImage USING utf8 )  fImage, DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,tId ,dWorker,temp,autonym  from enter
+        WHERE aId=#{aid}
+        AND dWorker = 0
+        ORDER BY eDate DESC
+        LIMIT 150
+    </select>
+
+    <select id="getEntryrecords" resultType="java.util.Map">
+        SELECT eId,aId,aName,vName,eName,tQrcard,tIdentitycard, DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,tId ,dWorker,temp,autonym  from enter
+        WHERE aId=#{aid}
+          AND dWorker = 0
+        ORDER BY eDate DESC
+            LIMIT 150
     </select>
 
 
+    <select id="getemploys" resultType="java.util.Map">
+        SELECT eId,aId,aName,vName,eName,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,tId from enter_employee
+        WHERE eDate between  DATE_FORMAT(NOW(),'%Y-%m-%d 00:00:00') and #{dateUp}
+        AND aId=#{aid}
+        AND tId != 1
+        ORDER BY eDate DESC
+        LIMIT 150
+    </select>
+
+<!--    &#45;&#45;         WHERE  eDate between  DATE_FORMAT(NOW(),'%Y-%m-%d 00:00:00') and #{dateUp}-->
     <select id="getImageByActivityIdcount" resultType="java.util.Map">
         SELECT COUNT(eId) from enter
         WHERE eDate between #{sqlDateformerly} and #{sqlDate}
@@ -129,7 +153,14 @@
             e.eDate DESC
 
     </select>
+    <select id="getdomparison" resultType="java.util.Map">
+        SELECT t.tId as tid,t.tIdentitycard as tIdentitycard,
+               w.tId as wtid,w.tRealname as wtRealname,w.tIdentitycard as wtIdentitycard ,t.tQrcard
+        FROM     ticketing AS t LEFT JOIN ticketing_wechat AS w   ON t.tQrcard= w.tQrcard
+        where  t.taId=#{aId}
+          AND t.tIdentitycard=''
 
+    </select>
     <select id="selectKeyByActivityId" resultType="java.lang.String">
         SELECT
             e.eId

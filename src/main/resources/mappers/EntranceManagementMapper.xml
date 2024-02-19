@@ -8,21 +8,21 @@
         <result column="eName" jdbcType="VARCHAR" property="emName" />
         <result column="eEnable" jdbcType="INTEGER" property="emEnable" />
         <result column="eNote" jdbcType="VARCHAR" property="emNote" />
-        <result column="evId" jdbcType="VARCHAR" property="emVmId" />
+        <result column="aId" jdbcType="VARCHAR" property="aId" />
         <result column="eCreationtime" jdbcType="TIMESTAMP" property="eCreationtime" />
     </resultMap>
     <sql id="Base_Column_List">
-        eId, eName, eEnable, eNote, evId, eCreationtime
+        eId, eName, eEnable, eNote, aId, eCreationtime
     </sql>
     <insert id="insert">
         <selectKey keyProperty="emId" resultType="string" order="BEFORE">
             SELECT uuId()
         </selectKey>
         INSERT INTO entrance (<include refid="Base_Column_List"/>)
-        VALUES (#{emId}, #{emName}, #{emEnable}, #{emNote}, #{emVmId}, now())
+        VALUES (#{emId}, #{emName}, #{emEnable}, #{emNote}, #{aId}, now())
     </insert>
     <update id="update">
-        UPDATE entrance SET eEnable = #{emEnable},eName=#{emName},eNote= #{emNote},evId=#{emVmId},eCreationtime=now() WHERE eId = #{emId} LIMIT 1
+        UPDATE entrance SET eEnable = #{emEnable},eName=#{emName},eNote= #{emNote},aId=#{aId},eCreationtime=now() WHERE eId = #{emId} LIMIT 1
     </update>
 
     <update id="updateEnable">
@@ -35,7 +35,6 @@
         FROM enter AS e
         WHERE
         e.aId = #{vaId}
-         and   TO_DAYS(e.eDate)=TO_DAYS(NOW())
         GROUP BY e.eName
         <!--
                 SELECT
@@ -53,30 +52,32 @@
         (
         CASE
         WHEN age &lt; 18 THEN
-        '18岁以下'
+        '18以下'
         WHEN age &lt; 30 THEN
-        '18-29岁'
+        '18-29'
         WHEN age &lt; 40 THEN
-        '30-39岁'
+        '30-39'
         WHEN age &lt; 50 THEN
-        '40-49岁'
+        '40-49'
         WHEN age &lt; 60 THEN
-        '50-59岁'
+        '50-59'
         WHEN age &lt; 70 THEN
-        '60-69岁'
+        '60-69'
         ELSE
-        '70岁以上'
+        '70以上'
         END
         ) AS age_range,
         COUNT(age) AS count
         FROM
         (
-        SELECT
-        (
-        DATE_FORMAT(NOW(), '%Y') - SUBSTRING(tIdentitycard, 7, 4)
-        ) AS age
-        FROM
-        enter   WHERE aId=#{vaId} and TO_DAYS(eDate)=TO_DAYS(NOW())
+            SELECT
+            (
+            DATE_FORMAT(NOW(), '%Y') - SUBSTRING(tIdentitycard, 7, 4)
+            ) AS age ,tIdentitycard,tId
+            FROM
+            ( SELECT * FROM enter WHERE length(tIdentitycard)=18) as en
+            WHERE aId=#{vaId}
+            order by  age  asc
         ) AS a
         GROUP BY age_range
         order by  age_range  asc
@@ -100,18 +101,22 @@
 
     </select>
     <select id="numberOFarea" resultType="java.util.Map">
-        SELECT t.tSeatingarea, COUNT( DISTINCT e.tid)as number  FROM
-            enter AS e inner JOIN ticketing  AS t ON t.tId=e.tId WHERE e.aId = #{vaId} AND TO_DAYS(e.eDate)=TO_DAYS(NOW()) group by t.tSeatingarea
+        SELECT t.tGrandstand, COUNT( DISTINCT e.tid)as number  FROM
+            enter AS e LEFT JOIN  ticketing  AS t ON t.tId=e.tId
+        WHERE e.aId =#{vaId}
+        group by t.tGrandstand
+
     </select>
 
 
 
     <select id="selectByKeys" resultType="java.util.Map">
         SELECT
-        e.eId, e.eName, IF(e.eEnable = 0, '删除',IF(e.eEnable = 1, '启用','不启用')) eEnable, e.eNote , v.vName,v.vId
+        e.eId, e.eName, IF(e.eEnable = 0, '删除',IF(e.eEnable = 1, '启用','不启用')) eEnable, e.eNote , a.aName,a.aId
         FROM
         entrance AS e
-        LEFT JOIN venues AS v ON v.vId = e.evId
+        LEFT JOIN activity AS a ON a.aId = e.aId
+
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="emName != null and emName.length != 0">
                 e.eName LIKE "%"#{emName}"%"
@@ -119,20 +124,21 @@
             <if test="emEnable != null">
                 AND e.eEnable = #{emEnable}
             </if>
-            <if test="vmName != null and vmName.length != 0">
-                AND v.vName LIKE "%"#{vmName}"%"
+            <if test="aName != null and aName.length != 0">
+                AND a.aName LIKE "%"#{aName}"%"
             </if>
             <if test="emEnable == null">
                 AND e.eEnable !=0
             </if>
         </trim>
+        AND a.aEnable !=0
         LIMIT ${(current-1)*size},${size}
     </select>
 
     <select id="selectCountByKeys" resultType="java.lang.Integer">
         SELECT COUNT(e.eId)
         FROM entrance AS e
-        LEFT JOIN venues AS v ON v.vId = e.evId
+        LEFT JOIN activity AS a ON a.aId = e.aId
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="emName != null and emName.length != 0">
                 e.eName LIKE "%"#{emName}"%"
@@ -140,10 +146,11 @@
             <if test="emEnable != null">
                 AND e.eEnable = #{emEnable}
             </if>
-            <if test="vmName != null and vmName.length != 0">
-                AND v.vName LIKE "%"#{vmName}"%"
+            <if test="aName != null and aName.length != 0">
+                AND a.aName LIKE "%"#{aName}"%"
             </if>
         </trim>
+        AND a.aEnable !=0
     </select>
 
     <select id="selectEntranceByEnable" resultMap="BaseResultMap">

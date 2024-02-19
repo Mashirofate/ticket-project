@@ -184,22 +184,25 @@ public class WebSoketTask {
                     }
 
 
+
+
+                    List<Map<String, Object>> areaList = entranceManagementService.numberOFarea(vaId);
+
+                    maps.put("areaList", areaList);
                     maps.put("timelist", rows);
                     maps.put("outlist", ExporoutList);
                     maps.put("enterlist", ExportenterList);
 
                     // 区域人口数量
-                    List<Map<String, Object>> SeatList = admissionInformationService.getSeatList(vaId);
-
-                    maps.put("SeatList", SeatList);
+                    // List<Map<String, Object>> SeatList = admissionInformationService.getSeatList(vaId);
+                    //maps.put("SeatList", SeatList);
 
                     //看台人数信息
-                    List<Map<String, Object>> GrandList = admissionInformationService.getGrandList(vaId);
-                    List<Map<String, Object>> GrandsList = admissionInformationService.getGrandsList(vaId);
+                    // List<Map<String, Object>> GrandList = admissionInformationService.getGrandList(vaId);
+                    // List<Map<String, Object>> GrandsList = admissionInformationService.getGrandsList(vaId);
 
-
-                    maps.put("GrandList", GrandList);
-                    maps.put("GrandsList", GrandsList);
+                    //  maps.put("GrandList", GrandList);
+                    // maps.put("GrandsList", GrandsList);
 
 
 
@@ -273,23 +276,11 @@ public class WebSoketTask {
             for (int u=0;u<vaIds.size();u++){
                 String vaId=vaIds.get(u);
                 if(vaId!=null){
-                    // 入场人数 ：  票务入场 ticketing+工作人员入场 staff+未实名入场 Norealname+实名入场 realname
-                   // Map<String, Object> typeCount = admissionInformationService.getTypeCount(vaId);
-//                    Map<String, Object> typeCounts = new HashMap<>();
-//                    if (typeCount == null) {
-//                        typeCounts.put("Norealname", 0);
-//                        typeCounts.put("ticketing", 0);
-//                        typeCounts.put("staff", 0);
-//                        typeCounts.put("realname", 0);
-//                        rest.put("typeenterCount", typeCounts);
-//                    }
-
                     // 未实名人数
                     Map<String, Object> Norealname = admissionInformationService.getNorealnameCount(vaId);
                     // 实名人数
                     Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
-                    rest.put("Norealname",Norealname.get("Norealname"));
-                    rest.put("realname",realname.get("realname"));
+
 
                     // 获取出场人数
                     Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
@@ -297,7 +288,11 @@ public class WebSoketTask {
                     Map<String, Object> intraFieldCount = turnoutService.getintraFieldCount(vaId);
 
                     Map<String, Object> intworkCount = turnoutService.getintworkCount(vaId);
-                    int work =Integer.parseInt(intworkCount.get("counts").toString());
+                    int work =0;
+                    if(intworkCount.get("counts") !=null) {
+
+                    work = Integer.parseInt(intworkCount.get("counts").toString());
+                   }
 
                     int intraField =0;
                     if(intraFieldCount==null){
@@ -307,11 +302,11 @@ public class WebSoketTask {
                     }
 
 
-
-
                     rest.put("typeOutCount",typeOutCount.get("counts"));
 
 
+                    rest.put("Norealname",Norealname.get("Norealname"));
+                    rest.put("realname",realname.get("realname"));
 
                     rest.put("intraField",intraField);
                     rest.put("work",work);
@@ -327,13 +322,16 @@ public class WebSoketTask {
                         // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
                         var obj= list.get(i);
                         if(obj != null && !obj.trim().equals("")){
-                            char genderCode = obj.charAt(obj.length() - 2);
-                            int genderDigit = Integer.parseInt(String.valueOf(genderCode));
-                            if (genderDigit % 2 == 0) {
-                                girl+=1;
-                            } else {
-                                 man +=1;
+                            if(obj.length()==18){
+                                char genderCode = obj.charAt(obj.length() - 2);
+                                int genderDigit = Integer.parseInt(String.valueOf(genderCode));
+                                if (genderDigit % 2 == 0) {
+                                    girl+=1;
+                                } else {
+                                    man +=1;
+                                }
                             }
+
 
                         }
                     }
@@ -377,60 +375,6 @@ public class WebSoketTask {
                 if (vaId != null) {
                     Map<String, Object> rest = new HashMap<>();
 
-                    // 获取出口的人数照片
-                    List<String> listimg = turnoutService.getImageByActivityId(vaId);
-
-                    //rest.put("OutImg",listimg);
-                    // 入场人数图片
-
-                    //  List<String> enterImg= faceService.getImageByActivityId(vaId);
-                    //rest.put("enterImg",enterImg);
-
-                    List<Map<String, Object>> rows = new ArrayList<>();
-                    List<Map<String, Object>> enterM = faceService.getImageByActivityIds(vaId);
-
-
-                    for (int i = 0; i < enterM.size(); i++) {
-                        Map<String, Object> b = new HashMap<>();
-                        if(enterM.get(i)!=null){
-                            Map<String, Object> a = enterM.get(i);
-                            String images =null;
-                            if (a.containsKey("image")) {
-                                if(null !=a.get("image")){
-                                    images = "data:image/jpg;base64," + a.get("image").toString();
-                                }
-
-                            }
-                            String tIdentitycard = null;
-                            if (a.containsKey("tIdentitycard")) {
-                                if(null !=a.get("tIdentitycard")){
-                                    tIdentitycard = a.get("tIdentitycard").toString();
-                                    if (tIdentitycard.length() == 18) {
-                                        tIdentitycard = tIdentitycard.substring(0, 6) + "************";
-                                    }
-                                }
-
-                            }
-
-                            b.put("autonym", a.get("autonym"));
-                            b.put("tIdentitycard", tIdentitycard);
-
-
-                            if (tIdentitycard == null || tIdentitycard.length() != 18) {
-                                b.put("healthCode", null);
-                            } else {
-                                b.put("healthCode", "绿码");
-                            }
-
-                            b.put("image", images);
-                            rows.add(b);
-                        }
-
-
-
-
-                    }
-
 
                     // 入场人数 ：  票务入场 ticketing+工作人员入场 staff+未实名入场 Norealname+实名入场 realname
                     // 未实名人数
@@ -438,7 +382,11 @@ public class WebSoketTask {
                     // 实名人数
                     Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
                     rest.put("Norealname",Norealname.get("Norealname"));
+
                     rest.put("realname",realname.get("realname"));
+
+
+
                     // 获取出场人数
                     Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
                     // 获取当天入场记录中的所有人数去重
@@ -455,8 +403,6 @@ public class WebSoketTask {
                     // rest.put("typeenterCount", typeCount);
                     rest.put("intraField", intraField);
 
-                    rest.put("enterImg", rows);
-                    rest.put("OutImg", listimg);
 
 
 

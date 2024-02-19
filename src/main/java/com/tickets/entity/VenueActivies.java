@@ -9,6 +9,8 @@ import java.util.Date;
  */
 @Data
 public class VenueActivies {
+
+    private String aaId;
     /**
      * 主键
      */
@@ -17,6 +19,10 @@ public class VenueActivies {
      * 活动名称
      */
     private String aName;
+    /**
+     * 活动场馆
+     */
+    private String vName;
     /**
      * 状态，1不启用，2启动
      */

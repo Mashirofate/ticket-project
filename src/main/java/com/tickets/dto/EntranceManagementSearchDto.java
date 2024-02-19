@@ -2,8 +2,6 @@ package com.tickets.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class EntranceManagementSearchDto {
     /**
@@ -17,5 +15,5 @@ public class EntranceManagementSearchDto {
 
     private String emName;
     private Integer emEnable;
-    private String vmName;
+    private String aName;
 }

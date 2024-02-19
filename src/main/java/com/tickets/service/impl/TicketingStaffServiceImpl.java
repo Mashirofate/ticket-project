@@ -42,6 +42,41 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
     public List<Map<String,Object>> getByKeys(String scanCode,String aId) {
         return ticketingStaffMapper.selectCountByscanCode(scanCode,aId);
     }
+    @Override
+    public List<Map<String,Object>> getByKeys1(String scanCode,String aId) {
+        return ticketingStaffMapper.selectCountByscanCode1(scanCode,aId);
+    }
+    @Override
+    public List<Map<String,Object>> getcardId(String cardId,String aId,String tId) {
+        List<Map<String,Object>> list=null;
+        if(tId == null){
+            list= ticketingStaffMapper.getcardIdto(cardId,aId,tId);
+        }else{
+            list=  ticketingStaffMapper.getcardId(cardId,aId,tId);
+        }
+
+        return list;
+    }
+    @Override
+    public List<Map<String,Object>> getcardId2(String cardId,String aId,String tId) {
+        List<Map<String,Object>> list=null;
+        if(tId == null){
+            list= ticketingStaffMapper.getcardId2to(cardId,aId,tId);
+        }else{
+            list=  ticketingStaffMapper.getcardId2(cardId,aId,tId);
+        }
+
+        return list;
+    }
+    /**
+     * @param cardId
+     * @param aId
+     * @return
+     */
+    @Override
+    public int getByKeycardIds(String cardId, String aId) {
+        return ticketingStaffMapper.getByKeycardIds(cardId,aId);
+    }
 
     @Override
     public List<Map<String, Object>>  getByBuys(BuyticketDto buyticketDto) {
@@ -179,14 +214,42 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
         return ticketingStaffMapper.updates(cardId, Rname,tid ,datei) == 1;
     }
 
+    @Override
+    public boolean updatewe(String cardId, String Rname, String wtid,String datei) {
+        return ticketingStaffMapper.updatewe(cardId, Rname,wtid ,datei) == 1;
+    }
+    @Override
+    public boolean installwtid(String cardId, String scanCode, String Rname, String aId,String datei) {
+
+        UUID uuid = UUID.randomUUID();
+        String tid =uuid.toString();
+        return ticketingStaffMapper.installwtid(cardId, scanCode,Rname, aId,datei,tid) == 1;
+    }
+    @Override
+    public boolean installwtidexhibition(String cardId, String Rname, String Phone, String aId, String datei) {
+
+        UUID uuid = UUID.randomUUID();
+        String tid =uuid.toString();
+        return ticketingStaffMapper.installwtidexhibition(cardId, Rname,Phone, aId,datei,tid) == 1;
+    }
     /**
-     * @param valid
+     * @param
      * @param aId
      * @return
      */
     @Override
-    public List<Map<String, Object>> getByapplet(int valid, String aId) {
-        return ticketingStaffMapper.getByapplet(valid, aId) ;
+    public List<Map<String, Object>> getByapplet( String aId, String ips) {
+        return ticketingStaffMapper.getByapplet( aId, ips) ;
+    }
+
+    /**
+     * @param aId
+     * @param UploadQuantity
+     * @return
+     */
+    @Override
+    public int getByappletlisteid(String aId, List<String> UploadQuantity, String ips) {
+        return  ticketingStaffMapper.getByappletlisteid(aId,  UploadQuantity, ips);
     }
 
     /**
@@ -202,11 +265,41 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
      * @param tQrcard
      * @param tIdentitycard
      * @param autonym
-     * @param fImage
+     * @param //fImage
      * @return
      */
     @Override
-    public int installEntryrecord(String eId, String aId, String vName, String eName, String tId, String aName, String eDate, String temp, String dWorker, String tQrcard, String tIdentitycard, String autonym) {
-        return ticketingStaffMapper.installEntryrecord(eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym) ;
+    public int installEntryrecord(String eId, String aId, String vName, String eName, String tId, String aName, String eDate, String temp, String dWorker, String tQrcard, String tIdentitycard, String autonym,byte[] fImage) {
+        return ticketingStaffMapper.installEntryrecord(eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym,fImage) ;
+    }
+
+    @Override
+    public int installemploy(String eId, String aId, String vName, String eName, String tId, String aName, String eDate, String tQrcard) {
+        return ticketingStaffMapper.installemploy(eId,aId,vName,eName,tId,aName,eDate,tQrcard) ;
+    }
+    public int installcamera(String teId,String teImage,String teDate,String teAisle,String teaId,String teCategory,String teMarking) {
+        return ticketingStaffMapper.installcamera(teId,teImage,teDate,teAisle,teaId,teCategory,teMarking) ;
+    }
+
+    /**
+     * @param aId
+     * @param cardId
+     * @param scanCode
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getticketing(String aId, String cardId, String scanCode) {
+        return ticketingStaffMapper.getticketing(aId, cardId,scanCode);
+    }
+
+    /**
+     * @param aId
+     * @param cardId
+     * @param scanCode
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getenueing(String aId, String cardId, String scanCode) {
+        return ticketingStaffMapper.getenueing(aId, cardId,scanCode);
     }
 }

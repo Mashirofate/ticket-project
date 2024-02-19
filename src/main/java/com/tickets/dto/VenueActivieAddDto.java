@@ -8,10 +8,14 @@ import java.util.Date;
 
 @Data
 public class VenueActivieAddDto {
+    @JsonProperty(value = "aaId")
+    private String aaId;
     @JsonProperty(value = "aId")
     private String aId;
     @JsonProperty(value = "aName")
     private String aName;
+    @JsonProperty(value = "vName")
+    private String vName;
     @JsonProperty(value = "aEnable")
     private Integer aEnable;
     @JsonProperty(value = "aNote")
@@ -33,5 +37,7 @@ public class VenueActivieAddDto {
     @JsonProperty(value = "updateTime")
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    private Date aCreationtime;
 
 }

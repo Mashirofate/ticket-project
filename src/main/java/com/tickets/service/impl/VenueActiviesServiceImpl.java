@@ -10,6 +10,8 @@ import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,15 @@ public class VenueActiviesServiceImpl implements VenueActiviesService {
         return venueActiviesMapper.insert(venueActivies) == 1;
     }
 
+    /**
+     * @param list
+     * @return
+     */
+    @Override
+    public int addAM(List list) {
+        return venueActiviesMapper.addAM(list);
+    }
+
     @Override
     public Page getByKeys(VenueActivieSearchDto venueActivieSearchDto) {
         Page<Map<String, Object>> page = new Page<Map<String, Object>>();
@@ -37,7 +48,19 @@ public class VenueActiviesServiceImpl implements VenueActiviesService {
         }
         return page;
     }
+    @Override
+    public List<Map<String, Object>> getdomparison(String aId) {
+        return venueActiviesMapper.getdomparison(aId);
+    }
 
+    @Override
+    public int upquantitys(String tId, String tIdentitycard,String tRealname) {
+        Date time= new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String datei = format.format(time);
+        return venueActiviesMapper.upquantitys(tId,tIdentitycard,tRealname,datei);
+    }
     @Override
     public List<Map<String, Object>> selectByNames( ) {
         return venueActiviesMapper.selectByNames();
@@ -57,10 +80,26 @@ public class VenueActiviesServiceImpl implements VenueActiviesService {
     public List<Map<String, Object>> getOpenActivies() {
         return venueActiviesMapper.selectByEnable('1');
     }
-
+    @Override
+    public List<Map<String, Object>> getOpenActiviess() {
+        return venueActiviesMapper.selectByEnables('1');
+    }
+    @Override
+    public List<Map<String, Object>> getOpenActiviesex() {
+        return venueActiviesMapper.selectByEnableex('1');
+    }
     @Override
     public Map<String,Object> getByVaId(String vaId) {
         return venueActiviesMapper.selectByVaId(vaId);
+    }
+
+    /**
+     * @param aId
+     * @return
+     */
+    @Override
+    public List<Map<String,Object>> getemVaId(String aId) {
+        return venueActiviesMapper.selectemVaId(aId);
     }
 
     @Override

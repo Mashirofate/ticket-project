@@ -48,6 +48,48 @@
     </select>-->
 
 
+    <select id="getByEntryrecorddownloads" resultType="java.util.Map">
+        SELECT eId ,aId,aName,vName,eName,tIdentitycard,tQrcard,eDate,tId,dWorker,temp,fImage,autonym from enter
+        WHERE aId=#{aId}
+        AND not locate(#{ips},dWorker)>0
+        LIMIT 150
+    </select>
+
+    <update id="getByEntryrecorddownloadlisteid" >
+        UPDATE enter  SET dWorker =  CONCAT(dWorker,#{ips})
+        WHERE aId=#{aId}
+        AND eId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <insert id="installEntryrecord">
+
+        INSERT INTO enter
+        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym,fImage)
+        VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},
+                #{aName}, #{eDate}, #{temp}, #{dWorker}, #{tQrcard}, #{tIdentitycard}, #{autonym}, #{fImage})
+    </insert>
+
+    <select id="getempssssssssssssssssssssloys" resultType="java.util.Map">
+        SELECT eId,aId,aName,vName,eName,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,tId from enter_employee
+        WHERE eDate between  DATE_FORMAT(NOW(),'%Y-%m-%d 00:00:00') and #{dateUp}
+        AND aId=#{aid}
+        AND tId  !=1 or  tId  is  null
+        ORDER BY eDate DESC
+            LIMIT 100
+    </select>
+
+    <update id="getUploadQTIAEWemploy" >
+        UPDATE enter_employee SET tId = 1
+        WHERE aId=#{aid}
+        AND eId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
     <delete id="deleteEs">
         delete from enter where eid=#{eid}
     </delete>
@@ -73,9 +115,6 @@
             </if>
             <if test="tQrcard != null and tQrcard.length != 0">
                 AND e.tQrcard LIKE "%"#{tQrcard}"%"
-            </if>
-            <if test="temp.equals('true') and temp != null and temp.length != 0">
-            AND e.temp >37.5
             </if>
 
             <if test="eDate1 != null and eDate2.length != 0">

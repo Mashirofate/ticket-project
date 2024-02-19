@@ -1,0 +1,4 @@
+2024-01-21 23:22:55.128 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 8152 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-21 23:22:55.131 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-01-21 23:26:44.520 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 16404 (C:\Users\11583\Desktop\ticket-project\target\classes started by 11583 in C:\Users\11583\Desktop\ticket-project)
+2024-01-21 23:26:44.521 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"

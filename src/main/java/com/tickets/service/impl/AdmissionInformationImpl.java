@@ -56,16 +56,12 @@ public class AdmissionInformationImpl implements AdmissionInformationService {
     public List getTIMElist(String vaId) {
         return admissionInformatization.getTIMElist(vaId) ;
     }
-    @Override
+
     public Map<String, Object> getrealnameCount(String vaId) {
         return  admissionInformatization.selectrealnameCount(vaId);
     }
 
-    /**
-     * @param vaId
-     * @return
-     */
-    @Override
+
     public Map<String, Object> getNorealnameCount(String vaId) {
         return admissionInformatization.selectNorealnameCount(vaId);
     }

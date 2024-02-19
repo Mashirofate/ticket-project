@@ -24,13 +24,41 @@
         VALUES (#{tsId}, #{tsVaId}, #{tsIdentiycard}, #{tsIccard}, #{tsQrcard},
         #{tsSeatingArea}, #{tsRownumber}, #{tsSeat}, #{tsGrandstand}, #{tsRealName}, #{tsNote}, #{phone})
     </insert>
+    <insert id="installwtid">
 
+        INSERT INTO ticketing_wechat
+        (tId, taId, tIdentitycard, tQrcard, tRealname, tNote,tData)
+        VALUES (#{tid}, #{aid}, #{cardId}, #{scanCode}, #{Rname},"1", #{datei} )
+    </insert>
+
+    <insert id="installwtidexhibition">
+
+        INSERT INTO ticketing
+            (tId, taId, tIdentitycard, tRealname, phone,tNote,tData)
+        VALUES (#{tid}, #{aid}, #{cardId},  #{Rname}, #{Phone},"1", #{datei} )
+    </insert>
     <insert id="installEntryrecord">
 
         INSERT INTO enter
-        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym)
+        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym,fImage)
         VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},
-        #{aName}, #{eDate}, #{temp}, #{dWorker}, #{tQrcard}, #{tIdentitycard}, #{autonym})
+        #{aName}, #{eDate}, #{temp}, #{dWorker}, #{tQrcard}, #{tIdentitycard}, #{autonym}, #{fImage})
+    </insert>
+
+    <insert id="installemploy">
+
+        INSERT INTO enter_employee
+        (eId,aId,vName,eName,tId,aName,eDate,tQrcard)
+        VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},
+                #{aName}, #{eDate}, #{tQrcard})
+    </insert>
+
+    <insert id="installcamera">
+
+        INSERT INTO tloe
+        (teId,teImage,teDate,teAisle,teaId,teCategory,teMarking,teuid)
+        VALUES (null, #{teImage}, #{teDate}, #{teAisle}, #{teaId},
+                #{teCategory}, #{teMarking},#{teId})
     </insert>
 
     <!--parameterType 传入参数的类型，resultType返回参数的类型-->
@@ -42,13 +70,46 @@
         LIMIT ${(current-1)*size},${size}
     </select>
 
+    <select id="getenueing" resultType="java.util.Map">
+        SELECT e.tIdentitycard as tIdentitycard, e.tQrcard as tQrcard,e.autonym as tRealname, e.fImage as fImage, e.eDate as Date,t.tSeatingarea as tSeatingarea ,t.tRownumber as tRownumber, t.tSeat as tSeat
+        FROM  enter AS e
+        LEFT JOIN ticketing AS t ON t.tId = e.tId
+        WHERE aId=#{aId}
+            AND e.tIdentitycard=#{cardId}
+            OR e.tQrcard =#{scanCode}
+        LIMIT 50
+    </select>
+
+    <select id="getticketing" resultType="java.util.Map">
+        SELECT  t.tIdentitycard as tIdentitycard,  t.tQrcard as tQrcard,t.tRealname as tRealname ,t.tSeatingarea,t.tRownumber, t.tSeat
+        FROM ticketing AS t
+        WHERE taId=#{aId}
+            <if test="cardId != null and cardId.length != 0">
+                AND t.tIdentitycard=#{cardId}
+            </if>
+            <if test="scanCode != null and scanCode.length != 0">
+                AND t.tQrcard =#{scanCode}
+            </if>
+        LIMIT 50
+    </select>
 
     <select id="getByapplet" resultType="java.util.Map">
-        select tId,tIdentitycard from ticketing
+        select tId,tIdentitycard,tRealname from ticketing
         WHERE taId = #{aId,jdbcType=VARCHAR}
+        AND  not locate(#{ips},tNote)>0
         order by tData
-        desc limit  #{valid,jdbcType=BIGINT}
+        desc limit 27
     </select>
+
+
+    <update id="getByappletlisteid" >
+        UPDATE ticketing  SET tNote =  CONCAT(tNote,#{ips})
+        WHERE taId=#{aId}
+        AND tId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
 
     <select id="getByBuys" resultType="java.util.Map">
         SELECT t.tId, a.aId,a.aName, t.tIdentitycard, t.tIccard, t.tQrcard, t.tSeatingarea,t.tRownumber, t.tSeat,
@@ -74,8 +135,31 @@
     </select>
 
     <select id="selectCountByscanCode" resultType="java.util.Map">
-        SELECT t.tId FROM ticketing AS t where t.tQrcard =#{scanCode} and t.taId=#{aId}
+        SELECT t.tId,t.tIdentitycard FROM ticketing AS t where t.tQrcard =#{scanCode} and t.taId=#{aId}
     </select>
+    <select id="selectCountByscanCode1" resultType="java.util.Map">
+        SELECT w.tId as wtid,w.tIdentitycard as wtIdentitycard
+        FROM  ticketing_wechat AS w
+        where  w.tQrcard =#{scanCode}
+          and w.taId=#{aId}
+    </select>
+
+    <select id="getcardId" resultType="java.util.Map">
+        SELECT t.tId FROM ticketing AS t where t.tIdentitycard =#{cardId} and t.taId=#{aId} and t.tId!=#{tId} LIMIT 1
+    </select>
+
+    <select id="getcardId2" resultType="java.util.Map">
+        SELECT w.tId as wtid FROM ticketing_wechat  AS w where w.tIdentitycard =#{cardId} and w.taId=#{aId} and w.tId!=#{tId} LIMIT 1
+    </select>
+
+    <select id="getcardIdto" resultType="java.util.Map">
+        SELECT t.tId FROM ticketing AS t where t.tIdentitycard =#{cardId} and t.taId=#{aId} LIMIT 1
+    </select>
+
+    <select id="getcardId2to" resultType="java.util.Map">
+        SELECT w.tId as wtid FROM ticketing_wechat  AS w where w.tIdentitycard =#{cardId} and w.taId=#{aId} LIMIT 1
+    </select>
+
 
     <select id="selectById" resultType="java.util.Map">
         SELECT t.tId, t.tIdentitycard, t.tRealname, t.phone, t.tQrcard, a.aName, a.aNote
@@ -91,10 +175,23 @@
           WHERE tId = #{tsId} LIMIT 1
     </update>
 
+    <select id="getByKeycardIds" resultType="java.lang.Integer">
+
+        SELECT COUNT(tIdentitycard)
+        FROM ticketing
+        WHERE taId=#{aId}
+          AND tIdentitycard=#{cardId}
+    </select>
+
     <update id="updates">
-        UPDATE ticketing SET tIdentitycard=#{cardId},tRealname= #{Rname},tData=#{datei}
+        UPDATE ticketing SET tIdentitycard=#{cardId},tRealname= #{Rname},tData=#{datei},tNote=1
         WHERE tId = #{tid} LIMIT 1
     </update>
+    <update id="updatewe">
+        UPDATE ticketing_wechat SET tIdentitycard=#{cardId},tRealname= #{Rname},tData=#{datei},tNote=1
+        WHERE tId = #{wtid} LIMIT 1
+    </update>
+
 
 
     <delete id="deleteTs">
