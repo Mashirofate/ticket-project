@@ -14,13 +14,17 @@ public interface FaceMapper {
 
 
     @MapKey("")
-    List<Map<String, Object>> getImageByActivityId(String aId,String  sqlDate,String  sqlDateformerly);
+    List<Map<String, Object>> getImageByActivityId(String aid,String  sqlDate,String  sqlDateformerly);
+    @MapKey("")
+    List<Map<String, Object>> getImageByActivityticketId(String aid,String  sqlDate,String  sqlDateformerly);
     @MapKey("")
     List<Map<String, Object>> getImageByActivityIdUP(String aid, String dateUp);
     @MapKey("")
     List<Map<String, Object>> getEntryrecord(String aid,String  dateUp);
     @MapKey("")
     List<Map<String, Object>> getEntryrecords(String aid,String  dateUp);
+    @MapKey("")
+    List<Map<String, Object>> getEntryrecordsGA(String aid,String  dateUp);
 
     @MapKey("")
     List<Map<String, Object>> getemploys(String aid,String  dateUp);

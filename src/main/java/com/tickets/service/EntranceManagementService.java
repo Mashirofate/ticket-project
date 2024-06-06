@@ -29,7 +29,9 @@ public interface EntranceManagementService {
     boolean update(EntranceManagementAddDto entranceManagementAddDto);
 
     Map<String, Object> getTempCount(String vaId);
-    List<Map<String, Object>> numberOFarea(String vaId);
+    List<String> numberOFarea(String vaId);
+    List<String> numberOFarea1(String vaId);
+    List<String> numberOFarea2(String vaId);
 
     /**
      * 查询开放的入口

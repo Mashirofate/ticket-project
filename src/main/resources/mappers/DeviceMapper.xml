@@ -52,10 +52,22 @@
     <update id="update">
         UPDATE devices SET eName = #{eName},dIp = #{dIp},dCreationtime=now()  WHERE dId=#{dId} LIMIT 1
     </update>
-
-    <select id="getSingle" resultType="String">
-        SELECT tIdentitycard
-        FROM enter
+    <select id="getSingle" resultType="java.util.Map">
+        SELECT
+            CASE
+                WHEN SUBSTRING(BIND_CARD, 18, 1) % 2 = 0 THEN '女'
+                ELSE '男'
+                END AS name,
+            COUNT(*) AS value
+        FROM
+            (SELECT * FROM (SELECT eId,aId,BIND_CARD FROM enter  group by eId,aId,BIND_CARD) AS e
+            WHERE length(e.BIND_CARD)=18 and  aId=#{aId}) en
+        GROUP BY
+            name
+    </select>
+    <select id="getSingles" resultType="String">
+        SELECT BIND_CARD
+        FROM (SELECT eId,aId,BIND_CARD FROM enter WHERE length(BIND_CARD)=18 and BIND_CARD REGEXP '^[0-9]{17}[0-9Xx]$' group by eId,aId,BIND_CARD) AS e
         WHERE aId=#{aId}
     </select>
 

@@ -7,9 +7,14 @@
 
     <!--parameterType 传入参数的类型，resultType返回参数的类型-->
     <select id="getTypeCount" resultType="java.util.Map">
-        SELECT count(teId) as counts
+        SELECT count(DISTINCT teId) as counts
         FROM tloe as t
-        WHERE  t.teaId= #{vaId}
+        WHERE  t.teaId= #{vaId} and t.teCategory="1"  AND to_days(t.teDate) = to_days(now())
+    </select>
+    <select id="getTypeenCount" resultType="java.util.Map">
+        SELECT count(DISTINCT teId) as counts
+        FROM tloe as t
+        WHERE  t.teaId= #{vaId} and t.teCategory="2" AND to_days(t.teDate) = to_days(now())
     </select>
 
     <select id="getEachexportCount" resultType="java.util.HashMap">
@@ -17,8 +22,312 @@
             t.teAisle AS 'name', COUNT(DISTINCT(t.teId)) AS 'value'
         FROM  tloe as t
         WHERE  t.teaId= #{vaId}
+        AND t.teCategory=#{i}
+        AND to_days(t.teDate) = to_days(now())
         GROUP BY t.teAisle
     </select>
+    <select id="getOUTENCount1" resultType="java.lang.String">
+
+        SELECT outs as intra  FROM(
+
+                                      SELECT ifnull(value,0) as outs,time,ifnull(value1,0) as ens ,time1 FROM(
+
+
+                                          SELECT * FROM (
+                                          SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                          FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                          FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                          WHERE to_days(teDate) = to_days(now())
+                                          AND teCategory=1
+                                          AND teaId =#{vaId}
+                                          group by teId)  as t)as c
+                                          GROUP BY SUBSTR(c.Dates, 1, 15)
+                                          ORDER BY time) as e
+                                          LEFT JOIN
+                                          ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                          FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                          FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                          WHERE to_days(teDate) = to_days(now())
+                                          AND teCategory=2
+                                          AND teaId =#{vaId}
+                                          group by teId) as t)as c
+                                          GROUP BY SUBSTR(c.Dates, 1, 15)
+                                          ORDER BY time1) as o
+
+                                          ON o.time1=e.time
+
+                                          UNION
+
+
+                                          SELECT * FROM (
+                                          SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                          FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                          FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                          WHERE to_days(teDate) = to_days(now())
+                                          AND teCategory=1
+                                          AND teaId =#{vaId}
+                                          group by teId)  as t)as c
+                                          GROUP BY SUBSTR(c.Dates, 1, 15)
+                                          ORDER BY time) as e
+                                          RIGHT JOIN
+                                          ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                          FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                          FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                          WHERE to_days(teDate) = to_days(now())
+                                          AND teCategory=2
+                                          AND teaId =#{vaId}
+                                          group by teId) as t)as c
+                                          GROUP BY SUBSTR(c.Dates, 1, 15)
+                                          ORDER BY time1) as o
+
+                                          ON o.time1=e.time) as SE)
+
+                                      AS SEE
+
+    </select>
+    <select id="getOUTENCount2" resultType="java.lang.String">
+
+        SELECT ens as intra  FROM(
+
+                                     SELECT ifnull(value,0) as outs,time,ifnull(value1,0) as ens ,time1 FROM(
+
+
+                                         SELECT * FROM (
+                                         SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                         FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                         FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                         WHERE to_days(teDate) = to_days(now())
+                                         AND teCategory=1
+                                         AND teaId =#{vaId}
+                                         group by teId)  as t)as c
+                                         GROUP BY SUBSTR(c.Dates, 1, 15)
+                                         ORDER BY time) as e
+                                         LEFT JOIN
+                                         ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                         FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                         FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                         WHERE to_days(teDate) = to_days(now())
+                                         AND teCategory=2
+                                         AND teaId =#{vaId}
+                                         group by teId) as t)as c
+                                         GROUP BY SUBSTR(c.Dates, 1, 15)
+                                         ORDER BY time1) as o
+
+                                         ON o.time1=e.time
+
+                                         UNION
+
+
+                                         SELECT * FROM (
+                                         SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                         FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                         FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                         WHERE to_days(teDate) = to_days(now())
+                                         AND teCategory=1
+                                         AND teaId =#{vaId}
+                                         group by teId)  as t)as c
+                                         GROUP BY SUBSTR(c.Dates, 1, 15)
+                                         ORDER BY time) as e
+                                         RIGHT JOIN
+                                         ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                         FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                         FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                         WHERE to_days(teDate) = to_days(now())
+                                         AND teCategory=2
+                                         AND teaId =#{vaId}
+                                         group by teId) as t)as c
+                                         GROUP BY SUBSTR(c.Dates, 1, 15)
+                                         ORDER BY time1) as o
+
+                                         ON o.time1=e.time) as SE)
+
+                                     AS SEE
+
+
+    </select>
+    <select id="getOUTENCount3" resultType="java.lang.String">
+
+        SELECT ens-outs as intra  FROM(
+
+                                          SELECT ifnull(value,0) as outs,time,ifnull(value1,0) as ens ,time1 FROM(
+
+
+                                              SELECT * FROM (
+                                              SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                              FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                              FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                              WHERE to_days(teDate) = to_days(now())
+                                              AND teCategory=1
+                                              AND teaId =#{vaId}
+                                              group by teId)  as t)as c
+                                              GROUP BY SUBSTR(c.Dates, 1, 15)
+                                              ORDER BY time) as e
+                                              LEFT JOIN
+                                              ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                              FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                              FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                              WHERE to_days(teDate) = to_days(now())
+                                              AND teCategory=2
+                                              AND teaId =#{vaId}
+                                              group by teId) as t)as c
+                                              GROUP BY SUBSTR(c.Dates, 1, 15)
+                                              ORDER BY time1) as o
+
+                                              ON o.time1=e.time
+
+                                              UNION
+
+
+                                              SELECT * FROM (
+                                              SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                              FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                              FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                              WHERE to_days(teDate) = to_days(now())
+                                              AND teCategory=1
+                                              AND teaId =#{vaId}
+                                              group by teId)  as t)as c
+                                              GROUP BY SUBSTR(c.Dates, 1, 15)
+                                              ORDER BY time) as e
+                                              RIGHT JOIN
+                                              ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                              FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                              FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                              WHERE to_days(teDate) = to_days(now())
+                                              AND teCategory=2
+                                              AND teaId =#{vaId}
+                                              group by teId) as t)as c
+                                              GROUP BY SUBSTR(c.Dates, 1, 15)
+                                              ORDER BY time1) as o
+
+                                              ON o.time1=e.time) as SE)
+
+                                          AS SEE
+
+    </select>
+
+
+    <select id="getTIMElist" resultType="java.lang.String">
+
+        SELECT time FROM(
+
+            SELECT ifnull(value,0) as outs,time,ifnull(value1,0) as ens ,time1 FROM(
+
+
+            SELECT * FROM (
+            SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+            FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+            FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+            WHERE to_days(teDate) = to_days(now())
+            AND teCategory=1
+            AND teaId =#{vaId}
+            group by teId)  as t)as c
+            GROUP BY SUBSTR(c.Dates, 1, 15)
+            ORDER BY time) as e
+            LEFT JOIN
+            ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+            FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+            FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+            WHERE to_days(teDate) = to_days(now())
+            AND teCategory=2
+            AND teaId =#{vaId}
+            group by teId) as t)as c
+            GROUP BY SUBSTR(c.Dates, 1, 15)
+            ORDER BY time1) as o
+
+            ON o.time1=e.time
+
+            UNION
+
+
+            SELECT * FROM (
+            SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+            FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+            FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+            WHERE to_days(teDate) = to_days(now())
+            AND teCategory=1
+            AND teaId =#{vaId}
+            group by teId)  as t)as c
+            GROUP BY SUBSTR(c.Dates, 1, 15)
+            ORDER BY time) as e
+            RIGHT JOIN
+            ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+            FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+            FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+            WHERE to_days(teDate) = to_days(now())
+            AND teCategory=2
+            AND teaId =#{vaId}
+            group by teId) as t)as c
+            GROUP BY SUBSTR(c.Dates, 1, 15)
+            ORDER BY time1) as o
+
+            ON o.time1=e.time) as SE)
+
+            AS SEE
+
+
+    </select>
+    <select id="getTIMElist1" resultType="java.lang.String">
+
+        SELECT time1 FROM(
+
+                             SELECT ifnull(value,0) as outs,time,ifnull(value1,0) as ens ,time1 FROM(
+
+
+                                 SELECT * FROM (
+                                 SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                 FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                 FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                 WHERE to_days(teDate) = to_days(now())
+                                 AND teCategory=1
+                                 AND teaId =#{vaId}
+                                 group by teId)  as t)as c
+                                 GROUP BY SUBSTR(c.Dates, 1, 15)
+                                 ORDER BY time) as e
+                                 LEFT JOIN
+                                 ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                 FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                 FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                 WHERE to_days(teDate) = to_days(now())
+                                 AND teCategory=2
+                                 AND teaId =#{vaId}
+                                 group by teId) as t)as c
+                                 GROUP BY SUBSTR(c.Dates, 1, 15)
+                                 ORDER BY time1) as o
+
+                                 ON o.time1=e.time
+
+                                 UNION
+
+
+                                 SELECT * FROM (
+                                 SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
+                                 FROM ( SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                 FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate)as teDate,teId FROM tloe
+                                 WHERE to_days(teDate) = to_days(now())
+                                 AND teCategory=1
+                                 AND teaId =#{vaId}
+                                 group by teId)  as t)as c
+                                 GROUP BY SUBSTR(c.Dates, 1, 15)
+                                 ORDER BY time) as e
+                                 RIGHT JOIN
+                                 ( SELECT count(ids) as value1,  SUBSTR(c.Dates, 1, 15) as time1
+                                 FROM (SELECT date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
+                                 FROM  (SELECT   ANY_VALUE(tteId)as tteId,ANY_VALUE(teDate) as teDate,teId FROM tloe
+                                 WHERE to_days(teDate) = to_days(now())
+                                 AND teCategory=2
+                                 AND teaId =#{vaId}
+                                 group by teId) as t)as c
+                                 GROUP BY SUBSTR(c.Dates, 1, 15)
+                                 ORDER BY time1) as o
+
+                                 ON o.time1=e.time) as SE)
+
+                             AS SEE
+
+
+    </select>
+
+
     <select id="getImageByActivityId" resultType="java.lang.String">
         SELECT
             CONCAT('data:image/jpg;base64,', t.teImage)  AS image
@@ -39,9 +348,15 @@
             FROM enter AS e
             WHERE e.aId = #{vaId}
     </select>
+    <select id="getVotesCount" resultType="java.util.Map">
+
+        SELECT count(DISTINCT t.tId) as counts
+        FROM ticketing AS t
+        WHERE t.aId = #{vaId}
+    </select>
 
     <select id="getintworkCount" resultType="java.util.Map">
-        SELECT count(DISTINCT e.tQrcard) as counts
+        SELECT count(DISTINCT e.ENTERID) as counts
         FROM enter_employee AS e
         WHERE e.aId = #{vaId}
     </select>

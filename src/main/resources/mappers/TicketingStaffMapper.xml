@@ -5,106 +5,168 @@
 <mapper namespace="com.tickets.mapper.TicketingStaffMapper">
 
     <insert id="insert">
-        <selectKey keyProperty="tsId" resultType="string" order="BEFORE">
+        <selectKey keyProperty="tId" resultType="string" order="BEFORE">
             SELECT uuId()
         </selectKey>
         INSERT INTO ticketing
-        (tId, taId, tIdentitycard, tIccard, tQrcard, tSeatingarea,
-        tRownumber, tSeat, tGrandstand, tRealname, tNote, tWId,phone)
-        VALUES (#{tsId}, #{tsVaId}, #{tsIdentiycard}, #{tsIccard}, #{tsQrcard},
-        #{tsSeatingArea}, #{tsRownumber}, #{tsSeat}, #{tsGrandstand}, #{tsRealName}, #{tsNote}, #{tWId}, #{phone})
+        (tId, aId, BIND_CARD, BIND_MZXX, QR_CODE, SRAND_NAME,
+        SRAT_ROW, SRAT_COL, FLOOR_NAME, BIND_NAME, stamp,BIND_PHONE)
+        VALUES (#{tsId}, #{tsVaId}, #{BIND_CARD}, #{tsIccard}, #{QR_CODE},
+        #{SRAND_NAME}, #{SRAT_ROW}, #{SRAT_COL}, #{FLOOR_NAME}, #{BIND_NAME}, #{stamp}, #{BIND_PHONE})
     </insert>
     <insert id="install">
-        <selectKey keyProperty="tsId" resultType="string" order="BEFORE">
+        <selectKey keyProperty="tId" resultType="string" order="BEFORE">
             SELECT uuId()
         </selectKey>
         INSERT INTO ticketing
-        (tId, taId, tIdentitycard, tIccard, tQrcard, tSeatingarea,
-        tRownumber, tSeat, tGrandstand, tRealname, tNote,phone)
-        VALUES (#{tsId}, #{tsVaId}, #{tsIdentiycard}, #{tsIccard}, #{tsQrcard},
-        #{tsSeatingArea}, #{tsRownumber}, #{tsSeat}, #{tsGrandstand}, #{tsRealName}, #{tsNote}, #{phone})
+        (tId, aId, BIND_CARD, BIND_MZXX, QR_CODE, SRAND_NAME,
+        SRAT_ROW, SRAT_COL, FLOOR_NAME, BIND_NAME, stamp,BIND_PHONE)
+        VALUES (#{tId}, #{aId}, #{BIND_CARD}, #{BIND_MZXX}, #{QR_CODE},
+        #{SRAND_NAME}, #{SRAT_ROW}, #{SRAT_COL}, #{FLOOR_NAME}, #{BIND_NAME}, #{stamp}, #{BIND_PHONE})
     </insert>
     <insert id="installwtid">
-
         INSERT INTO ticketing_wechat
-        (tId, taId, tIdentitycard, tQrcard, tRealname, tNote,tData)
-        VALUES (#{tid}, #{aid}, #{cardId}, #{scanCode}, #{Rname},"1", #{datei} )
+        (tId, taId,tIdentitycard, tQrcard,tRealname, tNote,tData,MZXX)
+        VALUES (#{tid}, #{aid}, #{cardId}, #{scanCode}, #{Rname},1, #{datei} ,#{BIND_MZXX})
     </insert>
 
     <insert id="installwtidexhibition">
-
         INSERT INTO ticketing
-            (tId, taId, tIdentitycard, tRealname, phone,tNote,tData)
-        VALUES (#{tid}, #{aid}, #{cardId},  #{Rname}, #{Phone},"1", #{datei} )
+            (tId, aId, BIND_CARD, BIND_NAME, BIND_PHONE,stamp,ENTRY_TIME)
+        VALUES (#{tid}, #{aid}, #{cardId},  #{Rname}, #{Phone},1, #{datei} )
     </insert>
-    <insert id="installEntryrecord">
+   <!-- <insert id="installEntryrecord">
 
         INSERT INTO enter
-        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym,fImage)
+        (eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,QR_CODE,BIND_CARD,autonym,fImage)
         VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},
-        #{aName}, #{eDate}, #{temp}, #{dWorker}, #{tQrcard}, #{tIdentitycard}, #{autonym}, #{fImage})
+        #{aName}, #{eDate}, #{temp}, #{dWorker}, #{QR_CODE}, #{BIND_CARD}, #{autonym}, #{fImage})
+    </insert>-->
+    <insert id="installEntryrecord">
+        insert into enter(eId,aId,eName,tId,BIND_NAME,BIND_CARD,QR_CODE,ENTRY_TIME,stamp,standby) values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (#{item.eId},#{item.aId},#{item.eName},#{item.tId},#{item.BIND_NAME},#{item.BIND_CARD},
+             #{item.QR_CODE},#{item.ENTRY_TIME},#{item.stamp},#{item.standby})
+        </foreach>
+
+    </insert>
+
+    <insert id="installEntryrecordinfo">
+        insert into enter_info(eId,CHECK_CERT_TYPE,BIND_GENDER,BIND_MZXX,BIND_HJDXX,Device_CODE,Device_NAME,stamp) values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (#{item.eId},#{item.CHECK_CERT_TYPE}, #{item.BIND_GENDER},
+            #{item.BIND_MZXX},#{item.BIND_HJDXX},#{item.Device_CODE},#{item.Device_NAME},#{item.stamp})
+        </foreach>
+
+    </insert>
+
+    <insert id="installEntryrecordfimage">
+        insert into enter_fimage(eId,aId,BIND_PHOTO,BIND_CARD_PHOTO,stamp,standby)values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (#{item.eId},#{item.aId},#{item.BIND_PHOTO},#{item.BIND_CARD_PHOTO},#{item.stamp},#{item.standby})
+        </foreach>
     </insert>
 
     <insert id="installemploy">
-
-        INSERT INTO enter_employee
-        (eId,aId,vName,eName,tId,aName,eDate,tQrcard)
-        VALUES (#{eId}, #{aId}, #{vName}, #{eName}, #{tId},
-                #{aName}, #{eDate}, #{tQrcard})
+        INSERT INTO enter_employee(eId,aId,tId,eName,ENTERID,ENTRY_TIME,standby,stamp,FACEPHOTO) values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (#{item.eId},#{item.aId},#{item.tId},#{item.eName},#{item.ENTERID},#{item.ENTRY_TIME},#{item.standby},#{item.stamp},#{item.FACEPHOTO})
+        </foreach>
     </insert>
 
     <insert id="installcamera">
 
         INSERT INTO tloe
-        (teId,teImage,teDate,teAisle,teaId,teCategory,teMarking,teuid)
-        VALUES (null, #{teImage}, #{teDate}, #{teAisle}, #{teaId},
+        (teDate,teAisle,teaId,teCategory,teMarking,teId)
+        VALUES ( #{teDate}, #{teAisle}, #{teaId},
                 #{teCategory}, #{teMarking},#{teId})
     </insert>
 
     <!--parameterType 传入参数的类型，resultType返回参数的类型-->
     <select id="selectByKeys" resultType="java.util.Map">
-        SELECT t.tId, a.aId,a.aName, t.tIdentitycard, t.tIccard, t.tQrcard, t.tSeatingarea,t.tRownumber, t.tSeat,
-        t.tGrandstand, t.tRealname, t.tNote,t.phone
+        SELECT t.tId, a.aId,a.aName, BIND_CARD, t.BIND_MZXX, t.QR_CODE, t.SRAND_NAME,t.SRAT_ROW, t.SRAT_COL,
+        t.FLOOR_NAME, t.BIND_NAME, t.stamp,t.BIND_PHONE
         /*--引用其他sql片段*/
         <include refid="searchSQL"/>
         LIMIT ${(current-1)*size},${size}
     </select>
 
     <select id="getenueing" resultType="java.util.Map">
-        SELECT e.tIdentitycard as tIdentitycard, e.tQrcard as tQrcard,e.autonym as tRealname, e.fImage as fImage, e.eDate as Date,t.tSeatingarea as tSeatingarea ,t.tRownumber as tRownumber, t.tSeat as tSeat
-        FROM  enter AS e
-        LEFT JOIN ticketing AS t ON t.tId = e.tId
-        WHERE aId=#{aId}
-            AND e.tIdentitycard=#{cardId}
-            OR e.tQrcard =#{scanCode}
-        LIMIT 50
-    </select>
 
-    <select id="getticketing" resultType="java.util.Map">
-        SELECT  t.tIdentitycard as tIdentitycard,  t.tQrcard as tQrcard,t.tRealname as tRealname ,t.tSeatingarea,t.tRownumber, t.tSeat
-        FROM ticketing AS t
-        WHERE taId=#{aId}
+        SELECT e.eId as eId, t.tId as tId,t.BIND_CARD as tBIND_CARD,e.BIND_CARD as eBIND_CARD,t.BIND_NAME as tBIND_NAME,e.BIND_NAME as eBIND_NAME, t.QR_CODE as QR_CODE,BIND_PHONE, ENTRY_TIME,SRAND_NAME,SRAT_ROW, SRAT_COL
+        FROM
+        (SELECT e.eId,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME FROM enter as e   WHERE e.aId=#{aId})  AS e
+        LEFT JOIN
+        (SELECT tId,QR_CODE,SRAND_NAME,SRAT_ROW, SRAT_COL,BIND_PHONE,BIND_NAME,BIND_CARD	 FROM  ticketing WHERE aId=#{aId}) AS t ON t.QR_CODE = e.QR_CODE
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="cardId != null and cardId.length != 0">
-                AND t.tIdentitycard=#{cardId}
+                AND e.BIND_CARD=#{cardId}
             </if>
             <if test="scanCode != null and scanCode.length != 0">
-                AND t.tQrcard =#{scanCode}
+                AND e.QR_CODE =#{scanCode}
             </if>
-        LIMIT 50
+            <if test="tSeatingarea != null and tSeatingarea.length != 0">
+                AND SRAND_NAME LIKE "%"#{tSeatingarea}"%"
+            </if>
+            <if test="tRownumber != null and tRownumber.length != 0">
+                AND SRAT_ROW LIKE "%"#{tRownumber}"%"
+            </if>
+            <if test="tSeat != null and tSeat.length != 0">
+                AND SRAT_COL LIKE "%"#{tSeat}"%"
+            </if>
+        </trim>
+
+
+        UNION
+
+        SELECT e.eId as eId,t.tId as tId,t.BIND_CARD as tBIND_CARD,e.BIND_CARD as eBIND_CARD,t.BIND_NAME as tBIND_NAME,e.BIND_NAME as eBIND_NAME, t.QR_CODE as QR_CODE,BIND_PHONE, ENTRY_TIME,SRAND_NAME,SRAT_ROW, SRAT_COL
+        FROM
+        (SELECT e.eId,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME FROM enter as e  WHERE e.aId=#{aId})  AS e
+        RIGHT JOIN
+        (SELECT tId,QR_CODE,SRAND_NAME,SRAT_ROW, SRAT_COL,BIND_PHONE,BIND_NAME,BIND_CARD	 FROM  ticketing WHERE aId=#{aId}) AS t ON t.QR_CODE = e.QR_CODE
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="cardId != null and cardId.length != 0">
+                AND t.BIND_CARD=#{cardId}
+            </if>
+            <if test="scanCode != null and scanCode.length != 0">
+                AND t.QR_CODE =#{scanCode}
+            </if>
+            <if test="tSeatingarea != null and tSeatingarea.length != 0">
+                AND SRAND_NAME LIKE "%"#{tSeatingarea}"%"
+            </if>
+            <if test="tRownumber != null and tRownumber.length != 0">
+                AND SRAT_ROW LIKE "%"#{tRownumber}"%"
+            </if>
+            <if test="tSeat != null and tSeat.length != 0">
+                AND SRAT_COL LIKE "%"#{tSeat}"%"
+            </if>
+        </trim>
+
+
+
+
+        LIMIT 20
+
+
+
+    </select>
+
+    <select id="getticketing" resultType="java.lang.String">
+        SELECT CONVERT ( BIND_PHOTO USING utf8 ) AS BIND_PHOTO FROM enter_fimage WHERE eId=#{eId} LIMIT 1
     </select>
 
     <select id="getByapplet" resultType="java.util.Map">
-        select tId,tIdentitycard,tRealname from ticketing
-        WHERE taId = #{aId,jdbcType=VARCHAR}
-        AND  not locate(#{ips},tNote)>0
-        order by tData
+        select tId,BIND_CARD,BIND_NAME,BIND_MZXX from ticketing
+        WHERE aId = #{aId,jdbcType=VARCHAR}
+        AND  not locate(#{ips},stamp)>0
+        order by ENTRY_TIME
         desc limit 27
     </select>
 
 
     <update id="getByappletlisteid" >
-        UPDATE ticketing  SET tNote =  CONCAT(tNote,#{ips})
-        WHERE taId=#{aId}
+        UPDATE ticketing  SET stamp =  CONCAT(stamp,#{ips})
+        WHERE aId=#{aId}
         AND tId in
         <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
             #{item, jdbcType=VARCHAR}
@@ -112,17 +174,17 @@
     </update>
 
     <select id="getByBuys" resultType="java.util.Map">
-        SELECT t.tId, a.aId,a.aName, t.tIdentitycard, t.tIccard, t.tQrcard, t.tSeatingarea,t.tRownumber, t.tSeat,
-        t.tGrandstand, t.tRealname, t.tNote,t.phone
+        SELECT t.tId, a.aId,a.aName, BIND_CARD, t.BIND_MZXX, QR_CODE, t.SRAND_NAME,t.SRAT_ROW, t.SRAT_COL,
+        t.FLOOR_NAME, t.BIND_NAME, t.stamp,t.phone
         /*--引用其他sql片段*/
         FROM ticketing AS t
-        LEFT JOIN activity AS a ON t.taId = a.aId
-        WHERE t.taId=#{value}
+        LEFT JOIN activity AS a ON t.aId = a.aId
+        WHERE t.aId=#{value}
         <if test="telephone != null and telephone.length != 0">
             AND t.phone= #{telephone}
         </if>
-        <if test="tQrcard != null and tQrcard.length != 0">
-            AND  t.tQrcard =#{tQrcard}
+        <if test="QR_CODE != null and QR_CODE.length != 0">
+            AND  QR_CODE =#{QR_CODE}
         </if>
     </select>
 
@@ -130,12 +192,17 @@
         SELECT COUNT(t.tId)
         <include refid="searchSQL"/>
     </select>
+
+    <select id="getscanCode" resultType="java.lang.Integer">
+        select EXISTS(select lid  from linkingformat where linking =#{scanCode} limit 1 );
+    </select>
+
     <select id="selectDataByVaId" resultType="java.lang.Integer">
 
     </select>
 
     <select id="selectCountByscanCode" resultType="java.util.Map">
-        SELECT t.tId,t.tIdentitycard FROM ticketing AS t where t.tQrcard =#{scanCode} and t.taId=#{aId}
+        SELECT tId,BIND_CARD FROM ticketing where QR_CODE =#{scanCode} and aId=#{aId}
     </select>
     <select id="selectCountByscanCode1" resultType="java.util.Map">
         SELECT w.tId as wtid,w.tIdentitycard as wtIdentitycard
@@ -145,7 +212,7 @@
     </select>
 
     <select id="getcardId" resultType="java.util.Map">
-        SELECT t.tId FROM ticketing AS t where t.tIdentitycard =#{cardId} and t.taId=#{aId} and t.tId!=#{tId} LIMIT 1
+        SELECT tId FROM ticketing  where BIND_CARD =#{cardId} and aId=#{aId} and tId!=#{tId} LIMIT 1
     </select>
 
     <select id="getcardId2" resultType="java.util.Map">
@@ -153,7 +220,7 @@
     </select>
 
     <select id="getcardIdto" resultType="java.util.Map">
-        SELECT t.tId FROM ticketing AS t where t.tIdentitycard =#{cardId} and t.taId=#{aId} LIMIT 1
+        SELECT tId FROM ticketing where BIND_CARD =#{cardId} and aId=#{aId} LIMIT 1
     </select>
 
     <select id="getcardId2to" resultType="java.util.Map">
@@ -161,51 +228,46 @@
     </select>
 
 
-    <select id="selectById" resultType="java.util.Map">
-        SELECT t.tId, t.tIdentitycard, t.tRealname, t.phone, t.tQrcard, a.aName, a.aNote
-        FROM ticketing t
-        LEFT JOIN activity a On a.aId = t.taId
-        WHERE tWId= #{id}
-    </select>
+
 
     <update id="update">
-        UPDATE ticketing SET taId = #{tsVaId},tIdentitycard=#{tsIdentiycard},tIccard=#{tsIccard},
-         tQrcard=#{tsQrcard}, tSeatingarea=#{tsSeatingArea},tRownumber=#{tsRownumber}, tSeat=#{tsSeat},
-          tGrandstand=#{tsGrandstand} ,tRealname= #{tsRealName}, tNote=#{tsNote},phone=#{phone}
-          WHERE tId = #{tsId} LIMIT 1
+        UPDATE ticketing SET aId = #{tsVaId},BIND_CARD=#{BIND_CARD},BIND_MZXX=#{BIND_MZXX},
+         QR_CODE=#{QR_CODE}, SRAND_NAME=#{SRAND_NAME},SRAT_ROW=#{SRAT_ROW}, SRAT_COL=#{SRAT_COL},
+          FLOOR_NAME=#{FLOOR_NAME} ,BIND_NAME= #{BIND_NAME}, stamp=#{stamp},BIND_PHONE=#{BIND_PHONE}
+          WHERE tId = #{tId} LIMIT 1
     </update>
 
     <select id="getByKeycardIds" resultType="java.lang.Integer">
 
-        SELECT COUNT(tIdentitycard)
+        SELECT COUNT(BIND_CARD)
         FROM ticketing
-        WHERE taId=#{aId}
-          AND tIdentitycard=#{cardId}
+        WHERE aId=#{aId}
+          AND BIND_CARD=#{cardId}
     </select>
 
     <update id="updates">
-        UPDATE ticketing SET tIdentitycard=#{cardId},tRealname= #{Rname},tData=#{datei},tNote=1
+        UPDATE ticketing SET BIND_CARD=#{cardId},BIND_NAME= #{Rname},BIND_MZXX=#{BIND_MZXX},ENTRY_TIME=#{datei},stamp=1
         WHERE tId = #{tid} LIMIT 1
     </update>
     <update id="updatewe">
-        UPDATE ticketing_wechat SET tIdentitycard=#{cardId},tRealname= #{Rname},tData=#{datei},tNote=1
-        WHERE tId = #{wtid} LIMIT 1
+        UPDATE ticketing_wechat SET tIdentitycard=#{cardId},tRealname= #{Rname},MZXX=#{BIND_MZXX},tData=#{datei},tNote=1
+        WHERE taId = #{wtid} LIMIT 1
     </update>
 
 
 
     <delete id="deleteTs">
-       DELETE ticketing,face FROM ticketing LEFT JOIN face ON ticketing.tId=face.ftId WHERE ticketing.tId = #{tid}
+       DELETE FROM ticketing WHERE tId = #{tid}
     </delete>
 
     <sql id="searchSQL">
         FROM ticketing AS t
-        LEFT JOIN activity AS a ON t.taId = a.aId
+        LEFT JOIN activity AS a ON t.aId = a.aId
         /*LEFT JOIN venues AS v ON t.tvId = v.vId
         LEFT JOIN entrance AS e ON t.teId = e.eId*/
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
-            <if test="tsVaName != null and tsVaName.length != 0">
-                AND a.aName LIKE "%"#{tsVaName}"%"
+            <if test="aName != null and aName.length != 0">
+                AND a.aName LIKE "%"#{aName}"%"
             </if>
             <!--<if test="tsVmName != null and tsVmName.length != 0">
                 AND v.vName LIKE "%"#{tsVmName}"%"
@@ -213,26 +275,26 @@
             <if test="tsEmName != null and tsEmName.length != 0">
                 AND e.eName LIKE "%"#{tsEmName}"%"
             </if>-->
-            <if test="tsIdentiycard != null and tsIdentiycard.length != 0">
-                AND t.tIdentitycard LIKE "%"#{tsIdentiycard}"%"
+            <if test="BIND_CARD != null and BIND_CARD.length != 0">
+                AND t.BIND_CARD LIKE "%"#{BIND_CARD}"%"
             </if>
-            <if test="tsQrcard != null and tsQrcard.length != 0">
-                AND t.tQrcard LIKE "%"#{tsQrcard}"%"
+            <if test="QR_CODE != null and QR_CODE.length != 0">
+                AND t.QR_CODE LIKE "%"#{QR_CODE}"%"
             </if>
-            <if test="tsIccard != null and tsIccard.length != 0">
-                AND t.tIccard LIKE "%"#{tsIccard}"%"
+            <if test="BIND_MZXX != null and BIND_MZXX.length != 0">
+                AND t.BIND_MZXX LIKE "%"#{BIND_MZXX}"%"
             </if>
-            <if test="tsSeatingArea != null and tsSeatingArea.length != 0">
-                AND t.tSeatingarea LIKE "%"#{tsSeatingArea}"%"
+            <if test="SRAND_NAME != null and SRAND_NAME.length != 0">
+                AND t.SRAND_NAME LIKE "%"#{SRAND_NAME}"%"
             </if>
-            <if test="tsRownumber != null and tsRownumber.length != 0">
-                AND t.tRownumber LIKE "%"#{tsRownumber}"%"
+            <if test="SRAT_ROW != null and SRAT_ROW.length != 0">
+                AND t.SRAT_ROW LIKE "%"#{SRAT_ROW}"%"
             </if>
-            <if test="tsSeat != null and tsSeat.length != 0">
-                AND t.tSeat LIKE "%"#{tsSeat}"%"
+            <if test="SRAT_COL != null and SRAT_COL.length != 0">
+                AND t.SRAT_COL LIKE "%"#{SRAT_COL}"%"
             </if>
-            <if test="tsRealName != null and tsRealName.length != 0">
-                AND t.tRealname LIKE "%"#{tsRealName}"%"
+            <if test="BIND_NAME != null and BIND_NAME.length != 0">
+                AND t.BIND_NAME LIKE "%"#{BIND_NAME}"%"
             </if>
         </trim>
     </sql>

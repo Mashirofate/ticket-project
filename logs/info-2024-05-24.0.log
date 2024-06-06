@@ -1,0 +1,92 @@
+2024-05-24 11:04:54.212 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 1152 (C:\Users\wen\IdeaProjects\ticket-project\target\classes started by wen in C:\Users\wen\IdeaProjects\ticket-project)
+2024-05-24 11:04:54.214 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-05-24 11:04:55.423 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-05-24 11:04:55.423 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-05-24 11:04:55.511 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-05-24 11:04:57.173 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 3.327 seconds (process running for 3.849)
+2024-05-24 11:04:57.570 [RMI TCP Connection(3)-192.168.1.3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-24 11:04:57.608 [RMI TCP Connection(2)-192.168.1.3] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-05-24 11:10:03.743 [http-nio-8081-exec-4] INFO  org.apache.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xed0x010x000x000xe90x030x030x83D0xe0@0xa80xb70x960x9f0x850xd1R0x820x02 ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-24 11:14:36.445 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-05-24 11:14:36.454 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-05-24 11:14:40.278 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 2028 (C:\Users\wen\IdeaProjects\ticket-project\target\classes started by wen in C:\Users\wen\IdeaProjects\ticket-project)
+2024-05-24 11:14:40.280 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-05-24 11:14:41.371 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-05-24 11:14:41.371 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-05-24 11:14:41.445 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-05-24 11:14:42.974 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 3.068 seconds (process running for 3.633)
+2024-05-24 11:14:43.125 [RMI TCP Connection(7)-192.168.1.3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-24 11:14:43.222 [RMI TCP Connection(6)-192.168.1.3] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-05-24 11:15:25.983 [http-nio-8081-exec-1] INFO  org.apache.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xed0x010x000x000xe90x030x03U0xf70x8c0x930xd00x8ePd%0x1e2Rf0xe9*)U0x06k0xd10xde0xcd0xaf0x010xb00x1fO>0xcf0xe5`0xcc ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-24 11:29:02.935 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-05-24 11:29:02.944 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-05-24 11:32:25.918 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 49904 (C:\Users\wen\IdeaProjects\ticket-project\target\classes started by wen in C:\Users\wen\IdeaProjects\ticket-project)
+2024-05-24 11:32:25.920 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-05-24 11:32:26.914 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-05-24 11:32:26.914 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-05-24 11:32:26.980 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-05-24 11:32:28.414 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 2.862 seconds (process running for 3.438)
+2024-05-24 11:32:29.123 [RMI TCP Connection(2)-192.168.1.3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-24 11:32:29.216 [RMI TCP Connection(1)-192.168.1.3] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-05-24 11:32:33.604 [http-nio-8081-exec-1] INFO  org.apache.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xed0x010x000x000xe90x030x03K0x190xdb0xa30x86XK0xa20xa30x1d0xd50x86?0x85"0xde500xbb0xc30xfa0xa60xce0xe40x85*0xff0xc1Z0x99n0x8c ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-24 12:10:31.306 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-05-24 12:10:31.308 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2024-05-24 12:10:35.639 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 24644 (C:\Users\wen\IdeaProjects\ticket-project\target\classes started by wen in C:\Users\wen\IdeaProjects\ticket-project)
+2024-05-24 12:10:35.640 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+2024-05-24 12:10:36.688 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2024-05-24 12:10:36.688 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.13]
+2024-05-24 12:10:36.761 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-05-24 12:10:38.356 [main] INFO  com.tickets.TicketsApplication - Started TicketsApplication in 3.078 seconds (process running for 3.615)
+2024-05-24 12:10:38.515 [RMI TCP Connection(1)-192.168.1.3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-24 12:10:38.574 [RMI TCP Connection(2)-192.168.1.3] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2024-05-24 12:11:05.067 [http-nio-8081-exec-2] INFO  org.apache.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xed0x010x000x000xe90x030x030xd4X]0x8500xc00x020xc4r%0xae0x07=J0x0c\0xeb0x80X0xf5q0xffA+0x990xee0xd10xbd0x960x050xa8S ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:407)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:264)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1740)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-05-24 14:33:14.640 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2024-05-24 14:33:14.645 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

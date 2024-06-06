@@ -28,7 +28,9 @@ public interface EntranceManagementMapper {
     @MapKey("")
     Map<String, Object> getTempCount(String vaId);
     @MapKey("")
-    List<Map<String, Object>> numberOFarea(String vaId);
+    List<String> numberOFarea(String vaId);
+    List<String> numberOFarea1(String vaId);
+    List<String> numberOFarea2(String vaId);
 
     /**
      * 查询开放的入口

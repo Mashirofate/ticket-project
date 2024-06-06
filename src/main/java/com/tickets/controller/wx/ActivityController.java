@@ -3,11 +3,8 @@ package com.tickets.controller.wx;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.ResponseResult;
-import com.tickets.service.EntersService;
-import com.tickets.service.FaceService;
-import com.tickets.service.TicketingStaffService;
-import com.tickets.service.VenueActiviesService;
+import com.tickets.dto.*;
+import com.tickets.service.*;
 import com.tickets.utils.AESUtils;
 import com.tickets.utils.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,6 +20,7 @@ import java.security.Key;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Tag(name = "微信用户权限接口")
 @RestController
@@ -38,6 +36,8 @@ public class ActivityController {
     private VenueActiviesService venueActiviesService;
     @Autowired
     private TicketingStaffService ticketingStaffService;
+    @Autowired
+    private TurnoutService turnoutService;
 
     /**
      * ECB加密,不要IV
@@ -207,7 +207,7 @@ public class ActivityController {
     @Authentication(required = true)
     @Operation(summary = "根据id 根据票务绑定身份证信息， 演唱会模式")
     @PostMapping("/binding")
-    public ResponseResult getbindingaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String datei) throws Exception {
+    public ResponseResult getbindingaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String BIND_MZXX,String datei) throws Exception {
         // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
         String i="0";
         String tid=null;
@@ -215,11 +215,6 @@ public class ActivityController {
         String wtid=null;
         String wtIdentitycard=null;
 
-        Boolean cardIdBOO=true;
-        if(cardId.length()==18){
-            // 正确身份证信息
-            cardIdBOO=checkIdCardNum(cardId);
-        }
 
         byte[] DESkey = decryptBASE64("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4");// key为abcdefghijklmnopqrstuvwx的Base64编码
         byte[] keyiv = { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -229,6 +224,11 @@ public class ActivityController {
         String aes= AESUtils.AESEncode("1234567890qwerty",cardId);
         //System.out.println("aes:"+aes.length()+":++aes:"+aes);
 
+         //出去空格
+        scanCode = scanCode.chars()
+                .filter(c -> !Character.isWhitespace(c))
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
 
 //        String aes1= AESUtils.AESDecode("1234567890qwerty",aes);
 //        System.out.println("aes1:"+aes1.length()+":++aes1解密:"+aes1);
@@ -247,10 +247,214 @@ public class ActivityController {
 //        decode = des3DecodeCBC(DESkey, keyiv, encode);
 //        System.out.println("加密：" + encryptBASE64(encode));
 //        System.out.println("解密：" + new String(decode, "UTF-8"));
+        // 验证扫到的二维码是正确的票务二维码
+
+       int ling= ticketingStaffService.getscanCode(scanCode);
+        if(ling==0){
+                // 查询是否是有效票务
+                List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
+                List<Map<String,Object>> codelist1= ticketingStaffService.getByKeys1(scanCode,aId);
+
+                for (Map<String, Object> map : codelist) {
+                    for (String key : map.keySet()) {
+                        if(key.equals("tId") & map.get(key)!=null){
+                            tid= map.get(key).toString();
+                        }
+                        if(key.equals("tIdentitycard") & map.get(key)!=null){
+                            tIdentitycard=map.get(key).toString();
+                        }
+                    }
+                }
+
+                for (Map<String, Object> map : codelist1) {
+                    for (String key : map.keySet()) {
+                        if(key.equals("wtid") & map.get(key)!=null){
+                            wtid= map.get(key).toString();
+                        }
+                        if(key.equals("wtIdentitycard") & map.get(key)!=null){
+                            wtIdentitycard=map.get(key).toString();
+                        }
+                    }
+                }
+                // 查询有没有票务信息、
+                // 没有 票务信息
+                if((tid == null || tid.length() == 0) &( wtid == null || wtid.length() == 0)  ){
+                    String tidnu=null;
+                    String wtidnu=null;
+                    List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
+                    List<Map<String,Object>> cardIdlist2 = ticketingStaffService.getcardId2(cardId,aId,wtid);
+                    for (Map<String, Object> map : cardIdlist) {
+                        for (String key : map.keySet()) {
+                            if(key.equals("tId") & map.get(key)!=null){
+                                tidnu= map.get(key).toString();
+                            }
+                        }
+                    }
+
+                    for (Map<String, Object> map : cardIdlist2) {
+                        for (String key : map.keySet()) {
+                            if(key.equals("wtid") & map.get(key)!=null){
+                                wtidnu= map.get(key).toString();
+                            }
+                        }
+                    }
+                    if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0) ){
+                        boolean boll= ticketingStaffService.installwtid(cardId, scanCode,Rname, aId,datei,BIND_MZXX);
+                        if(boll){
+                            i=aes;
+                        }else {
+                            i="2";
+                        }
+                    }else{
+                        i="5";
+                    }
+                }else{
+            /*  boolean result = tIdentitycard==null;
+                boolean result1 =StringUtils.isBlank(tIdentitycard);
+                查询有没有重复的身份证信息*/
+                    List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
+                    List<Map<String,Object>> cardIdlist2 = ticketingStaffService.getcardId2(cardId,aId,wtid);
+
+                    String tidnu=null;
+                    String wtidnu=null;
+                    for (Map<String, Object> map : cardIdlist) {
+                        for (String key : map.keySet()) {
+                            if(key.equals("tId") & map.get(key)!=null){
+                                tidnu= map.get(key).toString();
+                            }
+                        }
+                    }
+
+                    for (Map<String, Object> map : cardIdlist2) {
+                        for (String key : map.keySet()) {
+                            if(key.equals("wtid") & map.get(key)!=null){
+                                wtidnu= map.get(key).toString();
+                            }
+                        }
+                    }
+                    // 没有重复的身份证信息
+                    // if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0)   ){
+                    if((tidnu == null || tidnu.length() == 0)){
+                        // 有票单没有身份证就绑定
+                        if((tIdentitycard==null || StringUtils.isBlank(tIdentitycard)) & (wtIdentitycard==null || StringUtils.isBlank(wtIdentitycard))){
+                            if(tid!=null){
+                                boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei,BIND_MZXX);
+                                if(boll){
+                                    i=aes;
+                                }else {
+                                    i="2";
+                                }
+                            }
+                            if(wtid!=null){
+                                boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
+                                if(boll){
+                                    i=aes;
+                                }else {
+                                    i="2";
+                                }
+                            }
+
+                        }else{
+                            if(tIdentitycard!=null){
+                                if(cardId.equals(tIdentitycard)){
+                                    boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei, BIND_MZXX);
+                                    if(boll){
+                                        i=aes;
+                                    }else {
+                                        i="2";
+                                    }
+                                }else{
+                                    i="4";
+                                }
+                            }
+
+                            if(wtIdentitycard!=null){
+                                // 有票单有身份证就比对身份证信息是否一至，一直就绑定
+                                if( cardId.equals(wtIdentitycard)){
+                                    boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
+                                    if(boll){
+                                        i=aes;
+                                    }else {
+                                        i="2";
+                                    }
+                                }else{
+                                    i="4";
+                                }
+                            }
+                        }
+                    }else{
+                        // 一个身份证有多张票返回身份证信息
+                        if(cardId.equals(tIdentitycard)){
+                            i=aes;
+                        }else{
+                            // 有重复的身份证信息
+                            i="5";
+                        }
+                    }
+
+                }
+
+        }else{
+            i="7";
+        }
 
 
+        List<Map<String, Object>> list= new ArrayList<>();
+        Map<String, Object> myMap = new HashMap<String, Object>();
+        myMap.put("codes",i);
+        list.add(myMap);
+        return ResponseResult.SUCCESS(list);
 
-        if(cardIdBOO){
+
+    }
+
+    @Authentication(required = true)
+    @Operation(summary = "根据id 根据票务绑定身份证信息， 演唱会模式")
+    @PostMapping("/bindingin")
+    public ResponseResult getbindinginaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String BIND_MZXX,String datei) throws Exception {
+        // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
+        String i="0";
+        String tid=null;
+        String tIdentitycard=null;
+        String wtid=null;
+        String wtIdentitycard=null;
+
+
+        byte[] DESkey = decryptBASE64("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4");// key为abcdefghijklmnopqrstuvwx的Base64编码
+        byte[] keyiv = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        byte[] data = cardId.getBytes("UTF-8");
+
+
+        String aes= AESUtils.AESEncode("1234567890qwerty",cardId);
+        //System.out.println("aes:"+aes.length()+":++aes:"+aes);
+
+        //出去空格
+        scanCode = scanCode.chars()
+                .filter(c -> !Character.isWhitespace(c))
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
+
+//        String aes1= AESUtils.AESDecode("1234567890qwerty",aes);
+//        System.out.println("aes1:"+aes1.length()+":++aes1解密:"+aes1);
+
+//        System.out.println("ECB模式：");// 当模式为ECB时，IV无用
+//        byte[] encode = des3EncodeECB(DESkey, data);
+//       // byte[] decode = ees3DecodeECB(DESkey, encode);
+//        String encryptBASE64=  encryptBASE64(encode);
+//        System.out.println("encryptBASE64:"+encryptBASE64.length());
+//        System.out.println("加密：" + encryptBASE64(encode));
+//        System.out.println("解密：" + new String(decode, "UTF-8"));
+//        System.out.println();
+
+//        System.out.println("CBC模式：");
+//        encode = des3EncodeCBC(DESkey, keyiv, data);
+//        decode = des3DecodeCBC(DESkey, keyiv, encode);
+//        System.out.println("加密：" + encryptBASE64(encode));
+//        System.out.println("解密：" + new String(decode, "UTF-8"));
+        // 验证扫到的二维码是正确的票务二维码
+
+        int ling= ticketingStaffService.getscanCode(scanCode);
+        if(ling==0){
             // 查询是否是有效票务
             List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
             List<Map<String,Object>> codelist1= ticketingStaffService.getByKeys1(scanCode,aId);
@@ -299,7 +503,7 @@ public class ActivityController {
                     }
                 }
                 if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0) ){
-                    boolean boll= ticketingStaffService.installwtid(cardId, scanCode,Rname, aId,datei);
+                    boolean boll= ticketingStaffService.installwtid(cardId, scanCode,Rname, aId,datei,BIND_MZXX);
                     if(boll){
                         i=aes;
                     }else {
@@ -333,11 +537,12 @@ public class ActivityController {
                     }
                 }
                 // 没有重复的身份证信息
-                if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0)   ){
+                // if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0)   ){
+                if((tidnu == null || tidnu.length() == 0)){
                     // 有票单没有身份证就绑定
                     if((tIdentitycard==null || StringUtils.isBlank(tIdentitycard)) & (wtIdentitycard==null || StringUtils.isBlank(wtIdentitycard))){
                         if(tid!=null){
-                            boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei);
+                            boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei,BIND_MZXX);
                             if(boll){
                                 i=aes;
                             }else {
@@ -345,7 +550,7 @@ public class ActivityController {
                             }
                         }
                         if(wtid!=null){
-                            boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei);
+                            boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
                             if(boll){
                                 i=aes;
                             }else {
@@ -354,37 +559,50 @@ public class ActivityController {
                         }
 
                     }else{
-                        if(cardId.equals(tIdentitycard)){
-                            boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei);
-                            if(boll){
-                                i=aes;
-                            }else {
-                                i="2";
+                        if(tIdentitycard!=null){
+                            if(cardId.equals(tIdentitycard)){
+                                boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei, BIND_MZXX);
+                                if(boll){
+                                    i=aes;
+                                }else {
+                                    i="2";
+                                }
+                            }else{
+                                i="4";
                             }
-                        }else{
-                            i="4";
                         }
-                        // 有票单有身份证就比对身份证信息是否一至，一直就绑定
-                        if( cardId.equals(wtIdentitycard)){
-                            boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei);
-                            if(boll){
-                                i=aes;
-                            }else {
-                                i="2";
+
+                        if(wtIdentitycard!=null){
+                            // 有票单有身份证就比对身份证信息是否一至，一直就绑定
+                            if( cardId.equals(wtIdentitycard)){
+                                boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
+                                if(boll){
+                                    i=aes;
+                                }else {
+                                    i="2";
+                                }
+                            }else{
+                                i="4";
                             }
-                        }else{
-                            i="4";
                         }
                     }
                 }else{
-                    // 有重复的身份证信息
-                    i="5";
+                    // 一个身份证有多张票返回身份证信息
+                    if(cardId.equals(tIdentitycard)){
+                        i=aes;
+                    }else{
+                        // 有重复的身份证信息
+                        i="5";
+                    }
                 }
 
             }
+
         }else{
-            i="6";
+            i="7";
         }
+
+
         List<Map<String, Object>> list= new ArrayList<>();
         Map<String, Object> myMap = new HashMap<String, Object>();
         myMap.put("codes",i);
@@ -394,44 +612,120 @@ public class ActivityController {
 
     }
 
+
+
     @Authentication(required = true)
     @Operation(summary = "根据二维码和身份证获取票务信息")
     @PostMapping("/inquire")
-    public ResponseResult getinquireId(@RequestParam String aId,String cardId,String aType,String scanCode) throws Exception {
+    public ResponseResult getinquireId(@RequestParam String aId,String cardId,String aType,String scanCode,String tSeatingarea,String tRownumber,String tSeat,String BIND_MZXX) throws Exception {
         // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
         List<Map<String, Object>> list=null;
-        if(aType.equals("ticketing")){
-            list= ticketingStaffService.getticketing(aId,cardId,scanCode);
-        }else {
-            list= ticketingStaffService.getenueing(aId,cardId,scanCode);
+       /* if(aType.equals("ticketing")){
+            list= ticketingStaffService.getticketing(aId,cardId,scanCode,tSeatingarea,tRownumber,tSeat);
+        }else {*/
+            list= ticketingStaffService.getenueing(aId,cardId,scanCode,tSeatingarea,tRownumber,tSeat);
+        return ResponseResult.SUCCESS(list);
+    }
 
-            if(list!=null & list.size()>0 ){
-                // e.tIdentitycard as tIdentitycard, e.tQrcard as tQrcard,e.autonym as tRealname, e.fImage   as fImage, e.eDate as Date,t.tSeatingarea as tSeatingarea ,t.tRownumber as tRownumber, t.tSeat as tSeat
-                for (int i = 0; i < list.size(); i++) {
-                    Map map = (Map) list.get(i);
-                    String a1=null;
-                    if(map.containsKey("fImage")){
-                        byte[]  by= (byte[])map.get("fImage");
-                        if(null !=by){
-                            String a = new String(by);
-                            a1 = a;
-                        }
+    @Authentication(required = true)
+    @Operation(summary = "根据二维码和身份证获取票务信息")
+    @PostMapping("/inquireimg")
+    public ResponseResult getinquireimg(@RequestParam String eId) throws Exception {
+
+        String  list= ticketingStaffService.getticketing(eId);
+
+        /*    if(list!=null & list.size()>0 ){
+            for (int i = 0; i < list.size(); i++) {
+                Map map = (Map) list.get(i);
+                String a1=null;
+                if(map.containsKey("BIND_PHOTO")){
+                    byte[]  by= (byte[])map.get("BIND_PHOTO");
+                    if(null !=by){
+                        String a = new String(by);
+                        a1 = a;
                     }
-                    map.put("fImage", a1);
-                    list.set(i, map);
                 }
+                map.put("BIND_PHOTO", a1);
+                list.set(i, map);
             }
-        }
-
+        }*/
         return ResponseResult.SUCCESS(list);
 
 
     }
 
     @Authentication(required = true)
-    @Operation(summary = "根据没有票务绑定 展会模式")
-    @PostMapping("/bindingexhibition")
-    public ResponseResult getbindingaIdexhibition(@RequestParam String aId,String cardId,String Rname,String Phone,String datei) throws Exception {
+    @Operation(summary = "根据tid清楚票务的身份证信息")
+    @PostMapping("/eliminate")
+    public ResponseResult geteliminateId(@RequestParam String aId,String tId) throws Exception {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String datei=formatter.format(date);
+        String BIND_MZXX=null;
+        boolean boll= ticketingStaffService.update("0", "0", tId,datei, "0");
+        List<Map<String, Object>> list= new ArrayList<>();
+        Map<String, Object> myMap = new HashMap<String, Object>();
+        String  i="1";
+        if(boll){
+            i="1";
+        }else{
+            i="2";
+        }
+        myMap.put("codes",i);
+        list.add(myMap);
+        return ResponseResult.SUCCESS(list);
+
+
+    }
+
+    @Authentication(required = true)
+    @Operation(summary = "根据tid查询票务数量")
+    @PostMapping("/attendance")
+    public ResponseResult getattendance(@RequestParam String aId) throws Exception {
+        // 获取当天入场记录中的所有人数去重
+        Map<String, Object> intraFieldCount = turnoutService.getintraFieldCount(aId);
+        Map<String, Object> VotesCount = turnoutService.getVotesCount(aId); //活动的总数
+        Map<String, Object> intworkCount = turnoutService.getintworkCount(aId);
+        int work =0;
+        if(intworkCount.get("counts") !=null) {
+
+            work = Integer.parseInt(intworkCount.get("counts").toString());
+        }
+
+        int intraField =0;
+        if(intraFieldCount!=null){
+
+            intraField=Integer.parseInt(intraFieldCount.get("counts").toString());
+        }
+
+        int Votes =0;
+        if(VotesCount!=null){
+
+            Votes=Integer.parseInt(VotesCount.get("counts").toString());
+        }
+
+
+        List<Map<String, Object>> list= new ArrayList<>();
+        Map<String, Object> myMap = new HashMap<String, Object>();
+
+
+
+
+        // rest.put("Norealname",Norealname.get("Norealname"));
+        // rest.put("realname",realname.get("realname"));
+        myMap.put("intraField",intraField);
+        myMap.put("Votes",Votes);
+        myMap.put("work",work);
+        list.add(myMap);
+        return ResponseResult.SUCCESS(list);
+
+
+    }
+
+    @Authentication(required = true)
+    @Operation(summary = "根据没有票务绑定 展会模式 新增票务")
+    @PostMapping("/bindingexhibitioning")
+    public ResponseResult getbindingaIdexhibitioning(@RequestParam String aId,String cardId,String Rname,String Phone,String datei,String scanCode) throws Exception {
         // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
         String i="0";
         String tid=null;
@@ -444,14 +738,12 @@ public class ActivityController {
             // 正确身份证信息
             cardIdBOO=checkIdCardNum(cardId);
         }
-
-
-
         String aes= AESUtils.AESEncode("1234567890qwerty",cardId);
 
 
-
+        // 展会添加数据
         if(cardIdBOO){
+
             boolean boll= ticketingStaffService.installwtidexhibition(cardId,Rname,Phone, aId,datei);
             if(boll){
                 i=aes;
@@ -461,6 +753,111 @@ public class ActivityController {
         }else{
             i="6";
         }
+
+
+
+        List<Map<String, Object>> list= new ArrayList<>();
+        Map<String, Object> myMap = new HashMap<String, Object>();
+        myMap.put("codes",i);
+        list.add(myMap);
+        return ResponseResult.SUCCESS(list);
+
+
+    }
+
+    @Authentication(required = true)
+    @Operation(summary = "根据没有票务绑定 展会模式 自带票务信息")
+    @PostMapping("/bindingexhibition")
+    public ResponseResult getbindingaIdexhibition(@RequestParam String aId,String cardId,String Rname,String Phone,String datei,String scanCode,String BIND_MZXX) throws Exception {
+        // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
+        String i="0";
+        String tid=null;
+        String tIdentitycard=null;
+        String wtid=null;
+        String wtIdentitycard=null;
+
+        Boolean cardIdBOO=true;
+        if(cardId.length()==18){
+            // 正确身份证信息
+            cardIdBOO=checkIdCardNum(cardId);
+        }
+        String aes= AESUtils.AESEncode("1234567890qwerty",cardId);
+
+        // 查询是否是有效票务
+        List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
+        for (Map<String, Object> map : codelist) {
+            for (String key : map.keySet()) {
+                if(key.equals("tId") & map.get(key)!=null){
+                    tid= map.get(key).toString();
+                }
+                if(key.equals("tIdentitycard") & map.get(key)!=null){
+                    tIdentitycard=map.get(key).toString();
+                }
+            }
+        }
+
+        System.out.println("scanCode:"+scanCode+"cardId:"+cardId+"tIdentitycard:"+tIdentitycard+"tid:"+tid);
+        if(cardIdBOO){
+           String  tidnu=null;
+            List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
+            for (Map<String, Object> map : cardIdlist) {
+                for (String key : map.keySet()) {
+                    if(key.equals("tId") & map.get(key)!=null){
+                        tidnu= map.get(key).toString();
+                    }
+                }
+            }
+            // 查询身份证有没有重复
+            if((tidnu == null || tidnu.length() == 0)){
+                // 说明没有绑定票务信息
+                if(tIdentitycard==null){
+                    // 绑定身份证和票务信息
+                    boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei, BIND_MZXX);
+                    if(boll){
+                        i=aes;
+                    }else {
+                        i="2";
+                    }
+                }else{
+                    //绑定票务信息绑定了票务信息
+                    // 验证是否是同一人，是返回身份证信息
+                    if(cardId.equals(tIdentitycard)){
+                        i=aes;
+                    }else{
+                        //不是同一人，返回错误提示信息
+                        i="4";
+                    }
+                }
+            }else{
+                if(tidnu.equals(tid)){
+                    i=aes;
+                }else{
+                    // 重复绑定多张
+                    i="5";
+                }
+            }
+
+
+
+        }else{
+            i="6";
+        }
+        // 展会添加数据
+/*
+        if(cardIdBOO){
+
+            boolean boll= ticketingStaffService.installwtidexhibition(cardId,Rname,Phone, aId,datei);
+            if(boll){
+                i=aes;
+            }else {
+                i="2";
+            }
+        }else{
+            i="6";
+        }*/
+
+
+
         List<Map<String, Object>> list= new ArrayList<>();
         Map<String, Object> myMap = new HashMap<String, Object>();
         myMap.put("codes",i);
@@ -512,57 +909,115 @@ public class ActivityController {
         JSONObject jsobject =  JSONObject.parseObject(jsonstr);
         JSONArray listiden=  jsobject.getJSONArray("Entryrecord");
         if(listiden!=null){
-            for(int i=0;i<listiden.size();i++) {
-                if( listiden.getJSONObject(i).get("eId")!=null){
-                    String eId= listiden.getJSONObject(i).get("eId").toString();
-                    String aId= listiden.getJSONObject(i).get("aId").toString();
-                    String vName=listiden.getJSONObject(i).get("vName").toString();
-                    String eName=listiden.getJSONObject(i).get("eName").toString();
-                    String tId=null;
-                    if(listiden.getJSONObject(i).get("tId")!=null){
-                        tId= listiden.getJSONObject(i).get("tId").toString();
-                    }
-                    String aName= listiden.getJSONObject(i).get("aName").toString();
-//                    System.out.print("Date:"+listiden.getJSONObject(i).get("eDate").toString());
+            if(listiden.size()>0){
+                List listen = new ArrayList();
+                List listf = new ArrayList();
+                List listi = new ArrayList();
+                for(int i=0;i<listiden.size();i++) {
+                    if( listiden.getJSONObject(i).get("eId")!=null){
+                        String eId= listiden.getJSONObject(i).get("eId").toString();
+                        String aId= listiden.getJSONObject(i).get("aId").toString();
+                        String eName=listiden.getJSONObject(i).get("eName").toString();
+                        String tId=null;
+                        if(listiden.getJSONObject(i).get("tId")!=null){
+                            tId= listiden.getJSONObject(i).get("tId").toString();
+                        }
+                        String CHECK_CERT_TYPE= listiden.getJSONObject(i).get("CHECK_CERT_TYPE").toString();
+
+                        String BIND_NAME=null;
+                        if(listiden.getJSONObject(i).get("BIND_NAME")!=null){
+                            BIND_NAME=  listiden.getJSONObject(i).get("BIND_NAME").toString();
+                        }
+                        String BIND_CARD=null;
+                        if(listiden.getJSONObject(i).get("BIND_CARD")!=null){
+                            BIND_CARD= listiden.getJSONObject(i).get("BIND_CARD").toString();
+                        }
+                        String BIND_GENDER=null;
+                        if(listiden.getJSONObject(i).get("BIND_GENDER")!=null){
+                            BIND_GENDER=  listiden.getJSONObject(i).get("BIND_GENDER").toString();
+                        }
+                        String BIND_MZXX=null;
+                        if(listiden.getJSONObject(i).get("BIND_MZXX")!=null){
+                            BIND_MZXX=  listiden.getJSONObject(i).get("BIND_MZXX").toString();
+                        }
+                        String BIND_HJDXX=null;
+                        if(listiden.getJSONObject(i).get("BIND_HJDXX")!=null){
+                            BIND_HJDXX= listiden.getJSONObject(i).get("BIND_HJDXX").toString();
+                        }
+                        String QR_CODE=null;
+                        if(listiden.getJSONObject(i).get("QR_CODE")!=null){
+                            QR_CODE=  listiden.getJSONObject(i).get("QR_CODE").toString();
+                        }
+                        String Device_CODE=null;
+                        if(listiden.getJSONObject(i).get("Device_CODE")!=null){
+                            Device_CODE=  listiden.getJSONObject(i).get("Device_CODE").toString();
+                        }
+                        String Device_NAME=null;
+                        if(listiden.getJSONObject(i).get("Device_NAME")!=null){
+                            Device_NAME= listiden.getJSONObject(i).get("Device_NAME").toString();
+                        }
+
+                        String stamp=null;
+                        if(listiden.getJSONObject(i).get("stamp")!=null){
+                            stamp=  listiden.getJSONObject(i).get("stamp").toString();
+                        }
+                        String ENTRY_TIME = listiden.getJSONObject(i).get("ENTRY_TIME").toString();
 
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                    String eDate = listiden.getJSONObject(i).get("eDate").toString();
+                        //fimge
 
-
-                    String temp=null;
-                    if(listiden.getJSONObject(i).get("temp")!=null){
-                        temp=  listiden.getJSONObject(i).get("temp").toString();
-                    }
-                    String dWorker=null;
-                    if(listiden.getJSONObject(i).get("dWorker")!=null){
-                        dWorker=  listiden.getJSONObject(i).get("dWorker").toString();
-                    }
-                    String tQrcard=null;
-                    if(listiden.getJSONObject(i).get("tQrcard")!=null){
-                        tQrcard= listiden.getJSONObject(i).get("tQrcard").toString();
-                    }
-                    String tIdentitycard=null;
-                    if(listiden.getJSONObject(i).get("tIdentitycard")!=null){
-                        tIdentitycard=  listiden.getJSONObject(i).get("tIdentitycard").toString();
-                    }
+                        byte[] BIND_PHOTO=null;
+                        if(listiden.getJSONObject(i).get("BIND_PHOTO")!=null){
+                            BIND_PHOTO = listiden.getJSONObject(i).get("BIND_PHOTO").toString().getBytes();
+                        }
+                        byte[] BIND_CARD_PHOTO=null;
+                        if(listiden.getJSONObject(i).get("BIND_CARD_PHOTO")!=null){
+                            BIND_CARD_PHOTO = listiden.getJSONObject(i).get("BIND_CARD_PHOTO").toString().getBytes();
+                        }
 
 
+                        EntertfDto entertfDto =new EntertfDto();
+                        entertfDto.setaId(aId);
+                        entertfDto.seteId(eId);
+                        entertfDto.seteName(eName);
+                        entertfDto.settId(tId);
+                        entertfDto.setBIND_NAME(BIND_NAME);
+                        entertfDto.setBIND_CARD(BIND_CARD);
+                        entertfDto.setQR_CODE(QR_CODE);
+                        entertfDto.setStamp(stamp);
+                        entertfDto.setENTRY_TIME(ENTRY_TIME);
+                        entertfDto.setStandby("0");
 
-                    String autonym=null;
-                    if(listiden.getJSONObject(i).get("autonym")!=null){
-                        autonym=  listiden.getJSONObject(i).get("autonym").toString();
-                    }
+                        listen.add(entertfDto);
 
-                    byte[] fImage=null;
-                    if(listiden.getJSONObject(i).get("fImage")!=null){
-                        fImage = listiden.getJSONObject(i).get("fImage").toString().getBytes();
-                    }
+                        enter_info enter_in=new enter_info();
+                        enter_in.seteId(eId);
+                        enter_in.setCHECK_CERT_TYPE(CHECK_CERT_TYPE);
+                        enter_in.setBIND_GENDER(BIND_GENDER);
+                        enter_in.setBIND_MZXX(BIND_MZXX);
+                        enter_in.setBIND_HJDXX(BIND_HJDXX);
+                        enter_in.setDevice_CODE(Device_CODE);
+                        enter_in.setDevice_NAME(Device_NAME);
+                        enter_in.setStamp("0");
+                        listi.add(enter_in);
 
-                    seio= ticketingStaffService.installEntryrecord(eId,aId,vName,eName,tId,aName,eDate,temp,dWorker,tQrcard,tIdentitycard,autonym,fImage);
+                        enter_fimage enter_fimae=new enter_fimage();
+                        enter_fimae.seteId(eId);
+                        enter_fimae.setaId(aId);
+                        enter_fimae.setBIND_PHOTO(BIND_PHOTO);
+                        enter_fimae.setBIND_CARD_PHOTO(BIND_CARD_PHOTO);
+                        enter_fimae.setStamp("0");
+                        enter_fimae.setStandby("0");
+                        listf.add(enter_fimae);
+
+                   }
                 }
+
+                seio= ticketingStaffService.installEntryrecord(listen,listf,listi);
+
             }
+
         }
 
 
@@ -572,6 +1027,7 @@ public class ActivityController {
 
 
     }
+
 
     @Authentication(required = true)
     @Operation(summary = "接受上传的工作证入场记录    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
@@ -583,47 +1039,50 @@ public class ActivityController {
         JSONObject jsobject =  JSONObject.parseObject(jsonstr);
         JSONArray listiden=  jsobject.getJSONArray("Entryrecord");
         if(listiden!=null){
-            for(int i=0;i<listiden.size();i++) {
-                if( listiden.getJSONObject(i).get("eId")!=null){
-                    String eId= listiden.getJSONObject(i).get("eId").toString();
-                    String aId= listiden.getJSONObject(i).get("aId").toString();
+            if(listiden.size()>0) {
+                List listen = new ArrayList();
+                for (int i = 0; i < listiden.size(); i++) {
+                    if (listiden.getJSONObject(i).get("eId") != null) {
+                        enter_employee enterEmployee = new enter_employee();
 
-                    String vName=listiden.getJSONObject(i).get("vName").toString();
 
-                    String eName=listiden.getJSONObject(i).get("eName").toString();
-                    String tId=null;
-                    if(listiden.getJSONObject(i).get("tId")!=null){
-                       tId= listiden.getJSONObject(i).get("tId").toString();
+                        String eId = listiden.getJSONObject(i).get("eId").toString();
+                        String aId = listiden.getJSONObject(i).get("aId").toString();
+                        String tId = null;
+                        if (listiden.getJSONObject(i).get("tId") != null) {
+                            tId = listiden.getJSONObject(i).get("tId").toString();
+                        }
+                        String eName = listiden.getJSONObject(i).get("eName").toString();
+
+                        String ENTRY_TIME = listiden.getJSONObject(i).get("ENTRY_TIME").toString();
+                        String stamp = listiden.getJSONObject(i).get("stamp").toString();
+
+                        String ENTERID = null;
+                        if (listiden.getJSONObject(i).get("ENTERID") != null) {
+                            ENTERID = listiden.getJSONObject(i).get("ENTERID").toString();
+                        }
+
+                        byte[] FACEPHOTO = null;
+                        if (listiden.getJSONObject(i).get("FACEPHOTO") != null) {
+                            FACEPHOTO = listiden.getJSONObject(i).get("FACEPHOTO").toString().getBytes();
+                        }
+                        enterEmployee.seteId(eId);
+                        enterEmployee.setaId(aId);
+                        enterEmployee.settId(tId);
+                        enterEmployee.setENTERID(ENTERID);
+                        enterEmployee.seteName(eName);
+                        enterEmployee.setENTRY_TIME(ENTRY_TIME);
+                        enterEmployee.setStandby("0");
+                        enterEmployee.setStamp(stamp);
+                        enterEmployee.setFACEPHOTO(FACEPHOTO);
+
+                        listen.add(enterEmployee);
                     }
-
-
-                    String aName= listiden.getJSONObject(i).get("aName").toString();
-                   // System.out.print("Date:"+listiden.getJSONObject(i).get("eDate").toString());
-
-
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-                    String eDate = listiden.getJSONObject(i).get("eDate").toString();
-
-
-                    String tQrcard=null;
-                    if(listiden.getJSONObject(i).get("tQrcard")!=null){
-                        tQrcard= listiden.getJSONObject(i).get("tQrcard").toString();
-                    }
-                    String tIdentitycard=null;
-
-
-                    ticketingStaffService.installemploy(eId,aId,vName,eName,tId,aName,eDate,tQrcard);
                 }
+                ticketingStaffService.installemploy(listen);
             }
         }
-
-
-
-
         return ResponseResult.SUCCESS("1");
-
-
     }
 
     @Authentication(required = true)
@@ -631,7 +1090,7 @@ public class ActivityController {
     @PostMapping("/camera")
     public ResponseResult getbindcamera(@RequestBody String jsonstr) {
         // json传输过来的活动id 摄像头信息
-       System.out.print("jsonstr:"+jsonstr);
+       //System.out.print("jsonstr:"+jsonstr);
 
         JSONObject jsobject =  JSONObject.parseObject(jsonstr);
         JSONArray listiden=  jsobject.getJSONArray("camera");
@@ -639,14 +1098,14 @@ public class ActivityController {
             for(int i=0;i<listiden.size();i++) {
                 if( listiden.getJSONObject(i).get("teId")!=null){
                     String teId= listiden.getJSONObject(i).get("teId").toString();
-                    String teImage= listiden.getJSONObject(i).get("teImage").toString();
+//                    String teImage= listiden.getJSONObject(i).get("teImage").toString();
                     String teDate=listiden.getJSONObject(i).get("teDate").toString();
                     String teAisle=listiden.getJSONObject(i).get("teAisle").toString();
                     String teaId= listiden.getJSONObject(i).get("teaId").toString();
                     String teCategory= listiden.getJSONObject(i).get("teCategory").toString();
                     String teMarking= listiden.getJSONObject(i).get("teMarking").toString();
 
-                    int a=ticketingStaffService.installcamera(teId,teImage,teDate,teAisle,teaId,teCategory,teMarking);
+                    int a=ticketingStaffService.installcamera(teId,teDate,teAisle,teaId,teCategory,teMarking);
 
                 }
             }
@@ -655,7 +1114,7 @@ public class ActivityController {
 
 
 
-        return ResponseResult.SUCCESS("1");
+        return ResponseResult.SUCCESS(listiden.size());
 
 
     }
@@ -743,43 +1202,5 @@ public class ActivityController {
         return ch[res%11];
     }
 
-    //根据身份证号码的出生日期计算年龄
-    public int getYear(String idNum)
-    {
-        int yearBirth=Integer.parseInt(idNum.substring(6, 10));
-        int monBirth=Integer.parseInt(idNum.substring(10, 12));
-        int dayBirth=Integer.parseInt(idNum.substring(12, 14));
 
-        Calendar cur=Calendar.getInstance();
-        int yearCur=cur.get(Calendar.YEAR);
-        int monCur=cur.get(Calendar.MONTH)+1; //不要忘了+1
-        int dayCur=cur.get(Calendar.DATE);
-
-
-        //System.out.println(yearCur+" "+monCur+" "+dayCur);
-        int age=yearCur-yearBirth;
-        if(monCur<monBirth || (monCur==monBirth && dayCur<dayBirth))
-            age--;
-
-        return age;
-    }
-
-    //出生的所在那一周是出生那年的第几周
-    public int getBirthWeek(String idNum) throws ParseException
-    {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
-        Date birthDate=sdf.parse(idNum.substring(6, 14));  //默认0时0分0秒
-        Calendar calendar=Calendar.getInstance();
-        calendar.setTime(birthDate);
-        return calendar.get(Calendar.WEEK_OF_YEAR);
-    }
-
-    //从出生到现在过去了多少周
-    public int getWeeks(String idNum) throws ParseException
-    {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
-        Date birthDate=sdf.parse(idNum.substring(6, 14));  //默认0时0分0秒
-        Date curDate=new Date();
-        return  (int)( (curDate.getTime()-birthDate.getTime())/(long)(7*24*60*60*1000) ) ; //不建议把分子转成int，可能会溢出
-    }
 }

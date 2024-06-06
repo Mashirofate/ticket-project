@@ -31,16 +31,31 @@ public class EntersController {
             for (int i = 0; i < list.size(); i++) {
                 Map map = (Map) list.get(i);
                 String a1=null;
-                if(map.containsKey("fImage")){
-                    byte[]  by= (byte[])map.get("fImage");
+                if(map.containsKey("BIND_PHOTO")){
+                    byte[]  by= (byte[])map.get("BIND_PHOTO");
                     if(null !=by){
                         String a = new String(by);
                         a1 = "data:image/png;base64," + a;
                     }
                 }
-                map.put("fImage", a1);
+                map.put("BIND_PHOTO", a1);
                 list.set(i, map);
             }
+
+            for (int i = 0; i < list.size(); i++) {
+                Map map = (Map) list.get(i);
+                String a1=null;
+                if(map.containsKey("BIND_CARD_PHOTO")){
+                    byte[]  by= (byte[])map.get("BIND_CARD_PHOTO");
+                    if(null !=by){
+                        String a = new String(by);
+                        a1 = "data:image/png;base64," + a;
+                    }
+                }
+                map.put("BIND_CARD_PHOTO", a1);
+                list.set(i, map);
+            }
+
             page.setRecords(list);
 
         }

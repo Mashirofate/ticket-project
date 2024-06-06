@@ -14,7 +14,7 @@
         WHERE tId=#{tId}
     </update>
     <update id="getUploadQTIAEW" >
-        UPDATE enter  SET dWorker = 1
+        UPDATE enter  SET standby = '1'
         WHERE aId=#{aid}
         AND eId in
         <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
@@ -93,11 +93,110 @@
    <!-- TO_DAYS(eDate)=TO_DAYS(NOW())-->
 <!--    eDate between #{sqlDateformerly} and #{sqlDate}-->
     <select id="getImageByActivityId" resultType="java.util.Map">
-        SELECT eId,aName,eName,tIdentitycard,tQrcard,eDate,CONVERT( fImage USING utf8 )  fImage from enter
-        WHERE  eDate between #{sqlDateformerly} and #{sqlDate}
-        AND aId=#{aId}
+        SELECT
+            e.eId AS ID,
+            CONCAT( e.aId, '01' ) AS performId,
+            e.aId AS projectId,
+            eName AS checkPass,
+            SRAT_ROW AS seatRow,
+            SRAT_COL AS seatCol,
+            CHECK_CERT_TYPE AS checkCertType,
+            BIND_CARD AS checkCertTypeNo,
+            VANAME AS venueName,
+            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS entryTime,
+            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS checkTime,
+            tId AS voucherId,
+            BIND_CARD AS bindCard,
+            BIND_NAME AS bindUserName,
+            FLOOR_NAME AS floorName,
+            SRAND_NAME AS standName,
+            DEVICE_NAME AS deviceName,
+            DEVICE_CODE AS deviceCode,
+            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS insertTime,
+            CONVERT ( BIND_PHOTO USING utf8 ) AS bindPhoto,
+            CONVERT ( BIND_CARD_PHOTO USING utf8 ) AS bindCardPhoto,
+            BIND_CARD AS idcode,
+            BIND_HJDXX AS hjdxx,
+            BIND_MZXX AS mzxx
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    (
+                        SELECT
+                            e.*,
+                            BIND_PHOTO,
+                            BIND_CARD_PHOTO
+                        FROM
+                            (
+                                SELECT
+                                    e.eId,
+                                    e.aId,
+                                    e.eName,
+                                    e.tId,
+                                    e.BIND_NAME,
+                                    e.BIND_CARD,
+                                    e.QR_CODE,
+                                    e.standby,
+                                    e.ENTRY_TIME,
+                                    i.CHECK_CERT_TYPE,
+                                    i.BIND_GENDER,
+                                    i.BIND_MZXX,
+                                    i.BIND_HJDXX,
+                                    i.Device_CODE,
+                                    i.Device_NAME
+                                FROM
+                                    enter AS e
+                                        LEFT JOIN enter_info AS i ON e.eId = i.eId
+                                WHERE
+                                    e.aId =#{aid}
+                            ) AS e
+                                LEFT JOIN enter_fimage AS f ON e.eId = f.eId
+
+                    ) AS e
+                        LEFT JOIN (
+                        SELECT
+                            tId AS TTID,
+                            SRAND_NAME,
+                            SRAT_ROW,
+                            SRAT_COL,
+                            FLOOR_NAME,
+                            vName AS VANAME
+                        FROM
+                            ticketing AS t
+                                LEFT JOIN activity AS a ON a.aId = t.aId
+                        WHERE
+                            t.aId = #{aid}
+                    ) AS t ON t.TTID = e.tId
+            ) AS e
+        WHERE e.standby = '0'
+          AND e.BIND_CARD IS NOT NULL
+          AND e.BIND_CARD != ''
+        ORDER BY
+            ENTRY_TIME DESC
+            LIMIT 3000
     </select>
 
+    <select id="getImageByActivityticketId" resultType="java.util.Map">
+        SELECT
+            a.aId as  park_id,
+            a.aName as park,
+            a.vName as venueName,
+            t.QR_CODE as qrCode,
+            t.BIND_NAME as bindUserName,
+            t.BIND_CARD as bindCard,
+            t.BIND_PHONE as bindPhone,
+            t.FLOOR_NAME AS floorName,
+            t.SRAND_NAME AS standName,
+            t.SRAT_ROW AS seatRow,
+            t.SRAT_COL AS seatCol
+        FROM
+            ticketing AS t
+                LEFT JOIN activity AS a ON t.aId = a.aId
+        WHERE
+            t.aId = #{aid}
+    </select>
 
     <select id="getImageByActivityIdUP" resultType="java.util.Map">
         SELECT eId,aName,eName,tIdentitycard,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,CONVERT( fImage USING utf8 )  fImage  from enter
@@ -117,11 +216,87 @@
     <select id="getEntryrecords" resultType="java.util.Map">
         SELECT eId,aId,aName,vName,eName,tQrcard,tIdentitycard, DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,tId ,dWorker,temp,autonym  from enter
         WHERE aId=#{aid}
-          AND dWorker = 0
+        AND dWorker ="0"
         ORDER BY eDate DESC
-            LIMIT 150
+            LIMIT 500
     </select>
 
+    <select id="getEntryrecordsGA" resultType="java.util.Map">
+        SELECT
+            e.eId AS ID,
+            CONCAT( e.aId, '01' ) AS performId,
+            e.aId AS projectId,
+            eName AS checkPass,
+            SRAT_ROW AS seatRow,
+            SRAT_COL AS seatCol,
+            CHECK_CERT_TYPE AS checkCertType,
+            BIND_CARD AS checkCertTypeNo,
+            VANAME AS venueName,
+            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS entryTime,
+            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS checkTime,
+            tId AS voucherId,
+            BIND_CARD AS bindCard,
+            BIND_NAME AS bindUserName,
+            FLOOR_NAME AS floorName,
+            SRAND_NAME AS standName,
+            DEVICE_NAME AS deviceName,
+            DEVICE_CODE AS deviceCode,
+            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS insertTime,
+            BIND_CARD AS idcode,
+            BIND_HJDXX AS hjdxx,
+            BIND_MZXX AS mzxx
+        FROM
+            (
+                SELECT
+                    *
+                FROM
+                    (
+
+                        SELECT
+                            e.eId,
+                            e.aId,
+                            e.eName,
+                            e.tId,
+                            e.BIND_NAME,
+                            e.BIND_CARD,
+                            e.QR_CODE,
+                            e.standby,
+                            e.ENTRY_TIME,
+                            i.CHECK_CERT_TYPE,
+                            i.BIND_GENDER,
+                            i.BIND_MZXX,
+                            i.BIND_HJDXX,
+                            i.Device_CODE,
+                            i.Device_NAME
+                        FROM
+                            enter AS e
+                                LEFT JOIN enter_info AS i ON e.eId = i.eId
+                        WHERE
+                            e.aId = "HKQ0601"
+
+
+                    ) AS e
+                        LEFT JOIN (
+                        SELECT
+                            tId AS TTID,
+                            SRAND_NAME,
+                            SRAT_ROW,
+                            SRAT_COL,
+                            FLOOR_NAME,
+                            vName AS VANAME
+                        FROM
+                            ticketing AS t
+                                LEFT JOIN activity AS a ON a.aId = t.aId
+                    ) AS t ON t.TTID = e.tId
+            ) AS e
+        WHERE
+            e.standby = '0'
+          AND e.BIND_CARD IS NOT NULL
+          AND e.BIND_CARD != ''
+        ORDER BY
+            ENTRY_TIME DESC
+            LIMIT 10
+    </select>
 
     <select id="getemploys" resultType="java.util.Map">
         SELECT eId,aId,aName,vName,eName,tQrcard,DATE_FORMAT(eDate, '%Y-%m-%d %H:%i:%s') AS eDate,tId from enter_employee

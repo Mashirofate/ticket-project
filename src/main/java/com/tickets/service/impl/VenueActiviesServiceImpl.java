@@ -54,12 +54,17 @@ public class VenueActiviesServiceImpl implements VenueActiviesService {
     }
 
     @Override
-    public int upquantitys(String tId, String tIdentitycard,String tRealname) {
+    public List<Map<String, Object>> getdomparisons(String aId) {
+        return venueActiviesMapper.getdomparisons(aId);
+    }
+
+    @Override
+    public int upquantitys(String tId, String tIdentitycard, String tRealname, String MZXX) {
         Date time= new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String datei = format.format(time);
-        return venueActiviesMapper.upquantitys(tId,tIdentitycard,tRealname,datei);
+        return venueActiviesMapper.upquantitys(tId,tIdentitycard,tRealname,datei,MZXX);
     }
     @Override
     public List<Map<String, Object>> selectByNames( ) {
@@ -119,10 +124,7 @@ public class VenueActiviesServiceImpl implements VenueActiviesService {
         return venueActiviesMapper.activitiyAmount();
     }
 
-    @Override
-    public Object venuesAmount() {
-        return venueActiviesMapper.venuesAmount();
-    }
+
 
     @Override
     public Object deviceAmount() {

@@ -67,6 +67,13 @@ public class EntersServiceImpl implements EntersService {
         return JSONArray;
     }
 
+    public JSONObject sendinstead(RestTemplate restTemplate, String url, JSONObject jsonObject, Class<String> Str) {
+        System.out.print("展会信息下拉");
+        String result = restTemplate.postForObject(url,jsonObject,String.class);
+        JSONObject JSONArray=  JSONObject.parseObject(result);
+        return JSONArray;
+    }
+
 //    @Override
 //    @Retryable(value = { RuntimeException.class },maxAttempts = 5,backoff = @Backoff(delay = 500,multiplier = 1))
     public String Entryrecorddownload(String argUrl, String param) {
@@ -79,6 +86,12 @@ public class EntersServiceImpl implements EntersService {
         }
         return result;
     }
+
+    @Override
+    public String selectAcitType(String aId) {
+        return entersMapper.selectAcitType(aId);
+    }
+
     @Override
     public boolean delById(String eid) {
         return entersMapper.deleteEs(eid) == 1;

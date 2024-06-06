@@ -11,7 +11,7 @@ public interface TicketingStaffService {
     Page getByKeys(TicketingStaffSearchDto ticketingStaffSearchDto);
     List<Map<String,Object>> getByKeys(String scanCode ,String aId);
     List<Map<String,Object>> getByKeys1(String scanCode ,String aId);
-
+    int getscanCode(String scanCode );
     List<Map<String,Object>> getcardId(String cardId ,String aId,String tid);
     List<Map<String,Object>> getcardId2(String cardId ,String aId,String tid);
     int getByKeycardIds(String cardId ,String aId);
@@ -35,21 +35,21 @@ public interface TicketingStaffService {
     boolean install(TicketingAddDto ticketingAddDto);
 
     boolean update(TicketingAddDto ticketingAddDto);
-    boolean update(String cardId,String Rname,String tid,String datei);
-    boolean updatewe(String cardId,String Rname,String wtid,String datei);
-    boolean installwtid(String cardId,String scanCode,String Rname,String aId,String datei);
+    boolean update(String cardId,String Rname,String tid,String datei,String BIND_MZXX);
+    boolean updatewe(String cardId,String Rname,String wtid,String datei,String BIND_MZXX);
+    boolean installwtid(String cardId,String scanCode,String Rname,String aId,String datei,String BIND_MZXX);
     boolean installwtidexhibition(String cardId,String Rname,String Phone,String aId,String datei);
     List<Map<String, Object>> getByapplet( String aId, String ips);
     int getByappletlisteid( String aId,List<String>  UploadQuantity,String ips);
 
 
 
-   int installEntryrecord(String eId,String aId,String vName,String eName,String tId,String aName,String eDate,String temp,String dWorker,String tQrcard,String tIdentitycard,String autonym,byte[] fImage);
-    int installemploy(String eId,String aId,String vName,String eName,String tId,String aName,String eDate,String tQrcard);
+   int installEntryrecord(List listen,List listf,List listi);
+    int installemploy(List list);
 
-    int installcamera(String teId,String teImage,String teDate,String teAisle,String teaId,String teCategory,String teMarking);
+    int installcamera(String teId,String teDate,String teAisle,String teaId,String teCategory,String teMarking);
 
 
-    List<Map<String, Object>> getticketing(String aId,String cardId,String scanCode);
-    List<Map<String, Object>> getenueing(String aId,String cardId,String scanCode);
+    String getticketing(String eId);
+    List<Map<String, Object>> getenueing(String aId,String cardId,String scanCode,String tSeatingarea,String tRownumber,String tSeat);
 }

@@ -20,6 +20,7 @@ import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static com.tickets.utils.NativePlace.getNativePlace;
 
@@ -45,84 +46,102 @@ public class WebSoketTask {
     private static Logger logger = LoggerFactory.getLogger(WebSoketTask.class);
 
     /**
-     * 推送实时人数信息
+     * 推送实时人数信息 展会
      */
     @Scheduled(fixedRate = 2 * 1000)
     public void realTimePeopleData() throws IOException, ParseException {
-        Map<String, List<Map<String, Object>>> maps=new HashMap<>();
+        //Map<String, List<Map<String, Object>>> maps=new HashMap<>();
+        Map<String, Object> maps = new HashMap<>();
         List<String> vaIds = RealTimePeopleServer.vaIds;
         if(vaIds!=null & vaIds.size()>0) {
             for (String vaId : vaIds) {
                 if (vaId != null) {
-                    //  Map<String, Object> countLimitTime = admissionInformationService.getCountLimitTime(new Date(),vaId);
-                    List<Map<String, Object>> rows = new ArrayList<>();
-                    List<Map<String, Object>> rows1 = new ArrayList<>();
-                    // 票务当天入口统计人数
-                    List<Map<String, Object>> ExportenterList = admissionInformationService.getCountLimitTimeenter(vaId);
-                    // 票务当天出口统计人数
-                    List<Map<String, Object>> ExporoutList = admissionInformationService.getCountLimitTimeout(vaId);
+                    //出口
+                    List EoutList = turnoutService.getOUTENCount(vaId,1,2);
+                    //入口
+                    List EenList = turnoutService.getOUTENCount(vaId,2,1);
 
-                    for (int i = 0; i < ExporoutList.size(); i++) {
-                        Map<String, Object> b = new HashMap<>();
-                        Map<String, Object> a = ExporoutList.get(i);
-                        // "yyyy-MM-dd HH:mm:ss"
-                        // 使用这个方法转化 Date和string
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        // string ---》Date
-                        Date date = sdf.parse(a.get("time").toString());
+                    // 场内人数 intra
+                    List intraList = turnoutService.getOUTENCount(vaId,3,1);
+                    // 以出口为主的时间轴
+                    List rows = new ArrayList<>();
+                    List TIMElList1 = turnoutService.getTIMElist(vaId,1,2);
+                    List TIMElList2 = turnoutService.getTIMElist(vaId,2,2);
+                    if(TIMElList1.size()>0 && TIMElList2.size()>0){
+                        if(TIMElList1.get(TIMElList1.size()-1)!=null){
+                            for (int i = 0; i < TIMElList1.size(); i++) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:m");
+                                String tme= TIMElList1.get(i).toString()+"0";
+                                Date date = sdf.parse(tme);
+                                SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
+                                String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
+                                rows.add(time);
+                            }
+                        }else{
+                            for (int i = 0; i < TIMElList2.size(); i++) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:m");
 
-                        //按固定的格式显示时间
-                        SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
-                        String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
-                        b.put("time", time);
-                        b.put("open", "出口");
-                        b.put("amount", a.get("value"));
-                        rows1.add(b);
+                                if(TIMElList2.get(i)!=null){
+                                    String tme= TIMElList2.get(i).toString()+"0";
+                                    Date date = sdf.parse(tme);
+                                    SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
+                                    String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
+                                    rows.add(time);
+                                }
+
+
+                            }
+                        }
                     }
 
-                    for (int i = 0; i < ExportenterList.size(); i++) {
-                        Map<String, Object> b = new HashMap<>();
-                        Map<String, Object> a = ExportenterList.get(i);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        Date date = sdf.parse(a.get("time").toString());
-                        SimpleDateFormat format0 = new SimpleDateFormat("HH:mm:ss");
-                        String time = format0.format(date.getTime());//这个就是把时间戳经过处理得到期望格式的时间
-                        b.put("time", time);
-                        b.put("amount", a.get("value"));
-                        b.put("open", "入口");
-                        rows.add(b);
+
+
+
+                    maps.put("timelist", rows);
+
+                    maps.put("timelist1", TIMElList1);
+                    maps.put("timelist2", TIMElList2);
+
+
+                    maps.put("EoutList", EoutList);
+                    maps.put("EenList", EenList);
+
+                    List listin=new ArrayList<>();
+                    for (int i = 0; i < intraList.size(); i++) {
+                        int li=0;
+                        if(i==0){
+                            li= Integer.parseInt(intraList.get(i).toString());
+                        }else{
+                            for (int j = 0; j <= i; j++) {
+                                li += Integer.parseInt(intraList.get(j).toString());
+                            }
+                        }
+
+                        listin.addLast(li);
                     }
-
-
-                    maps.put("brokenlistrows", rows);
-                    maps.put("brokenlistrows1", rows1);
-                    // 获取各个入口的人数
-                    List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
+                    maps.put("intraLists", intraList);
+                    maps.put("intraList", listin);
 
                     // 获取各个出口的人数
-                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
+                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId,1);
+                    // 获取各个 入口的人数
+                    List<Map<String, Object>> EachexenterList = turnoutService.getEachexportCount(vaId,2);
 
                     maps.put("EachexoutList", EachexoutList);
                     maps.put("EachexenterList", EachexenterList);
-                    // 如入场记录中大于37.5的人员数量
-                    Map<String, Object> tempchartMap = entranceManagementService.getTempCount(vaId);
-                    List<Map<String, Object>> tempchartList = new ArrayList<>();
-                    tempchartList.add(tempchartMap);
-                    maps.put("tempchartList", tempchartList);
 
 
-                    int intraFields = intraFieldINFO;
-                    Map<String, Object> intraFieldmap = new HashMap<>();
-                    intraFieldmap.put("intraField", intraFields);
-                    List<Map<String, Object>> intraFieList = new ArrayList<>();
-                    intraFieList.add(intraFieldmap);
-                    maps.put("intraFields", intraFieList);
+                    // 获取出场人数
+                    Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId,1);
 
+                    Map<String, Object> typeenCount = turnoutService.getTypeCount(vaId,2);
+                    // 获取当天入场记录中的所有人数去重
 
-                    List<Map<String, Object>> numberOFareamap = entranceManagementService.numberOFarea(vaId);
-
-                    maps.put("numberOFareas", numberOFareamap);
-
+                    int intraField = Integer.parseInt(typeenCount.get("counts").toString()) -  Integer.parseInt(typeOutCount.get("counts").toString());
+                    maps.put("typeOutCount", typeOutCount.get("counts"));
+                    maps.put("typeenCount", typeenCount.get("counts"));
+                    // rest.put("typeenterCount", typeCount);
+                    maps.put("intraField", intraField);
 
                     // 设备状态
 
@@ -138,7 +157,7 @@ public class WebSoketTask {
     /**
      * 推送实时入口人数信息  新的中间数据
      */
-    @Scheduled(fixedRate = 10 * 1000)
+    @Scheduled(fixedRate = 7 * 1000)
     public void realTimeEntrancePeopleData() throws IOException, ParseException {
         List<String> vaIds = RealTimeEntranceServer.vaIds;
         Map<String, List<Map<String, Object>>> maps=new HashMap<>();
@@ -154,27 +173,25 @@ public class WebSoketTask {
 
 
                     // 票务当天出口统计人数
-                    List ExporoutList = admissionInformationService.getoutlist(vaId);
+                    // List ExporoutList = admissionInformationService.getoutlist(vaId);
 
                     // 票务当天入口统计人数
                     List ExportenterList = admissionInformationService.getenterlist(vaId);
 
-                    List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
+                  //  List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
                     // 获取各个出口的人数
-                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
-                    maps.put("EachexenterList", EachexenterList);
-                    maps.put("EachexoutList", EachexoutList);
+                  //  List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId,1);
+                   // maps.put("EachexenterList", EachexenterList);
+                   // maps.put("EachexoutList", EachexoutList);
 
                     List TIMElList = admissionInformationService.getTIMElist(vaId);
 
                     for (int i = 0; i < TIMElList.size(); i++) {
-
-
                         // "yyyy-MM-dd HH:mm:ss"Time
                         // 使用这个方法转化 Date和string
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:m");
                         // string ---》Date
-                        String tme= TIMElList.get(i).toString()+"0";
+                        String tme= TIMElList.get(i).toString();
                         Date date = sdf.parse(tme);
 
                         //按固定的格式显示时间
@@ -186,16 +203,84 @@ public class WebSoketTask {
 
 
 
-                    List<Map<String, Object>> areaList = entranceManagementService.numberOFarea(vaId);
 
-                    maps.put("areaList", areaList);
+
+                    List listin=new ArrayList<>();
+                    for (int i = 0; i < ExportenterList.size(); i++) {
+                        int li=0;
+                        if(i==0){
+                            li= Integer.parseInt(ExportenterList.get(i).toString());
+                        }else{
+                            for (int j = 0; j <= i; j++) {
+                                li += Integer.parseInt(ExportenterList.get(j).toString());
+                            }
+                        }
+
+                        listin.addLast(li);
+                    }
+
+                    maps.put("listin", listin);
+
                     maps.put("timelist", rows);
-                    maps.put("outlist", ExporoutList);
+                 //   maps.put("outlist", ExporoutList);
                     maps.put("enterlist", ExportenterList);
 
-                    // 区域人口数量
-                    // List<Map<String, Object>> SeatList = admissionInformationService.getSeatList(vaId);
-                    //maps.put("SeatList", SeatList);
+                    // 民族数量
+                    List<Map<String, Object>> MZXXList = admissionInformationService.getBIND_MZXX(vaId);
+
+
+                    if(MZXXList.size()>0){
+                        List<Map<String, Object>> MZXX = new ArrayList<>();
+                        List<Map<String, Object>> MZXXs = new ArrayList<>();
+                        List<Map<String, Object>> MZXXss = new ArrayList<>();
+                        for (int i = 0; i < MZXXList.size(); i++) {
+                            if(i<20){
+                                Map<String, Object> map1=new HashMap<>();
+                                Map<String, Object> map = MZXXList.get(i);
+                                for (String key : map.keySet()) {
+                                    Object value = map.get(key);
+                                    // 进行处理
+                                    if(key!=null){
+                                        // System.out.println("Key: " + key + ", Value: " + value);
+                                        map1.put(key,value);
+                                    }
+
+                                }
+
+                                MZXX.add(map1);
+                            }else if (i > 20 && i < 40){
+                                Map<String, Object> map1=new HashMap<>();
+                                Map<String, Object> map = MZXXList.get(i);
+                                for (String key : map.keySet()) {
+                                    Object value = map.get(key);
+                                    if(key!=null){
+                                        // System.out.println("Key: " + key + ", Value: " + value);
+                                        map1.put(key,value);
+                                    }
+                                }
+                                MZXXs.add(map1);
+                            }else {
+                                Map<String, Object> map1=new HashMap<>();
+                                Map<String, Object> map = MZXXList.get(i);
+                                for (String key : map.keySet()) {
+                                    Object value = map.get(key);
+                                    if(key!=null){
+                                        // System.out.println("Key: " + key + ", Value: " + value);
+                                        map1.put(key,value);
+                                    }
+                                }
+                                MZXXss.add(map1);
+                            }
+                        }
+
+
+                        maps.put("MZXX", MZXX);
+                        maps.put("MZXXs", MZXXs);
+                        maps.put("MZXXss", MZXXss);
+                        /*maps.put("MZXX", null);
+                        maps.put("MZXXs", null);
+                        maps.put("MZXXss", null);*/
+                    }
 
                     //看台人数信息
                     // List<Map<String, Object>> GrandList = admissionInformationService.getGrandList(vaId);
@@ -205,9 +290,8 @@ public class WebSoketTask {
                     // maps.put("GrandsList", GrandsList);
 
 
-
-                        Map<String, Object> rest = new HashMap<>();
-                        List<String>  list = deviceService.getSingle(vaId);
+                        String aId =vaId;
+                        List<String>  list = deviceService.getSingles(vaId);
                         List<String> listshen = new ArrayList<>();
                         for (int i = 0; i < list.size(); i++) {
                             // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
@@ -228,7 +312,6 @@ public class WebSoketTask {
                         });
                         // System.out.println(nameMap);
                         List<Map<String, Object>> listmap = new ArrayList<>();
-
                         for (Map.Entry<String, Integer> entry : nameMap.entrySet()) {
                             Map<String, Object> nameMap1 = Maps.newHashMap();
                             String str=entry.getKey();
@@ -237,9 +320,58 @@ public class WebSoketTask {
                             listmap.add(nameMap1);
                         }
 
+                    if(listmap.size()>0){
+                       List<Map<String, Object>> firstHalf = new ArrayList<>();
+                        List<Map<String, Object>> secondHalf = new ArrayList<>();
+                          for (int i = 0; i < listmap.size(); i++) {
+                              if(i<18){
+                                  Map<String, Object> map1=new HashMap<>();
+                                  Map<String, Object> map = listmap.get(i);
+                                  for (String key : map.keySet()) {
+                                      Object value = map.get(key);
+                                      // 进行处理
+                                      if(key!=null){
+                                         // System.out.println("Key: " + key + ", Value: " + value);
+                                          map1.put(key,value);
+                                      }
+
+                                  }
+
+                                  firstHalf.add(map1);
+                                }else{
+                                  Map<String, Object> map1=new HashMap<>();
+                                  Map<String, Object> map = listmap.get(i);
+                                  for (String key : map.keySet()) {
+                                      Object value = map.get(key);
+                                      if(key!=null){
+                                          // System.out.println("Key: " + key + ", Value: " + value);
+                                          map1.put(key,value);
+                                      }
+                                  }
+                                  secondHalf.add(map1);
+                                }
+                            }
+
+                        Map<String, Object> map2=new HashMap<>();
+                         boolean bp = "YQH0601".equals(vaId);
+                       // System.out.println("惠州vaId: " + vaId+bp);
+                       if("YQH0601".equals(vaId)){
+                           int foshanResidents = countFoshanResidents(list,"4406");
 
 
+                           map2.put("name","惠州市");
+                           map2.put("value",foshanResidents);
+                       }else {
+                           int foshanResidents = countFoshanResidents(list,"4413");
+                           map2.put("name","佛山市");
+                           map2.put("value",foshanResidents);
+                       }
+                        secondHalf.add(map2);
+                        maps.put("firstHalf",firstHalf);
+                        maps.put("secondHalf",secondHalf);
 
+
+                    }
 
 
 
@@ -261,6 +393,19 @@ public class WebSoketTask {
         }
 
     }
+    // 获取佛山市的人数
+    public static int countFoshanResidents(List<String> idCards,String codex) {
+        int count = 0;
+        for (String idCard : idCards) {
+            // 获取身份证号码的前6位
+            String prefix = idCard.substring(0, 4);
+            // 判断是否为佛山市的居民
+            if (codex.equals(prefix)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     /**
      * 其它信息推送
@@ -277,78 +422,50 @@ public class WebSoketTask {
                 String vaId=vaIds.get(u);
                 if(vaId!=null){
                     // 未实名人数
-                    Map<String, Object> Norealname = admissionInformationService.getNorealnameCount(vaId);
+                 //   Map<String, Object> Norealname = admissionInformationService.getNorealnameCount(vaId);
                     // 实名人数
-                    Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
+                 //   Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
 
 
-                    // 获取出场人数
-                    Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
+                    // 获取出场人数 在tloe表查询入场和出场人数
+                     Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId,1);
+                    // Map<String, Object> typeenCount = turnoutService.getTypeCount(vaId,2);
+
+
                     // 获取当天入场记录中的所有人数去重
                     Map<String, Object> intraFieldCount = turnoutService.getintraFieldCount(vaId);
 
                     Map<String, Object> intworkCount = turnoutService.getintworkCount(vaId);
                     int work =0;
                     if(intworkCount.get("counts") !=null) {
-
-                    work = Integer.parseInt(intworkCount.get("counts").toString());
-                   }
-
-                    int intraField =0;
-                    if(intraFieldCount==null){
-                        intraField = -Integer.parseInt(typeOutCount.get("counts").toString());
-                    }else{
-                        intraField=Integer.parseInt(intraFieldCount.get("counts").toString()) - Integer.parseInt(typeOutCount.get("counts").toString())+ work ;
+                        work = Integer.parseInt(intworkCount.get("counts").toString());
+                    }
+                    int typeOutCou=0;
+                    if(typeOutCount.get("counts") !=null) {
+                        typeOutCou = Integer.parseInt(typeOutCount.get("counts").toString());
                     }
 
+                    int intraField =0;
+                    if(intraFieldCount!=null){
+                        intraField=Integer.parseInt(intraFieldCount.get("counts").toString())-typeOutCou;
+                    }
 
-                    rest.put("typeOutCount",typeOutCount.get("counts"));
-
-
-                    rest.put("Norealname",Norealname.get("Norealname"));
-                    rest.put("realname",realname.get("realname"));
+                   // rest.put("Norealname",Norealname.get("Norealname"));
+                   // rest.put("realname",realname.get("realname"));
 
                     rest.put("intraField",intraField);
                     rest.put("work",work);
                     intraFieldINFO =intraField;
 
                     // 根据身份证判断性别
-                    List<String>  list = deviceService.getSingle(vaId);
-                    List<String> listshen = new ArrayList<>();
-                    int man=0;
-                    int girl=0;
+                    List<Map<String, Object>>  listmap1 = deviceService.getSingle(vaId);
 
-                    for (int i = 0; i < list.size(); i++) {
-                        // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
-                        var obj= list.get(i);
-                        if(obj != null && !obj.trim().equals("")){
-                            if(obj.length()==18){
-                                char genderCode = obj.charAt(obj.length() - 2);
-                                int genderDigit = Integer.parseInt(String.valueOf(genderCode));
-                                if (genderDigit % 2 == 0) {
-                                    girl+=1;
-                                } else {
-                                    man +=1;
-                                }
-                            }
+                    rest.put("gender",listmap1);
 
+                    // 各个年龄段的人数
+                    List<Map<String, Object>> EachexageList = entranceManagementService.getEachexageCount(vaId);
 
-                        }
-                    }
-
-                    List<Map<String, String>> listmap = new ArrayList<>();
-                    Map<String, String> nameMap1 = Maps.newHashMap();
-                    Map<String, String> nameMap2 = Maps.newHashMap();
-
-                    nameMap1.put("name","男");
-                    nameMap1.put("value", String.valueOf(man));
-                    nameMap2.put("name","女");
-                    nameMap2.put("value", String.valueOf(girl));
-
-                    listmap.add(nameMap1);
-                    listmap.add(nameMap2);
-
-                    rest.put("gender",listmap);
+                    rest.put("ageList", EachexageList);
 
 
                     String jsonStr = JSON.toJSONString(rest);
@@ -360,6 +477,8 @@ public class WebSoketTask {
         }
 
     }
+    // 字符转是否是数字的验证
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     /**
      * 出场人数推送
@@ -375,9 +494,6 @@ public class WebSoketTask {
                 if (vaId != null) {
                     Map<String, Object> rest = new HashMap<>();
 
-
-                    // 入场人数 ：  票务入场 ticketing+工作人员入场 staff+未实名入场 Norealname+实名入场 realname
-                    // 未实名人数
                     Map<String, Object> Norealname = admissionInformationService.getNorealnameCount(vaId);
                     // 实名人数
                     Map<String, Object> realname = admissionInformationService.getrealnameCount(vaId);
@@ -388,18 +504,19 @@ public class WebSoketTask {
 
 
                     // 获取出场人数
-                    Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId);
+                   Map<String, Object> typeOutCount = turnoutService.getTypeCount(vaId,1);
+
+                    /*  Map<String, Object> typeenCount = turnoutService.getTypeCount(vaId,2);*/
                     // 获取当天入场记录中的所有人数去重
                     Map<String, Object> intraFieldCount = turnoutService.getintraFieldCount(vaId);
                     int intraField = 0;
-                    if (intraFieldCount == null) {
-                        intraField = -Integer.parseInt(typeOutCount.get("counts").toString());
-                    } else {
-                        intraField = Integer.parseInt(intraFieldCount.get("counts").toString()) - Integer.parseInt(typeOutCount.get("counts").toString());
+                    if (intraFieldCount != null) {
+
+                        intraField = Integer.parseInt(intraFieldCount.get("counts").toString());
                     }
 
 
-                    rest.put("typeOutCount", typeOutCount.get("counts"));
+                   rest.put("typeOutCount", typeOutCount.get("counts"));
                     // rest.put("typeenterCount", typeCount);
                     rest.put("intraField", intraField);
 
@@ -407,11 +524,7 @@ public class WebSoketTask {
 
 
                     List<Map<String, Object>> EachexenterList = entranceManagementService.getEntrancePeopleCount(vaId);
-                    // 获取各个出口的人数
-                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId);
 
-                    // 各个年龄段的人数
-                    List<Map<String, Object>> EachexageList = entranceManagementService.getEachexageCount(vaId);
 
                     List enterListname = new ArrayList<>();
                     List enterListvalue = new ArrayList<>();
@@ -429,6 +542,25 @@ public class WebSoketTask {
                         }
 
                     }
+
+                    rest.put("enterListname", enterListname);
+                    rest.put("enterListvalue", enterListvalue);
+
+
+                    List<String> areaList = entranceManagementService.numberOFarea(vaId);
+                    List<String> areaList1 = entranceManagementService.numberOFarea1(vaId);
+                    List<String> areaList2 = entranceManagementService.numberOFarea2(vaId);
+
+                    rest.put("areaList", areaList);
+                    rest.put("areaList1", areaList1);
+                    rest.put("areaList2", areaList2);
+
+
+
+                   /*
+                     // 获取各个出口的人数
+                    List<Map<String, Object>> EachexoutList = turnoutService.getEachexportCount(vaId,1);
+
                     List outListname = new ArrayList<>();
                     List outListvalue = new ArrayList<>();
                     if (EachexoutList!=null & EachexoutList.size()>0)
@@ -444,33 +576,8 @@ public class WebSoketTask {
                         }
 
                     }
-
-                    List ageListname = new ArrayList<>();
-                    List ageListvalue = new ArrayList<>();
-                    if (EachexageList!=null & EachexageList.size()>0)
-                    {
-                        for (int i = 0; i < EachexageList.size(); i++) {
-                            for (Map.Entry<String, Object> entry : EachexageList.get(i).entrySet()) {
-                                if("age_range".equals(entry.getKey())){
-                                    ageListname.add(entry.getValue());
-                                }else{
-                                    ageListvalue.add(entry.getValue());
-                                }
-                            }
-                        }
-
-                    }
-
-
-                    rest.put("enterListname", enterListname);
-                    rest.put("enterListvalue", enterListvalue);
-                    rest.put("outListname", outListname);
-                    rest.put("outListvalue", outListvalue);
-
-                    rest.put("ageListname", ageListname);
-                    rest.put("ageListvalue", ageListvalue);
-
-
+                   rest.put("outListname", outListname);
+                    rest.put("outListvalue", outListvalue);*/
 
 
 
@@ -492,7 +599,7 @@ public class WebSoketTask {
    *设备情况表
    *
    */
-
+   @Scheduled(fixedRate = 2 * 1000)
     public void UnitTypeTimeEnterData() throws IOException {
         List<String> vaIds = UnitTypeTimeService.vaIds;
        if(vaIds!=null & vaIds.size()>0) {
@@ -500,7 +607,7 @@ public class WebSoketTask {
                String vaId = vaIds.get(u);
                if (vaId != null & !StringUtils.isEmpty(vaId)) {
                    Map<String, Object> rest = new HashMap<>();
-                   List<String>  list = deviceService.getSingle(vaId);
+                   List<String>  list = deviceService.getSingles(vaId);
                    List<String> listshen = new ArrayList<>();
                    for (int i = 0; i < list.size(); i++) {
                        // 判断 对象不为空 Optional.ofNullable(obj).isPresent()
@@ -527,6 +634,8 @@ public class WebSoketTask {
                        nameMap1.put("value", String.valueOf(entry.getValue()));
                        listmap.add(nameMap1);
                    }
+
+
 
                    String jsonStr = JSON.toJSONString(listmap);
                    //logger.info(" %%%%%%% send UnitTypeTimeEnterData : " + jsonStr);

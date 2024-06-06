@@ -21,5 +21,7 @@ public interface DeviceMapper {
 
     int update(DeviceAddDto deviceAddDto);
 
-    List<String> getSingle(String aId);
+    List<Map<String, Object>> getSingle(String aId);
+
+    List<String> getSingles(String aId);
 }

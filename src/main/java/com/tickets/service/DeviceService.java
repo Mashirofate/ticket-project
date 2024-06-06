@@ -19,7 +19,8 @@ public interface DeviceService {
 
 
 
-    List<String>   getSingle(String aId);
+    List<Map<String, Object>>  getSingle(String aId);
+    List<String>   getSingles(String aId);
 
     Page getaiKeys(AisleSearchDto aisleSearchDto);
     boolean deaiById(String aid);

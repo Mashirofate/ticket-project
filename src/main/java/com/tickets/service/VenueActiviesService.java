@@ -14,7 +14,8 @@ public interface VenueActiviesService {
 
     Page getByKeys(VenueActivieSearchDto venueActivieSearchDto);
     List<Map<String, Object>> getdomparison(String aId);
-    int upquantitys(String tId, String tIdentitycard,String tRealname);
+    List<Map<String, Object>> getdomparisons(String aId);
+    int upquantitys(String tId, String tIdentitycard,String tRealname,String MZXX);
 
     List<Map<String, Object>> selectByNames();
 
@@ -38,7 +39,6 @@ public interface VenueActiviesService {
 
     Object activitiyAmount();
 
-    Object venuesAmount();
 
     Object deviceAmount();
 

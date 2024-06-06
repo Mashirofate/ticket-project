@@ -7050,6 +7050,8 @@ public class NativePlace {
                 return "香港";
             case 82:
                 return "澳门";
+            case 83:
+                return "台湾";
 
             default:
                 return null;

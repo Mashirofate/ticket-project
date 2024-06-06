@@ -28,6 +28,10 @@ public class FaceServiceImpl implements FaceService {
         return faceMapper.getImageByActivityId(aId,sqlDate,sqlDateformerly);
     }
     @Override
+    public List<Map<String, Object>> getImageByActivityticketId(String aId,String  sqlDate,String  sqlDateformerly) {
+        return faceMapper.getImageByActivityticketId(aId,sqlDate,sqlDateformerly);
+    }
+    @Override
     public List<Map<String, Object>> getImageByActivityIdUP(String aid ,String dateUp) {
         return faceMapper.getImageByActivityIdUP(aid,dateUp);
     }
@@ -42,20 +46,25 @@ public class FaceServiceImpl implements FaceService {
         return faceMapper.getEntryrecords(aid,dateUp);
     }
     @Override
+    public List<Map<String, Object>> getEntryrecordsGA(String aid ,String dateUp) {
+        return faceMapper.getEntryrecordsGA(aid,dateUp);
+    }
+    @Override
     public List<Map<String, Object>> getemploys(String aid ,String dateUp) {
         List<Map<String, Object>> list =entersMapper.getempssssssssssssssssssssloys(aid,dateUp);
         return list;
        // return faceMapper.getemploys(aid,dateUp);
     }
     public JSONObject sendSsm( RestTemplate restTemplate, String url, JSONObject jsonObject, Class<String> Str, List<String> listeid , String aid) {
-        System.out.print("入场日志");
+        System.out.print("上传公安入场日志");
         String result = restTemplate.postForObject(url,jsonObject,String.class);
-
+        System.out.print("jsonObject："+jsonObject);
         JSONObject JSONArray=  JSONObject.parseObject(result);
+        System.out.print("JSONArray："+JSONArray);
         for (Map.Entry<String, Object> entry : JSONArray.entrySet()) {
-            if("data".equals(entry.getKey())){
+            if("code".equals(entry.getKey())){
               int dt= (int) entry.getValue();
-                if(dt==1){
+                if(dt==200){
                     faceMapper.getUploadQTIAEW(aid,listeid);
                     System.out.println("成功"+new Date() +"+++++++++上传的数据量："+ listeid.size());
                 }else {

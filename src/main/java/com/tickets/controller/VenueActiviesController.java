@@ -68,7 +68,6 @@ public class VenueActiviesController { //活动管理
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("activitiyAmount",venueActiviesService.activitiyAmount());
-        map.put("venuesAmount",venueActiviesService.venuesAmount());
         map.put("deviceAmount",venueActiviesService.deviceAmount());
         map.put("ticketingAmount",venueActiviesService.ticketingAmount());
         map.put("list",list);

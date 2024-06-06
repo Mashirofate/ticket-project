@@ -12,18 +12,18 @@ public class TicketingStaffSearchDto {
     /**
      * 分页大小
      */
-    private Long size = 10L;
+    private Long size = 20L;
 
-    private String tsId;
-    private String tsVaName;
-    private String tsIdentiycard;
-    private String tsQrcard;
-    private String tsIccard;
-    private String tsSeatingArea;
-    private String tsRownumber;
-    private String tsSeat;
-    private String tsRealName;
-    private String tsPhone;
-    private String tsNote;
-    private String tsGrandstand;
+    private String tId;
+    private String aName;
+    private String SRAND_NAME;
+    private String SRAT_ROW;
+    private String SRAT_COL;
+    private String FLOOR_NAME;
+    private String BIND_CARD;
+    private String BIND_NAME;
+    private String QR_CODE;
+    private String IC_CODE;
+    private String BIND_PHONE;
+    private String BIND_MZXX;
 }

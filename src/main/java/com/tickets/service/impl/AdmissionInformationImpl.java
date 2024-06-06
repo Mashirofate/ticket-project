@@ -40,6 +40,10 @@ public class AdmissionInformationImpl implements AdmissionInformationService {
         return admissionInformatization.getoutlist(vaId) ;
     }
 
+    public List<Map<String, Object>> getBIND_MZXX(String vaId) {
+        return admissionInformatization.getBIND_MZXX(vaId) ;
+    }
+
     public List<Map<String, Object>> getSeatList(String vaId) {
         return admissionInformatization.getSeatList(vaId) ;
     }

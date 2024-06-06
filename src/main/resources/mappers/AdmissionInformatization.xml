@@ -11,27 +11,27 @@
                  INNER JOIN device AS d ON d.dId = e.edId
         WHERE (e.eDate >= #{date} - INTERVAL 60  SECOND)
           AND d.daId = #{vaId}
-          AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+          AND TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
     </select>
     <select id="selectTypeCount" resultType="java.util.Map">
         SELECT
         (
         SELECT COUNT(DISTINCT e.tId)
         FROM  enter AS e
-        WHERE dWorker = 0 and e.aId =#{vaId}
-        AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        WHERE e.aId =#{vaId}
+        AND TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
         ) AS ticketing,
         (
         SELECT COUNT(eId)
         FROM enter AS e
         WHERE  dWorker = 1 and e.aId =#{vaId}
-        AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        AND TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
         ) AS staff,
         (
         SELECT COUNT(e.eId) from
         (SELECT  eid,tIdentitycard FROM enter AS e
         WHERE e.aId =#{vaId}
-        AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        AND TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
         group by e.eId) as e
         WHERE (ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
         ) AS Norealname,
@@ -39,7 +39,7 @@
         SELECT COUNT(e.eId) from
         (SELECT  eid,tIdentitycard FROM enter AS e
         WHERE e.aId =#{vaId}
-        AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+        AND TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
         group by e.eId) as e
         WHERE NOT(ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
         ) AS realname
@@ -48,18 +48,18 @@
 
     <select id="selectNorealnameCount" resultType="java.util.Map">
                 SELECT COUNT(e.eId) Norealname from
-                    (SELECT  eid,tIdentitycard FROM enter AS e
+                    (SELECT  eid,BIND_CARD FROM enter AS e
                      WHERE e.aId =#{vaId}
-                     group by e.eId,e.tIdentitycard) as e
-                WHERE (ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
+                     group by e.eId,e.BIND_CARD) as e
+                WHERE (ISNULL (e.BIND_CARD) OR LENGTH(e.BIND_CARD) &lt; 1 )
     </select>
     <select id="selectrealnameCount" resultType="java.util.Map">
 
                 SELECT COUNT(e.eId) realname from
-                    (SELECT  eid,tIdentitycard FROM enter AS e
+                    (SELECT  eid,BIND_CARD FROM enter AS e
                      WHERE e.aId =#{vaId}
-                     group by e.eId,e.tIdentitycard) as e
-                WHERE NOT(ISNULL (e.tIdentitycard) OR LENGTH(e.tIdentitycard) &lt; 1 )
+                     group by e.eId,e.BIND_CARD) as e
+                WHERE NOT(ISNULL (e.BIND_CARD) OR LENGTH(e.BIND_CARD) &lt; 1 )
 
     </select>
 
@@ -74,28 +74,14 @@
         FROM
             (
         SELECT
-        date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
+        date_format(e.ENTRY_TIME,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
         FROM  enter as e
         WHERE e.aId =#{vaId}
-           AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
+           AND TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
             ) as c
         GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' )
         ORDER BY time;
-        <!--
-         SELECT count(DISTINCT c.ids) as value,
-         DATE_FORMAT(
-         concat( date( c.Dates ), ' ', HOUR ( c.Dates ), ':', floor( MINUTE (c.Dates ) / 10 ) * 10 ),
-         '%Y-%m-%d %H:%i:%s'
-         ) AS time
-         FROM
-         (
-         SELECT
-         date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates,e.edId as ids
-         FROM
-         enters AS e  WHERE e.etId = #{vaId} AND TO_DAYS(e.eDate)=TO_DAYS(NOW())
-         ) as c
-         GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' )
-         ORDER BY time;-->
+
     </select>
 
     <select id="getCountLimitTimeout" resultType="java.util.Map">
@@ -124,7 +110,7 @@
                                              FROM
                                                  (
                                                  SELECT
-                                                 date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
+                                                 date_format(e.ENTRY_TIME,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
                                                  FROM  enter as e
                                                  WHERE e.aId =#{vaId}
                                                  ) as c
@@ -145,91 +131,67 @@
     </select>
 
     <select id="getenterlist" resultType="java.lang.String">
-
-        SELECT COALESCE(e.value,0) FROM (SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
-                                         FROM
-                                             (
-                                             SELECT
-                                             date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
-                                             FROM  enter as e
-                                             WHERE e.aId =#{vaId}
-                                             ) as c
-                                         GROUP BY  SUBSTR(c.Dates, 1, 15)
-                                         ORDER BY time) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
-                                                                                 FROM
-                                                                                     (
-                                                                                     SELECT
-                                                                                     date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
-                                                                                     FROM tloe  AS t
-                                                                                     WHERE t.teaId =#{vaId}
-                                                                                     ) as c
-                                                                                 GROUP BY SUBSTR(c.Dates, 1, 15)
-                                                                                 ORDER BY time) as o on e.time=o.time
-
-
-
+        SELECT
+            COUNT(*) AS people_count
+        FROM
+            (SELECT
+                 FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(ENTRY_TIME) / 600) * 600) AS time
+             FROM
+                 (select ENTRY_TIME,eId from enter
+                 WHERE aId=#{vaId}
+                 group by ENTRY_TIME,eId) as e ) AS subquery
+        GROUP BY
+            time
+        ORDER BY
+            time;
     </select>
 
     <select id="getTIMElist" resultType="java.lang.String">
+        SELECT
+            time
+        FROM
+            (SELECT
+            FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(ENTRY_TIME) / 600) * 600) AS time
+            FROM
+            enter
+            WHERE aId=#{vaId}) AS subquery
+        GROUP BY
+            time
+        ORDER BY
+            time;
+    </select>
 
-        SELECT e.time  FROM (	SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
-                                 FROM
-                                     (
-                                     SELECT
-                                     date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as Dates, e.eName as Names,e.eId as ids
-                                     FROM  enter as e
-                                     WHERE e.aId =#{vaId}
-
-                                     ) as c
-                                 GROUP BY  SUBSTR(c.Dates, 1, 15)
-                                 ORDER BY time	) as e  LEFT OUTER JOIN  ( SELECT count(ids) as value,  SUBSTR(c.Dates, 1, 15) time
-                                                                             FROM
-                                                                                 (
-                                                                                 SELECT
-                                                                                 date_format(t.teDate,'%Y-%m-%d %H:%i:%s') as Dates,t.teId as ids
-                                                                                 FROM tloe  AS t
-                                                                                 WHERE t.teaId =#{vaId}
-                                                                                 ) as c
-                                                                             GROUP BY SUBSTR(c.Dates, 1, 15)
-                                                                             ORDER BY time
-
-        ) as o on e.time=o.time
-
-
-
+    <select id="getBIND_MZXX" resultType="java.util.Map">
+        SELECT  BIND_MZXX AS name,count(BIND_MZXX) as value
+        FROM (select BIND_MZXX,e.eId from enter AS e LEFT JOIN enter_info AS f ON e.eId=f.eId
+            WHERE aId=#{vaId} and  BIND_MZXX is NOT NULL and BIND_MZXX !=''
+            group by BIND_MZXX,e.eId) as e
+        GROUP BY BIND_MZXX
     </select>
 
     <select id="getSeatList" resultType="java.util.Map">
-        SELECT t.tSeatingarea AS 'name',count(t.tSeatingarea) as value
+        SELECT t.SRAND_NAME AS 'name',count(t.SRAND_NAME) as value
         FROM enter AS e LEFT OUTER JOIN  ticketing AS t ON e.tId=t.tId WHERE e.aId = #{vaId}
-        and   TO_DAYS(e.eDate)=TO_DAYS(NOW())
-        GROUP BY t.tSeatingarea
-        <!--
-                SELECT
-                    e.Activityname AS 'type', COUNT(DISTINCT e.edId) AS 'value'
-                FROM enters AS e
-                WHERE
-                e.etId=#{vaId}
-                AND
-                TO_DAYS(e.eDate)=TO_DAYS(NOW())
-                GROUP BY e.Activityname-->
+        and   TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
+        GROUP BY t.SRAND_NAME
+
     </select>
     <select id="getGrandList" resultType="java.util.Map">
-        SELECT t.tGrandstand AS name,count(t.tGrandstand) as value,valuele
+        SELECT t.FLOOR_NAME AS name,count(t.FLOOR_NAME) as value,valuele
         FROM ticketing AS t LEFT JOIN (
-            SELECT t.tGrandstand AS namele ,count(t.tGrandstand) as valuele
+            SELECT t.FLOOR_NAME AS namele ,count(t.FLOOR_NAME) as valuele
             FROM enter AS e LEFT OUTER JOIN  ticketing AS t ON e.tId=t.tId WHERE e.aId = #{vaId}
-            and   TO_DAYS(e.eDate)=TO_DAYS(NOW())
-            GROUP BY t.tGrandstand
-            )AS f ON f.namele=t.tGrandstand
+            and   TO_DAYS(e.ENTRY_TIME)=TO_DAYS(NOW())
+            GROUP BY t.FLOOR_NAME
+            )AS f ON f.namele=t.FLOOR_NAME
 
-        WHERE t.taId = #{vaId}
-        GROUP BY t.tGrandstand,valuele
+        WHERE t.tId = #{vaId}
+        GROUP BY t.FLOOR_NAME,valuele
     </select>
     <select id="getGrandsList" resultType="java.util.Map">
-        SELECT t.tGrandstand AS 'name',count(t.tGrandstand) as value
-        FROM ticketing AS t  WHERE t.taId = #{vaId}
-        GROUP BY t.tGrandstand
+        SELECT t.FLOOR_NAME AS 'name',count(t.FLOOR_NAME) as value
+        FROM ticketing AS t  WHERE t.aId = #{vaId}
+        GROUP BY t.FLOOR_NAME
     </select>
 
 </mapper>

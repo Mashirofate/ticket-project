@@ -14,6 +14,8 @@ public interface EntersMapper {
     List<Map<String, Object>> selectByKeys(EntersSearchDto entersSearchDto);
 
     int deleteEs(String eid);
+    
+    String selectAcitType( String aId);
 
     @MapKey("")
     List<Map<String, Object>> getempssssssssssssssssssssloys(String aid,String  dateUp);

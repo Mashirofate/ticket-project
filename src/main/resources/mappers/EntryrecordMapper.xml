@@ -5,24 +5,64 @@
 <mapper namespace="com.tickets.mapper.EntryrecordMapper">
 
     <select id="getByEntryrecorddownload" resultType="java.util.Map">
-        SELECT eId ,aId,aName,vName,eName,tIdentitycard,tQrcard,eDate,tId,dWorker,temp,autonym from enter
+        SELECT eId,aId,eName,tId,BIND_CARD,QR_CODE,ENTRY_TIME,stamp from enter
         WHERE aId=#{aId}
-        AND not locate(#{ips},dWorker)>0
+        AND not locate(#{ips},stamp)>0
         LIMIT 500
     </select>
 
-    <select id="getByticketingDownloads" resultType="java.util.Map">
-        SELECT tId ,taId,tIdentitycard,tQrcard,tSeatingarea,tRownumber,tSeat,tGrandstand,tRealname,phone from ticketing
-        WHERE taId=#{aId}
+    <select id="getByemployee" resultType="java.util.Map">
+        SELECT eId,aId,tId,eName,ENTERID,IDCODE, FACEPHOTO,stamp from enter_employee
+        WHERE aId=#{aId}
+          AND not locate(#{ips},stamp)>0
+            LIMIT 100
     </select>
+
+    <select id="getbindingEtickinginstead" resultType="java.util.Map">
+        SELECT  tId ,aId,BIND_CARD,QR_CODE,BIND_NAME,BIND_PHONE from ticketing
+        WHERE aId=#{aId}
+          AND  not locate(#{ips},stamp)>0
+        order by ENTRY_TIME
+        desc limit 27
+    </select>
+
+
+    <select id="getByticketingDownloads" resultType="java.util.Map">
+        SELECT tId ,aId,QR_CODE,BIND_NAME,BIND_CARD,BIND_PHONE,SRAND_NAME,SRAT_ROW,SRAT_COL,FLOOR_NAME from ticketing
+        WHERE aId=#{aId}
+    </select>
+    <select id="getByfrontinfoDownloads" resultType="java.util.Map">
+        SELECT fId ,fCertificate,fComment from frontinfo
+
+    </select>
+
     <update id="getByEntryrecorddownloadlisteid" >
-        UPDATE enter  SET dWorker =  CONCAT(dWorker,#{ips})
+        UPDATE enter  SET stamp =  CONCAT(stamp,#{ips})
         WHERE aId=#{aId}
         AND eId in
         <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
             #{item, jdbcType=VARCHAR}
         </foreach>
     </update>
+
+    <update id="getemployeeid" >
+        UPDATE enter_employee  SET stamp =  CONCAT(stamp,#{ips})
+        WHERE aId=#{aId}
+        AND eId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
+    <update id="getBytickinginstead" >
+        UPDATE ticketing  SET tNote =  CONCAT(tNote,#{ips})
+        WHERE taId=#{aId}
+        AND tId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
+
 
     <insert id="installEntryrecord">
 
@@ -54,6 +94,32 @@
             #{item.tIdentitycard},
             #{item.time},
             #{item.tNote}
+            )
+        </foreach>
+
+    </insert>
+
+    <insert id="bindtloerecord">
+        insert into tloe
+        (
+        teId,
+        teImage,
+        teDate,
+        teAisle,
+        teaId,
+        teCategory,
+        teMarking
+        )
+        values
+        <foreach collection="list" item="item" index= "index" separator =",">
+            (
+            #{item.teId},
+            #{item.teImage},
+            #{item.teDate},
+            #{item.teAisle},
+            #{item.teaId},
+            #{item.teCategory},
+            #{item.teMarking}
             )
         </foreach>
 

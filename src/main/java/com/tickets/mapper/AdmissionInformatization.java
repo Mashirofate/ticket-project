@@ -21,6 +21,8 @@ public interface AdmissionInformatization {
     @MapKey("")
     List<String> getoutlist(String vaId);
     @MapKey("")
+    List<Map<String, Object>> getBIND_MZXX(String vaId);
+    @MapKey("")
     List<Map<String, Object>> getSeatList(String vaId);
     @MapKey("")
     List<Map<String, Object>> getGrandList(String vaId);

@@ -7,27 +7,30 @@ import lombok.Data;
 public class TicketingAddDto {
     @JsonProperty(value = "tsIccard")
     private String tsIccard;
-    @JsonProperty(value = "tsGrandstand")
-    private String tsGrandstand;
-    @JsonProperty(value = "tsIdentiycard")
-    private String tsIdentiycard;
-    @JsonProperty(value = "tsNote")
-    private String tsNote;
-    @JsonProperty(value = "phone")
-    private String phone;
-    @JsonProperty(value = "tsQrcard")
-    private String tsQrcard;
-    @JsonProperty(value = "tsRealName")
-    private String tsRealName;
-    @JsonProperty(value = "tsRownumber")
-    private String tsRownumber;
-    @JsonProperty(value = "tsSeat")
-    private String tsSeat;
-    @JsonProperty(value = "tsSeatingArea")
-    private String tsSeatingArea;
-    @JsonProperty(value = "tsVaId")
-    private String tsVaId;
-    @JsonProperty(value = "tsId")
-    private String tsId;
+    @JsonProperty(value = "FLOOR_NAME")
+    private String FLOOR_NAME;
+    @JsonProperty(value = "BIND_CARD")
+    private String BIND_CARD;
+    @JsonProperty(value = "BIND_MZXX")
+    private String BIND_MZXX;
+    @JsonProperty(value = "BIND_PHONE")
+    private String BIND_PHONE;
+    @JsonProperty(value = "QR_CODE")
+    private String QR_CODE;
+    @JsonProperty(value = "BIND_NAME")
+    private String BIND_NAME;
+    @JsonProperty(value = "SRAT_ROW")
+    private String SRAT_ROW;
+    @JsonProperty(value = "SRAT_COL")
+    private String SRAT_COL;
+    @JsonProperty(value = "SRAND_NAME")
+    private String SRAND_NAME;
+    @JsonProperty(value = "aId")
+    private String aId;
+    @JsonProperty(value = "tId")
+    private String tId;
+
+
+
 
 }

@@ -26,13 +26,15 @@
     <!--parameterType 传入参数的类型，resultType返回参数的类型-->
     <select id="selectByKeys" resultType="java.util.Map">
         <!--date_format(ed.eDate,'%Y-%m-%d %H:%i:%s') 用于固定显示时间格式 -->
-        SELECT e.eId,e.fImage, e.aName,e.vName,e.autonym,e.eName,e.temp,e.tIdentitycard,
-        e.tQrcard,date_format(e.eDate,'%Y-%m-%d %H:%i:%s') as eDate,
-        t.tSeatingarea,t.tRownumber,t.tSeat,t.tGrandstand
+        SELECT e.eId,e.BIND_PHOTO,e.BIND_CARD_PHOTO,e.BIND_NAME,e.BIND_MZXX,e.BIND_CARD,
+        e.QR_CODE,date_format(e.ENTRY_TIME,'%Y-%m-%d %H:%i:%s') as ENTRY_TIME,
+        t.SRAND_NAME,t.SRAT_ROW,t.SRAT_COL,t.BIND_PHONE,e.eName,t.vName,t.aName
         /*--引用其他sql片段*/
         <include refid="searchSQL"/>
-        order by eDate desc
+        order by ENTRY_TIME desc
         LIMIT ${(current-1)*size},${size}
+
+
     </select>
 
     <select id="selectCountByKeys" resultType="java.lang.Integer">
@@ -46,7 +48,9 @@
             LEFT JOIN activity a On a.aId = t.taId
         WHERE tWId= #{id}
     </select>-->
-
+    <select id="selectAcitType" resultType="java.lang.String">
+        SELECT aType FROM activity WHERE aId=#{aId}
+    </select>
 
     <select id="getByEntryrecorddownloads" resultType="java.util.Map">
         SELECT eId ,aId,aName,vName,eName,tIdentitycard,tQrcard,eDate,tId,dWorker,temp,fImage,autonym from enter
@@ -95,30 +99,57 @@
     </delete>
 
     <sql id="searchSQL">
-        FROM enter as e
-        LEFT JOIN ticketing AS t ON e.tId = t.tId
+        FROM (SELECT e.eId,eName,BIND_PHOTO, BIND_CARD_PHOTO,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME,tId,BIND_MZXX FROM (SELECT
+        e.eId,
+        e.aId,
+        e.eName,
+        e.tId,
+        e.BIND_NAME,
+        e.BIND_CARD,
+        e.QR_CODE,
+        e.standby,
+        e.ENTRY_TIME,
+        i.CHECK_CERT_TYPE,
+        i.BIND_GENDER,
+        i.BIND_MZXX,
+        i.BIND_HJDXX,
+        i.Device_CODE,
+        i.Device_NAME
+        FROM
+        enter AS e
+        LEFT JOIN enter_info AS i ON e.eId = i.eId ) as e LEFT JOIN enter_fimage as f ON e.eId=f.eId ) as e
+        LEFT JOIN (SELECT tId,aName,vName,SRAND_NAME,SRAT_ROW, SRAT_COL,BIND_PHONE	 FROM  ticketing	as t LEFT JOIN activity as a ON t.aId=a.aId	) AS t ON e.tId = t.tId
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="aName != null and aName.length != 0">
-                AND e.aName LIKE "%"#{aName}"%"
+                AND t.aName LIKE "%"#{aName}"%"
             </if>
             <if test="vName != null and vName.length != 0">
-                AND e.vName LIKE "%"#{vName}"%"
+                AND t.vName LIKE "%"#{vName}"%"
             </if>
             <if test="eName != null and eName.length != 0">
                 AND e.eName LIKE "%"#{eName}"%"
             </if>
-            <if test="tIdentitycard != null and tIdentitycard.length != 0">
-                AND e.tIdentitycard LIKE "%"#{tIdentitycard}"%"
+            <if test="BIND_CARD != null and BIND_CARD.length != 0">
+                AND e.BIND_CARD LIKE "%"#{BIND_CARD}"%"
             </if>
-            <if test="autonym != null and autonym.length != 0">
-                AND e.autonym LIKE "%"#{autonym}"%"
+            <if test="BIND_NAME != null and BIND_NAME.length != 0">
+                AND e.BIND_NAME LIKE "%"#{BIND_NAME}"%"
             </if>
-            <if test="tQrcard != null and tQrcard.length != 0">
-                AND e.tQrcard LIKE "%"#{tQrcard}"%"
+            <if test="QR_CODE != null and QR_CODE.length != 0">
+                AND e.QR_CODE LIKE "%"#{QR_CODE}"%"
             </if>
 
             <if test="eDate1 != null and eDate2.length != 0">
-                AND e.eDate BETWEEN #{eDate1} and DATE_ADD(#{eDate2},INTERVAL 1 DAY)
+                AND e.ENTRY_TIME BETWEEN #{eDate1} and DATE_ADD(#{eDate2},INTERVAL 1 DAY)
+            </if>
+            <if test="SRAND_NAME != null and SRAND_NAME.length != 0">
+                AND t.SRAND_NAME LIKE "%"#{SRAND_NAME}"%"
+            </if>
+            <if test="SRAT_ROW != null and SRAT_ROW.length != 0">
+                AND t.SRAT_ROW LIKE "%"#{SRAT_ROW}"%"
+            </if>
+            <if test="SRAT_COL != null and SRAT_COL.length != 0">
+                AND t.SRAT_COL LIKE "%"#{SRAT_COL}"%"
             </if>
         </trim>
     </sql>

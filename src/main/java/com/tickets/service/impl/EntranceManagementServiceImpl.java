@@ -66,8 +66,14 @@ public class EntranceManagementServiceImpl implements EntranceManagementService 
     public Map<String, Object> getTempCount(String vaId) {
         return entranceManagementMapper.getTempCount(vaId);
     }
-    public  List<Map<String, Object>> numberOFarea(String vaId) {
+    public  List<String> numberOFarea(String vaId) {
         return entranceManagementMapper.numberOFarea(vaId);
+    }
+    public  List<String> numberOFarea1(String vaId) {
+        return entranceManagementMapper.numberOFarea1(vaId);
+    }
+    public  List<String> numberOFarea2(String vaId) {
+        return entranceManagementMapper.numberOFarea2(vaId);
     }
 
     @Override

@@ -22,10 +22,27 @@ public class EntryrecordServiceImpl implements EntryrecordService {
 
         return entryrecordMapper.getByEntryrecorddownload(aId,ips) ;
     }
+    @Override
+    public List<Map<String, Object>> getByemployee( String aId,String ips) {
+
+        return entryrecordMapper.getByemployee(aId,ips) ;
+    }
+    public List<Map<String, Object>> getbindingEtickinginstead( String aId,String ips) {
+
+        return entryrecordMapper.getbindingEtickinginstead(aId,ips) ;
+    }
 
     @Override
     public int getByEntryrecorddownloadlisteid(String aId, List<String> UploadQuantity ,String ips) {
         return  entryrecordMapper.getByEntryrecorddownloadlisteid(aId, UploadQuantity,ips);
+    }
+
+    @Override
+    public int getemployeeid(String aId, List<String> UploadQuantity ,String ips) {
+        return  entryrecordMapper.getemployeeid(aId, UploadQuantity,ips);
+    }
+    public int getBytickinginstead(String aId, List<String> UploadQuantity ,String ips) {
+        return  entryrecordMapper.getBytickinginstead(aId, UploadQuantity,ips);
     }
 
     @Override
@@ -52,6 +69,11 @@ public class EntryrecordServiceImpl implements EntryrecordService {
         return entryrecordMapper.addMayo( list);
     }
 
+    @Override
+    public int bindtloerecord(List list) {
+        return entryrecordMapper.bindtloerecord( list);
+    }
+
     /**
      * @param aId
      * @return
@@ -59,6 +81,10 @@ public class EntryrecordServiceImpl implements EntryrecordService {
     @Override
     public List<Map<String, Object>> getByticketingDownloads(String aId) {
         return entryrecordMapper.getByticketingDownloads(aId);
+    }
+
+    public List<Map<String, Object>> getByfrontinfoDownloads(String aId) {
+        return entryrecordMapper.getByfrontinfoDownloads(aId);
     }
 
     /**

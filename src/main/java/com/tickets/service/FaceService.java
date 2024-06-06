@@ -15,12 +15,14 @@ public interface FaceService {
 
     // 数据显示页面的人脸照片推送
     List<Map<String, Object>> getImageByActivityId(String aId,String  sqlDate,String  sqlDateformerly);
+    List<Map<String, Object>>  getImageByActivityticketId(String aId,String  sqlDate,String  sqlDateformerly);
 
     List<Map<String, Object>> getImageByActivityIdUP(String aid,String dateUp );
     List<String> getUploadQuantity(String aid);
 
     List<Map<String, Object>> getEntryrecord(String aid,String dateUp);
     List<Map<String, Object>> getEntryrecords(String aid,String dateUp);
+    List<Map<String, Object>> getEntryrecordsGA(String aid,String dateUp);
     List<Map<String, Object>> getemploys(String aid,String dateUp);
 
     @Retryable(value = RuntimeException.class,maxAttempts = 10, backoff = @Backoff(value = 2000, multiplier = 2))

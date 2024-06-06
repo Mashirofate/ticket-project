@@ -25,6 +25,7 @@ public interface AdmissionInformationService {
 
     List getoutlist(String vaId);
 
+    List<Map<String, Object>> getBIND_MZXX(String vaId);
     List<Map<String, Object>> getSeatList(String vaId);
     List<Map<String, Object>> getGrandList(String vaId);
     List<Map<String, Object>> getGrandsList(String vaId);

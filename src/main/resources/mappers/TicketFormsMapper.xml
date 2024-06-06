@@ -71,7 +71,7 @@
                  WHERE e.aId =#{aId}
                    and e.dWorker = 0
              ) as c
-        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s'),Names
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s'),Names,c.Dates
         ORDER BY time;
 
     </select>
@@ -89,7 +89,7 @@
                  WHERE e.aId =#{aId}
                    and e.dWorker = 1
              ) as c
-        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s')
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s'),c.Dates
         ORDER BY time;
     </select>
     <select id="getTotality" resultType="java.util.HashMap">
@@ -105,7 +105,7 @@
                 FROM enter as e
                 WHERE e.aId =#{aId}
             ) as c
-        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' )
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),c.Dates
         ORDER BY time;
     </select>
 
@@ -165,7 +165,7 @@
                 WHERE e.aId=#{aId}
 
             ) as c
-        GROUP BY DATE_FORMAT(time, '%Y-%m-%d'),Names
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d'),Names,c.Dates
         ORDER BY time;
 
     </select>
@@ -188,7 +188,7 @@
                 WHERE t.teaId=#{aId}
 
             ) as c
-        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),Names
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),Names,c.Dates
         ORDER BY time;
     </select>
 
@@ -209,7 +209,7 @@
                 WHERE e.aId=#{aId}
 
             ) as c
-        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),Names
+        GROUP BY DATE_FORMAT(time, '%Y-%m-%d %H:%i:%s' ),Names,c.Dates
         ORDER BY time;
     </select>
 

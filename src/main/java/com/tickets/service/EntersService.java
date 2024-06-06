@@ -28,7 +28,14 @@ public interface EntersService {
     JSONObject sendSsmapplet(RestTemplate restTemplate , String url, JSONObject jsonObject, Class<String> Str);
 
     @Retryable(value = RuntimeException.class,maxAttempts = 10, backoff = @Backoff(value = 2000, multiplier = 2))
+    JSONObject sendinstead(RestTemplate restTemplate , String url, JSONObject jsonObject, Class<String> Str);
+
+
+    @Retryable(value = RuntimeException.class,maxAttempts = 10, backoff = @Backoff(value = 2000, multiplier = 2))
     String Entryrecorddownload(String url, String jsonObject );
+
+
+    String selectAcitType( String aId);
 
 
     List<Map<String, Object>> getByEntryrecorddownload( String aId,String ips);
