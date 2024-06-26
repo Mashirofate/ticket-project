@@ -2,6 +2,7 @@ package com.tickets.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tickets.dao.BaseDao;
+import com.tickets.dto.EntersMZXXDto;
 import com.tickets.dto.EntersSearchDto;
 import com.tickets.dto.Page;
 import com.tickets.mapper.EntersMapper;
@@ -42,7 +43,11 @@ public class EntersServiceImpl implements EntersService {
         return page;
     }
 
-
+    @Override
+    public List<Map<String, Object>> selectByKeysMXZZ(EntersMZXXDto entersMZXXDto) {
+        return entersMapper.selectByKeysMXZZ(entersMZXXDto);
+        // return faceMapper.getemploys(aid,dateUp);
+    }
     @Override
     public List<Map<String, Object>> getemploys(String aid , String dateUp) {
         List<Map<String, Object>> list =entersMapper.getempssssssssssssssssssssloys(aid,dateUp);

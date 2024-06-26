@@ -1,0 +1,2 @@
+2024-06-15 19:15:42.758 [main] INFO  com.tickets.TicketsApplication - Starting TicketsApplication using Java 21 with PID 22436 (C:\Users\wen\IdeaProjects\ticket-project\target\classes started by wen in C:\Users\wen\IdeaProjects\ticket-project)
+2024-06-15 19:15:42.761 [main] INFO  com.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"

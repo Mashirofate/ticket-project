@@ -79,11 +79,11 @@
         insert into ticketing
         (
         tId,
-        taId,
-        tQrcard,
-        tIdentitycard,
-        tData,
-        tNote
+        aId,
+        QR_CODE,
+        BIND_CARD,
+        ENTRY_TIME,
+        stamp
         )
         values
         <foreach collection="list" item="item" index= "index" separator =",">

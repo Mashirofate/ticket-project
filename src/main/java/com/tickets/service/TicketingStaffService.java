@@ -10,6 +10,7 @@ public interface TicketingStaffService {
 
     Page getByKeys(TicketingStaffSearchDto ticketingStaffSearchDto);
     List<Map<String,Object>> getByKeys(String scanCode ,String aId);
+    List<Map<String,Object>> getByKeysun(String scanCode ,String cardId,String aId);
     List<Map<String,Object>> getByKeys1(String scanCode ,String aId);
     int getscanCode(String scanCode );
     List<Map<String,Object>> getcardId(String cardId ,String aId,String tid);
@@ -40,6 +41,8 @@ public interface TicketingStaffService {
     boolean installwtid(String cardId,String scanCode,String Rname,String aId,String datei,String BIND_MZXX);
     boolean installwtidexhibition(String cardId,String Rname,String Phone,String aId,String datei);
     List<Map<String, Object>> getByapplet( String aId, String ips);
+
+    List<Map<String, Object>> getByapplets( String aId, String ips);
     int getByappletlisteid( String aId,List<String>  UploadQuantity,String ips);
 
 
@@ -51,5 +54,5 @@ public interface TicketingStaffService {
 
 
     String getticketing(String eId);
-    List<Map<String, Object>> getenueing(String aId,String cardId,String scanCode,String tSeatingarea,String tRownumber,String tSeat);
+    List<Map<String, Object>> getenueing(String aId,String cardId,String scanCode,String tSeatingarea,String tRownumber,String tSeat,String BIND_MZXX);
 }

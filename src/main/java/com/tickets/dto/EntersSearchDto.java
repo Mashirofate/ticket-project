@@ -40,5 +40,4 @@ public class EntersSearchDto {
     private String SRAND_NAME;
     private String SRAT_ROW;
     private String SRAT_COL;
-
 }

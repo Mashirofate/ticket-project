@@ -37,6 +37,45 @@
 
     </select>
 
+    <select id="selectByKeysMXZZ" resultType="java.util.Map">
+        WITH ranked_enter AS (
+        SELECT
+        eeId,
+        eId,
+        aId,
+        eName,
+        tId,
+        BIND_NAME,
+        BIND_CARD,
+        QR_CODE,
+        ENTRY_TIME,
+        ROW_NUMBER() OVER ( PARTITION BY eId ORDER BY eeId ) AS rn
+        FROM
+        enter
+        ),
+        ranked_enter_info AS ( SELECT eId, BIND_HJDXX, BIND_MZXX, ROW_NUMBER() OVER ( PARTITION BY eId ORDER BY ieId ) AS rn FROM enter_info ) SELECT
+        e.eName AS checkPass,
+        e.BIND_NAME AS bindUserName,
+        e.BIND_CARD AS bindCard,
+        CONCAT(t.FLOOR_NAME, ' ', t.SRAND_NAME) AS standName,
+        CONCAT(t.SRAT_ROW, '排', t.SRAT_COL,'号') AS seatRow,
+        DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS entryTime,
+        i.BIND_HJDXX AS hjdxx,
+        i.BIND_MZXX AS mzxx,
+        CONCAT('data:image/png;base64,', CONVERT(f.BIND_PHOTO USING utf8)) AS bindPhoto
+        FROM
+        ranked_enter AS e
+        LEFT JOIN ranked_enter_info AS i ON e.eId = i.eId
+        AND i.rn = 1
+        LEFT JOIN enter_fimage AS f ON e.eId = f.eId
+        LEFT JOIN ticketing AS t ON t.tId = e.tId
+        WHERE
+        e.rn = 1
+        AND e.aId =  #{aId}
+        AND i.BIND_MZXX = #{BIND_MZXX}
+        order by e.ENTRY_TIME desc
+    </select>
+
     <select id="selectCountByKeys" resultType="java.lang.Integer">
         SELECT COUNT(e.eId)
         <include refid="searchSQL"></include>
@@ -123,8 +162,8 @@
             <if test="aName != null and aName.length != 0">
                 AND t.aName LIKE "%"#{aName}"%"
             </if>
-            <if test="vName != null and vName.length != 0">
-                AND t.vName LIKE "%"#{vName}"%"
+            <if test="BIND_MZXX != null and BIND_MZXX.length != 0">
+                AND e.BIND_MZXX =#{BIND_MZXX}
             </if>
             <if test="eName != null and eName.length != 0">
                 AND e.eName LIKE "%"#{eName}"%"

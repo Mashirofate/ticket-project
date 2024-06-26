@@ -4,11 +4,6 @@ import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tickets.annotations.Authentication;
 import com.tickets.dto.*;
 import com.tickets.service.EntersService;
@@ -40,21 +35,21 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.crypto.spec.IvParameterSpec;
-import javax.net.ssl.*;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
-import javax.swing.text.Style;
+import javax.crypto.spec.IvParameterSpec;
+import javax.net.ssl.*;
 import java.io.*;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.URI;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.Key;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -65,19 +60,14 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 import java.util.zip.GZIPOutputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
 
 import static com.tickets.controller.CONSTANTS.KEY;
 
-@Tag(name  = "人脸接口")
+@Tag(name  = "猫眼接口")
 @RestController
-@RequestMapping("/fr")
+@RequestMapping("/Ma")
 @Slf4j
-public class FaceController {
+public class MaoyanController {
 
 
     @Autowired
@@ -290,61 +280,6 @@ public class FaceController {
         return ResponseResult.SUCCESS(page);
     }
 
-    @Authentication(isLogin = true,isRequiredUserInfo = true)
-    @Operation(summary = "创建活动", description  = "")
-    @PostMapping("/onAvtivit")
-    public ResponseResult getonAvtivit(@RequestBody String aid) throws Exception {
-
-        VenueActivieAddDto venueActivieAddDto=new VenueActivieAddDto();
-        String url = "https://zeantong.com:8082/wechat/activity/toByVaId";
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("aid",aid);
-        String param = jsonObject.toJSONString();
-        String result = HttpUtils.postWithJson(url, null, param, null);
-        JSONObject Array=  JSONObject.parseObject( result);
-
-        com.alibaba.fastjson.JSONArray  listiden=  Array.getJSONArray("data");
-        boolean a=false;
-
-
-        if(listiden!=null){
-            if(listiden.size() == 2){
-                List listms=new ArrayList();
-
-                com.alibaba.fastjson.JSONArray  listm=listiden.getJSONArray(1);
-
-                for(int i=0;i<listm.size();i++) {
-                    AManagementDto aManagementDto=new AManagementDto();
-                    aManagementDto.setAId( listm.getJSONObject(i).get("aId").toString());
-                    aManagementDto.setEId(listm.getJSONObject(i).get("eId").toString());
-                    aManagementDto.setEName(listm.getJSONObject(i).get("eName").toString());
-                    aManagementDto.setENote(listm.getJSONObject(i).get("eNote").toString());
-                    aManagementDto.setEEnable(1);
-                    listms.add(aManagementDto);
-                }
-                venueActiviesService.addAM(listms);
-
-            }
-
-            venueActivieAddDto.setAId( listiden.getJSONObject(0).get("aId").toString());
-            venueActivieAddDto.setAName( listiden.getJSONObject(0).get("aName").toString());
-            venueActivieAddDto.setVName( listiden.getJSONObject(0).get("vName").toString());
-            String aEnable= listiden.getJSONObject(0).get("aEnable").toString();
-            venueActivieAddDto.setAEnable(Integer.parseInt(aEnable));
-            venueActivieAddDto.setANote( listiden.getJSONObject(0).get("aNote").toString());
-            venueActivieAddDto.setATicketnumber((Integer) listiden.getJSONObject(0).get("aTicketnumber"));
-            venueActivieAddDto.setAEmployeenumber((Integer) listiden.getJSONObject(0).get("aEmployeenumber"));
-            venueActivieAddDto.setAType( listiden.getJSONObject(0).get("aType").toString());
-            a=   venueActiviesService.save(venueActivieAddDto);
-
-
-        }
-        int i=0;
-        if(a){
-            i=1;
-        }
-        return ResponseResult.SUCCESS(i);
-    }
 
     @Authentication(isLogin = true,isRequiredUserInfo = true)
     @Operation(summary = "票务信息下载", description  = "")
@@ -358,7 +293,7 @@ public class FaceController {
         String result = HttpUtils.postWithJson(argUrl, null, param, null);
         JSONObject Array=  JSONObject.parseObject( result);
 
-        com.alibaba.fastjson.JSONArray listiden=  Array.getJSONArray("data");
+        JSONArray listiden=  Array.getJSONArray("data");
         int  interesting = 0;
         if(listiden!=null){
             List list=new ArrayList();
@@ -452,7 +387,7 @@ public class FaceController {
                         JSONObject jsobject =entersService.sendinstead(restTemplate,url,jsonObject,String.class);
                         int  interesting = 0;
 
-                        com.alibaba.fastjson.JSONArray listiden=  jsobject.getJSONArray("data");
+                        JSONArray listiden=  jsobject.getJSONArray("data");
                         if(listiden!=null){
                             List list=new ArrayList();
                             for(int i=0;i<listiden.size();i++) {
@@ -517,7 +452,7 @@ public class FaceController {
 
                         int interesting = 0;
 
-                        com.alibaba.fastjson.JSONArray listiden = jsobject.getJSONArray("data");
+                        JSONArray listiden = jsobject.getJSONArray("data");
                         if (listiden != null) {
                             for (int i = 0; i < listiden.size(); i++) {
                                 String tId = listiden.getJSONObject(i).get("tId").toString();
@@ -558,7 +493,7 @@ public class FaceController {
                     int  interesting = 0;
                     if(jsobject!=null){
 
-                        com.alibaba.fastjson.JSONArray listiden=  jsobject.getJSONArray("data");
+                        JSONArray listiden=  jsobject.getJSONArray("data");
                         if(listiden!=null){
                             for(int i=0;i<listiden.size();i++) {
                                 if( listiden.getJSONObject(i).get("eId")!=null){
@@ -671,7 +606,7 @@ public class FaceController {
                         }
 
 
-                        com.alibaba.fastjson.JSONArray  array=com.alibaba.fastjson.JSONArray.parseArray(JSON.toJSONString(lists));
+                        JSONArray  array= JSONArray.parseArray(JSON.toJSONString(lists));
                         //String url = "http://127.0.0.1:5000/register";
                         String url = "https://www.zeantong.com:8082/wechat/activity/employ";
 
@@ -808,7 +743,7 @@ public class FaceController {
                         }
 
 
-                        com.alibaba.fastjson.JSONArray array=com.alibaba.fastjson.JSONArray.parseArray(JSON.toJSONString(lists));
+                        JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
                         //String url = "http://127.0.0.1:5000/register";
                         String url = "https://www.zeantong.com:8082/wechat/activity/Entryrecord";
 
@@ -1119,7 +1054,7 @@ public class FaceController {
             };
 
             SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            sslContext.init(null, trustAllCerts, new SecureRandom());
             return sslContext;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -1139,7 +1074,7 @@ public class FaceController {
         // 创建SSLContext对象，并使用我们指定的信任管理器初始化
         TrustManager[] tm = { new MyX509TrustManager() };
         SSLContext sslContext = SSLContext.getInstance("SSL");
-        sslContext.init(null, tm, new java.security.SecureRandom());
+        sslContext.init(null, tm, new SecureRandom());
 
         // 从上述SSLContext对象中得到SSLSocketFactory对象
         SSLSocketFactory ssf = sslContext.getSocketFactory();
@@ -1205,7 +1140,7 @@ public class FaceController {
         // 创建SSLContext对象，并使用我们指定的信任管理器初始化
         TrustManager[] tm = { new MyX509TrustManager() };
         SSLContext sslContext = SSLContext.getInstance("SSL");
-        sslContext.init(null, tm, new java.security.SecureRandom());
+        sslContext.init(null, tm, new SecureRandom());
 
         // 从上述SSLContext对象中得到SSLSocketFactory对象
         SSLSocketFactory ssf = sslContext.getSocketFactory();
@@ -1270,7 +1205,7 @@ public class FaceController {
         // 创建SSLContext对象，并使用我们指定的信任管理器初始化
         TrustManager[] tm = { new MyX509TrustManager() };
         SSLContext sslContext = SSLContext.getInstance("SSL");
-        sslContext.init(null, tm, new java.security.SecureRandom());
+        sslContext.init(null, tm, new SecureRandom());
 
         // 从上述SSLContext对象中得到SSLSocketFactory对象
         SSLSocketFactory ssf = sslContext.getSocketFactory();
@@ -1498,7 +1433,7 @@ public class FaceController {
                         }
 
 
-                        com.alibaba.fastjson.JSONArray array= com.alibaba.fastjson.JSONArray.parseArray(JSON.toJSONString(lists));
+                        JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
                         //String url = "http://127.0.0.1:5000/register";
                         String url = "https://www.zeantong.com:8082/wechat/activity/Entryrecord";
 
@@ -1552,7 +1487,7 @@ public class FaceController {
                         }
 
 
-                        com.alibaba.fastjson.JSONArray array=com.alibaba.fastjson.JSONArray.parseArray(JSON.toJSONString(lists));
+                        JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
                         //String url = "http://127.0.0.1:5000/register";
                         String url = "https://www.zeantong.com:8082/wechat/activity/employ";
 
@@ -2026,7 +1961,7 @@ public class FaceController {
                             //String a1 = "data:image/png;base64," + a;
                             //时间
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            java.util.Date date= sdf.parse(simi.get("eDate").toString());
+                            Date date= sdf.parse(simi.get("eDate").toString());
 
                             SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             long timestamp = date.getTime();
@@ -2061,7 +1996,7 @@ public class FaceController {
                         String secretKey= "phillam123";
 
 
-                        com.alibaba.fastjson.JSONArray array=com.alibaba.fastjson.JSONArray.parseArray(JSON.toJSONString(lists));
+                        JSONArray array= JSONArray.parseArray(JSON.toJSONString(lists));
 
 
                         String signature= times  +"&"+ appid   +"&"+ secretKey;
@@ -2451,7 +2386,7 @@ public class FaceController {
         // 创建一个Calendar对象
         Calendar calendar = Calendar.getInstance();
         // 获取当前时间
-        java.util.Date date= calendar.getTime();
+        Date date= calendar.getTime();
 
         // util.date转sql date
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());

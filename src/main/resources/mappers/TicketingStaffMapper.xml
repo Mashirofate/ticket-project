@@ -26,8 +26,8 @@
     </insert>
     <insert id="installwtid">
         INSERT INTO ticketing_wechat
-        (tId, taId,tIdentitycard, tQrcard,tRealname, tNote,tData,MZXX)
-        VALUES (#{tid}, #{aid}, #{cardId}, #{scanCode}, #{Rname},1, #{datei} ,#{BIND_MZXX})
+        (tId, taId,tIdentitycard, tQrcard,tRealname, tNote,tData,MZXX,BIND_PHOTO)
+        VALUES (#{tid}, #{aid}, #{cardId}, #{scanCode}, #{Rname},1 ,now(),#{BIND_MZXX},#{datei})
     </insert>
 
     <insert id="installwtidexhibition">
@@ -43,10 +43,10 @@
         #{aName}, #{eDate}, #{temp}, #{dWorker}, #{QR_CODE}, #{BIND_CARD}, #{autonym}, #{fImage})
     </insert>-->
     <insert id="installEntryrecord">
-        insert into enter(eId,aId,eName,tId,BIND_NAME,BIND_CARD,QR_CODE,ENTRY_TIME,stamp,standby) values
+        insert into enter(eId,aId,eName,tId,BIND_NAME,BIND_CARD,QR_CODE,ENTRY_TIME,stamp,standby,shunde) values
         <foreach collection="list" item="item" index= "index" separator =",">
             (#{item.eId},#{item.aId},#{item.eName},#{item.tId},#{item.BIND_NAME},#{item.BIND_CARD},
-             #{item.QR_CODE},#{item.ENTRY_TIME},#{item.stamp},#{item.standby})
+             #{item.QR_CODE},#{item.ENTRY_TIME},#{item.stamp},#{item.standby},#{item.shunde})
         </foreach>
 
     </insert>
@@ -93,9 +93,9 @@
 
     <select id="getenueing" resultType="java.util.Map">
 
-        SELECT e.eId as eId, t.tId as tId,t.BIND_CARD as tBIND_CARD,e.BIND_CARD as eBIND_CARD,t.BIND_NAME as tBIND_NAME,e.BIND_NAME as eBIND_NAME, t.QR_CODE as QR_CODE,BIND_PHONE, ENTRY_TIME,SRAND_NAME,SRAT_ROW, SRAT_COL
+        SELECT e.eId as eId, t.tId as tId,t.BIND_CARD as tBIND_CARD,e.BIND_CARD as eBIND_CARD,e.BIND_MZXX as BIND_MZXX ,t.BIND_NAME as tBIND_NAME,e.BIND_NAME as eBIND_NAME, t.QR_CODE as QR_CODE,BIND_PHONE, ENTRY_TIME,SRAND_NAME,SRAT_ROW, SRAT_COL
         FROM
-        (SELECT e.eId,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME FROM enter as e   WHERE e.aId=#{aId})  AS e
+        (SELECT e.eId,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME,BIND_MZXX FROM enter as e LEFT JOIN enter_info AS i ON e.eId = i.eId    WHERE e.aId=#{aId})  AS e
         LEFT JOIN
         (SELECT tId,QR_CODE,SRAND_NAME,SRAT_ROW, SRAT_COL,BIND_PHONE,BIND_NAME,BIND_CARD	 FROM  ticketing WHERE aId=#{aId}) AS t ON t.QR_CODE = e.QR_CODE
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
@@ -114,14 +114,17 @@
             <if test="tSeat != null and tSeat.length != 0">
                 AND SRAT_COL LIKE "%"#{tSeat}"%"
             </if>
+            <if test="BIND_MZXX != null and BIND_MZXX.length != 0">
+                AND e.BIND_MZXX  LIKE "%"#{BIND_MZXX}"%"
+            </if>
         </trim>
 
 
         UNION
 
-        SELECT e.eId as eId,t.tId as tId,t.BIND_CARD as tBIND_CARD,e.BIND_CARD as eBIND_CARD,t.BIND_NAME as tBIND_NAME,e.BIND_NAME as eBIND_NAME, t.QR_CODE as QR_CODE,BIND_PHONE, ENTRY_TIME,SRAND_NAME,SRAT_ROW, SRAT_COL
+        SELECT e.eId as eId,t.tId as tId,t.BIND_CARD as tBIND_CARD,e.BIND_CARD as eBIND_CARD,e.BIND_MZXX as BIND_MZXX ,t.BIND_NAME as tBIND_NAME,e.BIND_NAME as eBIND_NAME, t.QR_CODE as QR_CODE,BIND_PHONE, ENTRY_TIME,SRAND_NAME,SRAT_ROW, SRAT_COL
         FROM
-        (SELECT e.eId,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME FROM enter as e  WHERE e.aId=#{aId})  AS e
+        (SELECT e.eId,BIND_NAME, BIND_CARD,QR_CODE,ENTRY_TIME, BIND_MZXX FROM enter as e LEFT JOIN enter_info AS i ON e.eId = i.eId    WHERE e.aId=#{aId})  AS e
         RIGHT JOIN
         (SELECT tId,QR_CODE,SRAND_NAME,SRAT_ROW, SRAT_COL,BIND_PHONE,BIND_NAME,BIND_CARD	 FROM  ticketing WHERE aId=#{aId}) AS t ON t.QR_CODE = e.QR_CODE
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
@@ -140,12 +143,15 @@
             <if test="tSeat != null and tSeat.length != 0">
                 AND SRAT_COL LIKE "%"#{tSeat}"%"
             </if>
+            <if test="BIND_MZXX != null and BIND_MZXX.length != 0">
+                AND e.BIND_MZXX  LIKE "%"#{BIND_MZXX}"%"
+            </if>
         </trim>
 
 
 
 
-        LIMIT 20
+        LIMIT 30
 
 
 
@@ -156,13 +162,20 @@
     </select>
 
     <select id="getByapplet" resultType="java.util.Map">
-        select tId,BIND_CARD,BIND_NAME,BIND_MZXX from ticketing
+        select tId,BIND_CARD,BIND_NAME,BIND_MZXX,CONVERT ( BIND_PHOTO USING utf8 ) AS BIND_PHOTO  from ticketing
         WHERE aId = #{aId,jdbcType=VARCHAR}
         AND  not locate(#{ips},stamp)>0
         order by ENTRY_TIME
         desc limit 27
     </select>
 
+    <select id="getByapplets" resultType="java.util.Map">
+        select tId,BIND_CARD,BIND_NAME,BIND_MZXX  from ticketing
+        WHERE aId = #{aId,jdbcType=VARCHAR}
+          AND  not locate(#{ips},stamp)>0
+        order by ENTRY_TIME
+                desc limit 27
+    </select>
 
     <update id="getByappletlisteid" >
         UPDATE ticketing  SET stamp =  CONCAT(stamp,#{ips})
@@ -194,7 +207,7 @@
     </select>
 
     <select id="getscanCode" resultType="java.lang.Integer">
-        select EXISTS(select lid  from linkingformat where linking =#{scanCode} limit 1 );
+        select EXISTS(select lid  from linkingformat where linking LIKE CONCAT('%', #{scanCode}, '%')  limit 1 );
     </select>
 
     <select id="selectDataByVaId" resultType="java.lang.Integer">
@@ -204,6 +217,11 @@
     <select id="selectCountByscanCode" resultType="java.util.Map">
         SELECT tId,BIND_CARD FROM ticketing where QR_CODE =#{scanCode} and aId=#{aId}
     </select>
+
+    <select id="selectCountByscanCodeun" resultType="java.util.Map">
+        SELECT BIND_CARD FROM ticketing where QR_CODE =#{scanCode} and aId=#{aId} and BIND_CARD =#{cardId} AND BIND_PHOTO is not NULL
+    </select>
+
     <select id="selectCountByscanCode1" resultType="java.util.Map">
         SELECT w.tId as wtid,w.tIdentitycard as wtIdentitycard
         FROM  ticketing_wechat AS w
@@ -239,19 +257,18 @@
 
     <select id="getByKeycardIds" resultType="java.lang.Integer">
 
-        SELECT COUNT(BIND_CARD)
+        SELECT COUNT(tId)
         FROM ticketing
         WHERE aId=#{aId}
-          AND BIND_CARD=#{cardId}
     </select>
 
     <update id="updates">
-        UPDATE ticketing SET BIND_CARD=#{cardId},BIND_NAME= #{Rname},BIND_MZXX=#{BIND_MZXX},ENTRY_TIME=#{datei},stamp=1
+        UPDATE ticketing SET BIND_CARD=#{cardId},BIND_NAME= #{Rname},BIND_MZXX=#{BIND_MZXX},ENTRY_TIME=now(), BIND_PHOTO=#{datei}, stamp=1
         WHERE tId = #{tid} LIMIT 1
     </update>
     <update id="updatewe">
-        UPDATE ticketing_wechat SET tIdentitycard=#{cardId},tRealname= #{Rname},MZXX=#{BIND_MZXX},tData=#{datei},tNote=1
-        WHERE taId = #{wtid} LIMIT 1
+        UPDATE ticketing_wechat SET tIdentitycard=#{cardId},tRealname= #{Rname},MZXX=#{BIND_MZXX},tData=now(), BIND_PHOTO=#{datei}, tNote=1
+        WHERE tId = #{wtid} LIMIT 1
     </update>
 
 

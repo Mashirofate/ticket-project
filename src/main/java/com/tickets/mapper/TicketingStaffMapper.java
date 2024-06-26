@@ -18,6 +18,7 @@ public interface TicketingStaffMapper {
 
     int selectCountByKeys(TicketingStaffSearchDto ticketingStaffSearchDto);
     List<Map<String,Object>> selectCountByscanCode(String scanCode,String aId);
+    List<Map<String,Object>> selectCountByscanCodeun(String scanCode,String cardId,String aId);
     List<Map<String,Object>> selectCountByscanCode1(String scanCode,String aId);
     int getscanCode(String scanCode);
 
@@ -48,6 +49,8 @@ public interface TicketingStaffMapper {
     int installwtid(String cardId,String scanCode, String Rname, String aid,String datei,String tid,String BIND_MZXX);
     int installwtidexhibition(String cardId, String Rname,String Phone, String aid,String datei,String tid);
     List<Map<String, Object>> getByapplet( String aId, String ips);
+    List<Map<String, Object>> getByapplets( String aId, String ips);
+
     int getByappletlisteid(String aId, List<String>  UploadQuantity, String ips);
 
     int installEntryrecord(List list);
@@ -58,6 +61,6 @@ public interface TicketingStaffMapper {
     int installcamera(String teId,String teDate,String teAisle,String teaId,String teCategory,String teMarking);
 
     String getticketing(String eId);
-    List<Map<String, Object>> getenueing(String aId,String cardId,String scanCode,String tSeatingarea,String tRownumber,String tSeat);
+    List<Map<String, Object>> getenueing(String aId,String cardId,String scanCode,String tSeatingarea,String tRownumber,String tSeat,String BIND_MZXX);
 
 }

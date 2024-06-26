@@ -1,6 +1,7 @@
 package com.tickets.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tickets.dto.EntersMZXXDto;
 import com.tickets.dto.EntersSearchDto;
 import com.tickets.dto.Page;
 import org.springframework.retry.annotation.Backoff;
@@ -14,7 +15,7 @@ public interface EntersService {
 
 
     Page getByKeys( EntersSearchDto entersSearchDto);
-
+    List<Map<String, Object>> selectByKeysMXZZ(EntersMZXXDto entersMZXXDto);
     boolean delById(String eid);
 
     List<Map<String, Object>> getemploys(String aid, String dateUp);

@@ -31,6 +31,11 @@ public class FaceServiceImpl implements FaceService {
     public List<Map<String, Object>> getImageByActivityticketId(String aId,String  sqlDate,String  sqlDateformerly) {
         return faceMapper.getImageByActivityticketId(aId,sqlDate,sqlDateformerly);
     }
+
+    @Override
+    public List<Map<String, Object>> getImageByActivityticketId(String aId) {
+        return faceMapper.getticketIds(aId);
+    }
     @Override
     public List<Map<String, Object>> getImageByActivityIdUP(String aid ,String dateUp) {
         return faceMapper.getImageByActivityIdUP(aid,dateUp);
@@ -49,6 +54,12 @@ public class FaceServiceImpl implements FaceService {
     public List<Map<String, Object>> getEntryrecordsGA(String aid ,String dateUp) {
         return faceMapper.getEntryrecordsGA(aid,dateUp);
     }
+
+    @Override
+    public List<Map<String, Object>> getEntryrecordsGASUNDE(String aid ,String dateUp) {
+        return faceMapper.getEntryrecordsGASUNDE(aid,dateUp);
+    }
+
     @Override
     public List<Map<String, Object>> getemploys(String aid ,String dateUp) {
         List<Map<String, Object>> list =entersMapper.getempssssssssssssssssssssloys(aid,dateUp);
@@ -128,6 +139,11 @@ public class FaceServiceImpl implements FaceService {
 
         return faceMapper.getUploadQTIAEW(aid, UploadQuantity);
     }
+
+    public int getUploadQTIAEWshunde(String aid,List<String>  UploadQuantity) {
+
+        return faceMapper.getUploadQTIAEWshunde(aid, UploadQuantity);
+    }
     /**
      * @param aid 活动名称
      * @return 返回数据中有身份证信息的数量
@@ -136,6 +152,12 @@ public class FaceServiceImpl implements FaceService {
     public int Queryquantity(String aid) {
         return faceMapper.Queryquantity(aid);
     }
+
+    @Override
+    public  Long selectLatestTimestamp(String aid) {
+        return faceMapper.selectLatestTimestamp(aid);
+    }
+
     @Override
     public int getUploadQTIAE(String aid,String dateUp) {
         return faceMapper.getUploadQTIAE(aid, dateUp);

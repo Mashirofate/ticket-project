@@ -140,7 +140,7 @@ public class ActivityController {
     }
 
     // required =  false  @GetMapping("/open")
-    @Authentication(required = true)
+    @Authentication(isLogin = true,isRequiredUserInfo = true)
     @Operation(summary = "启用的演唱会")
     @PostMapping("/open")
     public ResponseResult openActivies(@RequestBody String x) {
@@ -207,7 +207,7 @@ public class ActivityController {
     @Authentication(required = true)
     @Operation(summary = "根据id 根据票务绑定身份证信息， 演唱会模式")
     @PostMapping("/binding")
-    public ResponseResult getbindingaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String BIND_MZXX,String datei) throws Exception {
+    public ResponseResult getbindingaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String BIND_MZXX,String base64Image) throws Exception {
         // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
         String i="0";
         String tid=null;
@@ -249,154 +249,72 @@ public class ActivityController {
 //        System.out.println("解密：" + new String(decode, "UTF-8"));
         // 验证扫到的二维码是正确的票务二维码
 
-       int ling= ticketingStaffService.getscanCode(scanCode);
-        if(ling==0){
-                // 查询是否是有效票务
-                List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
-                List<Map<String,Object>> codelist1= ticketingStaffService.getByKeys1(scanCode,aId);
+            // 查询是否是有效票务
+            List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
+            List<Map<String,Object>> codelist1= ticketingStaffService.getByKeys1(scanCode,aId);
 
-                for (Map<String, Object> map : codelist) {
-                    for (String key : map.keySet()) {
-                        if(key.equals("tId") & map.get(key)!=null){
-                            tid= map.get(key).toString();
-                        }
-                        if(key.equals("tIdentitycard") & map.get(key)!=null){
-                            tIdentitycard=map.get(key).toString();
-                        }
+            for (Map<String, Object> map : codelist) {
+                for (String key : map.keySet()) {
+                    if(key.equals("tId") & map.get(key)!=null){
+                        tid= map.get(key).toString();
+                    }
+                    if(key.equals("BIND_CARD") & map.get(key)!=null){
+                        tIdentitycard= map.get(key).toString();
                     }
                 }
+            }
 
-                for (Map<String, Object> map : codelist1) {
-                    for (String key : map.keySet()) {
-                        if(key.equals("wtid") & map.get(key)!=null){
-                            wtid= map.get(key).toString();
-                        }
-                        if(key.equals("wtIdentitycard") & map.get(key)!=null){
-                            wtIdentitycard=map.get(key).toString();
-                        }
+            for (Map<String, Object> map : codelist1) {
+                for (String key : map.keySet()) {
+                    if(key.equals("wtid") & map.get(key)!=null){
+                        wtid= map.get(key).toString();
                     }
                 }
-                // 查询有没有票务信息、
-                // 没有 票务信息
-                if((tid == null || tid.length() == 0) &( wtid == null || wtid.length() == 0)  ){
-                    String tidnu=null;
-                    String wtidnu=null;
-                    List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
-                    List<Map<String,Object>> cardIdlist2 = ticketingStaffService.getcardId2(cardId,aId,wtid);
-                    for (Map<String, Object> map : cardIdlist) {
-                        for (String key : map.keySet()) {
-                            if(key.equals("tId") & map.get(key)!=null){
-                                tidnu= map.get(key).toString();
-                            }
-                        }
-                    }
+            }
+            // 查询有没有票务信息、
+            // 没有 票务信息
+            if((tid == null || tid.length() == 0) &( wtid == null || wtid.length() == 0)  ){
+                boolean boll= ticketingStaffService.installwtid(cardId, scanCode,Rname, aId,base64Image,BIND_MZXX);
+                if(boll){
+                    i=aes;
+                }else {
+                    i="2";
+                }
+            }else{
 
-                    for (Map<String, Object> map : cardIdlist2) {
-                        for (String key : map.keySet()) {
-                            if(key.equals("wtid") & map.get(key)!=null){
-                                wtidnu= map.get(key).toString();
+                // 有票务信息就更新信息
+                if(tid != null){
+                    if(tIdentitycard !=null){
+                        if(cardId.equals(tIdentitycard)){
+                            boolean boll= ticketingStaffService.update(cardId, Rname, tid,base64Image,BIND_MZXX);
+                            if(boll){
+                                i=aes;
+                            }else {
+                                i="2";
                             }
+                        }else{
+                            i="4";
                         }
-                    }
-                    if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0) ){
-                        boolean boll= ticketingStaffService.installwtid(cardId, scanCode,Rname, aId,datei,BIND_MZXX);
+                    }else{
+                        boolean boll= ticketingStaffService.update(cardId, Rname, tid,base64Image,BIND_MZXX);
                         if(boll){
                             i=aes;
                         }else {
                             i="2";
                         }
-                    }else{
-                        i="5";
                     }
+
+
                 }else{
-            /*  boolean result = tIdentitycard==null;
-                boolean result1 =StringUtils.isBlank(tIdentitycard);
-                查询有没有重复的身份证信息*/
-                    List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
-                    List<Map<String,Object>> cardIdlist2 = ticketingStaffService.getcardId2(cardId,aId,wtid);
-
-                    String tidnu=null;
-                    String wtidnu=null;
-                    for (Map<String, Object> map : cardIdlist) {
-                        for (String key : map.keySet()) {
-                            if(key.equals("tId") & map.get(key)!=null){
-                                tidnu= map.get(key).toString();
-                            }
-                        }
+                    boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,base64Image,BIND_MZXX);
+                    if(boll){
+                        i=aes;
+                    }else {
+                        i="2";
                     }
-
-                    for (Map<String, Object> map : cardIdlist2) {
-                        for (String key : map.keySet()) {
-                            if(key.equals("wtid") & map.get(key)!=null){
-                                wtidnu= map.get(key).toString();
-                            }
-                        }
-                    }
-                    // 没有重复的身份证信息
-                    // if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0)   ){
-                    if((tidnu == null || tidnu.length() == 0)){
-                        // 有票单没有身份证就绑定
-                        if((tIdentitycard==null || StringUtils.isBlank(tIdentitycard)) & (wtIdentitycard==null || StringUtils.isBlank(wtIdentitycard))){
-                            if(tid!=null){
-                                boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei,BIND_MZXX);
-                                if(boll){
-                                    i=aes;
-                                }else {
-                                    i="2";
-                                }
-                            }
-                            if(wtid!=null){
-                                boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
-                                if(boll){
-                                    i=aes;
-                                }else {
-                                    i="2";
-                                }
-                            }
-
-                        }else{
-                            if(tIdentitycard!=null){
-                                if(cardId.equals(tIdentitycard)){
-                                    boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei, BIND_MZXX);
-                                    if(boll){
-                                        i=aes;
-                                    }else {
-                                        i="2";
-                                    }
-                                }else{
-                                    i="4";
-                                }
-                            }
-
-                            if(wtIdentitycard!=null){
-                                // 有票单有身份证就比对身份证信息是否一至，一直就绑定
-                                if( cardId.equals(wtIdentitycard)){
-                                    boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
-                                    if(boll){
-                                        i=aes;
-                                    }else {
-                                        i="2";
-                                    }
-                                }else{
-                                    i="4";
-                                }
-                            }
-                        }
-                    }else{
-                        // 一个身份证有多张票返回身份证信息
-                        if(cardId.equals(tIdentitycard)){
-                            i=aes;
-                        }else{
-                            // 有重复的身份证信息
-                            i="5";
-                        }
-                    }
-
                 }
+            }
 
-        }else{
-            i="7";
-        }
 
 
         List<Map<String, Object>> list= new ArrayList<>();
@@ -411,13 +329,11 @@ public class ActivityController {
     @Authentication(required = true)
     @Operation(summary = "根据id 根据票务绑定身份证信息， 演唱会模式")
     @PostMapping("/bindingin")
-    public ResponseResult getbindinginaId(@RequestParam String aId,String cardId,String Rname,String scanCode,String BIND_MZXX,String datei) throws Exception {
+    public ResponseResult getbindinginaId(@RequestParam String aId,String cardId,String scanCode) throws Exception {
         // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据
         String i="0";
         String tid=null;
         String tIdentitycard=null;
-        String wtid=null;
-        String wtIdentitycard=null;
 
 
         byte[] DESkey = decryptBASE64("YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4");// key为abcdefghijklmnopqrstuvwx的Base64编码
@@ -451,154 +367,40 @@ public class ActivityController {
 //        decode = des3DecodeCBC(DESkey, keyiv, encode);
 //        System.out.println("加密：" + encryptBASE64(encode));
 //        System.out.println("解密：" + new String(decode, "UTF-8"));
-        // 验证扫到的二维码是正确的票务二维码
 
+
+
+        // 证扫到的二维码是正确的票务二维码
         int ling= ticketingStaffService.getscanCode(scanCode);
         if(ling==0){
             // 查询是否是有效票务
-            List<Map<String,Object>> codelist= ticketingStaffService.getByKeys(scanCode,aId);
-            List<Map<String,Object>> codelist1= ticketingStaffService.getByKeys1(scanCode,aId);
+            List<Map<String,Object>> codelist= ticketingStaffService.getByKeysun(scanCode,cardId,aId);
+
+            List<Map<String,Object>> codelist1= ticketingStaffService.getByKeys(scanCode,aId);
+
+            int tcoun= ticketingStaffService.getByKeycardIds(null,aId);
+
+
 
             for (Map<String, Object> map : codelist) {
                 for (String key : map.keySet()) {
-                    if(key.equals("tId") & map.get(key)!=null){
-                        tid= map.get(key).toString();
-                    }
-                    if(key.equals("tIdentitycard") & map.get(key)!=null){
+                    if(key.equals("BIND_CARD") & map.get(key)!=null){
                         tIdentitycard=map.get(key).toString();
                     }
                 }
             }
-
-            for (Map<String, Object> map : codelist1) {
-                for (String key : map.keySet()) {
-                    if(key.equals("wtid") & map.get(key)!=null){
-                        wtid= map.get(key).toString();
-                    }
-                    if(key.equals("wtIdentitycard") & map.get(key)!=null){
-                        wtIdentitycard=map.get(key).toString();
-                    }
-                }
-            }
-            // 查询有没有票务信息、
-            // 没有 票务信息
-            if((tid == null || tid.length() == 0) &( wtid == null || wtid.length() == 0)  ){
-                String tidnu=null;
-                String wtidnu=null;
-                List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
-                List<Map<String,Object>> cardIdlist2 = ticketingStaffService.getcardId2(cardId,aId,wtid);
-                for (Map<String, Object> map : cardIdlist) {
-                    for (String key : map.keySet()) {
-                        if(key.equals("tId") & map.get(key)!=null){
-                            tidnu= map.get(key).toString();
-                        }
-                    }
-                }
-
-                for (Map<String, Object> map : cardIdlist2) {
-                    for (String key : map.keySet()) {
-                        if(key.equals("wtid") & map.get(key)!=null){
-                            wtidnu= map.get(key).toString();
-                        }
-                    }
-                }
-                if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0) ){
-                    boolean boll= ticketingStaffService.installwtid(cardId, scanCode,Rname, aId,datei,BIND_MZXX);
-                    if(boll){
-                        i=aes;
-                    }else {
-                        i="2";
-                    }
-                }else{
-                    i="5";
-                }
+           // System.out.println("解密：" +tcoun+"解密：" +codelist1);
+            // 已经验证的身份证信息
+            if(cardId.equals(tIdentitycard)){
+                i=aes;
+            }else if (tcoun>0 && codelist1.isEmpty()){
+                i="2";
             }else{
-            /*  boolean result = tIdentitycard==null;
-                boolean result1 =StringUtils.isBlank(tIdentitycard);
-                查询有没有重复的身份证信息*/
-                List<Map<String,Object>> cardIdlist= ticketingStaffService.getcardId(cardId,aId,tid);
-                List<Map<String,Object>> cardIdlist2 = ticketingStaffService.getcardId2(cardId,aId,wtid);
-
-                String tidnu=null;
-                String wtidnu=null;
-                for (Map<String, Object> map : cardIdlist) {
-                    for (String key : map.keySet()) {
-                        if(key.equals("tId") & map.get(key)!=null){
-                            tidnu= map.get(key).toString();
-                        }
-                    }
-                }
-
-                for (Map<String, Object> map : cardIdlist2) {
-                    for (String key : map.keySet()) {
-                        if(key.equals("wtid") & map.get(key)!=null){
-                            wtidnu= map.get(key).toString();
-                        }
-                    }
-                }
-                // 没有重复的身份证信息
-                // if((tidnu == null || tidnu.length() == 0) &( wtidnu == null || wtidnu.length() == 0)   ){
-                if((tidnu == null || tidnu.length() == 0)){
-                    // 有票单没有身份证就绑定
-                    if((tIdentitycard==null || StringUtils.isBlank(tIdentitycard)) & (wtIdentitycard==null || StringUtils.isBlank(wtIdentitycard))){
-                        if(tid!=null){
-                            boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei,BIND_MZXX);
-                            if(boll){
-                                i=aes;
-                            }else {
-                                i="2";
-                            }
-                        }
-                        if(wtid!=null){
-                            boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
-                            if(boll){
-                                i=aes;
-                            }else {
-                                i="2";
-                            }
-                        }
-
-                    }else{
-                        if(tIdentitycard!=null){
-                            if(cardId.equals(tIdentitycard)){
-                                boolean boll= ticketingStaffService.update(cardId, Rname, tid,datei, BIND_MZXX);
-                                if(boll){
-                                    i=aes;
-                                }else {
-                                    i="2";
-                                }
-                            }else{
-                                i="4";
-                            }
-                        }
-
-                        if(wtIdentitycard!=null){
-                            // 有票单有身份证就比对身份证信息是否一至，一直就绑定
-                            if( cardId.equals(wtIdentitycard)){
-                                boolean boll= ticketingStaffService.updatewe(cardId, Rname, wtid,datei,BIND_MZXX);
-                                if(boll){
-                                    i=aes;
-                                }else {
-                                    i="2";
-                                }
-                            }else{
-                                i="4";
-                            }
-                        }
-                    }
-                }else{
-                    // 一个身份证有多张票返回身份证信息
-                    if(cardId.equals(tIdentitycard)){
-                        i=aes;
-                    }else{
-                        // 有重复的身份证信息
-                        i="5";
-                    }
-                }
-
+                //没有验证的身份证信息
+                i="100";
             }
-
         }else{
+            // 二维码信息不对
             i="7";
         }
 
@@ -608,8 +410,6 @@ public class ActivityController {
         myMap.put("codes",i);
         list.add(myMap);
         return ResponseResult.SUCCESS(list);
-
-
     }
 
 
@@ -623,7 +423,8 @@ public class ActivityController {
        /* if(aType.equals("ticketing")){
             list= ticketingStaffService.getticketing(aId,cardId,scanCode,tSeatingarea,tRownumber,tSeat);
         }else {*/
-            list= ticketingStaffService.getenueing(aId,cardId,scanCode,tSeatingarea,tRownumber,tSeat);
+
+            list= ticketingStaffService.getenueing(aId,cardId,scanCode,tSeatingarea,tRownumber,tSeat,BIND_MZXX);
         return ResponseResult.SUCCESS(list);
     }
 
@@ -662,7 +463,7 @@ public class ActivityController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String datei=formatter.format(date);
         String BIND_MZXX=null;
-        boolean boll= ticketingStaffService.update("0", "0", tId,datei, "0");
+        boolean boll= ticketingStaffService.update(null, null, tId,datei, null);
         List<Map<String, Object>> list= new ArrayList<>();
         Map<String, Object> myMap = new HashMap<String, Object>();
         String  i="1";
@@ -900,6 +701,39 @@ public class ActivityController {
     }
 
     @Authentication(required = true)
+    @Operation(summary = "根据id获取活动票务标准中的身份证信息，并返回身份证信息  不传输照片   // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
+    @PostMapping("/applets")
+    public ResponseResult getbindingapplets(@RequestBody String jsonstr) {
+        // json传输过来的活动id和已有身份证信息的条数
+        JSONObject jsobject =  JSONObject.parseObject(jsonstr);
+
+
+        String aId= jsobject.getString("aid");
+        String ips= jsobject.getString("ips");
+        // 根据活动id返有身份证的票务数量
+        //int ints = faceService.Queryquantity(aId);
+
+        List<Map<String,Object>> codelist=  ticketingStaffService.getByapplets(aId,ips);
+
+        if(codelist!=null){
+            List<String> listeid=new ArrayList<>();
+            if(codelist.size()>0){
+                for (Map<String, Object> simi : codelist) {
+                    listeid.add( simi.get("tId").toString());
+                }
+                String ipss= ips+",";
+                ticketingStaffService.getByappletlisteid(aId,listeid,ipss);
+            }
+            //  System.out.println("成功+++++++++codelist:"+ codelist.size()+"++++++++下载身份证:"+listeid.size());
+        }
+
+        return ResponseResult.SUCCESS(codelist);
+
+
+    }
+
+
+    @Authentication(required = true)
     @Operation(summary = "接受上传的入场记录    // RequestParam 表示接受的是param数据 ，RequestBody表示接受的是json数据 ")
     @PostMapping("/Entryrecord")
     public ResponseResult getbindEntryrecord(@RequestBody String jsonstr) {
@@ -988,6 +822,7 @@ public class ActivityController {
                         entertfDto.setStamp(stamp);
                         entertfDto.setENTRY_TIME(ENTRY_TIME);
                         entertfDto.setStandby("0");
+                        entertfDto.setShunde("0");
 
                         listen.add(entertfDto);
 

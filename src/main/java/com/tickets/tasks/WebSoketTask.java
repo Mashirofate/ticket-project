@@ -353,16 +353,17 @@ public class WebSoketTask {
                             }
 
                         Map<String, Object> map2=new HashMap<>();
-                         boolean bp = "YQH0601".equals(vaId);
+                      /*  int foshanResidents = countFoshanResidents(list,"4412");
+                        map2.put("name","肇庆市");
+                        map2.put("value",foshanResidents);*/
+
                        // System.out.println("惠州vaId: " + vaId+bp);
-                       if("YQH0601".equals(vaId)){
-                           int foshanResidents = countFoshanResidents(list,"4406");
-
-
-                           map2.put("name","惠州市");
+                       if("Supper0615".equals(vaId)){
+                           int foshanResidents = countFoshanResidents(list,"4412");
+                           map2.put("name","肇庆市");
                            map2.put("value",foshanResidents);
                        }else {
-                           int foshanResidents = countFoshanResidents(list,"4413");
+                           int foshanResidents = countFoshanResidents(list,"4406");
                            map2.put("name","佛山市");
                            map2.put("value",foshanResidents);
                        }

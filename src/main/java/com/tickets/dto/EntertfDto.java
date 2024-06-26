@@ -14,21 +14,17 @@ public class EntertfDto {
     private String ENTRY_TIME;
     private String stamp;
     private String standby;
+    public String shunde;
 
     public EntertfDto() {
     }
 
-    public EntertfDto(String eId, String aId, String eName, String tId, String BIND_NAME, String BIND_CARD, String QR_CODE, String ENTRY_TIME, String stamp, String standby) {
-        this.eId = eId;
-        this.aId = aId;
-        this.eName = eName;
-        this.tId = tId;
-        this.BIND_NAME = BIND_NAME;
-        this.BIND_CARD = BIND_CARD;
-        this.QR_CODE = QR_CODE;
-        this.ENTRY_TIME = ENTRY_TIME;
-        this.stamp = stamp;
-        this.standby = standby;
+    public String getShunde() {
+        return shunde;
+    }
+
+    public void setShunde(String shunde) {
+        this.shunde = shunde;
     }
 
     public String geteId() {

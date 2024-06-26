@@ -67,7 +67,7 @@
         WHERE tId=#{tId}
     </update>
     <update id="updateEnable">
-        UPDATE activity SET aEnable = #{aEnable},updateTime=now() WHERE aId = #{aId}
+        UPDATE activity SET aEnable = #{aEnable} WHERE aId = #{aId}
     </update>
     <select id="selectByKeys" resultType="java.util.Map">
     SELECT aaId ,aId, aName,vName, aNote, IF(aEnable = 0, '删除', IF(aEnable=1,'启用','不启用')) aEnable, aCreationtime, aTicketnumber , aEmployeenumber, aImage, aType

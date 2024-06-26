@@ -1,16 +1,19 @@
 package com.tickets.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.tickets.annotations.Authentication;
-import com.tickets.dto.EntersSearchDto;
-import com.tickets.dto.Page;
-import com.tickets.dto.ResponseResult;
+import com.tickets.dto.*;
 import com.tickets.service.EntersService;
+import com.tickets.utils.HttpUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,5 +85,15 @@ public class EntersController {
         return ResponseResult.SUCCESS();
     }
 
+    @Authentication(isLogin = true, isRequiredUserInfo = true)
+    @Operation(summary  = "根据民族查询")
+    @PostMapping ("/MXZZ")
+    public ResponseResult searchMXZZ(@RequestBody EntersMZXXDto entersMZXXDto) {
+        List list =null;
+        if(!"汉族".equals(entersMZXXDto.getBIND_MZXX())){
+            list = entersService.selectByKeysMXZZ(entersMZXXDto);
+        }
+        return ResponseResult.SUCCESS(list);
+    }
 
 }

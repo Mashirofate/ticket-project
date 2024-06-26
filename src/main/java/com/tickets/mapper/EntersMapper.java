@@ -1,5 +1,6 @@
 package com.tickets.mapper;
 
+import com.tickets.dto.EntersMZXXDto;
 import com.tickets.dto.EntersSearchDto;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,6 +17,8 @@ public interface EntersMapper {
     int deleteEs(String eid);
     
     String selectAcitType( String aId);
+    @MapKey("")
+    List<Map<String, Object>> selectByKeysMXZZ(EntersMZXXDto entersMZXXDto);
 
     @MapKey("")
     List<Map<String, Object>> getempssssssssssssssssssssloys(String aid,String  dateUp);

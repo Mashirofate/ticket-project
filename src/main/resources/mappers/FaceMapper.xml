@@ -21,6 +21,14 @@
             #{item, jdbcType=VARCHAR}
         </foreach>
     </update>
+    <update id="getUploadQTIAEWshunde" >
+        UPDATE enter  SET shunde = '1'
+        WHERE aId=#{aid}
+        AND eId in
+        <foreach item="item" collection="UploadQuantity" separator="," open="(" close=")" index="">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </update>
 
 
     <select id="queryFace" resultType="java.util.Map">
@@ -180,9 +188,10 @@
 
     <select id="getImageByActivityticketId" resultType="java.util.Map">
         SELECT
-            a.aId as  park_id,
-            a.aName as park,
+            a.performId AS performId,
+            a.projectId AS projectId,
             a.vName as venueName,
+            t.tId as voucherId,
             t.QR_CODE as qrCode,
             t.BIND_NAME as bindUserName,
             t.BIND_CARD as bindCard,
@@ -196,6 +205,14 @@
                 LEFT JOIN activity AS a ON t.aId = a.aId
         WHERE
             t.aId = #{aid}
+    </select>
+    <select id="getticketIds" resultType="java.util.Map">
+        SELECT
+            a.performId AS performId,
+            a.projectId AS projectId
+        FROM activity AS a
+        WHERE
+            a.aId = #{aid}
     </select>
 
     <select id="getImageByActivityIdUP" resultType="java.util.Map">
@@ -222,80 +239,120 @@
     </select>
 
     <select id="getEntryrecordsGA" resultType="java.util.Map">
-        SELECT
-            e.eId AS ID,
-            CONCAT( e.aId, '01' ) AS performId,
-            e.aId AS projectId,
-            eName AS checkPass,
-            SRAT_ROW AS seatRow,
-            SRAT_COL AS seatCol,
-            CHECK_CERT_TYPE AS checkCertType,
-            BIND_CARD AS checkCertTypeNo,
-            VANAME AS venueName,
-            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS entryTime,
-            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS checkTime,
-            tId AS voucherId,
-            BIND_CARD AS bindCard,
-            BIND_NAME AS bindUserName,
-            FLOOR_NAME AS floorName,
-            SRAND_NAME AS standName,
-            DEVICE_NAME AS deviceName,
-            DEVICE_CODE AS deviceCode,
-            DATE_FORMAT( ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS insertTime,
-            BIND_CARD AS idcode,
-            BIND_HJDXX AS hjdxx,
-            BIND_MZXX AS mzxx
+        WITH ranked_enter AS (
+            SELECT
+                eeId,eId,aId,eName,tId,BIND_NAME,BIND_CARD,QR_CODE,standby,ENTRY_TIME,
+                ROW_NUMBER() OVER ( PARTITION BY eId ORDER BY eeId ) AS rn
+            FROM
+                enter
+        ),
+             ranked_enter_info AS (
+                 SELECT
+                     eId,CHECK_CERT_TYPE,DEVICE_NAME,DEVICE_CODE,BIND_HJDXX,BIND_MZXX,
+                     ROW_NUMBER() OVER ( PARTITION BY eId ORDER BY ieId ) AS rn
+                 FROM
+                     enter_info
+             )SELECT
+                  e.eId AS ID,
+                  a.performId AS performId,
+                  a.projectId AS projectId,
+                  e.eName AS checkPass,
+                  t.SRAT_ROW AS seatRow,
+                  t.SRAT_COL AS seatCol,
+                  i.CHECK_CERT_TYPE AS checkCertType,
+                  e.BIND_CARD AS checkCertTypeNo,
+                  a.vName AS venueName,
+                  DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS entryTime,
+                  DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS checkTime,
+                  e.tId AS voucherId,
+                  e.BIND_CARD AS bindCard,
+                  e.BIND_NAME AS bindUserName,
+                  t.FLOOR_NAME AS floorName,
+                  t.SRAND_NAME AS standName,
+                  i.DEVICE_NAME AS deviceName,
+                  i.DEVICE_CODE AS deviceCode,
+                  DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS insertTime,
+                  CONVERT ( f.BIND_PHOTO USING utf8 ) AS bindPhoto,CONVERT ( f.BIND_CARD_PHOTO USING utf8 ) AS bindCardPhoto,
+                  e.BIND_CARD AS idcode,
+                  i.BIND_HJDXX AS hjdxx,
+                  i.BIND_MZXX AS mzxx
         FROM
-            (
-                SELECT
-                    *
-                FROM
-                    (
+            ranked_enter AS e
+                LEFT JOIN ranked_enter_info AS i ON e.eId = i.eId
+                AND i.rn = 1
+                LEFT JOIN enter_fimage AS f ON e.eId = f.eId
+                LEFT JOIN ticketing AS t ON t.tId = e.tId
 
-                        SELECT
-                            e.eId,
-                            e.aId,
-                            e.eName,
-                            e.tId,
-                            e.BIND_NAME,
-                            e.BIND_CARD,
-                            e.QR_CODE,
-                            e.standby,
-                            e.ENTRY_TIME,
-                            i.CHECK_CERT_TYPE,
-                            i.BIND_GENDER,
-                            i.BIND_MZXX,
-                            i.BIND_HJDXX,
-                            i.Device_CODE,
-                            i.Device_NAME
-                        FROM
-                            enter AS e
-                                LEFT JOIN enter_info AS i ON e.eId = i.eId
-                        WHERE
-                            e.aId = "HKQ0601"
+                LEFT JOIN activity AS a ON a.aId = e.aId
 
-
-                    ) AS e
-                        LEFT JOIN (
-                        SELECT
-                            tId AS TTID,
-                            SRAND_NAME,
-                            SRAT_ROW,
-                            SRAT_COL,
-                            FLOOR_NAME,
-                            vName AS VANAME
-                        FROM
-                            ticketing AS t
-                                LEFT JOIN activity AS a ON a.aId = t.aId
-                    ) AS t ON t.TTID = e.tId
-            ) AS e
         WHERE
-            e.standby = '0'
+            e.rn = 1
+          AND e.aId = #{aid}
+          AND e.standby = '0'
           AND e.BIND_CARD IS NOT NULL
           AND e.BIND_CARD != ''
-        ORDER BY
-            ENTRY_TIME DESC
-            LIMIT 10
+	AND e.tId  != ''
+	AND e.tId  IS NOT NULL
+	LIMIT 100
+    </select>
+
+
+    <select id="getEntryrecordsGASUNDE" resultType="java.util.Map">
+        WITH ranked_enter AS (
+            SELECT
+                eeId,eId,aId,eName,tId,BIND_NAME,BIND_CARD,QR_CODE,shunde,ENTRY_TIME,
+                ROW_NUMBER() OVER ( PARTITION BY eId ORDER BY eeId ) AS rn
+            FROM
+                enter
+        ),
+             ranked_enter_info AS (
+                 SELECT
+                     eId,CHECK_CERT_TYPE,DEVICE_NAME,DEVICE_CODE,BIND_HJDXX,BIND_MZXX,
+                     ROW_NUMBER() OVER ( PARTITION BY eId ORDER BY ieId ) AS rn
+                 FROM
+                     enter_info
+             )SELECT
+                  e.eId AS ID,
+                  a.performId AS performId,
+                  a.projectId AS projectId,
+                  e.eName AS checkPass,
+                  t.SRAT_ROW AS seatRow,
+                  t.SRAT_COL AS seatCol,
+                  i.CHECK_CERT_TYPE AS checkCertType,
+                  e.BIND_CARD AS checkCertTypeNo,
+                  a.vName AS venueName,
+                  DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS entryTime,
+                  DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS checkTime,
+                  e.tId AS voucherId,
+                  e.BIND_CARD AS bindCard,
+                  e.BIND_NAME AS bindUserName,
+                  t.FLOOR_NAME AS floorName,
+                  t.SRAND_NAME AS standName,
+                  i.DEVICE_NAME AS deviceName,
+                  i.DEVICE_CODE AS deviceCode,
+                  DATE_FORMAT( e.ENTRY_TIME, '%Y-%m-%d %H:%i:%s' ) AS insertTime,
+                  CONVERT ( f.BIND_PHOTO USING utf8 ) AS bindPhoto,CONVERT ( f.BIND_CARD_PHOTO USING utf8 ) AS bindCardPhoto,
+                  e.BIND_CARD AS idcode,
+                  i.BIND_HJDXX AS hjdxx,
+                  i.BIND_MZXX AS mzxx
+        FROM
+            ranked_enter AS e
+                LEFT JOIN ranked_enter_info AS i ON e.eId = i.eId
+                AND i.rn = 1
+                LEFT JOIN enter_fimage AS f ON e.eId = f.eId
+                LEFT JOIN ticketing AS t ON t.tId = e.tId
+
+                LEFT JOIN activity AS a ON a.aId = e.aId
+
+        WHERE
+            e.rn = 1
+          AND e.aId = #{aid}
+          AND e.shunde = '0'
+          AND e.BIND_CARD IS NOT NULL
+          AND e.BIND_CARD != ''
+	AND e.tId  != ''
+	AND e.tId  IS NOT NULL
+	LIMIT 70
     </select>
 
     <select id="getemploys" resultType="java.util.Map">
@@ -349,6 +406,15 @@
         ORDER BY
             e.eDate DESC
             LIMIT 5
+    </select>
+
+
+    <select id="selectLatestTimestamp" resultType="java.lang.Long">
+        SELECT timestamp
+        FROM ticketing
+        WHERE aId=#{aId}
+        ORDER BY timestamp DESC
+            LIMIT 1
     </select>
 
     <select id="selectImageByKeys" resultType="java.util.Map">

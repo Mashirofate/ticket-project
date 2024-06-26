@@ -43,6 +43,10 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
         return ticketingStaffMapper.selectCountByscanCode(scanCode,aId);
     }
     @Override
+    public List<Map<String,Object>> getByKeysun(String scanCode,String cardId,String aId) {
+        return ticketingStaffMapper.selectCountByscanCodeun(scanCode, cardId,aId);
+    }
+    @Override
     public List<Map<String,Object>> getByKeys1(String scanCode,String aId) {
         return ticketingStaffMapper.selectCountByscanCode1(scanCode,aId);
     }
@@ -245,6 +249,10 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
     public List<Map<String, Object>> getByapplet( String aId, String ips) {
         return ticketingStaffMapper.getByapplet( aId, ips) ;
     }
+    @Override
+    public List<Map<String, Object>> getByapplets( String aId, String ips) {
+        return ticketingStaffMapper.getByapplets( aId, ips) ;
+    }
 
     /**
      * @param aId
@@ -294,7 +302,7 @@ public class TicketingStaffServiceImpl implements TicketingStaffService {
      * @return
      */
     @Override
-    public List<Map<String, Object>> getenueing(String aId, String cardId, String scanCode,String tSeatingarea,String tRownumber,String tSeat) {
-        return ticketingStaffMapper.getenueing(aId, cardId,scanCode,tSeatingarea,tRownumber,tSeat);
+    public List<Map<String, Object>> getenueing(String aId, String cardId, String scanCode,String tSeatingarea,String tRownumber,String tSeat,String BIND_MZXX) {
+        return ticketingStaffMapper.getenueing(aId, cardId,scanCode,tSeatingarea,tRownumber,tSeat, BIND_MZXX);
     }
 }
